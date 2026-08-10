@@ -4,7 +4,7 @@ Página única em HTML puro. Sem build, sem framework, sem CDN: o `index.html` t
 dentro dele e as imagens são locais. Abrir o arquivo no navegador já mostra o resultado
 final — o que está no ar é exatamente isto.
 
-Publicado pelo **GitHub Pages** em <https://rafalog860-code.github.io/>.
+Publicado pelo **GitHub Pages** em <https://rafalog860-code.github.io/LandingPage/>.
 
 ## Arquivos
 
