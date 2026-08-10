@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agenda Barbeiro — o app de agendamento com a marca da sua barbearia</title>
+<meta name="description" content="Seu cliente marca o horário sozinho pelo link, com a marca da sua barbearia. Sem app para baixar, sem cadastro. R$ 49,90 por mês, instalação grátis e 14 dias para testar.">
+<meta name="theme-color" content="#120e08">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agenda Barbeiro — agendamento com a marca da sua barbearia">
+<meta property="og:description" content="O cliente escolhe serviço, barbeiro e horário sozinho. Cai direto na sua agenda. R$ 49,90/mês.">
+<meta property="og:image" content="img/tela-1.png">
+<link rel="icon" href="img/logo.png">
+
+<style>
+    :root {
+        --ouro: #d4af37;
+        --ouro-claro: #f0d97a;
+        --preto: #120e08;
+        --preto-card: #1c1710;
+        --texto: #efe7d8;
+        --texto-fraco: #b3a68c;
+        --borda: rgba(212, 175, 55, .25);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--preto);
+        color: var(--texto);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0 0 .6em; }
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.15rem; }
+    p { margin: 0 0 1em; }
+    a { color: var(--ouro-claro); }
+
+    .ouro { color: var(--ouro); }
+    .wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 56px 0; border-top: 1px solid rgba(212, 175, 55, .12); }
+    .centro { text-align: center; }
+    .sub { color: var(--texto-fraco); }
+
+    /* Cabecalho ------------------------------------------------------------ */
+    header { padding: 22px 0; }
+    .marca { display: flex; align-items: center; gap: 12px; font-family: Georgia, serif;
+             letter-spacing: .12em; text-transform: uppercase; font-size: .95rem; }
+    .marca img { width: 40px; height: 40px; border-radius: 50%; }
+
+    /* Hero ----------------------------------------------------------------- */
+    .hero { padding: 26px 0 56px; }
+    .hero-grid { display: grid; gap: 36px; align-items: center; }
+    .hero h1 span { color: var(--ouro); }
+    .hero .lead { font-size: 1.15rem; color: var(--texto-fraco); }
+    .hero img { width: 100%; max-width: 300px; display: block; margin: 0 auto;
+                border-radius: 18px; border: 1px solid var(--borda); }
+
+    /* Botoes --------------------------------------------------------------- */
+    .botoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+    .btn {
+        display: inline-block; padding: 15px 26px; border-radius: 10px;
+        font-weight: 700; text-decoration: none; letter-spacing: .04em;
+        font-size: 1rem; text-align: center;
+    }
+
+    .btn-ouro { background: linear-gradient(180deg, var(--ouro-claro), var(--ouro));
+                color: #1a1408; box-shadow: 0 6px 18px rgba(212, 175, 55, .18); }
+    .btn-vazio { border: 1px solid var(--borda); color: var(--texto); }
+    .btn:hover { filter: brightness(1.07); }
+
+    /* Cards ---------------------------------------------------------------- */
+    .cards { display: grid; gap: 18px; grid-template-columns: 1fr; }
+
+    .card {
+        background: var(--preto-card); border: 1px solid var(--borda);
+        border-radius: 14px; padding: 22px;
+    }
+
+    .card h3 { color: var(--ouro); }
+    .card p:last-child { margin-bottom: 0; }
+    .num { font-family: Georgia, serif; color: var(--ouro); font-size: 1.5rem; display: block; }
+
+    /* Telas ---------------------------------------------------------------- */
+    .telas { display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr); }
+    .telas figure { margin: 0; }
+    .telas img { width: 100%; border-radius: 14px; border: 1px solid var(--borda); display: block; }
+    .telas figcaption { color: var(--texto-fraco); font-size: .9rem; margin-top: 8px; text-align: center; }
+
+    /* Preco ---------------------------------------------------------------- */
+    .preco { background: var(--preto-card); border: 1px solid var(--ouro);
+             border-radius: 18px; padding: 30px; text-align: center; }
+    .preco .valor { font-family: Georgia, serif; font-size: 3rem; color: var(--ouro); line-height: 1; }
+    .preco ul { list-style: none; padding: 0; margin: 22px 0; text-align: left; display: inline-block; }
+    .preco li { padding: 5px 0 5px 28px; position: relative; }
+    .preco li::before { content: "✓"; color: var(--ouro); position: absolute; left: 0; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: .98rem; }
+    th, td { padding: 12px 10px; border-bottom: 1px solid rgba(212, 175, 55, .15); text-align: left; }
+    th { color: var(--texto-fraco); font-weight: 600; }
+    tr.destaque td { color: var(--ouro); font-weight: 700; }
+
+    /* FAQ ------------------------------------------------------------------ */
+    details { border-bottom: 1px solid rgba(212, 175, 55, .15); padding: 16px 0; }
+    summary { cursor: pointer; font-weight: 600; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+ "; color: var(--ouro); font-weight: 700; }
+    details[open] summary::before { content: "– "; }
+    details p { margin: 12px 0 0; color: var(--texto-fraco); }
+
+    footer { padding: 40px 0 60px; color: var(--texto-fraco); font-size: .88rem; }
+
+    /* Barra fixa do celular ------------------------------------------------ */
+    .barra-zap {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 9;
+        background: rgba(18, 14, 8, .96); border-top: 1px solid var(--borda);
+        padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    }
+
+    .barra-zap .btn { display: block; width: 100%; }
+    body { padding-bottom: 84px; }
+
+    @media (min-width: 800px) {
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; }
+        .hero-grid { grid-template-columns: 1.15fr .85fr; }
+        .hero img { max-width: 340px; }
+        .cards { grid-template-columns: repeat(3, 1fr); }
+        .telas { grid-template-columns: repeat(4, 1fr); }
+        .barra-zap { display: none; }
+        body { padding-bottom: 0; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="wrap marca">
+        <img src="img/logo.png" alt="">
+        Agenda Barbeiro
+    </div>
+</header>
+
+<!-- Hero ------------------------------------------------------------------ -->
+<div class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <h1>Seu cliente marca o horário sozinho. <span>Com a marca da sua barbearia.</span></h1>
+
+            <p class="lead">
+                Você manda um link. Ele escolhe o serviço, o barbeiro e o horário livre —
+                e cai direto na sua agenda. Sem app para baixar, sem cadastro, sem você
+                parar o corte para responder “tem horário?”.
+            </p>
+
+            <div class="botoes">
+                <a class="btn btn-ouro"
+                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20app%20de%20agendamento%20para%20a%20minha%20barbearia."
+                   target="_blank" rel="noopener">Falar no WhatsApp</a>
+                <a class="btn btn-vazio" href="https://agendabarbeiro.great-site.net"
+                   target="_blank" rel="noopener">Ver funcionando</a>
+            </div>
+
+            <p class="sub" style="margin-top:16px; font-size:.92rem;">
+                14 dias para testar · instalação grátis · sem fidelidade
+            </p>
+        </div>
+
+        <img src="img/tela-1.png" alt="Tela do app: o cliente escolhe o serviço e o profissional">
+    </div>
+</div>
+
+<!-- Dor ------------------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>O problema não é falta de cliente. É o WhatsApp.</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Você para o corte para responder</h3>
+                <p>“Tem horário às 15h?” chega o dia inteiro, e cada resposta é um cliente
+                   esperando na cadeira.</p>
+            </div>
+            <div class="card">
+                <h3>Dois clientes no mesmo horário</h3>
+                <p>Anotação no caderno não avisa quando bate. O app simplesmente não deixa
+                   marcar em cima.</p>
+            </div>
+            <div class="card">
+                <h3>O cliente some sem avisar</h3>
+                <p>Cancelar dá vergonha de ligar. Pelo link ele cancela em dois toques — e
+                   o horário volta a ficar livre para outro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Como funciona --------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>Como funciona para o seu cliente</h2>
+        <p class="sub">Quatro toques, cerca de 30 segundos. Ele nem precisa saber usar nada.</p>
+
+        <div class="telas">
+            <figure>
+                <img src="img/tela-1.png" alt="Passo 1: escolher serviço e profissional">
+                <figcaption><span class="num">1</span> Escolhe o serviço e o barbeiro</figcaption>
+            </figure>
+            <figure>
+                <img src="img/tela-2.png" alt="Passo 2: escolher dia e horário">
+                <figcaption><span class="num">2</span> Escolhe o dia e a hora livre</figcaption>
+            </figure>
+            <figure>
+                <img src="img/tela-3.png" alt="Passo 3: informar nome e celular">
+                <figcaption><span class="num">3</span> Deixa nome e celular</figcaption>
+            </figure>
+            <figure>
+                <img src="img/tela-4.png" alt="Passo 4: confirmação do horário">
+                <figcaption><span class="num">4</span> Confirma — e cai na sua agenda</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- Marca ----------------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>É o app <span class="ouro">da sua barbearia</span> — não o meu</h2>
+
+        <p>Seu logo, seu nome, sua cor, seus serviços e seus preços. Seu cliente não vê
+           marca de sistema nenhum, e não encontra a barbearia do concorrente do lado da
+           sua, como acontece nos aplicativos de catálogo.</p>
+
+        <div class="telas" style="grid-template-columns: repeat(2, 1fr); max-width: 620px;">
+            <figure>
+                <img src="img/marca-azul.png" alt="O mesmo app com a marca em azul">
+                <figcaption>A mesma tela, outra barbearia</figcaption>
+            </figure>
+            <figure>
+                <img src="img/marca-terracota.png" alt="O mesmo app com a marca em terracota">
+                <figcaption>Cor e logo entram na hora da instalação</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- O que vem junto -------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>O que vem junto</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Agenda de cada barbeiro</h3>
+                <p>Cada profissional com o próprio horário, folga e almoço. O cliente
+                   escolhe com quem quer cortar.</p>
+            </div>
+            <div class="card">
+                <h3>Férias e dia fechado</h3>
+                <p>Lançou as férias de um barbeiro, os dias somem da agenda dele — e só
+                   dele. Feriado fecha a barbearia inteira de uma vez.</p>
+            </div>
+            <div class="card">
+                <h3>Contatos do dia</h3>
+                <p>Precisou fechar hoje? A tela mostra quem está marcado, com o WhatsApp de
+                   cada um e a mensagem já escrita para avisar.</p>
+            </div>
+            <div class="card">
+                <h3>Remarcar e cancelar</h3>
+                <p>O cliente resolve sozinho pelo link dele, sem ligar para você e sem
+                   ocupar horário à toa.</p>
+            </div>
+            <div class="card">
+                <h3>Celular conferido</h3>
+                <p>O campo só aceita celular brasileiro de verdade, com DDD válido. Nada de
+                   telefone digitado errado.</p>
+            </div>
+            <div class="card">
+                <h3>Lista de clientes</h3>
+                <p>Quem já veio fica registrado, com o histórico de horários — sua base,
+                   não a de um aplicativo de terceiro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Preco ------------------------------------------------------------------ -->
+<section>
+    <div class="wrap">
+        <h2 class="centro">Preço</h2>
+
+        <div class="preco">
+            <div class="valor">R$ 49,90</div>
+            <p class="sub">por mês, a barbearia inteira — não por barbeiro</p>
+
+            <ul>
+                <li>Instalação e configuração <strong>grátis</strong></li>
+                <li>14 dias para testar, sem cartão</li>
+                <li>Quantos barbeiros você tiver</li>
+                <li>Agendamentos sem limite</li>
+                <li>Sem fidelidade — cancela quando quiser</li>
+            </ul>
+
+            <div class="botoes" style="justify-content:center;">
+                <a class="btn btn-ouro"
+                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20testar%20o%20app%20de%20agendamento%20na%20minha%20barbearia."
+                   target="_blank" rel="noopener">Quero testar 14 dias</a>
+            </div>
+        </div>
+
+        <table>
+            <tr><th>Sistema</th><th>Mensalidade</th><th>Sua marca?</th></tr>
+            <tr><td>Booksy</td><td>a partir de R$ 280</td><td>Não — sua barbearia fica no app deles</td></tr>
+            <tr><td>AppBarber</td><td>a partir de R$ 79,90</td><td>Não</td></tr>
+            <tr class="destaque"><td>Agenda Barbeiro</td><td>R$ 49,90</td><td>Sim, só a sua</td></tr>
+        </table>
+        <p class="sub" style="font-size:.85rem; margin-top:10px;">
+            Valores dos concorrentes conforme as tabelas públicas deles em agosto de 2026;
+            confira no site de cada um antes de decidir.
+        </p>
+    </div>
+</section>
+
+<!-- FAQ -------------------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>Perguntas que sempre fazem</h2>
+
+        <details>
+            <summary>Meu cliente precisa baixar alguma coisa?</summary>
+            <p>Não. É um link que abre no navegador do celular dele. Se quiser, ele salva na
+               tela de início e fica com cara de aplicativo.</p>
+        </details>
+
+        <details>
+            <summary>E quem não tem e-mail?</summary>
+            <p>Marca do mesmo jeito. O formulário pede só o nome e o celular.</p>
+        </details>
+
+        <details>
+            <summary>Preciso ensinar meu cliente a usar?</summary>
+            <p>Não. Ele escolhe serviço, dia e hora, escreve o nome e o celular e pronto —
+               são quatro toques.</p>
+        </details>
+
+        <details>
+            <summary>E se eu precisar fechar amanhã?</summary>
+            <p>Você bloqueia o dia no painel e a agenda para de oferecer horário na hora. A
+               tela de contatos do dia mostra quem já estava marcado, com o WhatsApp de cada
+               um e a mensagem pronta para avisar.</p>
+        </details>
+
+        <details>
+            <summary>O sistema manda mensagem sozinho para o cliente?</summary>
+            <p>Não, e isso é de propósito: envio automático em massa é o caminho mais rápido
+               para o WhatsApp bloquear o número da barbearia. Quem aperta enviar é você, e
+               a mensagem já vai escrita.</p>
+        </details>
+
+        <details>
+            <summary>Meus dados ficam misturados com os de outra barbearia?</summary>
+            <p>Não. Cada barbearia tem a própria instalação e o próprio banco de dados.</p>
+        </details>
+
+        <details>
+            <summary>Quanto tempo para ficar no ar?</summary>
+            <p>Um dia. Preciso do nome dos barbeiros, dos serviços com preço e duração, e do
+               horário de funcionamento.</p>
+        </details>
+
+        <details>
+            <summary>E se eu quiser sair?</summary>
+            <p>Sem fidelidade e sem multa. É só avisar.</p>
+        </details>
+    </div>
+</section>
+
+<!-- Fechamento ------------------------------------------------------------- -->
+<section class="centro">
+    <div class="wrap">
+        <h2>Quer ver com a sua marca?</h2>
+        <p class="sub">Me chame no WhatsApp e eu monto a tela da sua barbearia para você ver
+           antes de decidir.</p>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn btn-ouro"
+               href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20ver%20o%20app%20com%20a%20marca%20da%20minha%20barbearia."
+               target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a class="btn btn-vazio" href="https://agendabarbeiro.great-site.net"
+               target="_blank" rel="noopener">Testar como cliente</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap centro">
+        Agenda Barbeiro · agendamento online para barbearias · Guarulhos, SP<br>
+        WhatsApp (11) 93935-7759
+    </div>
+</footer>
+
+<div class="barra-zap">
+    <a class="btn btn-ouro"
+       href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20app%20de%20agendamento%20para%20a%20minha%20barbearia."
+       target="_blank" rel="noopener">Falar no WhatsApp</a>
+</div>
+
+</body>
+</html>
