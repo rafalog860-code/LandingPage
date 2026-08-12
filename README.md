@@ -1,4 +1,4 @@
-# Agenda Barbeiro — site
+# Horário Cheio — site
 
 Página única em HTML puro. Sem build, sem framework, sem CDN: o `index.html` traz o CSS
 dentro dele e as imagens são locais. Abrir o arquivo no navegador já mostra o resultado
