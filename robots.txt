@@ -1,0 +1,50 @@
+# horariocheio.com.br
+# Criado em 16/08/2026. Ate esta data o dominio devolvia 404 aqui, o que significa
+# que nenhum buscador tinha um mapa do site e nenhum robo de IA tinha permissao
+# explicita. Nao havia bloqueio - havia ausencia.
+
+User-agent: *
+Allow: /
+
+# A demo fica fora do indice por DOIS motivos, e o segundo e' o forte:
+#  1. e' uma barbearia de exemplo ("Navalha de Ouro") - conteudo de teste competindo
+#     na busca com a landing so atrapalha;
+#  2. calendario e' armadilha de rastreamento: cada dia, cada profissional e cada
+#     servico vira uma URL nova, e o robo entra num numero praticamente infinito de
+#     paginas rasas. Isso gasta o orcamento de rastreamento do dominio inteiro.
+# O link continua funcionando normalmente para quem clica - o que muda e' so o
+# buscador nao listar. Se um dia a demo virar peca de conteudo, reverter esta linha.
+Disallow: /demo/
+
+# Robos de IA generativa. Sao listados um por um de proposito: o "User-agent: *"
+# acima ja permitiria, mas varios desses robos so leem a regra que cita o nome
+# deles, e ter a linha explicita e' o que deixa registrado que a permissao e'
+# intencional - e onde se revoga, se um dia a decisao mudar.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://horariocheio.com.br/sitemap.xml

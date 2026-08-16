@@ -4,7 +4,16 @@ Página única em HTML puro. Sem build, sem framework, sem CDN: o `index.html` t
 dentro dele e as imagens são locais. Abrir o arquivo no navegador já mostra o resultado
 final — o que está no ar é exatamente isto.
 
-Publicado pelo **GitHub Pages** em <https://rafalog860-code.github.io/LandingPage/>.
+Publicada na **Hostinger** em <https://horariocheio.com.br/>, desde 15/08/2026.
+
+Deploy: empacotar `index.html`, `img/` e `.nojekyll` e extrair em
+`~/domains/horariocheio.com.br/public_html/` — a mesma conta e a mesma chave SSH do app.
+A pasta tem também o `demo/` (a instância de demonstração) e o `default.php` da Hostinger,
+que fica sem uso porque o `index.html` tem precedência.
+
+> O endereço anterior era o GitHub Pages (`rafalog860-code.github.io/LandingPage/`).
+> Saiu de cena junto com o domínio próprio; se o repositório recortado ainda existir, ele
+> agora serve uma versão velha.
 
 ## Arquivos
 
@@ -14,7 +23,7 @@ Publicado pelo **GitHub Pages** em <https://rafalog860-code.github.io/LandingPag
 | `img/tela-1..4.png` | As quatro telas do app (os passos do agendamento) |
 | `img/marca-azul.png`, `img/marca-terracota.png` | A mesma tela com outra marca — a prova visual do white-label |
 | `img/logo.png` | Logo, favicon e imagem do card de link |
-| `.nojekyll` | Desliga o Jekyll do GitHub Pages: o site é servido como está |
+| `.nojekyll` | Resíduo do GitHub Pages. Inofensivo na Hostinger; mantido caso o Pages volte a ser usado como espelho |
 
 ## Se o endereço mudar
 

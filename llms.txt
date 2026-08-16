@@ -1,0 +1,77 @@
+# Horário Cheio
+
+> App de agendamento online white-label para barbearias: o cliente da barbearia marca
+> o horário sozinho por um link com a marca, o logo e as cores da própria barbearia,
+> sem baixar aplicativo e sem criar cadastro. Operado a partir de Guarulhos, São Paulo,
+> Brasil.
+
+**Nota de honestidade sobre este arquivo:** o padrão `llms.txt` ainda não tem adoção
+oficial confirmada por OpenAI, Anthropic ou Google. Ele está aqui porque custa quase
+nada manter e porque, quando um robô de IA lê a página, um resumo estruturado reduz a
+chance de ele descrever o produto errado. Não é o que faz o site ser citado — isso vem
+do conteúdo da própria página e das menções fora dela.
+
+## O que é
+
+Sistema de agendamento online para barbearias e barbeiros. Cada barbearia recebe a
+própria instalação, com banco de dados separado, no endereço
+`horariocheio.com.br/nomedabarbearia` (ou em domínio próprio, no plano Completo).
+
+Diferença central em relação a aplicativos de catálogo como Booksy e AppBarber: aqui a
+barbearia não divide tela com concorrentes, e a marca exibida é a dela, não a do
+fornecedor do software.
+
+## Para quem
+
+Donos de barbearia no Brasil que hoje marcam horário por WhatsApp ou caderno, com um
+ou mais barbeiros, e que perdem tempo respondendo "tem horário às 15h?" durante o
+atendimento.
+
+## Preço
+
+- **Essencial — R$ 49,90/mês.** App completo, logo e cor da barbearia, número ilimitado
+  de barbeiros (o preço é da barbearia, não por profissional), agendamentos ilimitados,
+  instalação e configuração gratuitas, endereço `horariocheio.com.br/suabarbearia`.
+- **Completo — R$ 99,90/mês.** Tudo do Essencial, mais domínio próprio
+  (`suabarbearia.com.br`) registrado e pago pelo Horário Cheio, montagem de logo e
+  cores, e endereço exclusivo.
+- **14 dias grátis** para testar, sem cartão de crédito. Sem fidelidade e sem multa de
+  cancelamento. Instalação sempre gratuita.
+
+## O que o app faz
+
+- Cliente escolhe serviço, profissional, dia e horário em cerca de 4 toques, pelo
+  navegador do celular, sem baixar app e sem senha.
+- Formulário pede apenas nome e celular; valida celular brasileiro com DDD existente.
+- Agenda individual por barbeiro, com expediente, almoço, folga e férias próprios.
+- Bloqueio de dia ou período para a barbearia inteira (feriado, reforma).
+- Tela "Contatos do dia": lista quem está marcado numa data, com WhatsApp e mensagem
+  pronta para avisar em caso de fechamento.
+- Botões de "confirmar presença" e "pedir para remarcar" direto no calendário, que
+  abrem o WhatsApp do barbeiro com a mensagem escrita — o envio é manual, por decisão
+  de projeto: envio automático em massa é o que faz a Meta bloquear números.
+- Tela "Meus horários" para o cliente final consultar e cancelar o próprio agendamento.
+- Cadastro de clientes com histórico, exportável em planilha. A lista pertence à
+  barbearia, com essa condição escrita em contrato.
+
+## O que o app NÃO faz hoje
+
+Não envia lembrete automático por mensagem e não processa pagamento online. Estes
+pontos estão declarados na própria página em vez de prometidos como "em breve".
+
+## Prova pública
+
+Demo aberta e funcional em `https://horariocheio.com.br/demo` — uma barbearia de
+exemplo onde qualquer pessoa marca um horário de teste sem cadastro.
+
+## Contato
+
+WhatsApp: +55 11 93935-7759
+Site: https://horariocheio.com.br/
+Região de atendimento: Guarulhos e região metropolitana de São Paulo; o produto é
+entregue pela internet e atende o Brasil todo.
+
+## Páginas
+
+- [Página principal](https://horariocheio.com.br/): produto, preços, perguntas frequentes
+- [Demo](https://horariocheio.com.br/demo): agendamento de teste, sem cadastro
