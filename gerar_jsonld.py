@@ -67,6 +67,34 @@ APP = {
 }
 
 
+# Paginas de segmento e a de comparacao: todas seguem o mesmo formato
+# (WebPage + FAQPage). So a landing tem Organization, WebSite e SoftwareApplication,
+# que sao do site inteiro e nao podem ser repetidos em cada pagina.
+# Para acrescentar um segmento novo: uma entrada aqui e a pagina em <pasta>/index.html.
+SECUNDARIAS = {
+    "comparar": {
+        "pasta": "comparar",
+        "nome": "AppBarber, Booksy ou Horário Cheio: comparação de preços",
+        "descricao": ("Comparação de preços entre AppBarber, Booksy e Horário Cheio "
+                      "para barbearias, com fonte e data de consulta."),
+    },
+    "manicure": {
+        "pasta": "manicure",
+        "nome": "Sistema de agendamento para manicure e nail designer",
+        "descricao": ("Agenda online para manicure, pedicure e nail designer com a marca "
+                      "do próprio estúdio: a cliente marca pelo link, cada serviço com a "
+                      "duração real, sem cobrança por profissional."),
+    },
+    "estetica": {
+        "pasta": "clinica-estetica",
+        "nome": "Sistema de agendamento para clínica de estética",
+        "descricao": ("Agenda online para clínica de estética e esteticista com a marca da "
+                      "própria clínica: agenda por profissional, link no lugar da conversa "
+                      "do Instagram, preço da clínica e não por profissional."),
+    },
+}
+
+
 def extrair_faq(html):
     """Le os <details><summary>pergunta</summary><p>resposta</p></details> da pagina."""
     blocos = re.findall(
@@ -85,25 +113,27 @@ def montar(pagina, html):
                   "publisher": {"@id": SITE + "#org"}},
                  APP,
                  {"@type": "FAQPage", "@id": SITE + "#faq", "mainEntity": faq}]
-    else:  # comparar
-        url = SITE + "comparar/"
+    else:
+        meta = SECUNDARIAS[pagina]
+        url = SITE + meta["pasta"] + "/"
         grafo = [
             {"@type": "WebPage", "@id": url, "url": url,
-             "name": "AppBarber, Booksy ou Horário Cheio: comparação de preços",
+             "name": meta["nome"],
              "inLanguage": "pt-BR", "isPartOf": {"@id": SITE + "#site"},
              "publisher": {"@id": SITE + "#org"},
              "about": {"@id": SITE + "#app"},
-             # datePublished honesto: a pagina nasceu hoje. Ao reescrever de verdade,
-             # atualizar dateModified - data falsa e' sinal de spam.
+             # datePublished honesto: todas nasceram em 16/08/2026. Ao reescrever de
+             # verdade, atualizar dateModified - data falsa e' sinal de spam.
              "datePublished": "2026-08-16", "dateModified": "2026-08-16",
-             "description": ("Comparação de preços entre AppBarber, Booksy e Horário Cheio "
-                             "para barbearias, com fonte e data de consulta.")},
+             "description": meta["descricao"]},
             {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": faq},
         ]
     return {"@context": "https://schema.org", "@graph": grafo}
 
 
-PAGINAS = {"landing": BASE / "index.html", "comparar": BASE / "comparar" / "index.html"}
+PAGINAS = {"landing": BASE / "index.html"}
+for _nome, _meta in SECUNDARIAS.items():
+    PAGINAS[_nome] = BASE / _meta["pasta"] / "index.html"
 
 for nome, caminho in PAGINAS.items():
     if not caminho.exists():

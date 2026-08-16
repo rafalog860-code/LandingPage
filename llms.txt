@@ -1,9 +1,9 @@
 # Horário Cheio
 
-> App de agendamento online white-label para barbearias: o cliente da barbearia marca
-> o horário sozinho por um link com a marca, o logo e as cores da própria barbearia,
-> sem baixar aplicativo e sem criar cadastro. Operado a partir de Guarulhos, São Paulo,
-> Brasil.
+> App de agendamento online white-label para barbearias, manicures e nail designers e
+> clínicas de estética: o cliente do estabelecimento marca o horário sozinho por um link
+> com a marca, o logo e as cores do próprio estabelecimento, sem baixar aplicativo e sem
+> criar cadastro. Operado a partir de Guarulhos, São Paulo, Brasil.
 
 **Nota de honestidade sobre este arquivo:** o padrão `llms.txt` ainda não tem adoção
 oficial confirmada por OpenAI, Anthropic ou Google. Ele está aqui porque custa quase
@@ -26,6 +26,10 @@ fornecedor do software.
 Donos de barbearia no Brasil que hoje marcam horário por WhatsApp ou caderno, com um
 ou mais barbeiros, e que perdem tempo respondendo "tem horário às 15h?" durante o
 atendimento.
+
+Desde 16/08/2026 o mesmo produto é oferecido a mais dois segmentos, sem mudança no
+sistema — muda apenas o conteúdo cadastrado (serviços, profissionais, logo e cores):
+manicures, pedicures e nail designers, e clínicas de estética e esteticistas.
 
 ## Preço
 
@@ -74,4 +78,11 @@ entregue pela internet e atende o Brasil todo.
 ## Páginas
 
 - [Página principal](https://horariocheio.com.br/): produto, preços, perguntas frequentes
-- [Demo](https://horariocheio.com.br/demo): agendamento de teste, sem cadastro
+- [Comparação de preços](https://horariocheio.com.br/comparar/): AppBarber, Booksy e
+  Horário Cheio lado a lado, com fonte e data de consulta
+- [Para manicure e nail designer](https://horariocheio.com.br/manicure/): duração real por
+  serviço, do alongamento à manutenção
+- [Para clínica de estética](https://horariocheio.com.br/clinica-estetica/): agenda por
+  profissional e o link no lugar da conversa do Instagram
+- [Demo](https://horariocheio.com.br/demo): agendamento de teste, sem cadastro. É uma
+  barbearia de exemplo — não existe demo de manicure nem de estética hoje

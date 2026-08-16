@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Mesmo criterio da home e da /manicure/: o title comeca pelo termo que a dona da
+     clinica digita na busca, e a marca vem depois. -->
+<title>Sistema de agendamento para clínica de estética — Horário Cheio</title>
+<meta name="description" content="Agenda online para clínica de estética e esteticista com a sua marca. A cliente escolhe o protocolo e o horário pelo link da bio, sem baixar app. R$ 49,90/mês pela clínica inteira, sem cobrar por profissional.">
+<meta name="theme-color" content="#6d4c9f">
+<link rel="canonical" href="https://horariocheio.com.br/clinica-estetica/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://horariocheio.com.br/clinica-estetica/">
+<meta property="og:title" content="Horário Cheio — agenda online para clínica de estética">
+<meta property="og:description" content="O link da bio marca o horário em vez de abrir conversa. Preço da clínica, não por profissional. A partir de R$ 49,90/mês.">
+<!-- og:image e' o mockup do segmento e nao o img/logo.png — ver a nota na /manicure/:
+     aquele arquivo ainda traz a marca antiga e uma tesoura. -->
+<meta property="og:image" content="https://horariocheio.com.br/img/estetica-tela-1.png">
+<link rel="icon" href="../img/logo.png">
+
+<!-- Paleta propria do segmento (pedido do Rafael em 16/08). Lilas suave sobre fundo
+     claro, a mesma cor dos mockups do app desta pagina (#6d4c9f). A estrutura
+     tipografica continua igual a das outras paginas — o que muda e' a cor, nao o
+     esqueleto. -->
+<style>
+    :root {
+        --cor: #6d4c9f; --cor-escura: #553a7e; --cor-suave: #e6dcf5;
+        --fundo: #fbfaff; --fundo-alt: #f3effa; --card: #ffffff;
+        --texto: #262232; --texto-fraco: #6f6880;
+        --borda: #e4dcf2;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--fundo); color: var(--texto);
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+           font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0 0 .6em; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.1rem; }
+    p { margin: 0 0 1em; }
+    a { color: var(--cor-escura); }
+    .cor { color: var(--cor); }
+    .wrap { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 44px 0; }
+    section.alt { background: var(--fundo-alt); }
+    .sub { color: var(--texto-fraco); }
+
+    header { padding: 20px 0; background: var(--cor); }
+    .marca { display: flex; align-items: center; gap: 10px; font-family: Georgia, serif;
+             letter-spacing: .14em; text-transform: uppercase; font-size: .9rem;
+             color: #fff; text-decoration: none; }
+    .marca .selo { width: 30px; height: 30px; border-radius: 50%; flex: none;
+                   border: 1.5px solid rgba(255,255,255,.75); display: flex;
+                   align-items: center; justify-content: center; font-size: .62rem;
+                   letter-spacing: .04em; }
+
+    .rolagem { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .97rem;
+            min-width: 520px; background: var(--card); }
+    th, td { padding: 12px 12px; border-bottom: 1px solid var(--borda);
+             text-align: left; vertical-align: top; }
+    th { color: var(--texto-fraco); font-weight: 600; }
+    td.nosso, th.nosso { color: var(--cor-escura); font-weight: 600; }
+    tr.destaque td { font-weight: 700; }
+
+    .card { background: var(--card); border: 1px solid var(--borda);
+            border-radius: 14px; padding: 22px; margin-bottom: 18px;
+            box-shadow: 0 1px 3px rgba(60, 40, 110, .05); }
+    .card h3 { color: var(--cor); }
+    .card p:last-child { margin-bottom: 0; }
+
+    .aviso { border-left: 3px solid var(--cor); padding: 4px 0 4px 16px;
+             color: var(--texto-fraco); font-size: .93rem; }
+
+    .btn { display: inline-block; padding: 15px 26px; border-radius: 10px; font-weight: 700;
+           text-decoration: none; letter-spacing: .03em; font-size: 1rem; text-align: center;
+           background: var(--cor); color: #fff; }
+    .btn-vazio { background: none; border: 1.5px solid var(--cor); color: var(--cor-escura); }
+    .botoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+    .telas { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-top: 26px; }
+    .telas figure { margin: 0; max-width: 250px; }
+    .telas img { width: 100%; height: auto; border-radius: 16px;
+                 box-shadow: 0 6px 20px rgba(45, 30, 85, .16); }
+    .telas figcaption { color: var(--texto-fraco); font-size: .88rem; margin-top: 10px; text-align: center; }
+
+    .lado-a-lado { display: flex; flex-wrap: wrap; gap: 30px; align-items: center; }
+    .lado-a-lado .texto { flex: 1 1 320px; }
+    .lado-a-lado .print { flex: 0 1 270px; margin: 0 auto; }
+    .lado-a-lado .print img { width: 100%; height: auto; border-radius: 16px;
+                              box-shadow: 0 6px 20px rgba(45, 30, 85, .16); }
+
+    .passos { counter-reset: passo; list-style: none; padding: 0; }
+    .passos li { counter-increment: passo; position: relative; padding-left: 44px; margin-bottom: 18px; }
+    .passos li::before { content: counter(passo); position: absolute; left: 0; top: 0;
+                         width: 30px; height: 30px; border-radius: 50%; background: var(--cor);
+                         color: #fff; font-weight: 700;
+                         display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+
+    details { border-bottom: 1px solid var(--borda); padding: 16px 0; }
+    summary { cursor: pointer; font-weight: 600; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+ "; color: var(--cor); font-weight: 700; }
+    details[open] summary::before { content: "– "; }
+    details p { margin: 12px 0 0; color: var(--texto-fraco); }
+
+    footer { padding: 36px 0 60px; color: var(--texto-fraco); font-size: .88rem;
+             background: var(--fundo-alt); }
+
+    @media (min-width: 800px) { h1 { font-size: 2.6rem; } h2 { font-size: 1.8rem; } }
+</style>
+<!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://horariocheio.com.br/clinica-estetica/",
+      "url": "https://horariocheio.com.br/clinica-estetica/",
+      "name": "Sistema de agendamento para clínica de estética",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://horariocheio.com.br/#site"
+      },
+      "publisher": {
+        "@id": "https://horariocheio.com.br/#org"
+      },
+      "about": {
+        "@id": "https://horariocheio.com.br/#app"
+      },
+      "datePublished": "2026-08-16",
+      "dateModified": "2026-08-16",
+      "description": "Agenda online para clínica de estética e esteticista com a marca da própria clínica: agenda por profissional, link no lugar da conversa do Instagram, preço da clínica e não por profissional."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://horariocheio.com.br/clinica-estetica/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Serve para esteticista autônoma, sem clínica montada?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Serve. O preço é do negócio e não por profissional, então quem atende sozinha paga o mesmo R$ 49,90 e cadastra só o próprio nome. O endereço do atendimento só aparece se você escrever."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cada profissional tem a própria agenda e o próprio horário?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim. Cada uma tem expediente, intervalo de almoço, folga semanal e férias próprios, e atende só os procedimentos que estiverem ligados a ela. A cliente escolhe a profissional na primeira tela. Bloquear a agenda de uma não mexe na das outras; para feriado existe o bloqueio da clínica inteira."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Procedimentos com tempos diferentes funcionam bem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "É o caso normal aqui. Cada procedimento tem a própria duração cadastrada — um protocolo corporal de 90 minutos e um design de sobrancelha de 30 não concorrem pelo mesmo espaço. O sistema só oferece à cliente os horários em que aquele procedimento cabe inteiro."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dá para o app controlar meu pacote de 10 sessões?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não hoje. A cliente marca sessão por sessão, e o controle de quantas já foram continua no seu registro atual. Se pacote é o centro da sua operação, este ponto pesa mais do que o preço — vale conversar antes de assinar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "E a cliente que marca e não aparece?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O app não cobra sinal, então não impede a falta. O que ele oferece é a tela de contatos do dia: você abre pela manhã, vê quem está marcado e envia a confirmação pelo WhatsApp com a mensagem pronta. Confirmação na véspera reduz falta; o disparo é seu, não do sistema."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso trocar meu Instagram ou meu WhatsApp Business?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. Muda só para onde o link aponta: em vez de abrir a conversa, ele abre a agenda. O WhatsApp continua sendo o canal de quem tem dúvida de verdade — que é uma parte bem menor das mensagens que você recebe hoje."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva para a clínica começar a usar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Algumas horas depois que você enviar a lista de procedimentos com valor e duração, os horários de cada profissional e o logo. Você testa o link pronto antes de divulgar para qualquer cliente."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- JSONLD:FIM -->
+
+</head>
+<body>
+
+<header>
+    <div class="wrap">
+        <a class="marca" href="../">
+            <span class="selo">HC</span>
+            Horário Cheio
+        </a>
+    </div>
+</header>
+
+<div class="wrap">
+    <section style="padding-bottom:20px;">
+        <h1>O link da bio <span class="cor">marca o horário</span> em vez de abrir conversa</h1>
+
+        <p class="sub" style="font-size:1.1rem;">
+            Agenda online para clínica de estética e esteticista, com o nome, o logo e as cores
+            da sua clínica. A cliente vem do Instagram, escolhe o protocolo, vê os horários
+            livres e confirma — sem baixar aplicativo e sem passar pela sua caixa de mensagens.
+        </p>
+
+        <div class="botoes">
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20para%20cl%C3%ADnica%20de%20est%C3%A9tica%20e%20quero%20ver%20o%20app%20com%20a%20minha%20marca" target="_blank" rel="noopener">Quero ver com a minha marca</a>
+            <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Abrir a demo funcionando</a>
+        </div>
+
+        <p class="aviso" style="margin-top:18px;">
+            A demo aberta é de uma barbearia — foi o primeiro segmento que atendemos e ainda
+            não montamos uma de estética. <strong>O app é o mesmo:</strong> mudam os
+            procedimentos, as profissionais, o logo e as cores. Para ver com a sua marca antes
+            de decidir, chame no WhatsApp que a gente monta.
+        </p>
+    </section>
+</div>
+
+<!-- A dor do nicho ------------------------------------------------------- -->
+<section class="alt">
+    <div class="wrap">
+        <h2>Todo mundo vem pelo Instagram — e para na conversa</h2>
+
+        <p>O caminho da cliente de estética hoje é quase sempre o mesmo: ela vê o resultado
+           num post, toca no link da bio e cai no WhatsApp. Aí começa a parte cara: “oi,
+           quanto custa?”, “tem horário sábado?”, “e na terça de manhã?”. São várias
+           mensagens por cliente, e boa parte delas acontece enquanto você está com outra
+           pessoa na maca.</p>
+
+        <p>Um bom conteúdo no Instagram traz gente. Mas se o link da bio abre uma conversa
+           em vez de uma agenda, <strong>quem vira cliente é quem teve paciência de
+           esperar sua resposta</strong> — e nem sempre é a maioria.</p>
+
+        <div class="card">
+            <h3>A troca que muda o número</h3>
+            <p>Trocar o link da bio pelo link de agendamento é a única alteração necessária
+               para começar. Ela chega, vê o protocolo com o tempo e o valor, escolhe entre
+               os horários que existem de verdade e confirma. Você recebe o horário na
+               agenda, já organizado por profissional.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Varias profissionais -------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>Uma agenda por profissional, um preço pela clínica</h2>
+
+        <p>Clínica raramente tem uma pessoa só. Cada profissional tem o próprio expediente,
+           a própria folga e os próprios procedimentos, e a cliente escolhe com quem quer
+           ser atendida. A parte que costuma pesar no orçamento é justamente essa: quase
+           todo sistema do mercado <strong>cobra por profissional cadastrada</strong>.</p>
+
+        <div class="rolagem">
+            <table>
+                <tr>
+                    <th>Profissionais na clínica</th>
+                    <th>Sistemas que cobram por cabeça</th>
+                    <th class="nosso">Horário Cheio</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>uma mensalidade</td>
+                    <td class="nosso">R$ 49,90</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>até três vezes mais</td>
+                    <td class="nosso">R$ 49,90</td>
+                </tr>
+                <tr class="destaque">
+                    <td>5</td>
+                    <td>até cinco vezes mais</td>
+                    <td class="nosso">R$ 49,90</td>
+                </tr>
+            </table>
+        </div>
+
+        <p class="sub">Preferimos não colocar aqui o preço de concorrente sem fonte: os
+           números com nome, valor e data de consulta estão na
+           <a href="../comparar/">página de comparação</a>. A regra do nosso lado é simples
+           — contratar mais uma esteticista não mexe na mensalidade.</p>
+    </div>
+</section>
+
+<!-- Como funciona (lado da cliente) --------------------------------------- -->
+<section class="alt">
+    <div class="wrap">
+        <h2>Como funciona para a sua cliente</h2>
+
+        <ol class="passos">
+            <li>Ela toca no link da bio, do story ou da mensagem de saudação.</li>
+            <li>Escolhe o procedimento e a profissional, já vendo duração e valor.</li>
+            <li>Escolhe o dia e o horário, entre os que cabem naquele procedimento.</li>
+            <li>Informa nome e celular e recebe a confirmação na tela, com link para
+                remarcar ou cancelar sozinha.</li>
+        </ol>
+
+        <div class="telas">
+            <figure>
+                <img src="../img/estetica-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Tela do app mostrando a escolha do procedimento Limpeza de Pele Profunda com duração de 60 minutos e valor de R$ 180,00">
+                <figcaption>1. Procedimento, profissional, tempo e valor</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/estetica-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Tela do app mostrando os dias e horários disponíveis na agenda da clínica">
+                <figcaption>2. Só aparece o que está livre</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/estetica-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Tela de horário confirmado, com procedimento, profissional, dia, horário e total de R$ 180,00">
+                <figcaption>3. Horário confirmado na hora</figcaption>
+            </figure>
+        </div>
+
+        <p class="sub" style="text-align:center;margin-top:20px;">
+            Telas de uma clínica de exemplo. Na sua, a marca é a sua — a cliente não vê
+            nome de fornecedor em nenhum momento.
+        </p>
+    </div>
+</section>
+
+<!-- Visao do prestador ---------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>E do seu lado: quem está marcado hoje</h2>
+
+        <div class="lado-a-lado">
+            <div class="texto">
+                <p>Você abre o painel pelo celular, escolhe a data e vê <strong>a agenda do
+                   dia em ordem de horário</strong>: cliente, procedimento, profissional
+                   responsável e telefone, com um botão de WhatsApp por linha — a mensagem
+                   já vai escrita e você pode alterar antes de enviar.</p>
+
+                <p>Numa clínica com mais de uma profissional isso substitui o grupo do
+                   WhatsApp e a agenda de papel na recepção: <strong>quem chega de manhã vê
+                   o dia inteiro numa tela</strong>, sem precisar perguntar a ninguém.</p>
+
+                <div class="card">
+                    <h3>Sem disparo em massa, por decisão</h3>
+                    <p>É um botão por cliente, com você apertando enviar. Ferramenta que
+                       dispara para todo mundo de uma vez é o que faz o WhatsApp bloquear o
+                       número da clínica — o número que está no seu Instagram e no seu
+                       cartão.</p>
+                </div>
+
+                <p class="sub">No mesmo painel você abre e fecha horários, lança férias de
+                   uma profissional sem mexer na agenda das outras, bloqueia o dia da
+                   clínica inteira num feriado e cadastra procedimentos e valores.</p>
+            </div>
+
+            <div class="print">
+                <img src="../img/estetica-painel.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Painel da clínica no celular: lista de clientes agendadas no dia, com horário, procedimento, profissional, telefone e botões de WhatsApp para avisar cancelamento ou lembrar do horário">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dados da cliente ------------------------------------------------------ -->
+<section class="alt">
+    <div class="wrap">
+        <h2>O que o sistema guarda da sua cliente</h2>
+
+        <p>Só <strong>nome e celular</strong>. O app não tem ficha de anamnese, não guarda
+           foto de antes e depois, não registra procedimento realizado nem qualquer
+           informação de saúde.</p>
+
+        <p>Isso é uma limitação e uma escolha ao mesmo tempo. Informação de saúde é
+           <strong>dado pessoal sensível</strong> na LGPD, com exigências bem maiores de
+           guarda e de consentimento do que um nome e um telefone. Um sistema de
+           agendamento que não coleta esse tipo de dado tira essa responsabilidade do
+           lugar errado — a sua ficha de avaliação continua onde já está hoje.</p>
+
+        <div class="card">
+            <h3>A lista de clientes é da clínica</h3>
+            <p>O cadastro pode ser exportado em planilha quando você pedir, e essa condição
+               está escrita em contrato. Se um dia você sair, sai com a sua base.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Preco ----------------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>Preço</h2>
+
+        <div class="card">
+            <h3>Essencial — R$ 49,90/mês</h3>
+            <p>App completo com a marca da clínica no endereço
+               <strong>horariocheio.com.br/suaclinica</strong>, profissionais e
+               agendamentos ilimitados, instalação e configuração grátis.</p>
+        </div>
+
+        <div class="card">
+            <h3>Completo — R$ 99,90/mês</h3>
+            <p>Tudo do Essencial, mais <strong>domínio próprio</strong>
+               (suaclinica.com.br) registrado e pago por nós, e montagem de logo e cores.</p>
+        </div>
+
+        <p><strong>14 dias grátis, sem cartão.</strong> Sem fidelidade, sem multa de
+           cancelamento. Em contas do seu caixa: a mensalidade custa menos que uma sessão
+           de limpeza de pele.</p>
+
+        <div class="botoes">
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Quero%20os%2014%20dias%20gr%C3%A1tis%20do%20Hor%C3%A1rio%20Cheio%20para%20minha%20cl%C3%ADnica" target="_blank" rel="noopener">Começar os 14 dias grátis</a>
+            <a class="btn btn-vazio" href="../comparar/">Comparar com outros sistemas</a>
+        </div>
+    </div>
+</section>
+
+<!-- O que nao faz --------------------------------------------------------- -->
+<section class="alt">
+    <div class="wrap">
+        <h2>O que o app <span class="cor">não</span> faz</h2>
+
+        <p>Esta lista existe porque clínica de estética costuma precisar de coisas que a
+           gente não entrega hoje. Melhor saber antes:</p>
+
+        <ul>
+            <li><strong>Não controla pacote de sessões.</strong> Protocolo vendido em dez
+                sessões precisa ser acompanhado fora do sistema; aqui cada sessão é um
+                agendamento.</li>
+            <li><strong>Não tem prontuário nem ficha de anamnese</strong>, nem foto de
+                evolução.</li>
+            <li><strong>Não processa pagamento nem cobra sinal</strong> no ato do
+                agendamento.</li>
+            <li><strong>Não dispara lembrete automático.</strong> A mensagem sai pronta e
+                você toca em enviar — envio automático em massa é o que faz o WhatsApp
+                bloquear o número da clínica.</li>
+            <li><strong>Não calcula comissão</strong> das profissionais.</li>
+            <li><strong>Não traz cliente nova.</strong> Quem traz é o seu conteúdo; o app
+                organiza quem já chegou.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- FAQ -------------------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>Perguntas que sempre fazem</h2>
+
+        <details>
+            <summary>Serve para esteticista autônoma, sem clínica montada?</summary>
+            <p>Serve. O preço é do negócio e não por profissional, então quem atende sozinha
+               paga o mesmo R$ 49,90 e cadastra só o próprio nome. O endereço do
+               atendimento só aparece se você escrever.</p>
+        </details>
+
+        <details>
+            <summary>Cada profissional tem a própria agenda e o próprio horário?</summary>
+            <p>Sim. Cada uma tem expediente, intervalo de almoço, folga semanal e férias
+               próprios, e atende só os procedimentos que estiverem ligados a ela. A cliente
+               escolhe a profissional na primeira tela. Bloquear a agenda de uma não mexe na
+               das outras; para feriado existe o bloqueio da clínica inteira.</p>
+        </details>
+
+        <details>
+            <summary>Procedimentos com tempos diferentes funcionam bem?</summary>
+            <p>É o caso normal aqui. Cada procedimento tem a própria duração cadastrada — um
+               protocolo corporal de 90 minutos e um design de sobrancelha de 30 não
+               concorrem pelo mesmo espaço. O sistema só oferece à cliente os horários em
+               que aquele procedimento cabe inteiro.</p>
+        </details>
+
+        <details>
+            <summary>Dá para o app controlar meu pacote de 10 sessões?</summary>
+            <p>Não hoje. A cliente marca sessão por sessão, e o controle de quantas já foram
+               continua no seu registro atual. Se pacote é o centro da sua operação, este
+               ponto pesa mais do que o preço — vale conversar antes de assinar.</p>
+        </details>
+
+        <details>
+            <summary>E a cliente que marca e não aparece?</summary>
+            <p>O app não cobra sinal, então não impede a falta. O que ele oferece é a tela
+               de contatos do dia: você abre pela manhã, vê quem está marcado e envia a
+               confirmação pelo WhatsApp com a mensagem pronta. Confirmação na véspera
+               reduz falta; o disparo é seu, não do sistema.</p>
+        </details>
+
+        <details>
+            <summary>Preciso trocar meu Instagram ou meu WhatsApp Business?</summary>
+            <p>Não. Muda só para onde o link aponta: em vez de abrir a conversa, ele abre a
+               agenda. O WhatsApp continua sendo o canal de quem tem dúvida de verdade — que
+               é uma parte bem menor das mensagens que você recebe hoje.</p>
+        </details>
+
+        <details>
+            <summary>Quanto tempo leva para a clínica começar a usar?</summary>
+            <p>Algumas horas depois que você enviar a lista de procedimentos com valor e
+               duração, os horários de cada profissional e o logo. Você testa o link pronto
+               antes de divulgar para qualquer cliente.</p>
+        </details>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <p>As telas desta página mostram uma clínica de exemplo, criada para demonstração —
+           não é cliente real, e nenhum depoimento aqui foi inventado. O Horário Cheio é um
+           sistema de agendamento: não é software médico e não substitui prontuário.</p>
+        <p>Horário Cheio · agendamento online para estética, manicure e barbearia ·
+           Guarulhos, SP · WhatsApp (11) 93935-7759 ·
+           <a href="../">horariocheio.com.br</a> ·
+           <a href="../manicure/">versão para manicure</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
