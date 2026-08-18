@@ -16,6 +16,13 @@ Allow: /
 # buscador nao listar. Se um dia a demo virar peca de conteudo, reverter esta linha.
 Disallow: /demo/
 
+# As imagens dos posts do Instagram (17/08/2026). Elas moram aqui porque a API da
+# Meta busca a imagem por URL publica, a partir do servidor dela - caminho de
+# arquivo local nao funciona. Mas sao MATERIAL DE ORIGEM, nao conteudo do site:
+# indexadas, competiriam na busca com as paginas reais e diluiriam justamente o
+# que a gente quer que apareca.
+Disallow: /midia/
+
 # Robos de IA generativa. Sao listados um por um de proposito: o "User-agent: *"
 # acima ja permitiria, mas varios desses robos so leem a regra que cita o nome
 # deles, e ter a linha explicita e' o que deixa registrado que a permissao e'
