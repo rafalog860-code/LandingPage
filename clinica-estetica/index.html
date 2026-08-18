@@ -3,111 +3,275 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Mesmo criterio da home e da /manicure/: o title comeca pelo termo que a dona da
-     clinica digita na busca, e a marca vem depois. -->
 <title>Sistema de agendamento para clínica de estética — Horário Cheio</title>
-<meta name="description" content="Agenda online para clínica de estética e esteticista com a sua marca. A cliente escolhe o protocolo e o horário pelo link da bio, sem baixar app. R$ 49,90/mês pela clínica inteira, sem cobrar por profissional.">
-<meta name="theme-color" content="#6d4c9f">
+<meta name="description" content="Agenda online para clínica de estética e esteticista com a sua marca. A cliente vem do Instagram e marca sozinha pelo link. Uma agenda por profissional, um preço pela clínica: R$ 49,90/mês.">
+<meta name="theme-color" content="#6D4C9F">
 <link rel="canonical" href="https://horariocheio.com.br/clinica-estetica/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://horariocheio.com.br/clinica-estetica/">
 <meta property="og:title" content="Horário Cheio — agenda online para clínica de estética">
-<meta property="og:description" content="O link da bio marca o horário em vez de abrir conversa. Preço da clínica, não por profissional. A partir de R$ 49,90/mês.">
-<!-- og:image e' o mockup do segmento e nao o img/logo.png — ver a nota na /manicure/:
-     aquele arquivo ainda traz a marca antiga e uma tesoura. -->
+<meta property="og:description" content="O link da bio marca o horário em vez de abrir conversa. Uma agenda por profissional, um preço pela clínica. A partir de R$ 49,90/mês.">
+<!-- og:image e' o mockup do segmento, e NAO o img/logo.png: aquele arquivo ainda traz
+     a marca antiga ("Agenda Barbeiro") e uma tesoura — ver a tarefa do logo no
+     TAREFAS.md. -->
 <meta property="og:image" content="https://horariocheio.com.br/img/estetica-tela-1.png">
 <link rel="icon" href="../img/logo.png">
 
-<!-- Paleta propria do segmento (pedido do Rafael em 16/08). Lilas suave sobre fundo
-     claro, a mesma cor dos mockups do app desta pagina (#6d4c9f). A estrutura
-     tipografica continua igual a das outras paginas — o que muda e' a cor, nao o
-     esqueleto. -->
 <style>
-    :root {
-        --cor: #6d4c9f; --cor-escura: #553a7e; --cor-suave: #e6dcf5;
-        --fundo: #fbfaff; --fundo-alt: #f3effa; --card: #ffffff;
-        --texto: #262232; --texto-fraco: #6f6880;
-        --borda: #e4dcf2;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--fundo); color: var(--texto);
-           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-           font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0 0 .6em; }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
-    h3 { font-size: 1.1rem; }
-    p { margin: 0 0 1em; }
-    a { color: var(--cor-escura); }
-    .cor { color: var(--cor); }
-    .wrap { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 44px 0; }
-    section.alt { background: var(--fundo-alt); }
-    .sub { color: var(--texto-fraco); }
+/* ===========================================================================
+   1. TOKENS — Open Props v1.7.16 (subconjunto)
+   ---------------------------------------------------------------------------
+   COPIADOS, nao linkados de propósito: folha de estilo externa e' requisicao
+   bloqueante, e estas paginas sao abertas a frio, pela busca, no 4G — nao ha
+   cache quente para amortizar a ida e volta. Valores conferidos direto em
+   unpkg.com/open-props@1.7.16/open-props.min.css em 17/08/2026.
 
-    header { padding: 20px 0; background: var(--cor); }
-    .marca { display: flex; align-items: center; gap: 10px; font-family: Georgia, serif;
-             letter-spacing: .14em; text-transform: uppercase; font-size: .9rem;
-             color: #fff; text-decoration: none; }
-    .marca .selo { width: 30px; height: 30px; border-radius: 50%; flex: none;
-                   border: 1.5px solid rgba(255,255,255,.75); display: flex;
-                   align-items: center; justify-content: center; font-size: .62rem;
-                   letter-spacing: .04em; }
+   Este bloco e' IDENTICO nas 3 paginas internas do site. Quando a extracao do
+   CSS comum acontecer (T102 no TAREFAS.md), e' exatamente este pedaco que sai
+   daqui para um arquivo so'. A home NAO usa este bloco: o CSS dela foi medido
+   em conversao e continua inline, intocado.
+   =========================================================================== */
+:root {
+  --size-1: .25rem;  --size-2: .5rem;   --size-3: 1rem;   --size-4: 1.25rem;
+  --size-5: 1.5rem;  --size-6: 1.75rem; --size-7: 2rem;   --size-8: 3rem;
+  --size-9: 4rem;    --size-10: 5rem;
+  --size-fluid-3: max(1.5rem, min(3vw, 2rem));
+  --size-fluid-4: max(2rem, min(4vw, 3rem));
 
-    .rolagem { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .97rem;
-            min-width: 520px; background: var(--card); }
-    th, td { padding: 12px 12px; border-bottom: 1px solid var(--borda);
-             text-align: left; vertical-align: top; }
-    th { color: var(--texto-fraco); font-weight: 600; }
-    td.nosso, th.nosso { color: var(--cor-escura); font-weight: 600; }
-    tr.destaque td { font-weight: 700; }
+  --font-size-0: .75rem; --font-size-1: 1rem;   --font-size-2: 1.1rem;
+  --font-size-3: 1.25rem; --font-size-4: 1.5rem; --font-size-5: 2rem;
+  --font-size-fluid-2: max(1.5rem, min(6vw, 2.5rem));
+  --font-weight-4: 400; --font-weight-6: 600; --font-weight-7: 700;
+  --font-lineheight-1: 1.25; --font-lineheight-3: 1.5; --font-lineheight-4: 1.75;
 
-    .card { background: var(--card); border: 1px solid var(--borda);
-            border-radius: 14px; padding: 22px; margin-bottom: 18px;
-            box-shadow: 0 1px 3px rgba(60, 40, 110, .05); }
-    .card h3 { color: var(--cor); }
-    .card p:last-child { margin-bottom: 0; }
+  --radius-2: 5px; --radius-3: 1rem; --radius-4: 2rem; --radius-round: 1e5px;
+  --border-size-1: 1px; --border-size-2: 2px; --border-size-3: 5px;
 
-    .aviso { border-left: 3px solid var(--cor); padding: 4px 0 4px 16px;
-             color: var(--texto-fraco); font-size: .93rem; }
+  --gray-0: #f8f9fa; --gray-2: #e9ecef; --gray-3: #dee2e6;
+  --gray-6: #868e96; --gray-7: #495057; --gray-9: #212529;
 
-    .btn { display: inline-block; padding: 15px 26px; border-radius: 10px; font-weight: 700;
-           text-decoration: none; letter-spacing: .03em; font-size: 1rem; text-align: center;
-           background: var(--cor); color: #fff; }
-    .btn-vazio { background: none; border: 1.5px solid var(--cor); color: var(--cor-escura); }
-    .botoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  --shadow-color: 220 3% 15%; --shadow-strength: 1%;
+  --shadow-1: 0 1px 2px -1px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 9%));
+  --shadow-2: 0 3px 5px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+              0 7px 14px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%));
+}
 
-    .telas { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-top: 26px; }
-    .telas figure { margin: 0; max-width: 250px; }
-    .telas img { width: 100%; height: auto; border-radius: 16px;
-                 box-shadow: 0 6px 20px rgba(45, 30, 85, .16); }
-    .telas figcaption { color: var(--texto-fraco); font-size: .88rem; margin-top: 10px; text-align: center; }
+/* ===========================================================================
+   2. MARCA DO SEGMENTO — a unica parte que muda entre as paginas internas
+   ---------------------------------------------------------------------------
+   O roxo e' o mesmo #6D4C9F dos mockups desta pagina: a cor do site tem que ser
+   a cor da tela mostrada nele, senao o print parece de outro produto. Os tons de
+   apoio saem da escala violet do Open Props (violet-0, violet-1, violet-10).
+   =========================================================================== */
+:root {
+  --marca:       #6D4C9F;
+  --marca-forte: #5235ab;   /* violet-10 — texto e link: 8,6:1 no branco */
+  --marca-veu:   #f3f0ff;   /* violet-0 */
+  --marca-linha: #e5dbff;   /* violet-1 */
+  --btn-tinta:   #fff;      /* roxo saturado aguenta texto branco (6,4:1) */
 
-    .lado-a-lado { display: flex; flex-wrap: wrap; gap: 30px; align-items: center; }
-    .lado-a-lado .texto { flex: 1 1 320px; }
-    .lado-a-lado .print { flex: 0 1 270px; margin: 0 auto; }
-    .lado-a-lado .print img { width: 100%; height: auto; border-radius: 16px;
-                              box-shadow: 0 6px 20px rgba(45, 30, 85, .16); }
+  --papel:      #fff;
+  --papel-alt:  var(--gray-0);
+  --tinta:      var(--gray-9);
+  --tinta-fraca: var(--gray-7);
+  --tinta-tenue: var(--gray-6);
+  --linha:      var(--gray-3);
+}
 
-    .passos { counter-reset: passo; list-style: none; padding: 0; }
-    .passos li { counter-increment: passo; position: relative; padding-left: 44px; margin-bottom: 18px; }
-    .passos li::before { content: counter(passo); position: absolute; left: 0; top: 0;
-                         width: 30px; height: 30px; border-radius: 50%; background: var(--cor);
-                         color: #fff; font-weight: 700;
-                         display: flex; align-items: center; justify-content: center; font-size: .95rem; }
+/* ===========================================================================
+   3. ESTRUTURA — igual nas 3 paginas internas
+   =========================================================================== */
+* { box-sizing: border-box; }
 
-    details { border-bottom: 1px solid var(--borda); padding: 16px 0; }
-    summary { cursor: pointer; font-weight: 600; list-style: none; }
-    summary::-webkit-details-marker { display: none; }
-    summary::before { content: "+ "; color: var(--cor); font-weight: 700; }
-    details[open] summary::before { content: "– "; }
-    details p { margin: 12px 0 0; color: var(--texto-fraco); }
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-size: var(--font-size-2);
+  line-height: var(--font-lineheight-4);
+  -webkit-font-smoothing: antialiased;
+}
 
-    footer { padding: 36px 0 60px; color: var(--texto-fraco); font-size: .88rem;
-             background: var(--fundo-alt); }
+/* Georgia nos titulos e' o que amarra estas paginas a home e a de comparacao:
+   as paletas divergem por segmento, a estrutura tipografica nao. */
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: var(--font-lineheight-1);
+  margin: 0 0 var(--size-3);
+  font-weight: var(--font-weight-7);
+}
+h1 { font-size: var(--font-size-fluid-2); letter-spacing: -.015em; }
+h2 { font-size: var(--font-size-5); margin-bottom: var(--size-4); }
+h3 { font-size: var(--font-size-3); }
+p  { margin: 0 0 var(--size-4); }
+a  { color: var(--marca-forte); }
+strong { font-weight: var(--font-weight-6); }
+.cor { color: var(--marca); }
+.sub { color: var(--tinta-fraca); }
+.mini { font-size: var(--font-size-1); color: var(--tinta-tenue); }
 
-    @media (min-width: 800px) { h1 { font-size: 2.6rem; } h2 { font-size: 1.8rem; } }
+.wrap { width: 100%; max-width: 980px; margin: 0 auto; padding: 0 var(--size-4); }
+section { padding: var(--size-fluid-4) 0; }
+section.alt { background: var(--papel-alt); border-block: var(--border-size-1) solid var(--linha); }
+section.veu { background: var(--marca-veu); }
+
+/* ---------- topo ---------- */
+header {
+  padding: var(--size-3) 0;
+  background: var(--papel);
+  border-bottom: var(--border-size-1) solid var(--linha);
+}
+.marca {
+  display: inline-flex; align-items: center; gap: var(--size-2);
+  font-family: Georgia, serif; letter-spacing: .14em; text-transform: uppercase;
+  font-size: var(--font-size-0); color: var(--tinta); text-decoration: none;
+}
+.marca .selo {
+  width: 30px; height: 30px; border-radius: var(--radius-round); flex: none;
+  border: var(--border-size-2) solid var(--marca); color: var(--marca);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; letter-spacing: .04em; font-weight: var(--font-weight-7);
+}
+
+/* ---------- herói: texto e celular lado a lado ---------- */
+.heroi { display: grid; gap: var(--size-8); align-items: center; }
+.heroi .chamada { font-size: var(--font-size-3); color: var(--tinta-fraca); }
+/* height:auto e' obrigatorio junto de width/height no <img>. Sem ele a altura
+   fica presa nos 1688 do atributo e a imagem estica — foi o defeito que
+   quebrou a home no ar em 16/08 (T76). Nao remover. */
+.heroi img {
+  width: 100%; height: auto; max-width: 300px; display: block; margin: 0 auto;
+  border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+
+/* ---------- botões ---------- */
+.botoes { display: flex; flex-wrap: wrap; gap: var(--size-3); margin-top: var(--size-6); }
+.btn {
+  display: inline-block; padding: var(--size-4) var(--size-6);
+  border-radius: var(--radius-2); font-weight: var(--font-weight-7);
+  text-decoration: none; font-size: var(--font-size-1); text-align: center;
+  background: var(--marca); color: var(--btn-tinta);
+  border: var(--border-size-2) solid var(--marca);
+  box-shadow: var(--shadow-1);
+}
+.btn-vazio { background: none; color: var(--marca-forte); box-shadow: none; }
+/* o botao da demo tem duas linhas: a acao em cima e, embaixo, o aviso de que o
+   exemplo no ar e' de barbearia. Sem rebaixar a segunda linha ela competiria com
+   a primeira e o botao viraria uma frase. */
+.btn em {
+  display: block; font-style: normal; font-size: var(--font-size-0);
+  font-weight: var(--font-weight-4); opacity: .85; margin-top: 3px;
+}
+
+/* ---------- cartões ---------- */
+.card {
+  background: var(--papel); border: var(--border-size-1) solid var(--linha);
+  border-radius: var(--radius-3); padding: var(--size-5);
+  box-shadow: var(--shadow-1);
+}
+.card h3 { color: var(--marca-forte); }
+.card p:last-child { margin-bottom: 0; }
+
+.grade { display: grid; gap: var(--size-4); grid-template-columns: 1fr; }
+.grade .card p { font-size: var(--font-size-1); color: var(--tinta-fraca); }
+
+.aviso {
+  border-left: var(--border-size-3) solid var(--marca);
+  background: var(--marca-veu);
+  padding: var(--size-4);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  color: var(--tinta-fraca); font-size: var(--font-size-1);
+  margin-top: var(--size-5);
+}
+.aviso :last-child { margin-bottom: 0; }
+
+/* ---------- tabela ---------- */
+/* No celular a tabela nao cabe e vira rolagem lateral. Sem aviso, a ultima
+   coluna — que aqui e' justamente a nossa — simplesmente nao e' vista: a
+   pessoa nao adivinha que da' para arrastar. A dica so' aparece na largura
+   em que o problema existe. */
+.rolagem { overflow-x: auto; }
+.dica-rolagem {
+  display: none; margin: 0; font-size: var(--font-size-0);
+  color: var(--tinta-tenue); font-style: italic;
+}
+@media (max-width: 640px) { .dica-rolagem { display: block; } }
+table {
+  width: 100%; border-collapse: collapse; margin: var(--size-5) 0;
+  font-size: var(--font-size-1); min-width: 520px; background: var(--papel);
+}
+th, td {
+  padding: var(--size-3); border-bottom: var(--border-size-1) solid var(--linha);
+  text-align: left; vertical-align: top;
+}
+th { color: var(--tinta-tenue); font-weight: var(--font-weight-6);
+     font-size: var(--font-size-0); text-transform: uppercase; letter-spacing: .06em; }
+td.nosso, th.nosso { color: var(--marca-forte); font-weight: var(--font-weight-6); }
+
+/* ---------- passos numerados ---------- */
+.passos { counter-reset: passo; list-style: none; padding: 0; margin: 0; }
+.passos li {
+  counter-increment: passo; position: relative;
+  padding-left: var(--size-8); margin-bottom: var(--size-4);
+}
+.passos li::before {
+  content: counter(passo); position: absolute; left: 0; top: 2px;
+  width: 32px; height: 32px; border-radius: var(--radius-round);
+  background: var(--marca); color: #fff; font-weight: var(--font-weight-7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--font-size-1);
+}
+
+/* ---------- telas do app ---------- */
+.telas {
+  display: flex; flex-wrap: wrap; gap: var(--size-5);
+  justify-content: center; margin-top: var(--size-7);
+}
+.telas figure { margin: 0; max-width: 250px; }
+.telas img {
+  width: 100%; height: auto; border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+.telas figcaption {
+  color: var(--tinta-tenue); font-size: var(--font-size-0);
+  margin-top: var(--size-2); text-align: center;
+}
+
+/* ---------- texto + print lado a lado ---------- */
+.lado-a-lado { display: grid; gap: var(--size-7); align-items: start; }
+.lado-a-lado .print img {
+  width: 100%; height: auto; max-width: 290px; display: block; margin: 0 auto;
+  border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+
+/* ---------- FAQ ---------- */
+details { border-bottom: var(--border-size-1) solid var(--linha); padding: var(--size-4) 0; }
+summary {
+  cursor: pointer; font-weight: var(--font-weight-6); list-style: none;
+  display: flex; gap: var(--size-3); align-items: baseline;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; color: var(--marca); font-weight: var(--font-weight-7); flex: none; }
+details[open] summary::before { content: "–"; }
+details p { margin: var(--size-3) 0 0 var(--size-5); color: var(--tinta-fraca); }
+
+/* ---------- rodapé ---------- */
+footer {
+  padding: var(--size-8) 0 var(--size-10);
+  color: var(--tinta-tenue); font-size: var(--font-size-1);
+  background: var(--papel-alt); border-top: var(--border-size-1) solid var(--linha);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 760px) {
+  .heroi { grid-template-columns: 1.15fr .85fr; }
+  .heroi img { max-width: 290px; }
+  .grade { grid-template-columns: 1fr 1fr; }
+  .lado-a-lado { grid-template-columns: 1.2fr .8fr; gap: var(--size-9); }
+}
+@media (min-width: 1000px) {
+  .grade { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 <!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
 <script type="application/ld+json">
@@ -130,7 +294,7 @@
         "@id": "https://horariocheio.com.br/#app"
       },
       "datePublished": "2026-08-16",
-      "dateModified": "2026-08-16",
+      "dateModified": "2026-08-17",
       "description": "Agenda online para clínica de estética e esteticista com a marca da própria clínica: agenda por profissional, link no lugar da conversa do Instagram, preço da clínica e não por profissional."
     },
     {
@@ -151,6 +315,14 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Sim. Cada uma tem expediente, intervalo de almoço, folga semanal e férias próprios, e atende só os procedimentos que estiverem ligados a ela. A cliente escolhe a profissional na primeira tela. Bloquear a agenda de uma não mexe na das outras; para feriado existe o bloqueio da clínica inteira."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Minha recepcionista consegue usar sem ver tudo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Consegue. O sistema tem três papéis: administradora, profissional e secretária. A secretária enxerga a agenda das profissionais que ela atende e marca por elas; a profissional vê as próprias clientes. Quem abre e fecha tudo é a administradora, que costuma ser a dona."
           }
         },
         {
@@ -212,31 +384,46 @@
     </div>
 </header>
 
-<div class="wrap">
-    <section style="padding-bottom:20px;">
-        <h1>O link da bio <span class="cor">marca o horário</span> em vez de abrir conversa</h1>
+<!-- HERÓI ------------------------------------------------------------------ -->
+<section>
+    <div class="wrap heroi">
+        <div>
+            <h1>O link da bio <span class="cor">marca o horário</span> em vez de abrir conversa</h1>
 
-        <p class="sub" style="font-size:1.1rem;">
-            Agenda online para clínica de estética e esteticista, com o nome, o logo e as cores
-            da sua clínica. A cliente vem do Instagram, escolhe o protocolo, vê os horários
-            livres e confirma — sem baixar aplicativo e sem passar pela sua caixa de mensagens.
-        </p>
+            <p class="chamada">
+                Agenda online para clínica de estética e esteticista, com o nome, o logo e as
+                cores da sua clínica. A cliente vem do Instagram, escolhe o protocolo, vê os
+                horários livres e confirma — sem baixar aplicativo e sem passar pela sua caixa
+                de mensagens.
+            </p>
 
-        <div class="botoes">
-            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20para%20cl%C3%ADnica%20de%20est%C3%A9tica%20e%20quero%20ver%20o%20app%20com%20a%20minha%20marca" target="_blank" rel="noopener">Quero ver com a minha marca</a>
-            <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Abrir a demo funcionando</a>
+            <div class="botoes">
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20para%20cl%C3%ADnica%20de%20est%C3%A9tica%20e%20quero%20ver%20o%20app%20com%20a%20minha%20marca" target="_blank" rel="noopener">Quero ver com a minha marca</a>
+                <!-- O botao DIZ que a demo e' de barbearia (pedido do Rafael, 17/08).
+                     Antes so' o aviso abaixo contava, e quem clica direto no botao
+                     chegava numa tela de "Corte + Barba" sem entender por que. -->
+                <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Abrir a demo — <em>o exemplo no ar é de uma barbearia</em></a>
+            </div>
         </div>
 
-        <p class="aviso" style="margin-top:18px;">
+        <div>
+            <img src="../img/estetica-tela-1.png" width="780" height="1688"
+                 fetchpriority="high" decoding="async"
+                 alt="Tela do app de agendamento com o nome Clínica Vita Estética, o procedimento Limpeza de Pele Profunda, a profissional Camila, duração de 60 minutos e valor de R$ 180,00">
+        </div>
+    </div>
+
+    <div class="wrap">
+        <p class="aviso">
             A demo aberta é de uma barbearia — foi o primeiro segmento que atendemos e ainda
             não montamos uma de estética. <strong>O app é o mesmo:</strong> mudam os
             procedimentos, as profissionais, o logo e as cores. Para ver com a sua marca antes
             de decidir, chame no WhatsApp que a gente monta.
         </p>
-    </section>
-</div>
+    </div>
+</section>
 
-<!-- A dor do nicho ------------------------------------------------------- -->
+<!-- A DOR DO NICHO ---------------------------------------------------------- -->
 <section class="alt">
     <div class="wrap">
         <h2>Todo mundo vem pelo Instagram — e para na conversa</h2>
@@ -261,7 +448,7 @@
     </div>
 </section>
 
-<!-- Varias profissionais -------------------------------------------------- -->
+<!-- VÁRIAS PROFISSIONAIS ---------------------------------------------------- -->
 <section>
     <div class="wrap">
         <h2>Uma agenda por profissional, um preço pela clínica</h2>
@@ -271,6 +458,7 @@
            ser atendida. A parte que costuma pesar no orçamento é justamente essa: quase
            todo sistema do mercado <strong>cobra por profissional cadastrada</strong>.</p>
 
+        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
         <div class="rolagem">
             <table>
                 <tr>
@@ -288,7 +476,7 @@
                     <td>até três vezes mais</td>
                     <td class="nosso">R$ 49,90</td>
                 </tr>
-                <tr class="destaque">
+                <tr>
                     <td>5</td>
                     <td>até cinco vezes mais</td>
                     <td class="nosso">R$ 49,90</td>
@@ -296,15 +484,15 @@
             </table>
         </div>
 
-        <p class="sub">Preferimos não colocar aqui o preço de concorrente sem fonte: os
+        <p class="mini">Preferimos não colocar aqui o preço de concorrente sem fonte: os
            números com nome, valor e data de consulta estão na
            <a href="../comparar/">página de comparação</a>. A regra do nosso lado é simples
            — contratar mais uma esteticista não mexe na mensalidade.</p>
     </div>
 </section>
 
-<!-- Como funciona (lado da cliente) --------------------------------------- -->
-<section class="alt">
+<!-- COMO FUNCIONA PARA A CLIENTE -------------------------------------------- -->
+<section class="veu">
     <div class="wrap">
         <h2>Como funciona para a sua cliente</h2>
 
@@ -324,7 +512,7 @@
             </figure>
             <figure>
                 <img src="../img/estetica-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Tela do app mostrando os dias e horários disponíveis na agenda da clínica">
+                     alt="Tela do app mostrando os dias e horários disponíveis na agenda da clínica, com os já ocupados riscados">
                 <figcaption>2. Só aparece o que está livre</figcaption>
             </figure>
             <figure>
@@ -334,24 +522,33 @@
             </figure>
         </div>
 
-        <p class="sub" style="text-align:center;margin-top:20px;">
+        <p class="mini" style="text-align:center;margin-top:var(--size-5);">
             Telas de uma clínica de exemplo. Na sua, a marca é a sua — a cliente não vê
             nome de fornecedor em nenhum momento.
         </p>
     </div>
 </section>
 
-<!-- Visao do prestador ---------------------------------------------------- -->
+<!-- ==========================================================================
+     O PAINEL — o lado de quem compra
+     --------------------------------------------------------------------------
+     Secao nova (17/08/2026). O motivo, nas palavras do Rafael: quem paga o app
+     e' a clinica, e a pagina mostrava so' a tela da CLIENTE dela. Cada item aqui
+     existe no app e foi conferido no DOCUMENTACAO.md — nada escrito para vender.
+     ========================================================================== -->
 <section>
     <div class="wrap">
-        <h2>E do seu lado: quem está marcado hoje</h2>
+        <h2>E do seu lado: <span class="cor">o painel</span></h2>
 
-        <div class="lado-a-lado">
-            <div class="texto">
-                <p>Você abre o painel pelo celular, escolhe a data e vê <strong>a agenda do
-                   dia em ordem de horário</strong>: cliente, procedimento, profissional
-                   responsável e telefone, com um botão de WhatsApp por linha — a mensagem
-                   já vai escrita e você pode alterar antes de enviar.</p>
+        <p class="chamada">Quem paga o app é a clínica — então esta parte é a que importa.
+           Tudo abaixo você faz do celular, sem pedir para a gente e sem custo adicional.</p>
+
+        <div class="lado-a-lado" style="margin-bottom:var(--size-8);">
+            <div>
+                <p>Você abre o painel, escolhe a data e vê <strong>a agenda do dia em ordem
+                   de horário</strong>: cliente, procedimento, profissional responsável e
+                   telefone, com dois botões de WhatsApp por linha — a mensagem já vai
+                   escrita e você pode alterar antes de enviar.</p>
 
                 <p>Numa clínica com mais de uma profissional isso substitui o grupo do
                    WhatsApp e a agenda de papel na recepção: <strong>quem chega de manhã vê
@@ -364,10 +561,6 @@
                        número da clínica — o número que está no seu Instagram e no seu
                        cartão.</p>
                 </div>
-
-                <p class="sub">No mesmo painel você abre e fecha horários, lança férias de
-                   uma profissional sem mexer na agenda das outras, bloqueia o dia da
-                   clínica inteira num feriado e cadastra procedimentos e valores.</p>
             </div>
 
             <div class="print">
@@ -375,10 +568,76 @@
                      alt="Painel da clínica no celular: lista de clientes agendadas no dia, com horário, procedimento, profissional, telefone e botões de WhatsApp para avisar cancelamento ou lembrar do horário">
             </div>
         </div>
+
+        <h3 style="margin-bottom:var(--size-5);">O que mais você controla por lá</h3>
+
+        <div class="grade">
+            <div class="card">
+                <h3>A agenda, do jeito que der para olhar</h3>
+                <p>Dia, semana, mês ou lista. A cliente pediu para mudar de horário? Você
+                   arrasta o agendamento para o lugar novo.</p>
+            </div>
+            <div class="card">
+                <h3>Confirmar e remarcar sem sair da agenda</h3>
+                <p>Toca no horário e aparecem dois botões: <em>confirmar presença</em> e
+                   <em>pedir para remarcar</em>. O segundo manda a cliente para o link dela,
+                   que só oferece horário que está mesmo livre.</p>
+            </div>
+            <div class="card">
+                <h3>Férias de uma sem mexer nas outras</h3>
+                <p>Um registro só cobre o período inteiro da profissional, e aqueles dias
+                   somem da tela da cliente na hora. A agenda das colegas continua igual.</p>
+            </div>
+            <div class="card">
+                <h3>Fechar só algumas horas</h3>
+                <p>Um compromisso de quinta às 15h não precisa virar dia perdido: você fecha
+                   aquela janela e o resto do dia continua aberto.</p>
+            </div>
+            <div class="card">
+                <h3>Fechar a clínica inteira</h3>
+                <p>Feriado, reforma, congresso: um período bloqueado vale para todas as
+                   profissionais de uma vez.</p>
+            </div>
+            <div class="card">
+                <h3>Procedimentos, valores e durações</h3>
+                <p>Nome, duração, valor e cor de cada procedimento. Você mesma cadastra e
+                   muda quando quiser — reajuste não passa pela gente.</p>
+            </div>
+            <div class="card">
+                <h3>Quem atende o quê</h3>
+                <p>Cada profissional é ligada só aos procedimentos que ela faz. A cliente
+                   que escolhe um protocolo corporal não vê quem só faz sobrancelha.</p>
+            </div>
+            <div class="card">
+                <h3>Marcar pela recepção</h3>
+                <p>Quem ligou, mandou mensagem ou apareceu na porta entra pelo painel, no
+                   horário que você quiser. O link público é um caminho a mais, não o único.</p>
+            </div>
+            <div class="card">
+                <h3>Recepcionista com acesso próprio</h3>
+                <p>Existem três papéis: administradora, profissional e secretária. Cada uma
+                   enxerga o que precisa — a profissional vê as próprias clientes.</p>
+            </div>
+            <div class="card">
+                <h3>Desligar o agendamento por um tempo</h3>
+                <p>Agenda lotada ou clínica fechada: a página sai do ar com um recado no
+                   lugar e volta com um clique, sem perder nada.</p>
+            </div>
+            <div class="card">
+                <h3>Nome, logo e cor</h3>
+                <p>Saem das definições e valem para tudo de uma vez: a página da cliente, o
+                   painel, o ícone da aba do navegador e o favicon.</p>
+            </div>
+            <div class="card">
+                <h3>Cada clínica no seu canto</h3>
+                <p>A sua instalação é separada, com banco de dados próprio. Nenhuma cliente
+                   sua esbarra em dado de outra clínica.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- Dados da cliente ------------------------------------------------------ -->
+<!-- DADOS DA CLIENTE -------------------------------------------------------- -->
 <section class="alt">
     <div class="wrap">
         <h2>O que o sistema guarda da sua cliente</h2>
@@ -401,27 +660,29 @@
     </div>
 </section>
 
-<!-- Preco ----------------------------------------------------------------- -->
+<!-- PREÇO -------------------------------------------------------------------- -->
 <section>
     <div class="wrap">
         <h2>Preço</h2>
 
-        <div class="card">
-            <h3>Essencial — R$ 49,90/mês</h3>
-            <p>App completo com a marca da clínica no endereço
-               <strong>horariocheio.com.br/suaclinica</strong>, profissionais e
-               agendamentos ilimitados, instalação e configuração grátis.</p>
+        <div class="grade" style="grid-template-columns:1fr;max-width:720px;">
+            <div class="card">
+                <h3>Essencial — R$ 49,90/mês</h3>
+                <p>App completo com a marca da clínica no endereço
+                   <strong>horariocheio.com.br/suaclinica</strong>, profissionais e
+                   agendamentos ilimitados, instalação e configuração grátis.</p>
+            </div>
+
+            <div class="card">
+                <h3>Completo — R$ 99,90/mês</h3>
+                <p>Tudo do Essencial, mais <strong>domínio próprio</strong>
+                   (suaclinica.com.br) registrado e pago por nós, e montagem de logo e cores.</p>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Completo — R$ 99,90/mês</h3>
-            <p>Tudo do Essencial, mais <strong>domínio próprio</strong>
-               (suaclinica.com.br) registrado e pago por nós, e montagem de logo e cores.</p>
-        </div>
-
-        <p><strong>14 dias grátis, sem cartão.</strong> Sem fidelidade, sem multa de
-           cancelamento. Em contas do seu caixa: a mensalidade custa menos que uma sessão
-           de limpeza de pele.</p>
+        <p style="margin-top:var(--size-5);"><strong>14 dias grátis, sem cartão.</strong>
+           Sem fidelidade, sem multa de cancelamento. Em contas do seu caixa: a mensalidade
+           custa menos que uma sessão de limpeza de pele.</p>
 
         <div class="botoes">
             <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Quero%20os%2014%20dias%20gr%C3%A1tis%20do%20Hor%C3%A1rio%20Cheio%20para%20minha%20cl%C3%ADnica" target="_blank" rel="noopener">Começar os 14 dias grátis</a>
@@ -430,7 +691,7 @@
     </div>
 </section>
 
-<!-- O que nao faz --------------------------------------------------------- -->
+<!-- O QUE NÃO FAZ ------------------------------------------------------------ -->
 <section class="alt">
     <div class="wrap">
         <h2>O que o app <span class="cor">não</span> faz</h2>
@@ -438,25 +699,38 @@
         <p>Esta lista existe porque clínica de estética costuma precisar de coisas que a
            gente não entrega hoje. Melhor saber antes:</p>
 
-        <ul>
-            <li><strong>Não controla pacote de sessões.</strong> Protocolo vendido em dez
-                sessões precisa ser acompanhado fora do sistema; aqui cada sessão é um
-                agendamento.</li>
-            <li><strong>Não tem prontuário nem ficha de anamnese</strong>, nem foto de
-                evolução.</li>
-            <li><strong>Não processa pagamento nem cobra sinal</strong> no ato do
-                agendamento.</li>
-            <li><strong>Não dispara lembrete automático.</strong> A mensagem sai pronta e
-                você toca em enviar — envio automático em massa é o que faz o WhatsApp
-                bloquear o número da clínica.</li>
-            <li><strong>Não calcula comissão</strong> das profissionais.</li>
-            <li><strong>Não traz cliente nova.</strong> Quem traz é o seu conteúdo; o app
-                organiza quem já chegou.</li>
-        </ul>
+        <div class="grade">
+            <div class="card">
+                <h3>Não controla pacote de sessões</h3>
+                <p>Protocolo vendido em dez sessões precisa ser acompanhado fora do sistema;
+                   aqui cada sessão é um agendamento.</p>
+            </div>
+            <div class="card">
+                <h3>Não tem prontuário nem anamnese</h3>
+                <p>Nem foto de evolução. Ver a seção sobre dado sensível acima.</p>
+            </div>
+            <div class="card">
+                <h3>Não processa pagamento nem cobra sinal</h3>
+                <p>No ato do agendamento não há cobrança de nenhum tipo.</p>
+            </div>
+            <div class="card">
+                <h3>Não dispara lembrete automático</h3>
+                <p>A mensagem sai pronta e você toca em enviar — envio automático em massa é
+                   o que faz o WhatsApp bloquear o número da clínica.</p>
+            </div>
+            <div class="card">
+                <h3>Não calcula comissão</h3>
+                <p>Das profissionais nem de ninguém.</p>
+            </div>
+            <div class="card">
+                <h3>Não traz cliente nova</h3>
+                <p>Quem traz é o seu conteúdo; o app organiza quem já chegou.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- FAQ -------------------------------------------------------------------- -->
+<!-- FAQ ---------------------------------------------------------------------- -->
 <section>
     <div class="wrap">
         <h2>Perguntas que sempre fazem</h2>
@@ -474,6 +748,14 @@
                próprios, e atende só os procedimentos que estiverem ligados a ela. A cliente
                escolhe a profissional na primeira tela. Bloquear a agenda de uma não mexe na
                das outras; para feriado existe o bloqueio da clínica inteira.</p>
+        </details>
+
+        <details>
+            <summary>Minha recepcionista consegue usar sem ver tudo?</summary>
+            <p>Consegue. O sistema tem três papéis: administradora, profissional e
+               secretária. A secretária enxerga a agenda das profissionais que ela atende e
+               marca por elas; a profissional vê as próprias clientes. Quem abre e fecha
+               tudo é a administradora, que costuma ser a dona.</p>
         </details>
 
         <details>
@@ -515,6 +797,18 @@
     </div>
 </section>
 
+<!-- CHAMADA FINAL ------------------------------------------------------------ -->
+<section class="veu">
+    <div class="wrap">
+        <h2>Quer ver com a marca da sua clínica?</h2>
+        <p>Manda uma mensagem com o nome da clínica e a sua cor. A gente monta e te devolve
+           o link para você abrir no celular, antes de decidir qualquer coisa.</p>
+        <div class="botoes">
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20para%20cl%C3%ADnica%20de%20est%C3%A9tica%20e%20quero%20ver%20o%20app%20com%20a%20minha%20marca" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        </div>
+    </div>
+</section>
+
 <footer>
     <div class="wrap">
         <p>As telas desta página mostram uma clínica de exemplo, criada para demonstração —
@@ -523,7 +817,9 @@
         <p>Horário Cheio · agendamento online para estética, manicure e barbearia ·
            Guarulhos, SP · WhatsApp (11) 93935-7759 ·
            <a href="../">horariocheio.com.br</a> ·
-           <a href="../manicure/">versão para manicure</a></p>
+           <a href="../manicure/">versão para manicure</a> ·
+           <a href="../como-funciona/">como funciona por dentro</a> ·
+           <a href="../comparar/">comparação com outros sistemas</a></p>
     </div>
 </footer>
 

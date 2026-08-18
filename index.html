@@ -136,6 +136,21 @@
     .telas img { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--borda); display: block; }
     .telas figcaption { color: var(--texto-fraco); font-size: .9rem; margin-top: 8px; text-align: center; }
 
+    /* Painel do barbeiro ---------------------------------------------------- */
+    .painel-linha { display: grid; gap: 24px; align-items: start; }
+    .painel-print { margin: 0; }
+    /* height:auto e' obrigatorio junto de width/height no <img> - sem ele a altura
+       fica presa nos 1688 do atributo e a imagem estica. Foi o defeito que quebrou
+       esta pagina no ar em 16/08. */
+    .painel-print img { width: 100%; height: auto; max-width: 300px; display: block;
+                        margin: 0 auto; border-radius: 14px; border: 1px solid var(--borda); }
+    .painel-print figcaption { color: var(--texto-fraco); font-size: .9rem;
+                               margin-top: 8px; text-align: center; }
+    .painel-titulo { margin: 34px 0 18px; }
+
+    /* Rodape --------------------------------------------------------------- */
+    .rodape-links { margin: 14px 0 0; font-size: .9rem; color: var(--texto-fraco); }
+
     /* Preco ---------------------------------------------------------------- */
     .preco { background: var(--preto-card); border: 1px solid var(--ouro);
              border-radius: 18px; padding: 30px; text-align: center; }
@@ -217,6 +232,7 @@
         .cards { grid-template-columns: repeat(3, 1fr); }
         .planos { grid-template-columns: repeat(2, 1fr); }
         .telas { grid-template-columns: repeat(4, 1fr); }
+        .painel-linha { grid-template-columns: 1.25fr .75fr; gap: 40px; }
         .barra-zap { display: none; }
         body { padding-bottom: 0; }
     }
@@ -619,6 +635,99 @@
     </div>
 </section>
 
+<!-- O painel do barbeiro ---------------------------------------------------
+     Entrou em 17/08/2026, a pedido do Rafael. O buraco que ela fecha: a pagina
+     inteira mostrava a tela do CLIENTE, e quem paga o app e' o barbeiro. O painel
+     so' aparecia como texto solto no FAQ e em dois cards de "o que vem junto" —
+     nenhuma imagem, nenhuma secao. Quem chega aqui pela busca nao tinha como
+     saber o que ele mesmo vai fazer no dia a dia.
+     Fica DEPOIS do fluxo do cliente e ANTES da secao da marca, de proposito: o
+     heroi e o H1 nao foram tocados (sao a melhor parte em conversao, medida). -->
+<section>
+    <div class="wrap">
+        <h2>E do seu lado: <span class="ouro">o painel</span></h2>
+
+        <p class="sub">Quem paga o app é você — então esta parte importa mais que a de cima.
+           Tudo aqui você faz do celular, sozinho, sem pedir para a gente.</p>
+
+        <div class="painel-linha">
+            <div>
+                <p>A tela que resolve o dia em que dá problema é <strong>Contatos do
+                   dia</strong>: você acordou doente, tem quatro clientes marcados e não quer
+                   caçar o número de cada um no meio das conversas. Escolhe a data e vê quem
+                   está marcado, em ordem de horário, com o serviço, o barbeiro, o telefone e
+                   dois botões de WhatsApp por cliente — <em>avisar cancelamento</em> e
+                   <em>lembrar do horário</em>, com a mensagem já escrita e o nome da pessoa
+                   dentro dela.</p>
+
+                <p>Dá para mudar o texto antes de mandar. E é um botão por cliente:
+                   <strong>não existe disparo em massa aqui</strong>, de propósito — envio em
+                   rajada é o padrão que faz o WhatsApp bloquear número, e o número é a
+                   barbearia.</p>
+            </div>
+
+            <figure class="painel-print">
+                <img width="780" height="1688" loading="lazy" decoding="async"
+                     src="img/painel.png"
+                     alt="Painel da barbearia no celular: lista de quem tem horário marcado no dia, com hora, cliente, serviço, barbeiro, telefone e botões de WhatsApp para avisar cancelamento ou lembrar do horário">
+                <figcaption>Contatos do dia, no seu celular</figcaption>
+            </figure>
+        </div>
+
+        <h3 class="painel-titulo">O que mais você resolve por lá</h3>
+
+        <div class="cards">
+            <div class="card">
+                <h3>A agenda como der para olhar</h3>
+                <p>Dia, semana, mês ou tabela. Cliente pediu para mudar de horário? Você
+                   arrasta o agendamento para o lugar novo.</p>
+            </div>
+            <div class="card">
+                <h3>Confirmar e remarcar de dentro da agenda</h3>
+                <p>Toca no horário e aparecem <em>confirmar presença</em> e <em>pedir para
+                   remarcar</em>. O de remarcar manda o cliente para o link dele, que só
+                   oferece horário que está mesmo livre — sem lista colada na mensagem para
+                   envelhecer em cinco minutos.</p>
+            </div>
+            <div class="card">
+                <h3>Férias de um barbeiro</h3>
+                <p>Um registro cobre o período inteiro, e aqueles dias somem da agenda dele
+                   na hora. A agenda do outro barbeiro não muda nada.</p>
+            </div>
+            <div class="card">
+                <h3>Fechar só algumas horas</h3>
+                <p>Compromisso de quinta às 15h não precisa virar dia perdido: fecha aquela
+                   janela e o resto do dia continua aberto.</p>
+            </div>
+            <div class="card">
+                <h3>Fechar a barbearia inteira</h3>
+                <p>Feriado ou reforma: um período bloqueado vale para todos os barbeiros de
+                   uma vez.</p>
+            </div>
+            <div class="card">
+                <h3>Serviços, preços e durações</h3>
+                <p>Nome, tempo, preço e cor de cada serviço. Você mesmo cadastra e reajusta
+                   quando quiser — não passa pela gente.</p>
+            </div>
+            <div class="card">
+                <h3>Marcar você mesmo</h3>
+                <p>Quem ligou, mandou mensagem ou apareceu na porta entra pelo painel, no
+                   horário que você decidir. O link é um caminho a mais, não o único.</p>
+            </div>
+            <div class="card">
+                <h3>Quem vê o quê</h3>
+                <p>Administrador, barbeiro e recepção têm acessos diferentes. O barbeiro vê
+                   os próprios clientes; quem abre tudo é o dono.</p>
+            </div>
+            <div class="card">
+                <h3>Desligar o agendamento</h3>
+                <p>Agenda lotada ou barbearia fechada por um tempo: a página sai do ar com um
+                   recado no lugar e volta com um clique.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Marca ----------------------------------------------------------------- -->
 <section>
     <div class="wrap">
@@ -1007,10 +1116,22 @@
     </div>
 </section>
 
+<!-- Os tres links abaixo entraram em 17/08/2026 e resolvem a T103: as paginas
+     /manicure/, /clinica-estetica/ e /comparar/ estavam no sitemap mas NENHUMA
+     pagina apontava para elas. Buscador trata link interno como voto — pagina
+     orfa e' rastreada mais tarde e vale menos. Ficam no rodape, e nao no corpo,
+     justamente para nao competir com a conversao da home, que fala com barbeiro. -->
 <footer>
     <div class="wrap centro">
         Horário Cheio · agendamento online para barbearias · Guarulhos, SP<br>
         WhatsApp (11) 93935-7759
+        <p class="rodape-links">
+            Também atendemos:
+            <a href="manicure/">manicure e nail designer</a> ·
+            <a href="clinica-estetica/">clínica de estética</a> ·
+            <a href="como-funciona/">como funciona, do cadastro ao horário marcado</a> ·
+            <a href="comparar/">comparação com AppBarber e Booksy</a>
+        </p>
     </div>
 </footer>
 

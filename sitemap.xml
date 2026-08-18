@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Atualizar <lastmod> a cada mudanca real de conteudo - data falsa e' sinal de
      spam para o buscador. Quando entrarem as paginas de cidade, cada uma vira uma
-     <url> aqui. A /demo/ NAO entra: ela esta bloqueada no robots.txt. -->
+     <url> aqui. A /demo/ NAO entra: ela esta bloqueada no robots.txt.
+     17/08/2026: as 4 paginas foram redesenhadas e entrou a /como-funciona/. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://horariocheio.com.br/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://horariocheio.com.br/como-funciona/</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://horariocheio.com.br/comparar/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://horariocheio.com.br/manicure/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://horariocheio.com.br/clinica-estetica/</loc>
-    <lastmod>2026-08-16</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

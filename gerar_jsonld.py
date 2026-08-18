@@ -78,6 +78,13 @@ SECUNDARIAS = {
         "descricao": ("Comparação de preços entre AppBarber, Booksy e Horário Cheio "
                       "para barbearias, com fonte e data de consulta."),
     },
+    "como-funciona": {
+        "pasta": "como-funciona",
+        "nome": "Como funciona: cadastrar serviços e preços e receber agendamento",
+        "descricao": ("Passo a passo neutro de segmento: onde o prestador cadastra os "
+                      "serviços que presta, a duração e o preço de cada um, e como o "
+                      "agendamento do cliente funciona a partir disso."),
+    },
     "manicure": {
         "pasta": "manicure",
         "nome": "Sistema de agendamento para manicure e nail designer",
@@ -122,9 +129,12 @@ def montar(pagina, html):
              "inLanguage": "pt-BR", "isPartOf": {"@id": SITE + "#site"},
              "publisher": {"@id": SITE + "#org"},
              "about": {"@id": SITE + "#app"},
-             # datePublished honesto: todas nasceram em 16/08/2026. Ao reescrever de
-             # verdade, atualizar dateModified - data falsa e' sinal de spam.
-             "datePublished": "2026-08-16", "dateModified": "2026-08-16",
+             # datePublished honesto: todas nasceram em 16/08/2026 e essa data nao
+             # muda mais. dateModified sobe a cada reescrita de verdade — data falsa
+             # e' sinal de spam, e data velha desperdica a reescrita.
+             # 17/08/2026: as tres foram redesenhadas (Open Props, fundo claro,
+             # secao nova do painel), entao o dateModified andou junto.
+             "datePublished": "2026-08-16", "dateModified": "2026-08-17",
              "description": meta["descricao"]},
             {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": faq},
         ]

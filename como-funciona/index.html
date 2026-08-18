@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como funciona: cadastrar serviços, preços e receber agendamento — Horário Cheio</title>
+<meta name="description" content="Onde o profissional cadastra os serviços que presta, a duração e o preço, e como o agendamento funciona depois disso. Passo a passo, com as telas reais do painel e do cliente.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://horariocheio.com.br/como-funciona/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://horariocheio.com.br/como-funciona/">
+<meta property="og:title" content="Como funciona o Horário Cheio: dos seus serviços ao horário marcado">
+<meta property="og:description" content="Você cadastra o que faz, quanto tempo leva e quanto custa. O cliente escolhe entre os horários que sobraram de verdade. Veja as telas.">
+<!-- og:image e' a tela de cadastro de servico: e' o assunto da pagina, e evita o
+     img/logo.png, que ainda traz a marca antiga "Agenda Barbeiro" (T105). -->
+<meta property="og:image" content="https://horariocheio.com.br/img/servicos-form.png">
+<link rel="icon" href="../img/logo.png">
+
+<style>
+/* ===========================================================================
+   1. TOKENS — Open Props v1.7.16 (subconjunto)
+   ---------------------------------------------------------------------------
+   COPIADOS, nao linkados de propósito: folha de estilo externa e' requisicao
+   bloqueante, e estas paginas sao abertas a frio, pela busca, no 4G — nao ha
+   cache quente para amortizar a ida e volta. Valores conferidos direto em
+   unpkg.com/open-props@1.7.16/open-props.min.css em 17/08/2026.
+
+   Este bloco e' IDENTICO nas 4 paginas internas do site. Quando a extracao do
+   CSS comum acontecer (T102 no TAREFAS.md), e' exatamente este pedaco que sai
+   daqui para um arquivo so'. A home NAO usa este bloco: o CSS dela foi medido
+   em conversao e continua inline, intocado.
+   =========================================================================== */
+:root {
+  --size-1: .25rem;  --size-2: .5rem;   --size-3: 1rem;   --size-4: 1.25rem;
+  --size-5: 1.5rem;  --size-6: 1.75rem; --size-7: 2rem;   --size-8: 3rem;
+  --size-9: 4rem;    --size-10: 5rem;
+  --size-fluid-3: max(1.5rem, min(3vw, 2rem));
+  --size-fluid-4: max(2rem, min(4vw, 3rem));
+
+  --font-size-0: .75rem; --font-size-1: 1rem;   --font-size-2: 1.1rem;
+  --font-size-3: 1.25rem; --font-size-4: 1.5rem; --font-size-5: 2rem;
+  --font-size-fluid-2: max(1.5rem, min(6vw, 2.5rem));
+  --font-weight-4: 400; --font-weight-6: 600; --font-weight-7: 700;
+  --font-lineheight-1: 1.25; --font-lineheight-3: 1.5; --font-lineheight-4: 1.75;
+
+  --radius-2: 5px; --radius-3: 1rem; --radius-4: 2rem; --radius-round: 1e5px;
+  --border-size-1: 1px; --border-size-2: 2px; --border-size-3: 5px;
+
+  --gray-0: #f8f9fa; --gray-2: #e9ecef; --gray-3: #dee2e6;
+  --gray-6: #868e96; --gray-7: #495057; --gray-9: #212529;
+
+  --shadow-color: 220 3% 15%; --shadow-strength: 1%;
+  --shadow-1: 0 1px 2px -1px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 9%));
+  --shadow-2: 0 3px 5px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+              0 7px 14px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%));
+}
+
+/* ===========================================================================
+   2. MARCA — esta pagina nao tem segmento, entao nao usa cor de segmento
+   ---------------------------------------------------------------------------
+   Rosa e' da manicure, roxo da estetica, dourado da barbearia. Esta pagina fala
+   com qualquer prestador, entao usa um azul-petroleo neutro (cyan-9 do Open
+   Props) — o mesmo dos mockups dela. Pelo mesmo motivo o icone das telas e' um
+   RELOGIO, e nao a tesoura, o esmalte ou a folha.
+   =========================================================================== */
+:root {
+  --marca:       #0b7285;   /* cyan-9  */
+  --marca-forte: #074652;   /* cyan-11 — texto e link: 9,1:1 no branco */
+  --marca-veu:   #e3fafc;   /* cyan-0  */
+  --marca-linha: #c5f6fa;   /* cyan-1  */
+  --btn-tinta:   #fff;      /* azul-petroleo aguenta texto branco (5,8:1) */
+
+  --papel:      #fff;
+  --papel-alt:  var(--gray-0);
+  --tinta:      var(--gray-9);
+  --tinta-fraca: var(--gray-7);
+  --tinta-tenue: var(--gray-6);
+  --linha:      var(--gray-3);
+}
+
+/* ===========================================================================
+   3. ESTRUTURA — igual nas paginas internas
+   =========================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-size: var(--font-size-2);
+  line-height: var(--font-lineheight-4);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: var(--font-lineheight-1);
+  margin: 0 0 var(--size-3);
+  font-weight: var(--font-weight-7);
+}
+h1 { font-size: var(--font-size-fluid-2); letter-spacing: -.015em; }
+h2 { font-size: var(--font-size-5); margin-bottom: var(--size-4); }
+h3 { font-size: var(--font-size-3); }
+p  { margin: 0 0 var(--size-4); }
+a  { color: var(--marca-forte); }
+strong { font-weight: var(--font-weight-6); }
+.cor { color: var(--marca-forte); }
+.sub { color: var(--tinta-fraca); }
+.mini { font-size: var(--font-size-1); color: var(--tinta-tenue); }
+
+.wrap { width: 100%; max-width: 980px; margin: 0 auto; padding: 0 var(--size-4); }
+section { padding: var(--size-fluid-4) 0; }
+section.alt { background: var(--papel-alt); border-block: var(--border-size-1) solid var(--linha); }
+section.veu { background: var(--marca-veu); }
+
+/* ---------- topo ---------- */
+header {
+  padding: var(--size-3) 0;
+  background: var(--papel);
+  border-bottom: var(--border-size-1) solid var(--linha);
+}
+.marca {
+  display: inline-flex; align-items: center; gap: var(--size-2);
+  font-family: Georgia, serif; letter-spacing: .14em; text-transform: uppercase;
+  font-size: var(--font-size-0); color: var(--tinta); text-decoration: none;
+}
+.marca .selo {
+  width: 30px; height: 30px; border-radius: var(--radius-round); flex: none;
+  border: var(--border-size-2) solid var(--marca); color: var(--marca-forte);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; letter-spacing: .04em; font-weight: var(--font-weight-7);
+}
+
+/* ---------- herói ---------- */
+.heroi { display: grid; gap: var(--size-8); align-items: center; }
+.heroi .chamada { font-size: var(--font-size-3); color: var(--tinta-fraca); }
+/* height:auto e' obrigatorio junto de width/height no <img>. Sem ele a altura
+   fica presa nos 1688 do atributo e a imagem estica — foi o defeito que
+   quebrou a home no ar em 16/08 (T76). Nao remover. */
+.heroi img {
+  width: 100%; height: auto; max-width: 300px; display: block; margin: 0 auto;
+  border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+
+/* ---------- botões ---------- */
+.botoes { display: flex; flex-wrap: wrap; gap: var(--size-3); margin-top: var(--size-6); }
+.btn {
+  display: inline-block; padding: var(--size-4) var(--size-6);
+  border-radius: var(--radius-2); font-weight: var(--font-weight-7);
+  text-decoration: none; font-size: var(--font-size-1); text-align: center;
+  background: var(--marca); color: var(--btn-tinta);
+  border: var(--border-size-2) solid var(--marca);
+  box-shadow: var(--shadow-1);
+}
+.btn-vazio { background: none; color: var(--marca-forte); box-shadow: none; }
+/* o botao da demo tem duas linhas: a acao em cima e, embaixo, o aviso de que o
+   exemplo no ar e' de barbearia. */
+.btn em {
+  display: block; font-style: normal; font-size: var(--font-size-0);
+  font-weight: var(--font-weight-4); opacity: .85; margin-top: 3px;
+}
+
+/* ---------- cartões ---------- */
+.card {
+  background: var(--papel); border: var(--border-size-1) solid var(--linha);
+  border-radius: var(--radius-3); padding: var(--size-5);
+  box-shadow: var(--shadow-1);
+}
+.card h3 { color: var(--marca-forte); }
+.card p:last-child { margin-bottom: 0; }
+
+.grade { display: grid; gap: var(--size-4); grid-template-columns: 1fr; }
+.grade .card p { font-size: var(--font-size-1); color: var(--tinta-fraca); }
+
+.aviso {
+  border-left: var(--border-size-3) solid var(--marca);
+  background: var(--marca-veu);
+  padding: var(--size-4);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  color: var(--tinta-fraca); font-size: var(--font-size-1);
+  margin-top: var(--size-5);
+}
+.aviso :last-child { margin-bottom: 0; }
+
+/* ---------- tabela ---------- */
+.rolagem { overflow-x: auto; }
+.dica-rolagem {
+  display: none; margin: 0; font-size: var(--font-size-0);
+  color: var(--tinta-tenue); font-style: italic;
+}
+@media (max-width: 640px) { .dica-rolagem { display: block; } }
+table {
+  width: 100%; border-collapse: collapse; margin: var(--size-5) 0;
+  font-size: var(--font-size-1); min-width: 520px; background: var(--papel);
+}
+th, td {
+  padding: var(--size-3); border-bottom: var(--border-size-1) solid var(--linha);
+  text-align: left; vertical-align: top;
+}
+th { color: var(--tinta-tenue); font-weight: var(--font-weight-6);
+     font-size: var(--font-size-0); text-transform: uppercase; letter-spacing: .06em; }
+td.nosso, th.nosso { color: var(--marca-forte); font-weight: var(--font-weight-6); }
+td code {
+  background: var(--marca-veu); border-radius: var(--radius-2);
+  padding: 1px 6px; font-size: .92em;
+}
+
+/* ---------- passos numerados ---------- */
+.passos { counter-reset: passo; list-style: none; padding: 0; margin: 0; }
+.passos li {
+  counter-increment: passo; position: relative;
+  padding-left: var(--size-8); margin-bottom: var(--size-4);
+}
+.passos li::before {
+  content: counter(passo); position: absolute; left: 0; top: 2px;
+  width: 32px; height: 32px; border-radius: var(--radius-round);
+  background: var(--marca); color: #fff; font-weight: var(--font-weight-7);
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--font-size-1);
+}
+
+/* ---------- etapa numerada grande (os 3 passos da página) ---------- */
+.etapa { display: flex; align-items: baseline; gap: var(--size-3); }
+.etapa .n {
+  font-family: Georgia, serif; font-size: var(--font-size-5);
+  color: var(--marca); font-weight: var(--font-weight-7); line-height: 1;
+}
+
+/* ---------- telas do app ---------- */
+.telas {
+  display: flex; flex-wrap: wrap; gap: var(--size-5);
+  justify-content: center; margin-top: var(--size-7);
+}
+.telas figure { margin: 0; max-width: 230px; }
+/* A tira dos 4 passos precisa caber numa linha so' no desktop: 4 x 230 + 3 gaps
+   dá 992 e estoura os 940 uteis do .wrap, entao quebrava 3+1 — o passo 4 sozinho
+   embaixo lia como se fosse outra coisa. Com 210 fecha em 912. */
+.telas.quatro figure { max-width: 210px; }
+.telas img {
+  width: 100%; height: auto; border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+.telas figcaption {
+  color: var(--tinta-tenue); font-size: var(--font-size-0);
+  margin-top: var(--size-2); text-align: center;
+}
+
+/* ---------- texto + print lado a lado ---------- */
+.lado-a-lado { display: grid; gap: var(--size-7); align-items: start; }
+.lado-a-lado .print img {
+  width: 100%; height: auto; max-width: 290px; display: block; margin: 0 auto;
+  border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+
+/* ---------- FAQ ---------- */
+details { border-bottom: var(--border-size-1) solid var(--linha); padding: var(--size-4) 0; }
+summary {
+  cursor: pointer; font-weight: var(--font-weight-6); list-style: none;
+  display: flex; gap: var(--size-3); align-items: baseline;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; color: var(--marca-forte); font-weight: var(--font-weight-7); flex: none; }
+details[open] summary::before { content: "–"; }
+details p { margin: var(--size-3) 0 0 var(--size-5); color: var(--tinta-fraca); }
+
+/* ---------- rodapé ---------- */
+footer {
+  padding: var(--size-8) 0 var(--size-10);
+  color: var(--tinta-tenue); font-size: var(--font-size-1);
+  background: var(--papel-alt); border-top: var(--border-size-1) solid var(--linha);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 760px) {
+  .heroi { grid-template-columns: 1.15fr .85fr; }
+  .heroi img { max-width: 290px; }
+  .grade { grid-template-columns: 1fr 1fr; }
+  .lado-a-lado { grid-template-columns: 1.2fr .8fr; gap: var(--size-9); }
+}
+@media (min-width: 1000px) {
+  .grade { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+<!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://horariocheio.com.br/como-funciona/",
+      "url": "https://horariocheio.com.br/como-funciona/",
+      "name": "Como funciona: cadastrar serviços e preços e receber agendamento",
+      "inLanguage": "pt-BR",
+      "isPartOf": {
+        "@id": "https://horariocheio.com.br/#site"
+      },
+      "publisher": {
+        "@id": "https://horariocheio.com.br/#org"
+      },
+      "about": {
+        "@id": "https://horariocheio.com.br/#app"
+      },
+      "datePublished": "2026-08-16",
+      "dateModified": "2026-08-17",
+      "description": "Passo a passo neutro de segmento: onde o prestador cadastra os serviços que presta, a duração e o preço de cada um, e como o agendamento do cliente funciona a partir disso."
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://horariocheio.com.br/como-funciona/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quem cadastra os meus serviços e preços?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Na montagem, a gente cadastra junto com você — basta mandar a lista com o nome de cada serviço, quanto tempo ele leva e quanto custa. Depois disso é você quem altera, pelo painel, quantas vezes quiser. Reajuste de preço não depende da gente e não tem custo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso ter serviços com durações bem diferentes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sim, e é o caso normal. Cada serviço tem a própria duração, e o sistema só oferece à pessoa os horários em que aquele serviço cabe inteiro. Um serviço de 3 horas e um de 30 minutos não disputam o mesmo espaço: o de 30 encaixa em vãos onde o de 3 horas nem aparece."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "E se eu não quiser mostrar o preço de um serviço?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dá para cadastrar o serviço sem valor, e aí ele aparece para marcar sem preço na tela. A outra saída é marcar esconder do agendamento online: o serviço fica só no painel, e quem quiser aquele atendimento fala com você — você lança o horário na mão."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Tenho mais de uma pessoa atendendo. Paga por cada uma?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. O preço é do negócio, não da pessoa: você cadastra quantos profissionais quiser sem a mensalidade mudar. Cada um com expediente, folga e férias próprios, e ligado só aos serviços que ele faz."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como eu bloqueio um horário que vendi pessoalmente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Você marca pelo painel, no horário que quiser — o link público é um caminho a mais, não o único. A partir do momento em que está lançado, aquele espaço some da tela de quem for marcar online."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso instalar alguma coisa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não, nem você nem o seu cliente. É um endereço na internet: abre no navegador do celular ou do computador. Dá para adicionar o atalho na tela de início do celular e ele passa a abrir como se fosse um aplicativo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quanto tempo leva para eu começar a usar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Algumas horas depois que você mandar a lista de serviços com preço e duração, os horários de trabalho e o logo. Você recebe o link pronto para testar antes de divulgar para qualquer cliente."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- JSONLD:FIM -->
+
+</head>
+<body>
+
+<header>
+    <div class="wrap">
+        <a class="marca" href="../">
+            <span class="selo">HC</span>
+            Horário Cheio
+        </a>
+    </div>
+</header>
+
+<!-- HERÓI ------------------------------------------------------------------ -->
+<section>
+    <div class="wrap heroi">
+        <div>
+            <h1>Você cadastra o que faz e <span class="cor">quanto custa</span>. O resto o cliente resolve sozinho.</h1>
+
+            <p class="chamada">
+                Esta página mostra o caminho inteiro, sem falar de nenhum ramo em
+                particular: onde entram os seus serviços, a duração e o preço de cada um,
+                e o que acontece na tela do cliente depois disso.
+            </p>
+
+            <div class="botoes">
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20como%20funciona%20e%20quero%20ver%20com%20a%20minha%20marca" target="_blank" rel="noopener">Quero ver com a minha marca</a>
+                <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Abrir a demo — <em>o exemplo no ar é de uma barbearia</em></a>
+            </div>
+        </div>
+
+        <div>
+            <img src="../img/servicos-form.png" width="780" height="1688"
+                 fetchpriority="high" decoding="async"
+                 alt="Tela de cadastro de serviço no painel: nome, duração em minutos, preço, categoria, cor na agenda, lista de quem atende e opção de esconder do agendamento online">
+        </div>
+    </div>
+
+    <div class="wrap">
+        <p class="aviso">
+            As telas desta página usam um negócio de exemplo, com nome, cor e serviços
+            inventados para demonstrar. <strong>A demo que está no ar é de uma
+            barbearia</strong> — foi o primeiro ramo que atendemos. O app é o mesmo em
+            qualquer caso: o que muda são os serviços, os nomes, o logo e as cores.
+        </p>
+    </div>
+</section>
+
+<!-- A IDEIA ----------------------------------------------------------------- -->
+<section class="alt">
+    <div class="wrap">
+        <h2>O app não sabe qual é o seu ramo — e é isso que faz ele servir</h2>
+
+        <p>Ele não conhece “corte de cabelo”, “alongamento de unha” nem “limpeza de
+           pele”. Ele conhece quatro coisas: <strong>um serviço, quanto tempo ele leva,
+           quanto custa e quem sabe fazer</strong>. A partir disso ele calcula sozinho
+           quais horários ainda cabem na sua agenda e mostra só esses para quem quer
+           marcar.</p>
+
+        <p>Por isso o passo a passo abaixo é o mesmo para qualquer atendimento com hora
+           marcada. Muda o que você escreve nos campos, não o caminho.</p>
+    </div>
+</section>
+
+<!-- ETAPA 1 — CADASTRAR OS SERVIÇOS ----------------------------------------- -->
+<section>
+    <div class="wrap">
+        <div class="etapa"><span class="n">1</span><h2>Você cadastra os seus serviços e os seus preços</h2></div>
+
+        <p>No painel, em <strong>Serviços</strong>. É a primeira coisa que a gente monta
+           junto com você na instalação — depois disso, alterar é com você, quantas vezes
+           quiser, sem pedir para ninguém e sem custo.</p>
+
+        <div class="telas">
+            <figure>
+                <img src="../img/servicos-lista.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Lista de serviços cadastrados no painel, cada um com nome, duração e preço, e um botão de adicionar serviço">
+                <figcaption>A lista do que você faz</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/servicos-form.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Formulário de um serviço aberto, com nome, duração, preço, categoria, cor, quem atende e visibilidade">
+                <figcaption>Um serviço aberto para editar</figcaption>
+            </figure>
+        </div>
+
+        <h3 style="margin-top:var(--size-8);">O que cada campo muda na prática</h3>
+
+        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
+        <div class="rolagem">
+            <table>
+                <tr>
+                    <th>Campo</th>
+                    <th>Exemplo</th>
+                    <th class="nosso">O que ele muda para o cliente</th>
+                </tr>
+                <tr>
+                    <td><strong>Nome</strong></td>
+                    <td><code>Atendimento completo</code></td>
+                    <td class="nosso">é o texto que ele lê na primeira tela</td>
+                </tr>
+                <tr>
+                    <td><strong>Duração</strong> (minutos)</td>
+                    <td><code>90</code></td>
+                    <td class="nosso">o sistema só oferece horário em que 90 minutos cabem inteiros</td>
+                </tr>
+                <tr>
+                    <td><strong>Preço</strong></td>
+                    <td><code>180,00</code></td>
+                    <td class="nosso">aparece como <code>R$ 180,00</code> antes de ele confirmar</td>
+                </tr>
+                <tr>
+                    <td><strong>Categoria</strong></td>
+                    <td><code>Principais</code></td>
+                    <td class="nosso">agrupa a lista quando você tem muitos serviços</td>
+                </tr>
+                <tr>
+                    <td><strong>Cor</strong></td>
+                    <td>a cor da marca</td>
+                    <td class="nosso">nada — é para <em>você</em> bater o olho na agenda e reconhecer</td>
+                </tr>
+                <tr>
+                    <td><strong>Quem atende</strong></td>
+                    <td>Ana, Bruno</td>
+                    <td class="nosso">só quem estiver marcado aparece para ele escolher</td>
+                </tr>
+                <tr>
+                    <td><strong>Esconder do online</strong></td>
+                    <td>desmarcado</td>
+                    <td class="nosso">marcado, o serviço some do link e fica só para você lançar pelo painel</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>O campo que mais dá problema é “quem atende”</h3>
+            <p>Se um serviço não estiver ligado a ninguém, ele simplesmente <strong>não
+               aparece</strong> para o cliente — sem mensagem de erro, sem aviso. É o
+               engano mais comum de quem cadastra um serviço novo às pressas: cria,
+               salva, testa o link e acha que o sistema quebrou. Na instalação a gente
+               deixa tudo vinculado; se você criar um serviço depois, é o único campo em
+               que vale prestar atenção.</p>
+        </div>
+
+        <p class="mini">Os valores acima são de um negócio inventado, só para a tela ter o
+           que mostrar. Os seus serviços, tempos e preços são os seus.</p>
+    </div>
+</section>
+
+<!-- ETAPA 2 — HORÁRIO DE TRABALHO ------------------------------------------- -->
+<section class="alt">
+    <div class="wrap">
+        <div class="etapa"><span class="n">2</span><h2>Você diz quando trabalha</h2></div>
+
+        <p>Serviço cadastrado não basta: o sistema precisa saber em que janelas ele pode
+           encaixar. Isso fica no cadastro de cada profissional — inclusive quando o
+           profissional é só você.</p>
+
+        <div class="grade">
+            <div class="card">
+                <h3>Expediente da semana</h3>
+                <p>Hora de abrir e de fechar em cada dia, com o intervalo de almoço. Sábado
+                   pode ter horário diferente do resto da semana.</p>
+            </div>
+            <div class="card">
+                <h3>Folga fixa</h3>
+                <p>O dia que você não trabalha toda semana. Ele simplesmente não existe na
+                   tela de quem vai marcar.</p>
+            </div>
+            <div class="card">
+                <h3>Férias e dias parados</h3>
+                <p>Um registro cobre o período inteiro, com data inicial e final. Vale só
+                   para aquela pessoa — a agenda de quem ficou continua aberta.</p>
+            </div>
+            <div class="card">
+                <h3>Algumas horas de um dia</h3>
+                <p>Aquele compromisso de quinta às 15h fecha só a janela dele. O resto do
+                   dia continua disponível.</p>
+            </div>
+            <div class="card">
+                <h3>O negócio inteiro fechado</h3>
+                <p>Feriado, reforma, viagem: um período bloqueado vale para todo mundo de
+                   uma vez.</p>
+            </div>
+            <div class="card">
+                <h3>Antecedência mínima</h3>
+                <p>Por padrão, ninguém marca em cima da hora: os 30 minutos seguintes já
+                   não aparecem. Dá para mudar.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ETAPA 3 — O AGENDAMENTO -------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <div class="etapa"><span class="n">3</span><h2>O cliente marca — em quatro toques</h2></div>
+
+        <p>Ele abre um link com o seu nome e a sua cor. Não baixa aplicativo, não cria
+           conta e não escolhe senha. O formulário pede <strong>nome e celular</strong>,
+           só isso.</p>
+
+        <ol class="passos">
+            <li>Escolhe o serviço e quem vai atender. Já vê a duração e o preço que você
+                cadastrou no passo 1.</li>
+            <li>Escolhe o dia e a hora, <strong>entre os que realmente sobraram</strong> —
+                é aqui que o passo 2 aparece.</li>
+            <li>Escreve o nome e o celular. O campo só aceita celular brasileiro de
+                verdade, com DDD que existe.</li>
+            <li>Recebe a confirmação na tela, com o resumo e um link próprio para remarcar
+                ou cancelar sozinho depois.</li>
+        </ol>
+
+        <div class="telas quatro">
+            <figure>
+                <img src="../img/generico-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
+                <figcaption>1. Serviço, quem atende, tempo e preço</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 2 do agendamento: dias e horários livres, com os já ocupados riscados">
+                <figcaption>2. Só o que está livre</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-tela-3.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 3 do agendamento: campos de nome e celular do cliente">
+                <figcaption>3. Nome e celular</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
+                <figcaption>4. Confirmado</figcaption>
+            </figure>
+        </div>
+    </div>
+</section>
+
+<!-- O QUE SOME SOZINHO ------------------------------------------------------- -->
+<section class="veu">
+    <div class="wrap">
+        <h2>O que some da agenda sem você fazer nada</h2>
+
+        <p>Esta é a parte que dispensa manutenção. Um horário só aparece para o cliente se
+           estiver mesmo livre. Somem sozinhos:</p>
+
+        <div class="grade">
+            <div class="card"><h3>O que já foi marcado</h3><p>Por outro cliente, no mesmo profissional.</p></div>
+            <div class="card"><h3>Fora do expediente</h3><p>Inclusive o intervalo de almoço e o sábado diferente.</p></div>
+            <div class="card"><h3>A folga da semana</h3><p>Repete sozinha, sem você lançar toda vez.</p></div>
+            <div class="card"><h3>Férias e dias parados</h3><p>Do profissional que estiver de férias, e só dele.</p></div>
+            <div class="card"><h3>Horas bloqueadas</h3><p>Aquele compromisso solto no meio do dia.</p></div>
+            <div class="card"><h3>Dia fechado</h3><p>Quando o negócio inteiro parou.</p></div>
+            <div class="card"><h3>O passado</h3><p>E os 30 minutos seguintes, para ninguém marcar em cima da hora.</p></div>
+            <div class="card"><h3>O que não cabe</h3><p>Se o serviço leva 90 minutos, um vão de 40 não é oferecido.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- DEPOIS QUE CAI NA AGENDA ------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>E depois que o horário cai na sua agenda</h2>
+
+        <div class="lado-a-lado">
+            <div>
+                <p>Você abre o painel pelo celular. A tela de <strong>contatos do dia</strong>
+                   mostra quem está marcado naquela data, em ordem de horário, com o
+                   serviço, quem atende, o telefone e dois botões de WhatsApp por pessoa —
+                   <em>avisar cancelamento</em> e <em>lembrar do horário</em>, com a
+                   mensagem já escrita e o nome dela dentro.</p>
+
+                <p>No calendário, tocar em um horário abre <em>confirmar presença</em> e
+                   <em>pedir para remarcar</em>. O de remarcar manda a pessoa para o link
+                   dela, que oferece só horário livre — nada de colar uma lista na mensagem
+                   e ela envelhecer em cinco minutos.</p>
+
+                <div class="card">
+                    <h3>Quem aperta enviar é sempre você</h3>
+                    <p>O sistema escreve a mensagem; o envio é um por vez, no seu WhatsApp.
+                       Não existe disparo em massa aqui, e isso é decisão de projeto:
+                       envio em rajada é o padrão que faz o WhatsApp bloquear número — e o
+                       número é o seu negócio.</p>
+                </div>
+            </div>
+
+            <div class="print">
+                <img src="../img/painel.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Painel no celular: lista de quem tem horário marcado no dia, com hora, cliente, serviço, profissional, telefone e botões de WhatsApp">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVE PARA O MEU RAMO ---------------------------------------------------- -->
+<section class="alt">
+    <div class="wrap">
+        <h2>Como isso fica no seu ramo</h2>
+
+        <p>Os mesmos campos, preenchidos de forma diferente:</p>
+
+        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
+        <div class="rolagem">
+            <table>
+                <tr>
+                    <th>Ramo</th>
+                    <th>Um serviço típico</th>
+                    <th>Duração</th>
+                    <th class="nosso">Página com detalhes</th>
+                </tr>
+                <tr>
+                    <td>Barbearia</td>
+                    <td>Corte + Barba</td>
+                    <td>50 min</td>
+                    <td class="nosso"><a href="../">página inicial</a></td>
+                </tr>
+                <tr>
+                    <td>Manicure e nail designer</td>
+                    <td>Alongamento em gel</td>
+                    <td>2h a 3h</td>
+                    <td class="nosso"><a href="../manicure/">versão para manicure</a></td>
+                </tr>
+                <tr>
+                    <td>Clínica de estética</td>
+                    <td>Limpeza de pele profunda</td>
+                    <td>60 min</td>
+                    <td class="nosso"><a href="../clinica-estetica/">versão para estética</a></td>
+                </tr>
+                <tr>
+                    <td>Outro atendimento com hora marcada</td>
+                    <td>o seu</td>
+                    <td>o seu</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Onde ele <em>não</em> serve, para você não perder tempo</h3>
+            <p>Não controla pacote de sessões, não guarda prontuário, ficha de anamnese
+               nem qualquer informação de saúde, não cobra sinal nem processa pagamento,
+               não calcula comissão e não dispara lembrete sozinho. Se o centro da sua
+               operação é uma dessas, o app resolve só a parte da agenda — e é melhor
+               saber agora.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ ---------------------------------------------------------------------- -->
+<section>
+    <div class="wrap">
+        <h2>Perguntas sobre o cadastro</h2>
+
+        <details>
+            <summary>Quem cadastra os meus serviços e preços?</summary>
+            <p>Na montagem, a gente cadastra junto com você — basta mandar a lista com o
+               nome de cada serviço, quanto tempo ele leva e quanto custa. Depois disso é
+               você quem altera, pelo painel, quantas vezes quiser. Reajuste de preço não
+               depende da gente e não tem custo.</p>
+        </details>
+
+        <details>
+            <summary>Posso ter serviços com durações bem diferentes?</summary>
+            <p>Sim, e é o caso normal. Cada serviço tem a própria duração, e o sistema só
+               oferece à pessoa os horários em que aquele serviço cabe inteiro. Um serviço
+               de 3 horas e um de 30 minutos não disputam o mesmo espaço: o de 30 encaixa
+               em vãos onde o de 3 horas nem aparece.</p>
+        </details>
+
+        <details>
+            <summary>E se eu não quiser mostrar o preço de um serviço?</summary>
+            <p>Dá para cadastrar o serviço sem valor, e aí ele aparece para marcar sem
+               preço na tela. A outra saída é marcar <em>esconder do agendamento
+               online</em>: o serviço fica só no painel, e quem quiser aquele atendimento
+               fala com você — você lança o horário na mão.</p>
+        </details>
+
+        <details>
+            <summary>Tenho mais de uma pessoa atendendo. Paga por cada uma?</summary>
+            <p>Não. O preço é do negócio, não da pessoa: você cadastra quantos
+               profissionais quiser sem a mensalidade mudar. Cada um com expediente, folga
+               e férias próprios, e ligado só aos serviços que ele faz.</p>
+        </details>
+
+        <details>
+            <summary>Como eu bloqueio um horário que vendi pessoalmente?</summary>
+            <p>Você marca pelo painel, no horário que quiser — o link público é um caminho
+               a mais, não o único. A partir do momento em que está lançado, aquele espaço
+               some da tela de quem for marcar online.</p>
+        </details>
+
+        <details>
+            <summary>Preciso instalar alguma coisa?</summary>
+            <p>Não, nem você nem o seu cliente. É um endereço na internet: abre no
+               navegador do celular ou do computador. Dá para adicionar o atalho na tela
+               de início do celular e ele passa a abrir como se fosse um aplicativo.</p>
+        </details>
+
+        <details>
+            <summary>Quanto tempo leva para eu começar a usar?</summary>
+            <p>Algumas horas depois que você mandar a lista de serviços com preço e
+               duração, os horários de trabalho e o logo. Você recebe o link pronto para
+               testar antes de divulgar para qualquer cliente.</p>
+        </details>
+    </div>
+</section>
+
+<!-- CHAMADA FINAL ------------------------------------------------------------ -->
+<section class="veu">
+    <div class="wrap">
+        <h2>Quer ver com os seus serviços?</h2>
+        <p>Manda o nome do seu negócio, a sua cor e a lista do que você faz com preço e
+           duração. A gente monta e te devolve o link para você abrir no seu celular,
+           antes de decidir qualquer coisa. Teste grátis de 14 dias, sem cartão.</p>
+        <div class="botoes">
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20como%20funciona%20e%20quero%20ver%20com%20a%20minha%20marca" target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a class="btn btn-vazio" href="../comparar/">Comparar com outros sistemas</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <p>As telas desta página mostram um negócio de exemplo, criado para demonstração —
+           não é cliente real, e nenhum depoimento aqui foi inventado. A demo aberta ao
+           público é de uma barbearia.</p>
+        <p>Horário Cheio · agendamento online para barbearia, manicure, estética e outros
+           atendimentos com hora marcada · Guarulhos, SP · WhatsApp (11) 93935-7759 ·
+           <a href="../">horariocheio.com.br</a> ·
+           <a href="../manicure/">manicure</a> ·
+           <a href="../clinica-estetica/">clínica de estética</a> ·
+           <a href="../comparar/">comparação</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

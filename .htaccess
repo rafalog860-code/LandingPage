@@ -1,0 +1,36 @@
+# horariocheio.com.br — regras de servidor da landing
+# Criado em 17/08/2026. Ate esta data NAO existia .htaccess nenhum aqui, nem na
+# pasta demo/. Isso importa por dois motivos:
+#   1. o rollback e' apagar este arquivo — nao ha estado anterior para restaurar;
+#   2. como demo/ nao tem .htaccess proprio, estas regras VALEM tambem para ela.
+#      Por isso tudo aqui e' de escopo estreito de proposito. Nada de RewriteRule
+#      generico: a demo e' o Easy!Appointments, e roteamento quebrado la' derruba
+#      o agendamento, que e' a peca de venda.
+
+# ---------------------------------------------------------------------------
+# 1. www -> sem www
+# ---------------------------------------------------------------------------
+# Antes desta regra, www.horariocheio.com.br servia o site com HTTP 200 em vez de
+# redirecionar: o mesmo conteudo em dois enderecos. O <link rel="canonical"> de
+# todas as paginas ja apontava para a versao sem www e o buscador consolidaria por
+# ele, mas canonical e' dica e redirecionamento e' regra. Acertado agora, enquanto
+# o dominio ainda nao tem historico de indexacao para consolidar.
+#
+# A condicao casa SO com o host www: qualquer outra requisicao nao entra na regra.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP_HOST} ^www\.horariocheio\.com\.br$ [NC]
+    RewriteRule ^(.*)$ https://horariocheio.com.br/$1 [R=301,L]
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# 2. charset no cabecalho
+# ---------------------------------------------------------------------------
+# As paginas estaticas saiam como "Content-Type: text/html" sem charset. Nao
+# quebrava no navegador, porque o <meta charset="utf-8"> esta nos primeiros 100
+# bytes de cada pagina e o HTML5 manda honrar. Mas quem le a pagina por script,
+# sem navegador — e e' assim que varios robos de IA leem — depende do cabecalho.
+#
+# Nao afeta a demo: o PHP dela ja manda "charset=UTF-8" explicito no header, e o
+# AddDefaultCharset so' vale quando a resposta nao declarou charset nenhum.
+AddDefaultCharset UTF-8

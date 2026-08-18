@@ -78,6 +78,9 @@ entregue pela internet e atende o Brasil todo.
 ## Páginas
 
 - [Página principal](https://horariocheio.com.br/): produto, preços, perguntas frequentes
+- [Como funciona](https://horariocheio.com.br/como-funciona/): passo a passo neutro de
+  segmento — onde o prestador cadastra serviços, duração e preço, o que cada campo muda
+  na tela do cliente, e como o agendamento funciona a partir disso
 - [Comparação de preços](https://horariocheio.com.br/comparar/): AppBarber, Booksy e
   Horário Cheio lado a lado, com fonte e data de consulta
 - [Para manicure e nail designer](https://horariocheio.com.br/manicure/): duração real por

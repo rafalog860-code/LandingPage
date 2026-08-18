@@ -5,80 +5,225 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AppBarber, Booksy ou Horário Cheio? Comparação de preços 2026</title>
 <meta name="description" content="Quanto custa cada sistema de agendamento para barbearia em 2026: AppBarber cobra por profissional, Booksy é marketplace, Horário Cheio cobra por barbearia. Preços com fonte e data.">
-<meta name="theme-color" content="#101114">
+<meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="https://horariocheio.com.br/comparar/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://horariocheio.com.br/comparar/">
 <meta property="og:title" content="AppBarber, Booksy ou Horário Cheio? Comparação de preços">
 <meta property="og:description" content="Com 3 barbeiros, o AppBarber sai a R$ 219,90/mês. Aqui o preço é da barbearia, não do barbeiro. Números com fonte e data.">
-<meta property="og:image" content="https://horariocheio.com.br/img/logo.png">
+<!-- og:image aponta para a tela do app, e NAO para img/logo.png: aquele arquivo ainda
+     diz "AGENDA BARBEIRO", o nome aposentado em 12/08 — ou seja, o card do WhatsApp
+     saia com a marca errada toda vez que alguem compartilhasse esta pagina.
+     Ver T105 no TAREFAS.md: o logo em si continua por trocar, mas esta pagina ja
+     deixou de exibi-lo. -->
+<meta property="og:image" content="https://horariocheio.com.br/img/tela-1.png">
 <link rel="icon" href="../img/logo.png">
 
-<!-- CSS proprio, e' um subconjunto do que esta no index.html da raiz.
-     A duplicacao e' consciente: sao duas paginas estaticas, e extrair um estilo.css
-     compartilhado adicionaria uma requisicao bloqueante na landing, que e' justamente
-     onde a velocidade importa. ATENCAO: ao mudar as cores da marca, mudar NOS DOIS.
-     Se um dia entrar uma terceira pagina, extrair de vez (esse e' o gatilho). -->
 <style>
-    :root {
-        --ouro: #d4af37; --ouro-claro: #f0d97a;
-        --preto: #101114; --preto-card: #1a1c21;
-        --texto: #ece9e3; --texto-fraco: #a8a49c;
-        --borda: rgba(212, 175, 55, .25);
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; background: var(--preto); color: var(--texto);
-           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-           font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; line-height: 1.2; margin: 0 0 .6em; }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
-    h3 { font-size: 1.1rem; }
-    p { margin: 0 0 1em; }
-    a { color: var(--ouro-claro); }
-    .ouro { color: var(--ouro); }
-    .wrap { width: 100%; max-width: 900px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 44px 0; border-top: 1px solid rgba(212, 175, 55, .12); }
-    .sub { color: var(--texto-fraco); }
-    header { padding: 22px 0; }
-    .marca { display: flex; align-items: center; gap: 12px; font-family: Georgia, serif;
-             letter-spacing: .12em; text-transform: uppercase; font-size: .95rem;
-             color: var(--texto); text-decoration: none; }
-    .marca img { width: 40px; height: 40px; border-radius: 50%; }
+/* ===========================================================================
+   1. TOKENS — Open Props v1.7.16 (subconjunto)
+   ---------------------------------------------------------------------------
+   COPIADOS, nao linkados de propósito: folha de estilo externa e' requisicao
+   bloqueante, e estas paginas sao abertas a frio, pela busca, no 4G — nao ha
+   cache quente para amortizar a ida e volta. Valores conferidos direto em
+   unpkg.com/open-props@1.7.16/open-props.min.css em 17/08/2026.
 
-    .rolagem { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .97rem;
-            min-width: 520px; }
-    th, td { padding: 12px 10px; border-bottom: 1px solid rgba(212, 175, 55, .15);
-             text-align: left; vertical-align: top; }
-    th { color: var(--texto-fraco); font-weight: 600; }
-    td.nosso, th.nosso { color: var(--ouro); }
-    tr.destaque td { font-weight: 700; }
+   Este bloco e' IDENTICO nas 3 paginas internas do site. Quando a extracao do
+   CSS comum acontecer (T102 no TAREFAS.md), e' exatamente este pedaco que sai
+   daqui para um arquivo so'. A home NAO usa este bloco: o CSS dela foi medido
+   em conversao e continua inline, intocado.
+   =========================================================================== */
+:root {
+  --size-1: .25rem;  --size-2: .5rem;   --size-3: 1rem;   --size-4: 1.25rem;
+  --size-5: 1.5rem;  --size-6: 1.75rem; --size-7: 2rem;   --size-8: 3rem;
+  --size-9: 4rem;    --size-10: 5rem;
+  --size-fluid-3: max(1.5rem, min(3vw, 2rem));
+  --size-fluid-4: max(2rem, min(4vw, 3rem));
 
-    .card { background: var(--preto-card); border: 1px solid var(--borda);
-            border-radius: 14px; padding: 22px; margin-bottom: 18px; }
-    .card h3 { color: var(--ouro); }
-    .card p:last-child { margin-bottom: 0; }
+  --font-size-0: .75rem; --font-size-1: 1rem;   --font-size-2: 1.1rem;
+  --font-size-3: 1.25rem; --font-size-4: 1.5rem; --font-size-5: 2rem;
+  --font-size-fluid-2: max(1.5rem, min(6vw, 2.5rem));
+  --font-weight-4: 400; --font-weight-6: 600; --font-weight-7: 700;
+  --font-lineheight-1: 1.25; --font-lineheight-3: 1.5; --font-lineheight-4: 1.75;
 
-    .aviso { border-left: 3px solid var(--ouro); padding: 4px 0 4px 16px;
-             color: var(--texto-fraco); font-size: .93rem; }
+  --radius-2: 5px; --radius-3: 1rem; --radius-4: 2rem; --radius-round: 1e5px;
+  --border-size-1: 1px; --border-size-2: 2px; --border-size-3: 5px;
 
-    .btn { display: inline-block; padding: 15px 26px; border-radius: 10px; font-weight: 700;
-           text-decoration: none; letter-spacing: .04em; font-size: 1rem; text-align: center;
-           background: linear-gradient(180deg, var(--ouro-claro), var(--ouro)); color: #1a1408; }
-    .btn-vazio { background: none; border: 1px solid var(--borda); color: var(--texto); }
-    .botoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+  --gray-0: #f8f9fa; --gray-2: #e9ecef; --gray-3: #dee2e6;
+  --gray-6: #868e96; --gray-7: #495057; --gray-9: #212529;
 
-    details { border-bottom: 1px solid rgba(212, 175, 55, .15); padding: 16px 0; }
-    summary { cursor: pointer; font-weight: 600; list-style: none; }
-    summary::-webkit-details-marker { display: none; }
-    summary::before { content: "+ "; color: var(--ouro); font-weight: 700; }
-    details[open] summary::before { content: "– "; }
-    details p { margin: 12px 0 0; color: var(--texto-fraco); }
+  --shadow-color: 220 3% 15%; --shadow-strength: 1%;
+  --shadow-1: 0 1px 2px -1px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 9%));
+  --shadow-2: 0 3px 5px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+              0 7px 14px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%));
+}
 
-    footer { padding: 36px 0 60px; color: var(--texto-fraco); font-size: .88rem; }
+/* ===========================================================================
+   2. MARCA — esta pagina fala das 3 marcas, entao usa a nossa: o dourado
+   ---------------------------------------------------------------------------
+   ATENCAO ao dourado no claro: #d4af37 sobre branco da 1,9:1 de contraste e
+   REPROVA em qualquer criterio de leitura. Por isso o dourado aqui e' so'
+   preenchimento (botao, celula de destaque) e todo TEXTO dourado usa o
+   --marca-forte, que e' um dourado escurecido com 7,4:1 no branco. Botao
+   dourado leva texto escuro (--btn-tinta), nao branco.
+   =========================================================================== */
+:root {
+  --marca:       #b08a25;
+  --marca-forte: #6b5010;
+  --marca-veu:   #fdf9ec;
+  --marca-linha: #f0e4c0;
+  --btn-tinta:   #241c05;   /* texto sobre o dourado: escuro, nao branco */
 
-    @media (min-width: 800px) { h1 { font-size: 2.6rem; } h2 { font-size: 1.8rem; } }
+  --papel:      #fff;
+  --papel-alt:  var(--gray-0);
+  --tinta:      var(--gray-9);
+  --tinta-fraca: var(--gray-7);
+  --tinta-tenue: var(--gray-6);
+  --linha:      var(--gray-3);
+}
+
+/* ===========================================================================
+   3. ESTRUTURA — igual nas 3 paginas internas
+   =========================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-size: var(--font-size-2);
+  line-height: var(--font-lineheight-4);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: var(--font-lineheight-1);
+  margin: 0 0 var(--size-3);
+  font-weight: var(--font-weight-7);
+}
+h1 { font-size: var(--font-size-fluid-2); letter-spacing: -.015em; }
+h2 { font-size: var(--font-size-5); margin-bottom: var(--size-4); }
+h3 { font-size: var(--font-size-3); }
+p  { margin: 0 0 var(--size-4); }
+a  { color: var(--marca-forte); }
+strong { font-weight: var(--font-weight-6); }
+.cor { color: var(--marca-forte); }
+.sub { color: var(--tinta-fraca); }
+.mini { font-size: var(--font-size-1); color: var(--tinta-tenue); }
+
+.wrap { width: 100%; max-width: 980px; margin: 0 auto; padding: 0 var(--size-4); }
+section { padding: var(--size-fluid-4) 0; }
+section.alt { background: var(--papel-alt); border-block: var(--border-size-1) solid var(--linha); }
+section.veu { background: var(--marca-veu); }
+
+/* ---------- topo ---------- */
+header {
+  padding: var(--size-3) 0;
+  background: var(--papel);
+  border-bottom: var(--border-size-1) solid var(--linha);
+}
+.marca {
+  display: inline-flex; align-items: center; gap: var(--size-2);
+  font-family: Georgia, serif; letter-spacing: .14em; text-transform: uppercase;
+  font-size: var(--font-size-0); color: var(--tinta); text-decoration: none;
+}
+.marca .selo {
+  width: 30px; height: 30px; border-radius: var(--radius-round); flex: none;
+  border: var(--border-size-2) solid var(--marca); color: var(--marca-forte);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; letter-spacing: .04em; font-weight: var(--font-weight-7);
+}
+
+/* ---------- botões ---------- */
+.botoes { display: flex; flex-wrap: wrap; gap: var(--size-3); margin-top: var(--size-6); }
+.btn {
+  display: inline-block; padding: var(--size-4) var(--size-6);
+  border-radius: var(--radius-2); font-weight: var(--font-weight-7);
+  text-decoration: none; font-size: var(--font-size-1); text-align: center;
+  background: var(--marca); color: var(--btn-tinta);
+  border: var(--border-size-2) solid var(--marca);
+  box-shadow: var(--shadow-1);
+}
+.btn-vazio { background: none; color: var(--marca-forte); box-shadow: none; }
+
+/* ---------- cartões ---------- */
+.card {
+  background: var(--papel); border: var(--border-size-1) solid var(--linha);
+  border-radius: var(--radius-3); padding: var(--size-5);
+  box-shadow: var(--shadow-1);
+}
+.card h3 { color: var(--marca-forte); }
+.card p:last-child { margin-bottom: 0; }
+
+.grade { display: grid; gap: var(--size-4); grid-template-columns: 1fr; }
+.grade .card p { font-size: var(--font-size-1); color: var(--tinta-fraca); }
+
+.aviso {
+  border-left: var(--border-size-3) solid var(--marca);
+  background: var(--marca-veu);
+  padding: var(--size-4);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  color: var(--tinta-fraca); font-size: var(--font-size-1);
+  margin-top: var(--size-5);
+}
+.aviso :last-child { margin-bottom: 0; }
+
+/* ---------- tabela ---------- */
+/* No celular a tabela nao cabe e vira rolagem lateral. Sem aviso, a ultima
+   coluna — que aqui e' justamente a nossa — simplesmente nao e' vista: a
+   pessoa nao adivinha que da' para arrastar. A dica so' aparece na largura
+   em que o problema existe. */
+.rolagem { overflow-x: auto; }
+.dica-rolagem {
+  display: none; margin: 0; font-size: var(--font-size-0);
+  color: var(--tinta-tenue); font-style: italic;
+}
+@media (max-width: 640px) { .dica-rolagem { display: block; } }
+table {
+  width: 100%; border-collapse: collapse; margin: var(--size-5) 0;
+  font-size: var(--font-size-1); min-width: 560px; background: var(--papel);
+}
+th, td {
+  padding: var(--size-3); border-bottom: var(--border-size-1) solid var(--linha);
+  text-align: left; vertical-align: top;
+}
+th { color: var(--tinta-tenue); font-weight: var(--font-weight-6);
+     font-size: var(--font-size-0); text-transform: uppercase; letter-spacing: .06em; }
+/* a coluna que e' nossa fica com fundo dourado bem lavado: destaca sem gritar,
+   e o texto continua no --marca-forte, que passa em contraste */
+td.nosso, th.nosso {
+  color: var(--marca-forte); font-weight: var(--font-weight-6);
+  background: var(--marca-veu);
+}
+tr.destaque td { font-weight: var(--font-weight-7); }
+
+/* ---------- FAQ ---------- */
+details { border-bottom: var(--border-size-1) solid var(--linha); padding: var(--size-4) 0; }
+summary {
+  cursor: pointer; font-weight: var(--font-weight-6); list-style: none;
+  display: flex; gap: var(--size-3); align-items: baseline;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; color: var(--marca-forte); font-weight: var(--font-weight-7); flex: none; }
+details[open] summary::before { content: "–"; }
+details p { margin: var(--size-3) 0 0 var(--size-5); color: var(--tinta-fraca); }
+
+/* ---------- rodapé ---------- */
+footer {
+  padding: var(--size-8) 0 var(--size-10);
+  color: var(--tinta-tenue); font-size: var(--font-size-1);
+  background: var(--papel-alt); border-top: var(--border-size-1) solid var(--linha);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 760px) {
+  .grade { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1000px) {
+  .grade { grid-template-columns: repeat(3, 1fr); }
+}
 </style>
 <!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
 <script type="application/ld+json">
@@ -101,7 +246,7 @@
         "@id": "https://horariocheio.com.br/#app"
       },
       "datePublished": "2026-08-16",
-      "dateModified": "2026-08-16",
+      "dateModified": "2026-08-17",
       "description": "Comparação de preços entre AppBarber, Booksy e Horário Cheio para barbearias, com fonte e data de consulta."
     },
     {
@@ -161,33 +306,37 @@
 <header>
     <div class="wrap">
         <a class="marca" href="../">
-            <img src="../img/logo.png" width="40" height="40" alt="">
+            <span class="selo">HC</span>
             Horário Cheio
         </a>
     </div>
 </header>
 
-<div class="wrap">
-    <h1>AppBarber, Booksy ou Horário Cheio: <span class="ouro">o que muda no preço</span></h1>
-
-    <p class="sub" style="font-size:1.1rem;">
-        Somos parte interessada nesta comparação — o Horário Cheio é nosso. Por isso todo
-        número aqui vem com <strong>fonte e data</strong>, e a recomendação no fim inclui
-        os casos em que a resposta certa <em>não</em> é a gente.
-    </p>
-
-    <p class="aviso">
-        Preços consultados em <strong>16 de agosto de 2026</strong>, nas páginas públicas
-        de cada empresa. Preço de terceiro muda sem aviso: confira no site deles antes de
-        decidir. Se algum número aqui estiver desatualizado, nos avise que corrigimos.
-    </p>
-</div>
-
-<!-- Preco --------------------------------------------------------------- -->
+<!-- ABERTURA ---------------------------------------------------------------- -->
 <section>
+    <div class="wrap">
+        <h1>AppBarber, Booksy ou Horário Cheio: <span class="cor">o que muda no preço</span></h1>
+
+        <p class="sub" style="font-size:var(--font-size-3);">
+            Somos parte interessada nesta comparação — o Horário Cheio é nosso. Por isso todo
+            número aqui vem com <strong>fonte e data</strong>, e a recomendação no fim inclui
+            os casos em que a resposta certa <em>não</em> é a gente.
+        </p>
+
+        <p class="aviso">
+            Preços consultados em <strong>16 de agosto de 2026</strong>, nas páginas públicas
+            de cada empresa. Preço de terceiro muda sem aviso: confira no site deles antes de
+            decidir. Se algum número aqui estiver desatualizado, nos avise que corrigimos.
+        </p>
+    </div>
+</section>
+
+<!-- PREÇO -------------------------------------------------------------------- -->
+<section class="alt">
     <div class="wrap">
         <h2>Quanto custa por mês</h2>
 
+        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
         <div class="rolagem">
             <table>
                 <tr>
@@ -223,18 +372,19 @@
            <strong>R$ 170 por mês</strong> — R$ 2.040 por ano, contratando mais gente sem
            a mensalidade subir junto.</p>
 
-        <p class="sub">O Booksy não publica tabela aberta por número de profissionais: o
+        <p class="mini">O Booksy não publica tabela aberta por número de profissionais: o
            site brasileiro informa a partir de R$ 99/mês e o valor final passa por contato
            comercial. Por isso as duas células dizem “sob consulta” — não sabemos, e não
            vamos inventar número de concorrente.</p>
     </div>
 </section>
 
-<!-- O que muda de verdade ------------------------------------------------ -->
+<!-- O QUE MUDA DE VERDADE ---------------------------------------------------- -->
 <section>
     <div class="wrap">
         <h2>O que muda além do preço</h2>
 
+        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
         <div class="rolagem">
             <table>
                 <tr>
@@ -296,61 +446,72 @@
     </div>
 </section>
 
-<!-- Honestidade ----------------------------------------------------------- -->
-<section>
+<!-- HONESTIDADE -------------------------------------------------------------- -->
+<section class="alt">
     <div class="wrap">
         <h2>Onde eles são melhores que a gente</h2>
 
         <p>Comparação em que o autor ganha todas as linhas não serve para decidir nada.
            Estas são reais:</p>
 
-        <div class="card">
-            <h3>Booksy traz cliente novo. Nós não.</h3>
-            <p>O Booksy é um catálogo com gente procurando barbearia dentro dele. Isso é
-               aquisição, e é uma vantagem que nenhum sistema de marca própria tem — aqui
-               quem leva o cliente até o link é você. Se o seu problema é <em>falta de
-               cliente</em>, e não agenda bagunçada, o Booksy resolve algo que a gente não
-               resolve.</p>
-        </div>
+        <div class="grade">
+            <div class="card">
+                <h3>Booksy traz cliente novo. Nós não.</h3>
+                <p>O Booksy é um catálogo com gente procurando barbearia dentro dele. Isso é
+                   aquisição, e é uma vantagem que nenhum sistema de marca própria tem — aqui
+                   quem leva o cliente até o link é você. Se o seu problema é <em>falta de
+                   cliente</em>, e não agenda bagunçada, o Booksy resolve algo que a gente não
+                   resolve.</p>
+            </div>
 
-        <div class="card">
-            <h3>AppBarber tem mais módulo e mais equipe.</h3>
-            <p>É uma empresa consolidada, com suporte estruturado e recursos de gestão
-               (comissão, caixa, fidelidade) que o Horário Cheio não tem hoje. Se você
-               precisa fechar comissão de barbeiro dentro do sistema, hoje eles fazem e a
-               gente não.</p>
-        </div>
+            <div class="card">
+                <h3>AppBarber tem mais módulo e mais equipe.</h3>
+                <p>É uma empresa consolidada, com suporte estruturado e recursos de gestão
+                   (comissão, caixa, fidelidade) que o Horário Cheio não tem hoje. Se você
+                   precisa fechar comissão de barbeiro dentro do sistema, hoje eles fazem e a
+                   gente não.</p>
+            </div>
 
-        <div class="card">
-            <h3>Os dois têm mais tempo de estrada.</h3>
-            <p>O Horário Cheio é novo. Isso é um risco real e você deve considerá-lo. O que
-               oferecemos contra isso é o contrário de amarração: sem fidelidade, sem
-               multa, e a sua lista de clientes entregue em planilha quando você pedir —
-               escrito em contrato.</p>
+            <div class="card">
+                <h3>Os dois têm mais tempo de estrada.</h3>
+                <p>O Horário Cheio é novo. Isso é um risco real e você deve considerá-lo. O que
+                   oferecemos contra isso é o contrário de amarração: sem fidelidade, sem
+                   multa, e a sua lista de clientes entregue em planilha quando você pedir —
+                   escrito em contrato.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Quando nao escolher ---------------------------------------------------- -->
+<!-- QUANDO NÃO ESCOLHER ------------------------------------------------------ -->
 <section>
     <div class="wrap">
-        <h2>Quando <span class="ouro">não</span> escolher o Horário Cheio</h2>
+        <h2>Quando <span class="cor">não</span> escolher o Horário Cheio</h2>
 
-        <ul>
-            <li>Se o que falta é <strong>cliente</strong>, não organização — vitrine
-                (Booksy) resolve melhor que agenda própria.</li>
-            <li>Se você precisa de <strong>comissão, caixa e controle financeiro</strong>
-                dentro do mesmo sistema.</li>
-            <li>Se você quer <strong>pagamento online</strong> no ato do agendamento — não
-                fazemos isso hoje.</li>
-            <li>Se você quer <strong>lembrete automático</strong> disparado pelo sistema:
-                aqui a mensagem vai escrita, mas quem aperta enviar é você. É decisão de
-                projeto, não limitação — envio automático em massa é o caminho mais rápido
-                para o WhatsApp bloquear o número da barbearia.</li>
-        </ul>
+        <div class="grade">
+            <div class="card">
+                <h3>Se o que falta é cliente</h3>
+                <p>E não organização — vitrine (Booksy) resolve melhor que agenda própria.</p>
+            </div>
+            <div class="card">
+                <h3>Se você precisa de controle financeiro</h3>
+                <p>Comissão, caixa e fechamento dentro do mesmo sistema.</p>
+            </div>
+            <div class="card">
+                <h3>Se você quer pagamento online</h3>
+                <p>No ato do agendamento — não fazemos isso hoje.</p>
+            </div>
+            <div class="card">
+                <h3>Se você quer lembrete automático</h3>
+                <p>Aqui a mensagem vai escrita, mas quem aperta enviar é você. É decisão de
+                   projeto, não limitação — envio automático em massa é o caminho mais rápido
+                   para o WhatsApp bloquear o número da barbearia.</p>
+            </div>
+        </div>
 
-        <p>Nos outros casos — barbearia que quer parar de responder “tem horário?”, com a
-           própria marca na tela e sem pagar por cabeça — a conta fecha do nosso lado.</p>
+        <p style="margin-top:var(--size-5);">Nos outros casos — barbearia que quer parar de
+           responder “tem horário?”, com a própria marca na tela e sem pagar por cabeça — a
+           conta fecha do nosso lado.</p>
 
         <div class="botoes">
             <a class="btn" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Testar a demo agora</a>
@@ -359,8 +520,8 @@
     </div>
 </section>
 
-<!-- FAQ -------------------------------------------------------------------- -->
-<section>
+<!-- FAQ ---------------------------------------------------------------------- -->
+<section class="alt">
     <div class="wrap">
         <h2>Perguntas sobre a troca</h2>
 
@@ -410,8 +571,12 @@
            Horário Cheio. Esta página existe para comparar preços e características
            publicadas, não para desqualificar ninguém — os dois são bons produtos e
            atendem bem casos que a gente não atende.</p>
-        <p>Horário Cheio · agendamento online para barbearias · Guarulhos, SP · WhatsApp
-           (11) 93935-7759 · <a href="../">horariocheio.com.br</a></p>
+        <p>Horário Cheio · agendamento online para barbearia, manicure e estética ·
+           Guarulhos, SP · WhatsApp (11) 93935-7759 ·
+           <a href="../">horariocheio.com.br</a> ·
+           <a href="../manicure/">versão para manicure</a> ·
+           <a href="../clinica-estetica/">versão para clínica de estética</a> ·
+           <a href="../como-funciona/">como funciona por dentro</a></p>
     </div>
 </footer>
 
