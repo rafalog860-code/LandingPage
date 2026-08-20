@@ -78,12 +78,18 @@ SECUNDARIAS = {
         "descricao": ("Comparação de preços entre AppBarber, Booksy e Horário Cheio "
                       "para barbearias, com fonte e data de consulta."),
     },
+    # A pasta virou "agenda-global" em 19/08/2026 e este dicionario ainda nao foi
+    # acertado — e' a T171. Nome e descricao ja' foram atualizados aqui em
+    # 20/08/2026 para bater com o que esta no <head> da pagina, para que o conserto
+    # da T171 nao reverta o JSON-LD que a pagina serve hoje.
     "como-funciona": {
         "pasta": "como-funciona",
-        "nome": "Como funciona: cadastrar serviços e preços e receber agendamento",
-        "descricao": ("Passo a passo neutro de segmento: onde o prestador cadastra os "
-                      "serviços que presta, a duração e o preço de cada um, e como o "
-                      "agendamento do cliente funciona a partir disso."),
+        "nome": "Agenda Global: uma agenda para barbearia, manicure, estética, consultório e mais",
+        "descricao": ("Agendamento online para quem trabalha com hora marcada: o cliente "
+                      "escolhe o serviço, o profissional e o horário disponível, e o "
+                      "agendamento cai direto na agenda do negócio. Barbearias, salões, "
+                      "manicures, estética, massagem, tatuagem, consultórios e outros "
+                      "serviços com horário marcado."),
     },
     "manicure": {
         "pasta": "manicure",

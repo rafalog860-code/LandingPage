@@ -196,10 +196,10 @@
     @media (min-width: 760px) { .vitrine { grid-template-columns: 1fr 1fr; gap: 22px; } }
     @media (min-width: 1100px) { .vitrine { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
 
-    /* Planilha + IA (19/08/2026) ------------------------------------------
+    /* Consultoria (19/08/2026, retitulada em 20/08/2026) -------------------
        As perguntas sao o produto desta secao: e' o que faz o barbeiro entender
-       para que serve baixar um arquivo. Ficam em cartoes pequenos, legiveis de
-       relance, porque ninguem le uma lista de doze linhas corridas no celular. */
+       para que serve falar com um consultor. Ficam em cartoes pequenos, legiveis
+       de relance, porque ninguem le uma lista de doze linhas corridas no celular. */
     .perguntas { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 22px 0 0; }
     .pergunta { background: var(--preto-card); border: 1px solid var(--borda);
                 border-left: 3px solid var(--ouro); border-radius: 12px;
@@ -767,14 +767,14 @@
 
             <div class="vitrine-item">
                 <div class="vitrine-texto">
-                    <span class="vitrine-passo">4 · O próximo mês</span>
-                    <h3>A planilha que vira conselho</h3>
-                    <p>Baixa em Excel e joga numa inteligência artificial, com a pergunta
-                       pronta.</p>
+                    <span class="vitrine-passo">4 · O histórico</span>
+                    <h3>Tudo o que aconteceu, num arquivo</h3>
+                    <p>Uma linha por atendimento, no período que você escolher. É daqui que
+                       sai a resposta do consultor.</p>
                 </div>
-                <img src="img/4-planilha.png" width="780" height="1042" loading="lazy"
+                <img src="img/4-planilha.png" width="780" height="740" loading="lazy"
                      decoding="async"
-                     alt="Bloco de baixar planilha, com o período escolhido e uma pergunta pronta para colar numa inteligência artificial">
+                     alt="Bloco de baixar planilha do app, com o período escolhido e o botão de baixar">
             </div>
         </div>
 
@@ -930,27 +930,30 @@
     </div>
 </section>
 
-<!-- Planilha + IA ----------------------------------------------------------
-     A tela de Faturamento responde "quanto deu"; esta secao e' a pergunta
-     seguinte: "e agora, o que eu faco com isso". As perguntas prontas sao o
-     argumento — sem elas, "baixar planilha" e' so' mais um botao.
-     Encurtada em 19/08/2026: saiu o print de faturamento.png, que ja aparece
-     recortado na vitrine, e os paragrafos viraram dois. As 12 perguntas ficam. -->
+<!-- Consultoria por WhatsApp ----------------------------------------------
+     Era "Planilha + IA" ate 19/08/2026: a pagina ensinava o barbeiro a baixar o
+     arquivo e colar numa inteligencia artificial. Decisao do Rafael em 20/08/2026 —
+     a promessa continua sendo "um consultor", mas a pagina PARA de contar como a
+     resposta e' feita. O barbeiro manda a pergunta no WhatsApp e recebe a resposta;
+     o metodo e' nosso.
+     As 12 perguntas ficam, e sao o argumento da secao: sem elas, "fale com um
+     consultor" e' so' mais uma promessa vaga.
+     O "primeiro mes" nao e' detalhe de marketing — e' o minimo de historico para a
+     analise significar alguma coisa (ver DIAS_PADRAO_PLANILHA no Revenue.php). -->
 <section class="alt">
     <div class="wrap">
-        <h2>Sua barbearia tem <span class="ouro">um consultor</span> escondido numa planilha de Excel</h2>
+        <h2>Depois do primeiro mês, você ganha <span class="ouro">um consultor</span></h2>
 
-        <p class="sub">Um botão baixa tudo o que aconteceu na sua barbearia — uma linha por
-           atendimento. Abre no Excel, ou você manda o arquivo para uma inteligência
-           artificial e escreve a pergunta. É de graça.</p>
+        <p class="sub">Com um mês de agenda rodando já existe história suficiente para
+           analisar. Daí em diante você manda a sua pergunta no nosso WhatsApp e a
+           resposta volta olhando o movimento da <strong>sua</strong> barbearia — não a
+           média do mercado, não o palpite de quem nunca viu a sua cadeira.</p>
 
-        <p>Vai data, hora, serviço, valor, duração, barbeiro, cliente, falta, balcão,
-           antecedência, <strong>em que visita ele estava</strong> e <strong>quantos dias
-           fazia que ele não aparecia</strong>. Essas duas últimas são as que ninguém tem:
-           é com elas que dá para saber quem sumiu, quem está prestes a sumir e de quanto
-           em quanto tempo cada cliente volta.</p>
+        <p>Você não monta relatório, não organiza número nenhum e não precisa aprender
+           ferramenta nenhuma. Escreve a pergunta como escreveria para um amigo que
+           entende do assunto — e a gente responde.</p>
 
-        <h3 class="painel-titulo">Perguntas que o barbeiro faz — e a planilha responde</h3>
+        <h3 class="painel-titulo">Perguntas que o barbeiro faz — e o consultor responde</h3>
 
         <div class="perguntas">
             <div class="pergunta">Como posso melhorar meu faturamento?</div>
@@ -967,11 +970,12 @@
             <div class="pergunta">Monte um plano de 30 dias para eu faturar mais, usando só os clientes que já são meus.</div>
         </div>
 
-        <p class="sub" style="margin-top:22px;">Não custa nada a mais, e não te obriga a
-           usar IA nenhuma: a planilha é sua e abre no Excel como qualquer outra.</p>
+        <p class="sub" style="margin-top:22px;">Estas são só exemplos. A pergunta pode ser
+           a que você quiser: se a resposta estiver no movimento da sua barbearia, ela vem.
+           Está incluído no plano — não custa nada a mais.</p>
 
         <div class="botoes" style="justify-content:center;">
-            <a class="btn btn-ouro" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Vi%20a%20planilha%20do%20Hor%C3%A1rio%20Cheio%20e%20quero%20testar%2014%20dias%20na%20minha%20barbearia." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+            <a class="btn btn-ouro" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Vi%20a%20consultoria%20do%20Hor%C3%A1rio%20Cheio%20e%20quero%20testar%2014%20dias%20na%20minha%20barbearia." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
             <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Ver o app funcionando</a>
         </div>
     </div>

@@ -11,9 +11,13 @@
 <meta property="og:url" content="https://horariocheio.com.br/agenda-global/">
 <meta property="og:title" content="Agenda Global: a mesma agenda para barbearia, manicure, estética, dentista e mais">
 <meta property="og:description" content="Você cadastra o que faz, quanto tempo leva e quanto custa. O cliente escolhe entre os horários que sobraram de verdade. Veja as telas.">
-<!-- og:image e' a tela de cadastro de servico: e' o assunto da pagina, e evita o
-     img/logo.png, que ainda traz a marca antiga "Agenda Barbeiro" (T105). -->
-<meta property="og:image" content="https://horariocheio.com.br/img/servicos-form.png">
+<!-- og:image e' a tela 1 do agendamento, generica: e' o assunto da pagina depois da
+     reorganizacao de 20/08/2026 (era a tela de cadastro de servico, que virou
+     detalhe la' embaixo). Continua evitando o img/logo.png, que ainda traz a marca
+     antiga "Agenda Barbeiro" (T105).
+     TROCA DE 20/08: quem ja' compartilhou o link tem o card velho em cache no
+     WhatsApp e no Instagram; o card novo vale para compartilhamento novo. -->
+<meta property="og:image" content="https://horariocheio.com.br/img/generico-tela-1.png">
 <link rel="icon" href="../img/logo.png">
 
 <style>
@@ -336,6 +340,23 @@ details.acordeao[open] > summary { margin-bottom: var(--size-4); }
 details.acordeao p { margin-left: 0; }
 details.acordeao table { margin-top: 0; }
 
+/* ---------- gestao do negocio (20/08/2026) ----------
+   Os dois prints do Faturamento sao telas densas (cartoes de valor, rosca e duas
+   tabelas). No celular eles precisam da largura util INTEIRA para o numero ser
+   legivel: a 210px, que e' o tamanho das telas do cliente, R$ 480,00 fica do
+   tamanho de um asterisco. Por isso classe propria e nao .telas. */
+.painel-duplo { display: grid; gap: var(--size-6); margin-top: var(--size-6); }
+.painel-duplo figure { margin: 0; }
+.painel-duplo img {
+  width: 100%; height: auto; max-width: 340px; display: block; margin: 0 auto;
+  border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+}
+.painel-duplo figcaption {
+  color: var(--tinta-fraca); font-size: var(--font-size-1);
+  margin-top: var(--size-3); text-align: center;
+}
+@media (min-width: 760px) { .painel-duplo { grid-template-columns: 1fr 1fr; } }
+
 /* ---------- planos (19/08/2026) ----------
    Mesmo bloco de preco da home, montado com as variaveis DESTA pagina - por isso
    ele fica rosa na manicure, roxo na estetica e dourado no comparativo, sem
@@ -389,8 +410,8 @@ details.acordeao table { margin-top: 0; }
         "@id": "https://horariocheio.com.br/#app"
       },
       "datePublished": "2026-08-16",
-      "dateModified": "2026-08-17",
-      "description": "Passo a passo neutro de segmento: onde o prestador cadastra os serviços que presta, a duração e o preço de cada um, e como o agendamento do cliente funciona a partir disso."
+      "dateModified": "2026-08-20",
+      "description": "Agendamento online para quem trabalha com hora marcada: o cliente escolhe o serviço, o profissional e o horário disponível, e o agendamento cai direto na agenda do negócio. Barbearias, salões, manicures, estética, massagem, tatuagem, consultórios e outros serviços com horário marcado."
     },
     {
       "@type": "FAQPage",
@@ -471,33 +492,135 @@ details.acordeao table { margin-top: 0; }
     </div>
 </header>
 
-<!-- HERÓI ------------------------------------------------------------------ -->
+<!-- 1. HERÓI ---------------------------------------------------------------
+     Reescrito em 20/08/2026, a pedido do Rafael, com a mesma lógica que a home
+     recebeu em 19/08: o H1 diz para QUEM é e o subtítulo diz O QUE faz, o CTA
+     principal é o teste de 14 dias e o secundário é âncora para a demonstração
+     desta mesma página (e não link para outra, que tira o visitante do funil).
+     O H1 anterior ("Você cadastra o que faz e quanto custa") abria pelo painel;
+     este abre pelo que o visitante reconhece: hora marcada.
+     A imagem do herói passou a ser a tela 1 do cliente (genérica, com relógio e
+     "MEU NEGOCIO"), no lugar do formulário de serviços — que continua na seção
+     de funcionalidades, onde é o assunto. É a única imagem sem loading="lazy":
+     é ela que o Google cronometra como LCP. -->
 <section>
     <div class="wrap heroi">
         <div>
             <p class="mini" style="text-transform:uppercase;letter-spacing:.12em;margin-bottom:var(--size-2);">Agenda Global</p>
-            <h1>Você cadastra o que faz e <span class="cor">quanto custa</span>. O resto o cliente resolve sozinho.</h1>
+            <h1>Agendamento online para quem trabalha com <span class="cor">hora marcada</span>.</h1>
 
             <p class="chamada">
-                Esta página mostra o caminho inteiro, sem falar de nenhum ramo em
-                particular: onde entram os seus serviços, a duração e o preço de cada um,
-                e o que acontece na tela do cliente depois disso.
+                Seu cliente escolhe o serviço, o profissional e o melhor horário
+                disponível. O agendamento aparece direto na sua agenda.
             </p>
 
             <div class="botoes">
-                <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20como%20funciona%20e%20quero%20ver%20com%20a%20minha%20marca" target="_blank" rel="noopener">Quero ver com a minha marca</a>
-                <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Abrir a demo — <em>o exemplo no ar é de uma barbearia</em></a>
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20gr%C3%A1tis." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+                <a class="btn btn-vazio" href="#veja-como-e-simples">Ver como funciona</a>
             </div>
+
+            <p class="heroi-selo">
+                <strong>R$ 49,90/mês</strong> • profissionais ilimitados • sem fidelidade •
+                sem cartão
+            </p>
+
+            <ul class="segmentos-heroi">
+                <li>Barbearias</li>
+                <li>Salões</li>
+                <li>Manicures</li>
+                <li>Estética</li>
+                <li>Massagem</li>
+                <li>Tatuagem</li>
+                <li>Consultórios</li>
+                <li>Outros serviços com hora marcada</li>
+            </ul>
         </div>
 
         <div>
-            <img src="../img/servicos-form.png" width="780" height="1688"
+            <img src="../img/generico-tela-1.png" width="780" height="1688"
                  fetchpriority="high" decoding="async"
-                 alt="Tela de cadastro de serviço no painel: nome, duração em minutos, preço, categoria, cor na agenda, lista de quem atende e opção de esconder do agendamento online">
+                 alt="Tela do agendamento no celular: o cliente escolhe o serviço e o profissional, e já vê a duração de 90 minutos e o preço de R$ 180,00">
         </div>
     </div>
+</section>
 
+<!-- 2. DEMONSTRAÇÃO --------------------------------------------------------
+     Mesma seção que a home ganhou em 19/08, montada com as telas GENÉRICAS
+     (generico-tela-1..4): fundo azul-petróleo, ícone de relógio, "MEU NEGOCIO",
+     "Atendimento completo" e "Ana". Nenhuma imagem de barbearia aqui, de
+     propósito — a página inteira deixa de funcionar se a primeira demonstração
+     fizer o produto parecer só de barbeiro.
+     O lado do negócio está em cartões de texto, sem print: não existe print real
+     da tela de agenda hoje, e por decisão do Rafael (19/08) não entra mockup ao
+     lado de print de verdade (T169). -->
+<section class="alt" id="veja-como-e-simples">
     <div class="wrap">
+        <h2 class="centro">Veja como é simples</h2>
+        <p class="sub centro">O mesmo agendamento visto dos dois lados: o que o seu
+           cliente faz no celular dele — <strong>sem baixar aplicativo</strong> — e o
+           que acontece do seu lado.</p>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Testar como cliente — <em>o exemplo no ar é de uma barbearia</em></a>
+        </div>
+
+        <div class="lado">
+            <span class="etiqueta">Cliente</span>
+            <h3>Escolhe o serviço → o profissional → o horário → confirma</h3>
+        </div>
+
+        <div class="telas quatro">
+            <figure>
+                <img src="../img/generico-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
+                <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 2 do agendamento: dias e horários livres, com os já ocupados riscados">
+                <figcaption>2. O horário — só o que está livre</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-tela-3.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 3 do agendamento: campos de nome e celular do cliente">
+                <figcaption>3. Nome e celular</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
+                     alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
+                <figcaption>4. Confirma</figcaption>
+            </figure>
+        </div>
+
+        <div class="lado">
+            <span class="etiqueta">Negócio</span>
+            <h3>Recebe o agendamento → vê na agenda → confirma, cancela ou remarca → acompanha os atendimentos</h3>
+        </div>
+
+        <div class="grade">
+            <div class="card">
+                <h3><span class="num">1</span>Recebe o agendamento</h3>
+                <p>Cai na sua agenda na hora, sem você digitar nada — e aquele horário
+                   some da tela de quem entrar depois.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">2</span>Visualiza na agenda</h3>
+                <p>Do celular, em dia, semana, mês ou tabela. Cada profissional com a
+                   própria agenda, com o horário, o serviço e o nome do cliente.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">3</span>Confirma, cancela ou remarca</h3>
+                <p>Toca no horário e escolhe <em>confirmar presença</em> ou <em>pedir para
+                   remarcar</em>, com a mensagem de WhatsApp já escrita. Para mudar de
+                   hora, arrasta o agendamento.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">4</span>Acompanha os atendimentos</h3>
+                <p>A tela de contatos do dia mostra quem está marcado naquela data, em
+                   ordem de horário, com serviço, profissional e telefone.</p>
+            </div>
+        </div>
+
         <p class="aviso">
             As telas desta página usam um negócio de exemplo, com nome, cor e serviços
             inventados para demonstrar. <strong>A demo que está no ar é de uma
@@ -507,8 +630,240 @@ details.acordeao table { margin-top: 0; }
     </div>
 </section>
 
-<!-- A IDEIA ----------------------------------------------------------------- -->
+<!-- 3. BENEFÍCIOS ----------------------------------------------------------
+     Três, e só três. O argumento de cada um NÃO se repete no resto da página:
+     "menos mensagens" só aparece aqui, "sem conflito" é detalhado (não repetido)
+     no acordeão do que some sozinho, e "mais organização" é o que as seções de
+     funcionalidades mostram na prática, sem reafirmar a frase. -->
+<section>
+    <div class="wrap">
+        <h2 class="centro">O que muda no seu dia a dia</h2>
+
+        <div class="grade">
+            <div class="card">
+                <h3>Menos mensagens para agendar</h3>
+                <p>Seu cliente encontra sozinho os horários disponíveis e faz o
+                   agendamento.</p>
+            </div>
+            <div class="card">
+                <h3>Sem conflito de horário</h3>
+                <p>Horários já ocupados deixam de aparecer como disponíveis.</p>
+            </div>
+            <div class="card">
+                <h3>Mais organização</h3>
+                <p>Serviços, profissionais, horários e atendimentos ficam centralizados.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. GESTÃO DO NEGÓCIO ---------------------------------------------------
+     POSIÇÃO E ESTRUTURA preparadas em 20/08/2026; o conteúdo detalhado é tarefa
+     à parte, combinada com o Rafael. O que está escrito aqui já existe no app
+     hoje (a tela de Faturamento) — nada de "em breve".
+     Detalhada em 20/08/2026. Cada afirmação dos seis cartões foi conferida no
+     código antes de ser escrita — em Revenue.php e em views/pages/revenue.php. O
+     que NÃO foi escrito, e por quê, está registrado no TAREFAS.md (T181):
+       · a tela mostra o VALOR por serviço e por profissional, e não a contagem de
+         atendimentos de cada um — as duas tabelas viraram nome+valor na T160, e
+         "quantas vezes cada serviço saiu" só existe na planilha exportada;
+       · a tabela por profissional só aparece quando há mais de um cadastrado.
+     A perda com faltas É calculada (`no_show_amount`, "Perdido com faltas" na
+     tela), então essa afirmação pôde ficar.
+
+     AS DUAS IMAGENS SÃO PRINTS DE VERDADE, e não mockup: saem de uma instância
+     local provisionada pelo provisionar.py como qualquer cliente ("Meu Negócio",
+     cor #0b7285, serviços e profissionais genéricos), recortadas por seletor pelo
+     Instagram/video/print_generico.js. Os prints do Faturamento que a home usa não
+     servem aqui: o img/3-de-onde-veio.png lista "Corte + Barba" na própria tela.
+
+     O BLOCO DO CONSULTOR, no fim da seção, veio de outra instrução e foi
+     PRESERVADO de propósito — ele não é funcionalidade do sistema, é serviço
+     nosso, e por isso fica separado dos seis cartões e depois da frase sobre o
+     arquivo exportado. Ver a pergunta aberta na T182. -->
+<section class="veu">
+    <div class="wrap">
+        <h2>Além da agenda, acompanhe seu negócio.</h2>
+
+        <p class="sub">Veja seus atendimentos, acompanhe resultados e tenha informações
+           para tomar decisões melhores.</p>
+
+        <div class="painel-duplo">
+            <figure>
+                <img src="../img/generico-faturamento.png" width="780" height="1220"
+                     loading="lazy" decoding="async"
+                     alt="Tela de Faturamento no celular: atalhos de hoje, ontem, 7 dias, este mês e 30 dias, com R$ 480,00 já atendido em 4 atendimentos, ticket médio de R$ 120,00, R$ 360,00 ainda por atender e R$ 120,00 perdido com 1 falta">
+                <figcaption>O período que você escolher, fechado sozinho</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/generico-de-onde-veio.png" width="780" height="1080"
+                     loading="lazy" decoding="async"
+                     alt="Gráfico de rosca com o quanto cada serviço rendeu no período e a tabela com o total por profissional">
+                <figcaption>Quanto rendeu cada serviço e cada pessoa</figcaption>
+            </figure>
+        </div>
+
+        <p class="mini" style="margin-top:var(--size-4);">As duas telas são do mesmo
+           negócio de exemplo do resto da página — os números são dele, não de um cliente
+           real.</p>
+
+        <div class="grade" style="margin-top:var(--size-6);">
+            <div class="card">
+                <h3>Veja quanto você faturou</h3>
+                <p>O valor dos atendimentos por período: hoje, ontem, 7 dias, este mês,
+                   30 dias — ou o intervalo de datas que você escolher.</p>
+            </div>
+            <div class="card">
+                <h3>Descubra quais serviços mais geram resultado</h3>
+                <p>Quanto cada serviço rendeu no período, do maior para o menor, com a
+                   fatia de cada um no total.</p>
+            </div>
+            <div class="card">
+                <h3>Acompanhe sua equipe</h3>
+                <p>Quanto cada profissional rendeu no período. A tabela aparece quando há
+                   mais de uma pessoa atendendo.</p>
+            </div>
+            <div class="card">
+                <h3>Entenda o impacto das faltas</h3>
+                <p>Você marca quem não compareceu, e o valor daquele horário sai do que
+                   foi faturado e aparece separado, como perda do período.</p>
+            </div>
+            <div class="card">
+                <h3>Registre também quem chegou sem agendar</h3>
+                <p>Lance o atendimento presencial em dois toques e ele entra na conta do
+                   dia junto com os que foram marcados.</p>
+            </div>
+            <div class="card">
+                <h3>Seus dados também no Excel</h3>
+                <p>Baixe uma planilha com uma linha por atendimento: serviço, valor,
+                   profissional, cliente, falta e o intervalo em que cada um costuma
+                   voltar.</p>
+            </div>
+        </div>
+
+        <p class="mini" style="margin-top:var(--size-4);">O arquivo é seu, e a planilha é
+           o que o sistema entrega: ele não analisa nada por dentro nem manda os seus
+           dados para lugar nenhum.</p>
+
+        <div class="card" style="margin-top:var(--size-5);">
+            <h3>Ou pergunte para a gente: um consultor no WhatsApp</h3>
+            <p>Depois do primeiro mês de uso, você manda a sua pergunta no nosso WhatsApp
+               e a resposta vem olhando os números do seu negócio. Do tipo <em>"quais dias
+               e horários não se pagam?"</em>, <em>"que mensagem eu mando para quem deixou
+               de vir?"</em> ou <em>"monte um plano de 30 dias para eu faturar mais usando
+               só os clientes que já são meus"</em>. Está incluído no plano.
+               <strong>É a partir do segundo mês</strong> porque antes disso não existe
+               histórico suficiente para a resposta valer alguma coisa.</p>
+        </div>
+
+        <div class="botoes">
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20gr%C3%A1tis." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+        </div>
+    </div>
+</section>
+
+<!-- 5. SEGMENTOS -----------------------------------------------------------
+     A tabela é a mesma de antes, com dois ajustes de 20/08/2026: o título deixou
+     de ser "Quem usa a Agenda Global" e a última linha deixou de dizer "qualquer
+     outro atendimento". Motivo do Rafael: prometer "qualquer negócio" enfraquece
+     a promessa em vez de ampliá-la. Exemplo é exemplo — a lista não é fechada,
+     mas também não é universal. -->
 <section class="alt">
+    <div class="wrap">
+        <h2>Feito para negócios que trabalham com hora marcada.</h2>
+
+        <p>É a mesma agenda em todos eles. Muda o que você escreve nos campos, não o
+           sistema — estes são exemplos, não a lista fechada:</p>
+
+        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
+        <div class="rolagem">
+            <table>
+                <tr>
+                    <th>Segmento</th>
+                    <th>Um serviço típico</th>
+                    <th>Duração</th>
+                    <th class="nosso">Página com detalhes</th>
+                </tr>
+                <tr>
+                    <td>Barbearias</td>
+                    <td>Corte + Barba</td>
+                    <td>50 min</td>
+                    <td class="nosso"><a href="../">página inicial</a></td>
+                </tr>
+                <tr>
+                    <td>Salões de beleza e cabeleireiros</td>
+                    <td>Escova + hidratação</td>
+                    <td>90 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Manicures e nail designers</td>
+                    <td>Alongamento em gel</td>
+                    <td>2h a 3h</td>
+                    <td class="nosso"><a href="../manicure/">versão para manicure</a></td>
+                </tr>
+                <tr>
+                    <td>Estética</td>
+                    <td>Limpeza de pele profunda</td>
+                    <td>60 min</td>
+                    <td class="nosso"><a href="../clinica-estetica/">versão para estética</a></td>
+                </tr>
+                <tr>
+                    <td>Massagem e quiropraxia</td>
+                    <td>Massagem relaxante</td>
+                    <td>60 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Tatuagem e piercing</td>
+                    <td>Sessão fechada</td>
+                    <td>2h a 4h</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Consultórios odontológicos</td>
+                    <td>Avaliação / limpeza</td>
+                    <td>40 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Consultórios médicos</td>
+                    <td>Consulta de retorno</td>
+                    <td>30 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Outros serviços profissionais com horário marcado</td>
+                    <td>o seu</td>
+                    <td>o seu</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>Onde ele <em>não</em> serve, para você não perder tempo</h3>
+            <p><strong>Para consultório, ele é agenda e só.</strong> Não controla pacote de
+               sessões, não guarda prontuário, ficha de anamnese
+               nem qualquer informação de saúde, não cobra sinal nem processa pagamento,
+               não calcula comissão e não dispara lembrete sozinho. Se o centro da sua
+               operação é uma dessas, o app resolve só a parte da agenda — e é melhor
+               saber agora.</p>
+        </div>
+    </div>
+</section>
+
+<!-- 6. FUNCIONALIDADES DETALHADAS -------------------------------------------
+     Daqui para baixo é o conteúdo que a página já tinha, na mesma ordem interna
+     (a ideia → serviços → expediente → o agendamento → o painel). Ele desceu em
+     20/08/2026 para depois das seções comerciais, mas NÃO encolheu: é o texto
+     que responde busca de cauda longa ("cadastrar duração de serviço",
+     "bloquear folga na agenda") e é ele que traz gente por busca.
+     Duas mudanças de repetição: (1) as quatro telas do cliente saíram da etapa 3,
+     porque agora abrem a demonstração lá em cima — só o texto ficou; (2) a tabela
+     de campos e a lista do que some sozinho viraram acordeão, que era o que mais
+     pesava a rolagem no celular. -->
+<section>
     <div class="wrap">
         <h2>O app não sabe qual é o seu ramo — e é isso que faz ele servir</h2>
 
@@ -524,7 +879,7 @@ details.acordeao table { margin-top: 0; }
 </section>
 
 <!-- ETAPA 1 — CADASTRAR OS SERVIÇOS ----------------------------------------- -->
-<section>
+<section class="alt">
     <div class="wrap">
         <div class="etapa"><span class="n">1</span><h2>Você cadastra os seus serviços e os seus preços</h2></div>
 
@@ -545,55 +900,57 @@ details.acordeao table { margin-top: 0; }
             </figure>
         </div>
 
-        <h3 style="margin-top:var(--size-8);">O que cada campo muda na prática</h3>
+        <details class="acordeao">
+            <summary>O que cada campo muda na prática</summary>
 
-        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
-        <div class="rolagem">
-            <table>
-                <tr>
-                    <th>Campo</th>
-                    <th>Exemplo</th>
-                    <th class="nosso">O que ele muda para o cliente</th>
-                </tr>
-                <tr>
-                    <td><strong>Nome</strong></td>
-                    <td><code>Atendimento completo</code></td>
-                    <td class="nosso">é o texto que ele lê na primeira tela</td>
-                </tr>
-                <tr>
-                    <td><strong>Duração</strong> (minutos)</td>
-                    <td><code>90</code></td>
-                    <td class="nosso">o sistema só oferece horário em que 90 minutos cabem inteiros</td>
-                </tr>
-                <tr>
-                    <td><strong>Preço</strong></td>
-                    <td><code>180,00</code></td>
-                    <td class="nosso">aparece como <code>R$ 180,00</code> antes de ele confirmar</td>
-                </tr>
-                <tr>
-                    <td><strong>Categoria</strong></td>
-                    <td><code>Principais</code></td>
-                    <td class="nosso">agrupa a lista quando você tem muitos serviços</td>
-                </tr>
-                <tr>
-                    <td><strong>Cor</strong></td>
-                    <td>a cor da marca</td>
-                    <td class="nosso">nada — é para <em>você</em> bater o olho na agenda e reconhecer</td>
-                </tr>
-                <tr>
-                    <td><strong>Quem atende</strong></td>
-                    <td>Ana, Bruno</td>
-                    <td class="nosso">só quem estiver marcado aparece para ele escolher</td>
-                </tr>
-                <tr>
-                    <td><strong>Esconder do online</strong></td>
-                    <td>desmarcado</td>
-                    <td class="nosso">marcado, o serviço some do link e fica só para você lançar pelo painel</td>
-                </tr>
-            </table>
-        </div>
+            <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
+            <div class="rolagem">
+                <table>
+                    <tr>
+                        <th>Campo</th>
+                        <th>Exemplo</th>
+                        <th class="nosso">O que ele muda para o cliente</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Nome</strong></td>
+                        <td><code>Atendimento completo</code></td>
+                        <td class="nosso">é o texto que ele lê na primeira tela</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Duração</strong> (minutos)</td>
+                        <td><code>90</code></td>
+                        <td class="nosso">o sistema só oferece horário em que 90 minutos cabem inteiros</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Preço</strong></td>
+                        <td><code>180,00</code></td>
+                        <td class="nosso">aparece como <code>R$ 180,00</code> antes de ele confirmar</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Categoria</strong></td>
+                        <td><code>Principais</code></td>
+                        <td class="nosso">agrupa a lista quando você tem muitos serviços</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cor</strong></td>
+                        <td>a cor da marca</td>
+                        <td class="nosso">nada — é para <em>você</em> bater o olho na agenda e reconhecer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quem atende</strong></td>
+                        <td>Ana, Bruno</td>
+                        <td class="nosso">só quem estiver marcado aparece para ele escolher</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Esconder do online</strong></td>
+                        <td>desmarcado</td>
+                        <td class="nosso">marcado, o serviço some do link e fica só para você lançar pelo painel</td>
+                    </tr>
+                </table>
+            </div>
+        </details>
 
-        <div class="card">
+        <div class="card" style="margin-top:var(--size-5);">
             <h3>O campo que mais dá problema é “quem atende”</h3>
             <p>Se um serviço não estiver ligado a ninguém, ele simplesmente <strong>não
                aparece</strong> para o cliente — sem mensagem de erro, sem aviso. É o
@@ -603,13 +960,14 @@ details.acordeao table { margin-top: 0; }
                que vale prestar atenção.</p>
         </div>
 
-        <p class="mini">Os valores acima são de um negócio inventado, só para a tela ter o
-           que mostrar. Os seus serviços, tempos e preços são os seus.</p>
+        <p class="mini" style="margin-top:var(--size-4);">Os valores acima são de um
+           negócio inventado, só para a tela ter o que mostrar. Os seus serviços, tempos
+           e preços são os seus.</p>
     </div>
 </section>
 
 <!-- ETAPA 2 — HORÁRIO DE TRABALHO ------------------------------------------- -->
-<section class="alt">
+<section>
     <div class="wrap">
         <div class="etapa"><span class="n">2</span><h2>Você diz quando trabalha</h2></div>
 
@@ -652,8 +1010,12 @@ details.acordeao table { margin-top: 0; }
     </div>
 </section>
 
-<!-- ETAPA 3 — O AGENDAMENTO -------------------------------------------------- -->
-<section>
+<!-- ETAPA 3 — O AGENDAMENTO --------------------------------------------------
+     As quatro telas saíram daqui em 20/08/2026: elas agora abrem a página, na
+     seção "Veja como é simples". O texto ficou, porque ele diz o que a imagem
+     não diz (o formulário pede só nome e celular, o celular é validado, e a
+     confirmação traz link próprio para remarcar). -->
+<section class="alt">
     <div class="wrap">
         <div class="etapa"><span class="n">3</span><h2>O cliente marca — em quatro toques</h2></div>
 
@@ -672,49 +1034,23 @@ details.acordeao table { margin-top: 0; }
                 ou cancelar sozinho depois.</li>
         </ol>
 
-        <div class="telas quatro">
-            <figure>
-                <img src="../img/generico-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
-                <figcaption>1. Serviço, quem atende, tempo e preço</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/generico-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Passo 2 do agendamento: dias e horários livres, com os já ocupados riscados">
-                <figcaption>2. Só o que está livre</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/generico-tela-3.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Passo 3 do agendamento: campos de nome e celular do cliente">
-                <figcaption>3. Nome e celular</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/generico-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
-                <figcaption>4. Confirmado</figcaption>
-            </figure>
-        </div>
-    </div>
-</section>
+        <details class="acordeao">
+            <summary>O que some da agenda sem você fazer nada</summary>
 
-<!-- O QUE SOME SOZINHO ------------------------------------------------------- -->
-<section class="veu">
-    <div class="wrap">
-        <h2>O que some da agenda sem você fazer nada</h2>
+            <p>Esta é a parte que dispensa manutenção. Um horário só aparece para o cliente
+               se estiver mesmo livre. Somem sozinhos:</p>
 
-        <p>Esta é a parte que dispensa manutenção. Um horário só aparece para o cliente se
-           estiver mesmo livre. Somem sozinhos:</p>
-
-        <div class="grade">
-            <div class="card"><h3>O que já foi marcado</h3><p>Por outro cliente, no mesmo profissional.</p></div>
-            <div class="card"><h3>Fora do expediente</h3><p>Inclusive o intervalo de almoço e o sábado diferente.</p></div>
-            <div class="card"><h3>A folga da semana</h3><p>Repete sozinha, sem você lançar toda vez.</p></div>
-            <div class="card"><h3>Férias e dias parados</h3><p>Do profissional que estiver de férias, e só dele.</p></div>
-            <div class="card"><h3>Horas bloqueadas</h3><p>Aquele compromisso solto no meio do dia.</p></div>
-            <div class="card"><h3>Dia fechado</h3><p>Quando o negócio inteiro parou.</p></div>
-            <div class="card"><h3>O passado</h3><p>E os 30 minutos seguintes, para ninguém marcar em cima da hora.</p></div>
-            <div class="card"><h3>O que não cabe</h3><p>Se o serviço leva 90 minutos, um vão de 40 não é oferecido.</p></div>
-        </div>
+            <div class="grade">
+                <div class="card"><h3>O que já foi marcado</h3><p>Por outro cliente, no mesmo profissional.</p></div>
+                <div class="card"><h3>Fora do expediente</h3><p>Inclusive o intervalo de almoço e o sábado diferente.</p></div>
+                <div class="card"><h3>A folga da semana</h3><p>Repete sozinha, sem você lançar toda vez.</p></div>
+                <div class="card"><h3>Férias e dias parados</h3><p>Do profissional que estiver de férias, e só dele.</p></div>
+                <div class="card"><h3>Horas bloqueadas</h3><p>Aquele compromisso solto no meio do dia.</p></div>
+                <div class="card"><h3>Dia fechado</h3><p>Quando o negócio inteiro parou.</p></div>
+                <div class="card"><h3>O passado</h3><p>E os 30 minutos seguintes, para ninguém marcar em cima da hora.</p></div>
+                <div class="card"><h3>O que não cabe</h3><p>Se o serviço leva 90 minutos, um vão de 40 não é oferecido.</p></div>
+            </div>
+        </details>
     </div>
 </section>
 
@@ -753,93 +1089,73 @@ details.acordeao table { margin-top: 0; }
     </div>
 </section>
 
-<!-- SERVE PARA O MEU RAMO ---------------------------------------------------- -->
-<section class="alt">
+<!-- 7. PREÇO ----------------------------------------------------------------
+     Bloco padronizado com a home (19/08/2026). O selo "Mais escolhido" fica no
+     ESSENCIAL, por decisão do Rafael em 19/08/2026: se o barato já resolve,
+     destacar o caro só cria desconfiança.
+     O valor também aparece no herói, logo abaixo dos CTAs — ninguém precisa
+     chegar até aqui para descobrir quanto custa. -->
+<section class="alt" id="preco">
     <div class="wrap">
-        <h2>Quem usa a Agenda Global</h2>
+        <h2>Preço</h2>
+        <p>Os dois planos têm o app inteiro. A diferença é o endereço e o quanto fazemos
+           por você.</p>
 
-        <p>É a mesma agenda para qualquer atendimento com hora marcada. Muda o que você
-           escreve nos campos, não o sistema:</p>
+        <div class="planos">
+            <div class="plano principal">
+                <span class="selo">Mais escolhido</span>
+                <h3>Essencial</h3>
+                <div class="valor">R$ 49,90 <small>/mês</small></div>
+                <p class="para">Para quem quer o cadastro pronto e a agenda recebendo horário ainda esta semana.</p>
 
-        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
-        <div class="rolagem">
-            <table>
-                <tr>
-                    <th>Ramo</th>
-                    <th>Um serviço típico</th>
-                    <th>Duração</th>
-                    <th class="nosso">Página com detalhes</th>
-                </tr>
-                <tr>
-                    <td>Barbearia</td>
-                    <td>Corte + Barba</td>
-                    <td>50 min</td>
-                    <td class="nosso"><a href="../">página inicial</a></td>
-                </tr>
-                <tr>
-                    <td>Manicure e nail designer</td>
-                    <td>Alongamento em gel</td>
-                    <td>2h a 3h</td>
-                    <td class="nosso"><a href="../manicure/">versão para manicure</a></td>
-                </tr>
-                <tr>
-                    <td>Clínica de estética</td>
-                    <td>Limpeza de pele profunda</td>
-                    <td>60 min</td>
-                    <td class="nosso"><a href="../clinica-estetica/">versão para estética</a></td>
-                </tr>
-                <tr>
-                    <td>Cabeleireiro e salão</td>
-                    <td>Escova + hidratação</td>
-                    <td>90 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Consultório odontológico</td>
-                    <td>Avaliação / limpeza</td>
-                    <td>40 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Consultório médico</td>
-                    <td>Consulta de retorno</td>
-                    <td>30 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Massagem e quiropraxia</td>
-                    <td>Massagem relaxante</td>
-                    <td>60 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Tatuagem e piercing</td>
-                    <td>Sessão fechada</td>
-                    <td>2h a 4h</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Qualquer outro atendimento com hora marcada</td>
-                    <td>o seu</td>
-                    <td>o seu</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-            </table>
+                <ul>
+                    <li>O app inteiro, com o seu logo e a sua cor</li>
+                    <li><strong>Quantos profissionais você tiver</strong> — o preço é do negócio</li>
+                    <li>Agendamentos sem limite</li>
+                    <li>Instalação e configuração grátis</li>
+                    <li>Seu endereço: horariocheio.com.br/seunegocio</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20o%20plano%20Essencial." target="_blank" rel="noopener">Testar 14 dias grátis</a>
+            </div>
+
+            <div class="plano">
+                <h3>Completo</h3>
+                <div class="valor">R$ 99,90 <small>/mês</small></div>
+                <p class="para">Para quem quer endereço próprio na internet, com a cara da casa.</p>
+
+                <ul>
+                    <li>Tudo do Essencial</li>
+                    <li><strong>Domínio próprio</strong> (seunegocio.com.br), registrado e pago por nós</li>
+                    <li>Montagem do logo e das cores</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20saber%20do%20plano%20Completo%2C%20com%20dom%C3%ADnio%20pr%C3%B3prio." target="_blank" rel="noopener">Falar no WhatsApp</a>
+            </div>
         </div>
 
-        <div class="card">
-            <h3>Onde ele <em>não</em> serve, para você não perder tempo</h3>
-            <p><strong>Para consultório, ele é agenda e só.</strong> Não controla pacote de
-               sessões, não guarda prontuário, ficha de anamnese
-               nem qualquer informação de saúde, não cobra sinal nem processa pagamento,
-               não calcula comissão e não dispara lembrete sozinho. Se o centro da sua
-               operação é uma dessas, o app resolve só a parte da agenda — e é melhor
-               saber agora.</p>
+        <p class="centro" style="margin-top:var(--size-6);"><strong>14 dias grátis para
+           testar, sem cartão.</strong> Sem fidelidade e sem multa para cancelar.</p>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20gr%C3%A1tis." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
         </div>
     </div>
 </section>
 
-<!-- FAQ ---------------------------------------------------------------------- -->
+<!-- 8. FAQ ------------------------------------------------------------------
+     NÃO MEXER no formato das perguntas abaixo (details sem atributo, um summary
+     e um parágrafo): o gerar_jsonld.py extrai daqui o FAQPage do JSON-LD por
+     regex, e o Google exige que o schema seja idêntico ao texto visível. Por
+     isso este comentário também não escreve o padrão por extenso — escrito, ele
+     seria capturado pela regex e viraria uma pergunta fantasma no schema.
+     Os acordeões das seções acima levam class="acordeao" justamente para
+     ficarem de fora dessa extração.
+     As sete perguntas ficaram intactas na reorganização de 20/08/2026. -->
 <section>
     <div class="wrap">
         <h2>Perguntas sobre o cadastro</h2>
@@ -898,59 +1214,7 @@ details.acordeao table { margin-top: 0; }
     </div>
 </section>
 
-<!-- PLANOS (bloco padronizado com a home, 19/08/2026) ------------------------
-     O selo "Mais escolhido" fica no ESSENCIAL, por decisao do Rafael em 19/08/2026.
-     Antes ele estava no Completo, o que contradizia o argumento central da pagina:
-     se o barato ja resolve, destacar o caro so' cria desconfianca. -->
-<section class="alt" id="preco">
-    <div class="wrap">
-        <h2>Preço</h2>
-        <p>Os dois planos têm o app inteiro. A diferença é o endereço e o quanto fazemos
-           por você.</p>
-
-        <div class="planos">
-            <div class="plano principal">
-                <span class="selo">Mais escolhido</span>
-                <h3>Essencial</h3>
-                <div class="valor">R$ 49,90 <small>/mês</small></div>
-                <p class="para">Para quem quer o cadastro pronto e a agenda recebendo horário ainda esta semana.</p>
-
-                <ul>
-                    <li>O app inteiro, com o seu logo e a sua cor</li>
-                    <li><strong>Quantos profissionais você tiver</strong> — o preço é do negócio</li>
-                    <li>Agendamentos sem limite</li>
-                    <li>Instalação e configuração grátis</li>
-                    <li>Seu endereço: horariocheio.com.br/seunegocio</li>
-                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
-                    <li>Sem fidelidade</li>
-                </ul>
-
-                <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20o%20plano%20Essencial." target="_blank" rel="noopener">Testar 14 dias grátis</a>
-            </div>
-
-            <div class="plano">
-                <h3>Completo</h3>
-                <div class="valor">R$ 99,90 <small>/mês</small></div>
-                <p class="para">Para quem quer endereço próprio na internet, com a cara da casa.</p>
-
-                <ul>
-                    <li>Tudo do Essencial</li>
-                    <li><strong>Domínio próprio</strong> (seunegocio.com.br), registrado e pago por nós</li>
-                    <li>Montagem do logo e das cores</li>
-                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
-                    <li>Sem fidelidade</li>
-                </ul>
-
-                <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20saber%20do%20plano%20Completo%2C%20com%20dom%C3%ADnio%20pr%C3%B3prio." target="_blank" rel="noopener">Falar no WhatsApp</a>
-            </div>
-        </div>
-
-        <p style="margin-top:var(--size-5);"><strong>14 dias grátis para testar, sem cartão.</strong>
-           Sem fidelidade e sem multa para cancelar.</p>
-    </div>
-</section>
-
-<!-- CHAMADA FINAL ------------------------------------------------------------ -->
+<!-- 9. CHAMADA FINAL --------------------------------------------------------- -->
 <section class="veu">
     <div class="wrap">
         <h2>Quer ver com os seus serviços?</h2>
@@ -958,7 +1222,7 @@ details.acordeao table { margin-top: 0; }
            duração. A gente monta e te devolve o link para você abrir no seu celular,
            antes de decidir qualquer coisa. Teste grátis de 14 dias, sem cartão.</p>
         <div class="botoes">
-            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20como%20funciona%20e%20quero%20ver%20com%20a%20minha%20marca" target="_blank" rel="noopener">Falar no WhatsApp</a>
+            <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20gr%C3%A1tis." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
             <a class="btn btn-vazio" href="../diferencial-dos-concorrentes/">Ver o diferencial dos concorrentes</a>
         </div>
     </div>
