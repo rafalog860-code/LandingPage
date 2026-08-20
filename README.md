@@ -24,6 +24,8 @@ que fica sem uso porque o `index.html` tem precedência.
 | `img/marca-azul.png`, `img/marca-terracota.png` | A mesma tela com outra marca — a prova visual do white-label |
 | `img/logo.png` | Logo, favicon e imagem do card de link |
 | `.nojekyll` | Resíduo do GitHub Pages. Inofensivo na Hostinger; mantido caso o Pages volte a ser usado como espelho |
+| `img/segmentos/` | As 18 fotos do carrossel da `/agenda-global/`, 800x600, com `creditos.json` dizendo o autor de cada uma |
+| `baixar_fotos_segmentos.ps1` | Baixa e normaliza essas 18 fotos (Pexels + ffmpeg). A escolha de qual candidata usar está na tabela dentro do script, não no comando — é o que faz rodar de novo devolver as mesmas fotos |
 
 ## Se o endereço mudar
 

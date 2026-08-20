@@ -87,9 +87,11 @@ SECUNDARIAS = {
         "nome": "Agenda Global: uma agenda para barbearia, manicure, estética, consultório e mais",
         "descricao": ("Agendamento online para quem trabalha com hora marcada: o cliente "
                       "escolhe o serviço, o profissional e o horário disponível, e o "
-                      "agendamento cai direto na agenda do negócio. Barbearias, salões, "
-                      "manicures, estética, massagem, tatuagem, consultórios e outros "
-                      "serviços com horário marcado."),
+                      "agendamento cai direto na agenda do negócio. Barbearias, salões e "
+                      "cabeleireiros, manicures e nail designers, lash designers, "
+                      "maquiadoras, estética, depilação, tatuagem, massagem, podologia, "
+                      "fisioterapia, personal trainers, dentistas, médicos, psicólogos, "
+                      "pet shops, professores particulares e lava-jatos."),
     },
     "manicure": {
         "pasta": "manicure",

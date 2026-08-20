@@ -292,14 +292,71 @@ footer {
 .centro { text-align: center; }
 
 /* exemplos de segmento no heroi: discretos de proposito — sao ilustracao, nao menu */
-.segmentos-heroi {
-  display: flex; flex-wrap: wrap; gap: var(--size-2);
-  list-style: none; padding: 0; margin: var(--size-5) 0 0;
+/* Carrossel de segmentos (20/08/2026) ---------------------------------------
+   Substituiu duas coisas ao mesmo tempo, a pedido do Rafael: a lista de pilulas
+   de texto que ficava no herói (.segmentos-heroi, apagada) e a tabela de 9 linhas
+   desta seção. Motivo: nome de segmento em texto nao diz "isto e' para mim" tao
+   rapido quanto a foto da atividade — e sao 18 segmentos, que em tabela viram
+   parede e em grade viram rolagem sem fim.
+
+   ROLAGEM NATIVA, sem biblioteca: scroll-snap faz o trabalho e a pagina continua
+   sem framework e sem requisicao externa. As setas sao um confort a mais — sem
+   JavaScript nenhum o carrossel continua arrastavel com o dedo e com a barra de
+   rolagem, que e' como a maioria vai usar no celular. */
+.carrossel { position: relative; margin-top: var(--size-5); }
+
+.carrossel-trilho {
+  display: flex; gap: var(--size-3);
+  list-style: none; margin: 0; padding: var(--size-1) var(--size-1) var(--size-3);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scroll-behavior: smooth; scrollbar-width: thin;
+  overscroll-behavior-x: contain;
 }
-.segmentos-heroi li {
-  font-size: var(--font-size-0); color: var(--tinta-fraca);
-  background: var(--marca-veu); border: var(--border-size-1) solid var(--marca-linha);
-  border-radius: var(--radius-round); padding: 3px 12px; line-height: var(--font-lineheight-3);
+.carrossel-trilho::-webkit-scrollbar { height: 8px; }
+.carrossel-trilho::-webkit-scrollbar-thumb {
+  background: var(--linha); border-radius: var(--radius-round);
+}
+
+.seg-card {
+  flex: 0 0 78%; scroll-snap-align: start;
+  background: var(--papel); border: var(--border-size-1) solid var(--linha);
+  border-radius: var(--radius-3); overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.seg-card img {
+  width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+  border-bottom: var(--border-size-1) solid var(--linha);
+}
+.seg-texto { padding: var(--size-3); display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.seg-texto h3 {
+  margin: 0; font-size: var(--font-size-2); line-height: var(--font-lineheight-1);
+  color: var(--marca-forte);
+}
+.seg-texto p {
+  margin: 0; font-size: var(--font-size-0); color: var(--tinta-fraca);
+  line-height: var(--font-lineheight-3);
+}
+.seg-texto a { font-size: var(--font-size-0); margin-top: auto; padding-top: var(--size-2); }
+
+/* As setas somem no celular: la o dedo arrasta, e dois botoes de 40px em cima da
+   foto so' roubam area de toque do proprio cartao. */
+.carrossel-seta { display: none; }
+@media (min-width: 900px) {
+  .seg-card { flex-basis: calc((100% - var(--size-3) * 3) / 4); }
+  .carrossel-seta {
+    display: grid; place-items: center; position: absolute; top: 38%; z-index: 2;
+    width: 44px; height: 44px; border-radius: var(--radius-round);
+    background: var(--papel); color: var(--marca-forte);
+    border: var(--border-size-1) solid var(--linha); box-shadow: var(--shadow-2);
+    font-size: var(--font-size-4); line-height: 1; cursor: pointer;
+  }
+  .carrossel-seta:hover { border-color: var(--marca); }
+  .carrossel-seta[disabled] { opacity: .35; cursor: default; }
+  .carrossel-seta.antes  { left: calc(var(--size-5) * -1); }
+  .carrossel-seta.depois { right: calc(var(--size-5) * -1); }
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  .seg-card { flex-basis: calc((100% - var(--size-3)) / 2); }
 }
 
 /* a linha de preco logo abaixo dos CTAs — o visitante nao precisa rolar ate o fim */
@@ -411,7 +468,7 @@ details.acordeao table { margin-top: 0; }
       },
       "datePublished": "2026-08-16",
       "dateModified": "2026-08-20",
-      "description": "Agendamento online para quem trabalha com hora marcada: o cliente escolhe o serviço, o profissional e o horário disponível, e o agendamento cai direto na agenda do negócio. Barbearias, salões, manicures, estética, massagem, tatuagem, consultórios e outros serviços com horário marcado."
+      "description": "Agendamento online para quem trabalha com hora marcada: o cliente escolhe o serviço, o profissional e o horário disponível, e o agendamento cai direto na agenda do negócio. Barbearias, salões e cabeleireiros, manicures e nail designers, lash designers, maquiadoras, estética, depilação, tatuagem, massagem, podologia, fisioterapia, personal trainers, dentistas, médicos, psicólogos, pet shops, professores particulares e lava-jatos."
     },
     {
       "@type": "FAQPage",
@@ -523,21 +580,10 @@ details.acordeao table { margin-top: 0; }
                 <strong>R$ 49,90/mês</strong> • profissionais ilimitados • sem fidelidade •
                 sem cartão
             </p>
-
-            <ul class="segmentos-heroi">
-                <li>Barbearias</li>
-                <li>Salões</li>
-                <li>Manicures</li>
-                <li>Estética</li>
-                <li>Massagem</li>
-                <li>Tatuagem</li>
-                <li>Consultórios</li>
-                <li>Outros serviços com hora marcada</li>
-            </ul>
         </div>
 
         <div>
-            <img src="../img/generico-tela-1.png" width="780" height="1688"
+            <img src="../img/generico-tela-1.png" width="780" height="1808"
                  fetchpriority="high" decoding="async"
                  alt="Tela do agendamento no celular: o cliente escolhe o serviço e o profissional, e já vê a duração de 90 minutos e o preço de R$ 180,00">
         </div>
@@ -546,10 +592,17 @@ details.acordeao table { margin-top: 0; }
 
 <!-- 2. DEMONSTRAÇÃO --------------------------------------------------------
      Mesma seção que a home ganhou em 19/08, montada com as telas GENÉRICAS
-     (generico-tela-1..4): fundo azul-petróleo, ícone de relógio, "MEU NEGOCIO",
-     "Atendimento completo" e "Ana". Nenhuma imagem de barbearia aqui, de
-     propósito — a página inteira deixa de funcionar se a primeira demonstração
-     fizer o produto parecer só de barbeiro.
+     (generico-tela-1..4): ícone de relógio, "MEU NEGÓCIO", "Atendimento completo"
+     e "Ana Martins". Nenhuma imagem de barbearia aqui, de propósito — a página
+     inteira deixa de funcionar se a primeira demonstração fizer o produto parecer
+     só de barbeiro.
+     20/08/2026: as quatro deixaram de ser MOCKUP de tema claro e passaram a ser
+     PRINT REAL da instância genérica local, tiradas pelo
+     Instagram/video/print_generico_cliente.js. Motivo do Rafael: a página estava
+     misturando padrão de imagem — as telas do painel já eram print escuro e estas
+     eram mockup claro com "LOGO" no lugar da marca, enquanto a página pública de
+     verdade é escura. É a T164 outra vez, na outra ponta do funil. As alturas
+     mudaram junto (cada passo tem a sua) e por isso não são mais 1688 iguais.
      O lado do negócio está em cartões de texto, sem print: não existe print real
      da tela de agenda hoje, e por decisão do Rafael (19/08) não entra mockup ao
      lado de print de verdade (T169). -->
@@ -571,22 +624,22 @@ details.acordeao table { margin-top: 0; }
 
         <div class="telas quatro">
             <figure>
-                <img src="../img/generico-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
+                <img src="../img/generico-tela-1.png" width="780" height="1808" loading="lazy" decoding="async"
                      alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
                 <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
             </figure>
             <figure>
-                <img src="../img/generico-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
+                <img src="../img/generico-tela-2.png" width="780" height="2232" loading="lazy" decoding="async"
                      alt="Passo 2 do agendamento: dias e horários livres, com os já ocupados riscados">
                 <figcaption>2. O horário — só o que está livre</figcaption>
             </figure>
             <figure>
-                <img src="../img/generico-tela-3.png" width="780" height="1688" loading="lazy" decoding="async"
+                <img src="../img/generico-tela-3.png" width="780" height="1584" loading="lazy" decoding="async"
                      alt="Passo 3 do agendamento: campos de nome e celular do cliente">
                 <figcaption>3. Nome e celular</figcaption>
             </figure>
             <figure>
-                <img src="../img/generico-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
+                <img src="../img/generico-tela-4.png" width="780" height="2020" loading="lazy" decoding="async"
                      alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
                 <figcaption>4. Confirma</figcaption>
             </figure>
@@ -751,7 +804,7 @@ details.acordeao table { margin-top: 0; }
                e a resposta vem olhando os números do seu negócio. Do tipo <em>"quais dias
                e horários não se pagam?"</em>, <em>"que mensagem eu mando para quem deixou
                de vir?"</em> ou <em>"monte um plano de 30 dias para eu faturar mais usando
-               só os clientes que já são meus"</em>. Está incluído no plano.
+               só os clientes que já são meus"</em>.
                <strong>É a partir do segundo mês</strong> porque antes disso não existe
                histórico suficiente para a resposta valer alguma coisa.</p>
         </div>
@@ -763,83 +816,191 @@ details.acordeao table { margin-top: 0; }
 </section>
 
 <!-- 5. SEGMENTOS -----------------------------------------------------------
-     A tabela é a mesma de antes, com dois ajustes de 20/08/2026: o título deixou
-     de ser "Quem usa a Agenda Global" e a última linha deixou de dizer "qualquer
-     outro atendimento". Motivo do Rafael: prometer "qualquer negócio" enfraquece
-     a promessa em vez de ampliá-la. Exemplo é exemplo — a lista não é fechada,
-     mas também não é universal. -->
+     Era uma tabela de 9 linhas com Segmento / Serviço típico / Duração / Página.
+     Virou carrossel de 18 fotos em 20/08/2026, a pedido do Rafael, com a
+     /segmentos/ do agende-me.com como referência. Duas razões, e as duas são
+     dele: nome de segmento em texto não diz "isto é para mim" tão rápido quanto
+     a foto da atividade; e a lista de segmentos que a página atendia era menor
+     do que a que o concorrente mostra.
+     A TABELA NÃO FOI JOGADA FORA — o serviço típico e a duração de cada linha
+     desceram para dentro do cartão, que é onde eles continuam respondendo
+     "quanto tempo dura o meu?". Os três links de página interna (barbearia,
+     manicure, estética) também.
+     São 18 e não os 17 do agende-me: tatuagem e piercing já era segmento desta
+     página antes, e sair dela para copiar a lista do outro seria perder alcance.
+     As fotos são do Pexels (licença livre, uso comercial), baixadas e cortadas
+     para 4:3 pelo LandingPage/baixar_fotos_segmentos.ps1, que guarda o autor de
+     cada uma em img/segmentos/creditos.json. Conferidas uma a uma: as que não
+     mostravam a atividade de relance, ou traziam letreiro estrangeiro legível,
+     foram trocadas — o número da candidata escolhida está na tabela do script,
+     para rodar de novo devolver as mesmas fotos. -->
 <section class="alt">
     <div class="wrap">
-        <h2>Feito para negócios que trabalham com hora marcada.</h2>
+        <h2>Feito para quem trabalha com horário marcado.</h2>
 
         <p>É a mesma agenda em todos eles. Muda o que você escreve nos campos, não o
            sistema — estes são exemplos, não a lista fechada:</p>
 
-        <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
-        <div class="rolagem">
-            <table>
-                <tr>
-                    <th>Segmento</th>
-                    <th>Um serviço típico</th>
-                    <th>Duração</th>
-                    <th class="nosso">Página com detalhes</th>
-                </tr>
-                <tr>
-                    <td>Barbearias</td>
-                    <td>Corte + Barba</td>
-                    <td>50 min</td>
-                    <td class="nosso"><a href="../">página inicial</a></td>
-                </tr>
-                <tr>
-                    <td>Salões de beleza e cabeleireiros</td>
-                    <td>Escova + hidratação</td>
-                    <td>90 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Manicures e nail designers</td>
-                    <td>Alongamento em gel</td>
-                    <td>2h a 3h</td>
-                    <td class="nosso"><a href="../manicure/">versão para manicure</a></td>
-                </tr>
-                <tr>
-                    <td>Estética</td>
-                    <td>Limpeza de pele profunda</td>
-                    <td>60 min</td>
-                    <td class="nosso"><a href="../clinica-estetica/">versão para estética</a></td>
-                </tr>
-                <tr>
-                    <td>Massagem e quiropraxia</td>
-                    <td>Massagem relaxante</td>
-                    <td>60 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Tatuagem e piercing</td>
-                    <td>Sessão fechada</td>
-                    <td>2h a 4h</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Consultórios odontológicos</td>
-                    <td>Avaliação / limpeza</td>
-                    <td>40 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Consultórios médicos</td>
-                    <td>Consulta de retorno</td>
-                    <td>30 min</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-                <tr>
-                    <td>Outros serviços profissionais com horário marcado</td>
-                    <td>o seu</td>
-                    <td>o seu</td>
-                    <td class="nosso">chame no WhatsApp e a gente monta</td>
-                </tr>
-            </table>
+        <div class="carrossel">
+            <button class="carrossel-seta antes" type="button" aria-label="Ver segmentos anteriores">&lsaquo;</button>
+
+            <ul class="carrossel-trilho" tabindex="0" aria-label="Segmentos atendidos">
+            <li class="seg-card">
+                <img src="../img/segmentos/barbearia.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Barbeiro passando a máquina no cabelo de um cliente sentado na cadeira">
+                <div class="seg-texto">
+                    <h3>Barbearias</h3>
+                    <p>Corte + barba · 50 min</p>
+                    <a href="../">página da barbearia</a>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/salao.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Cabeleireira lavando o cabelo de uma cliente na cuba do salão">
+                <div class="seg-texto">
+                    <h3>Salões e cabeleireiros</h3>
+                    <p>Escova + hidratação · 90 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/manicure.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Manicure trabalhando nas unhas de uma cliente, com vidros de esmalte na mesa">
+                <div class="seg-texto">
+                    <h3>Manicures e nail designers</h3>
+                    <p>Alongamento em gel · 2h a 3h</p>
+                    <a href="../manicure/">versão para manicure</a>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/cilios.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Profissional aplicando extensão de cílios com pinça, com a cliente de olhos fechados">
+                <div class="seg-texto">
+                    <h3>Lash designers</h3>
+                    <p>Extensão de cílios · 2h</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/maquiagem.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Maquiadora aplicando sombra na cliente segurando a paleta de cores">
+                <div class="seg-texto">
+                    <h3>Maquiadoras</h3>
+                    <p>Maquiagem social · 60 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/estetica.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Esteticista aplicando máscara no rosto de uma cliente deitada na maca">
+                <div class="seg-texto">
+                    <h3>Estética</h3>
+                    <p>Limpeza de pele profunda · 60 min</p>
+                    <a href="../clinica-estetica/">versão para estética</a>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/depilacao.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Aplicação de faixa de cera na perna de uma cliente">
+                <div class="seg-texto">
+                    <h3>Depilação</h3>
+                    <p>Depilação com cera · 40 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/tatuagem.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Tatuador com luvas trabalhando com a máquina na pele do cliente">
+                <div class="seg-texto">
+                    <h3>Tatuagem e piercing</h3>
+                    <p>Sessão fechada · 2h a 4h</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/massagem.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Massagista trabalhando as costas de um cliente deitado na maca">
+                <div class="seg-texto">
+                    <h3>Massagem e quiropraxia</h3>
+                    <p>Massagem relaxante · 60 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/podologia.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Podóloga com luvas e máscara cuidando do pé de um paciente na cadeira">
+                <div class="seg-texto">
+                    <h3>Podologia</h3>
+                    <p>Consulta podológica · 50 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/fisioterapia.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Fisioterapeuta apoiando um paciente com prótese durante um exercício">
+                <div class="seg-texto">
+                    <h3>Fisioterapia</h3>
+                    <p>Sessão de fisioterapia · 50 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/personal.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Personal trainer acompanhando uma aluna num exercício de equilíbrio na academia">
+                <div class="seg-texto">
+                    <h3>Personal trainers</h3>
+                    <p>Treino acompanhado · 60 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/dentista.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Dentista atendendo um paciente na cadeira, sob o foco de luz">
+                <div class="seg-texto">
+                    <h3>Consultórios odontológicos</h3>
+                    <p>Avaliação / limpeza · 40 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/medico.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Médica com estetoscópio atendendo um paciente na mesa do consultório">
+                <div class="seg-texto">
+                    <h3>Consultórios médicos</h3>
+                    <p>Consulta de retorno · 30 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/psicologo.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Psicóloga com bloco de anotações durante uma sessão com um paciente no divã">
+                <div class="seg-texto">
+                    <h3>Psicólogos</h3>
+                    <p>Sessão de terapia · 50 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/petshop.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Cachorro sobre a mesa de tosa de um pet shop, ao lado dos produtos de banho">
+                <div class="seg-texto">
+                    <h3>Pet shops</h3>
+                    <p>Banho e tosa · 90 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/professor.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Professora acompanhando uma aluna estudando na mesa, com livros ao fundo">
+                <div class="seg-texto">
+                    <h3>Professores particulares</h3>
+                    <p>Aula particular · 60 min</p>
+                </div>
+            </li>
+            <li class="seg-card">
+                <img src="../img/segmentos/lavajato.jpg" width="800" height="600" loading="lazy"
+                     decoding="async" alt="Carro passando pelo túnel de lavagem automática, entre os rolos">
+                <div class="seg-texto">
+                    <h3>Lava-jatos</h3>
+                    <p>Lavagem completa · 60 min</p>
+                </div>
+            </li>
+            </ul>
+
+            <button class="carrossel-seta depois" type="button" aria-label="Ver mais segmentos">&rsaquo;</button>
         </div>
+
+        <p><strong>Não achou o seu?</strong> O app não conhece ramo — ele conhece um
+           serviço, quanto tempo leva, quanto custa e quem sabe fazer. Se o seu
+           atendimento tem hora marcada, ele serve. Chame no WhatsApp e a gente monta
+           com os seus serviços.</p>
 
         <div class="card">
             <h3>Onde ele <em>não</em> serve, para você não perder tempo</h3>
@@ -889,13 +1050,13 @@ details.acordeao table { margin-top: 0; }
 
         <div class="telas">
             <figure>
-                <img src="../img/servicos-lista.png" width="780" height="1688" loading="lazy" decoding="async"
+                <img src="../img/generico-servicos-lista.png" width="780" height="1090" loading="lazy" decoding="async"
                      alt="Lista de serviços cadastrados no painel, cada um com nome, duração e preço, e um botão de adicionar serviço">
                 <figcaption>A lista do que você faz</figcaption>
             </figure>
             <figure>
-                <img src="../img/servicos-form.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Formulário de um serviço aberto, com nome, duração, preço, categoria, cor, quem atende e visibilidade">
+                <img src="../img/generico-servicos-form.png" width="780" height="910" loading="lazy" decoding="async"
+                     alt="Formulário de um serviço aberto no painel, com nome, duração em minutos, valor e moeda">
                 <figcaption>Um serviço aberto para editar</figcaption>
             </figure>
         </div>
@@ -1082,7 +1243,7 @@ details.acordeao table { margin-top: 0; }
             </div>
 
             <div class="print">
-                <img src="../img/painel.png" width="780" height="1688" loading="lazy" decoding="async"
+                <img src="../img/generico-contatos.png" width="780" height="1552" loading="lazy" decoding="async"
                      alt="Painel no celular: lista de quem tem horário marcado no dia, com hora, cliente, serviço, profissional, telefone e botões de WhatsApp">
             </div>
         </div>
@@ -1241,6 +1402,49 @@ details.acordeao table { margin-top: 0; }
            <a href="../diferencial-dos-concorrentes/">diferencial dos concorrentes</a></p>
     </div>
 </footer>
+
+<!-- Setas do carrossel de segmentos ----------------------------------------
+     Unico JavaScript da pagina, e de proposito: e' um confort, nao o mecanismo.
+     Quem estiver sem JS continua arrastando o carrossel com o dedo ou com a barra
+     de rolagem, que e' como ele funciona no celular de qualquer jeito — as setas
+     so' aparecem a partir de 900px.
+     Rola por um cartao mais o vao, medido do proprio DOM: numero cravado aqui
+     desalinharia com o CSS na primeira vez que a largura do cartao mudasse. -->
+<script>
+(function () {
+    var trilho = document.querySelector('.carrossel-trilho');
+    if (!trilho) return;
+
+    var antes  = document.querySelector('.carrossel-seta.antes');
+    var depois = document.querySelector('.carrossel-seta.depois');
+    if (!antes || !depois) return;
+
+    function passo() {
+        var card = trilho.querySelector('.seg-card');
+        if (!card) return trilho.clientWidth;
+        var vao = parseFloat(getComputedStyle(trilho).columnGap || '0') || 0;
+        return card.getBoundingClientRect().width + vao;
+    }
+
+    function atualizar() {
+        // 2px de folga nas duas pontas: a soma de larguras fracionarias raramente
+        // fecha exata, e sem ela a seta da direita nunca desliga no fim.
+        // No comeco a folga inclui o padding do trilho: o primeiro cartao encosta
+        // em scrollLeft = padding-left (4px hoje), e nao em zero, entao comparar
+        // com zero deixava a seta da esquerda acesa na primeira tela.
+        var recuo = parseFloat(getComputedStyle(trilho).paddingLeft || '0') || 0;
+        var fim = trilho.scrollWidth - trilho.clientWidth - 2;
+        antes.disabled  = trilho.scrollLeft <= recuo + 2;
+        depois.disabled = trilho.scrollLeft >= fim;
+    }
+
+    antes.addEventListener('click',  function () { trilho.scrollLeft -= passo(); });
+    depois.addEventListener('click', function () { trilho.scrollLeft += passo(); });
+    trilho.addEventListener('scroll', atualizar, { passive: true });
+    window.addEventListener('resize', atualizar);
+    atualizar();
+})();
+</script>
 
 </body>
 </html>

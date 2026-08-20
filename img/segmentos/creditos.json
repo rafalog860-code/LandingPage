@@ -1,0 +1,182 @@
+﻿[
+    {
+        "segmento":  "barbearia",
+        "arquivo":  "barbearia.jpg",
+        "busca":  "barber shop haircut client",
+        "candidata":  0,
+        "autor":  "mostafa meraji",
+        "autor_url":  "https://www.pexels.com/@mostafameraji",
+        "foto_url":  "https://www.pexels.com/photo/man-holds-black-hair-shaver-3037244/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "salao",
+        "arquivo":  "salao.jpg",
+        "busca":  "hairdresser salon washing hair",
+        "candidata":  0,
+        "autor":  "Kampus Production",
+        "autor_url":  "https://www.pexels.com/@kampus",
+        "foto_url":  "https://www.pexels.com/photo/person-washing-the-hair-of-the-elderly-woman-8834043/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "manicure",
+        "arquivo":  "manicure.jpg",
+        "busca":  "manicure nail polish hands",
+        "candidata":  2,
+        "autor":  "Felix Adams",
+        "autor_url":  "https://www.pexels.com/@felix-adams-2546767",
+        "foto_url":  "https://www.pexels.com/photo/person-getting-her-nails-done-5484948/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "cilios",
+        "arquivo":  "cilios.jpg",
+        "busca":  "eyelash extension technician",
+        "candidata":  0,
+        "autor":  "RDNE Stock project",
+        "autor_url":  "https://www.pexels.com/@rdne",
+        "foto_url":  "https://www.pexels.com/photo/close-up-shot-of-a-person-holding-a-tweezer-and-false-eyelashes-7755650/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "maquiagem",
+        "arquivo":  "maquiagem.jpg",
+        "busca":  "makeup artist applying makeup",
+        "candidata":  0,
+        "autor":  "BR1 FDS",
+        "autor_url":  "https://www.pexels.com/@br1-fds-1869698315",
+        "foto_url":  "https://www.pexels.com/photo/woman-applying-makeup-to-another-woman-indoors-28588870/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "estetica",
+        "arquivo":  "estetica.jpg",
+        "busca":  "facial treatment esthetician",
+        "candidata":  0,
+        "autor":  "Denys Mikhalevych",
+        "autor_url":  "https://www.pexels.com/@denys",
+        "foto_url":  "https://www.pexels.com/photo/unrecognizable-beautician-removing-clay-mask-from-woman-face-12115040/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "depilacao",
+        "arquivo":  "depilacao.jpg",
+        "busca":  "waxing hair removal salon",
+        "candidata":  0,
+        "autor":  "Tima Miroshnichenko",
+        "autor_url":  "https://www.pexels.com/@tima-miroshnichenko",
+        "foto_url":  "https://www.pexels.com/photo/person-holding-pink-and-white-textile-6763570/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "massagem",
+        "arquivo":  "massagem.jpg",
+        "busca":  "massage therapist back massage",
+        "candidata":  0,
+        "autor":  "Nothing Ahead",
+        "autor_url":  "https://www.pexels.com/@ian-panelo",
+        "foto_url":  "https://www.pexels.com/photo/professional-massage-therapy-session-outdoors-37719545/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "podologia",
+        "arquivo":  "podologia.jpg",
+        "busca":  "pedicure foot treatment",
+        "candidata":  0,
+        "autor":  "José Antonio Otegui Auzmendi",
+        "autor_url":  "https://www.pexels.com/@jose-antonio-otegui-auzmendi-2150489988",
+        "foto_url":  "https://www.pexels.com/photo/professional-pedicure-session-at-a-salon-34930123/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "fisioterapia",
+        "arquivo":  "fisioterapia.jpg",
+        "busca":  "physical therapy rehabilitation",
+        "candidata":  0,
+        "autor":  "Kampus Production",
+        "autor_url":  "https://www.pexels.com/@kampus",
+        "foto_url":  "https://www.pexels.com/photo/a-woman-guiding-a-man-on-his-physical-therapy-6111585/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "personal",
+        "arquivo":  "personal.jpg",
+        "busca":  "personal trainer gym coaching",
+        "candidata":  0,
+        "autor":  "TSquared Lab",
+        "autor_url":  "https://www.pexels.com/@tsquared-lab-312588937",
+        "foto_url":  "https://www.pexels.com/photo/personal-training-session-with-prowler-sled-in-gym-32830368/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "dentista",
+        "arquivo":  "dentista.jpg",
+        "busca":  "dentist dental clinic patient",
+        "candidata":  0,
+        "autor":  "SHVETS production",
+        "autor_url":  "https://www.pexels.com/@shvets-production",
+        "foto_url":  "https://www.pexels.com/photo/female-dentist-doing-an-examination-on-her-elderly-patient-8413334/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "medico",
+        "arquivo":  "medico.jpg",
+        "busca":  "doctor consultation patient office",
+        "candidata":  0,
+        "autor":  "cottonbro studio",
+        "autor_url":  "https://www.pexels.com/@cottonbro",
+        "foto_url":  "https://www.pexels.com/photo/woman-in-white-suit-with-stethoscope-talking-to-a-person-7579823/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "psicologo",
+        "arquivo":  "psicologo.jpg",
+        "busca":  "therapy session counseling talking",
+        "candidata":  0,
+        "autor":  "RDNE Stock project",
+        "autor_url":  "https://www.pexels.com/@rdne",
+        "foto_url":  "https://www.pexels.com/photo/man-lying-on-a-sofa-and-talking-to-a-psychologist-9064680/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "petshop",
+        "arquivo":  "petshop.jpg",
+        "busca":  "dog grooming pet salon",
+        "candidata":  0,
+        "autor":  "Goochie Poochie Grooming",
+        "autor_url":  "https://www.pexels.com/@goochie-poochie",
+        "foto_url":  "https://www.pexels.com/photo/a-dog-in-a-pet-salon-19145874/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "professor",
+        "arquivo":  "professor.jpg",
+        "busca":  "private tutor teaching student",
+        "candidata":  3,
+        "autor":  "Gustavo Fring",
+        "autor_url":  "https://www.pexels.com/@gustavo-fring",
+        "foto_url":  "https://www.pexels.com/photo/thoughtful-teacher-and-schoolgirl-doing-homework-4173339/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "lavajato",
+        "arquivo":  "lavajato.jpg",
+        "busca":  "car wash washing vehicle",
+        "candidata":  1,
+        "autor":  "Helena Jankovičová Kováčová",
+        "autor_url":  "https://www.pexels.com/@helen1",
+        "foto_url":  "https://www.pexels.com/photo/car-at-a-carwash-10446281/",
+        "baixada":  "2026-08-20"
+    },
+    {
+        "segmento":  "tatuagem",
+        "arquivo":  "tatuagem.jpg",
+        "busca":  "tattoo artist tattooing arm",
+        "candidata":  0,
+        "autor":  "Matheus Andrade",
+        "autor_url":  "https://www.pexels.com/@andrademattheus",
+        "foto_url":  "https://www.pexels.com/photo/a-person-wearing-latex-gloves-tattooing-his-client-14611512/",
+        "baixada":  "2026-08-20"
+    }
+]
