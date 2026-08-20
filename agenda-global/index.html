@@ -316,6 +316,11 @@ footer {
 .carrossel-trilho::-webkit-scrollbar-thumb {
   background: var(--linha); border-radius: var(--radius-round);
 }
+/* Com a rolagem continua ligada a barra fica correndo sozinha e voltando ao
+   inicio a cada volta do laco, o que parece defeito. Ela some, mas so' quando o
+   JavaScript assume: sem ele a barra e' a unica pista de que da' para arrastar. */
+.carrossel-trilho.rodando { scrollbar-width: none; }
+.carrossel-trilho.rodando::-webkit-scrollbar { display: none; }
 
 .seg-card {
   flex: 0 0 78%; scroll-snap-align: start;
@@ -1409,137 +1414,148 @@ details.acordeao table { margin-top: 0; }
     </div>
 </footer>
 
-<!-- Carrossel de segmentos: setas e rotacao automatica ----------------------
+<!-- Carrossel de segmentos: rolagem continua e setas ----------------------
      Unico JavaScript da pagina, e de proposito: e' um confort, nao o mecanismo.
      Sem ele o carrossel continua arrastavel com o dedo e com a barra de rolagem,
      que e' como o celular usa de qualquer jeito.
 
-     NAVEGA POR INDICE DE CARTAO, e nao somando pixels no scrollLeft. A primeira
-     versao somava a largura de um cartao a cada passo e travava perto do fim: com
-     scroll-snap: mandatory o ultimo ponto de encaixe e' o comeco do 18o cartao
-     (3.085px), nao o fim da rolagem (3.318px), entao somar mais um passo pedia uma
-     posicao sem encaixe e o navegador devolvia o carrossel para o mesmo lugar, em
-     silencio. Indo direto ao offsetLeft do cartao, todo destino E' um ponto de
-     encaixe e o snap nunca briga com o script.
+     ROLAGEM CONTINUA, e nao de cartao em cartao. A primeira versao andava um
+     cartao a cada 3,5 segundos e ficava parada no meio; o Rafael viu e pediu
+     "suavemente, sem parar". Agora o trilho anda alguns pixels por quadro, na
+     mesma velocidade o tempo inteiro, e nunca fica parado.
 
-     A ROTACAO ANDA E VOLTA em vez de dar a volta. Voltar do 18o cartao ao 1o com
-     scroll-behavior: smooth atravessa a lista inteira na frente do visitante, o
-     que parece defeito; invertendo o sentido no fim, o movimento nunca da salto.
+     O LACO E' FEITO CLONANDO OS 18 CARTOES. Com a lista duplicada, quando a
+     rolagem passa do fim da primeira copia ela volta exatamente uma copia para
+     tras, e como o que esta na tela naquele instante e' identico, o salto nao
+     aparece. Sem os clones so' haveria duas saidas, e as duas se veem: voltar ao
+     inicio atravessando a lista, ou inverter o sentido e ficar indo e vindo.
+     Os clones levam aria-hidden: para quem usa leitor de tela sao 18 segmentos,
+     nao 36.
 
-     ELA PARA SOZINHA em quatro situacoes, e as quatro tem a mesma razao — conteudo
-     que se mexe embaixo do dedo ou do olho de quem esta lendo e' hostil:
-       . mouse em cima ou foco de teclado dentro do carrossel;
-       . aba em segundo plano (tambem evita queimar bateria a toa);
-       . qualquer toque, arrasto ou clique na seta, com 8 segundos de tregua;
-       . prefers-reduced-motion: reduce, onde ela nem comeca. -->
+     O SCROLL-SNAP E' DESLIGADO quando este script assume. Ele existe no CSS para
+     quem estiver sem JavaScript, onde arrastar com o dedo encaixando cartao a
+     cartao e' melhor; com a rolagem continua ele brigaria a cada quadro, puxando
+     a posicao de volta para o encaixe mais proximo.
+
+     PARA SO' EM TRES CASOS, e nenhum deles e' o visitante parado olhando:
+       . enquanto o dedo ou o mouse esta ARRASTANDO o trilho, senao o arrasto
+         briga com a animacao; volta a andar assim que solta;
+       . aba em segundo plano, que alem de inutil queima bateria;
+       . prefers-reduced-motion: reduce, onde a rolagem nem comeca e o carrossel
+         fica sendo a lista estatica com as setas. -->
 <script>
 (function () {
     var trilho = document.querySelector('.carrossel-trilho');
     if (!trilho) return;
 
-    var area   = document.querySelector('.carrossel');
     var antes  = document.querySelector('.carrossel-seta.antes');
     var depois = document.querySelector('.carrossel-seta.depois');
 
-    function cartoes() {
-        return Array.prototype.slice.call(trilho.querySelectorAll('.seg-card'));
+    function passo() {
+        var card = trilho.querySelector('.seg-card');
+        if (!card) return trilho.clientWidth;
+        var vao = parseFloat(getComputedStyle(trilho).columnGap || '0') || 0;
+        return card.getBoundingClientRect().width + vao;
     }
 
-    // O zero da conta e' o primeiro cartao, e nao a borda do trilho: assim o
-    // padding do trilho nao entra em nenhuma soma.
-    function base() {
-        var c = trilho.querySelector('.seg-card');
-        return c ? c.offsetLeft : 0;
-    }
-
-    // Ultimo cartao que ainda da' para encostar na esquerda. Depois dele a rolagem
-    // acabou, e insistir e' o que travava a versao anterior.
-    function ultimo() {
-        var cs = cartoes(), b = base();
-        var fim = trilho.scrollWidth - trilho.clientWidth;
-        var m = 0;
-        for (var k = 0; k < cs.length; k++) {
-            if (cs[k].offsetLeft - b <= fim + 1) m = k;
-        }
-        return m;
-    }
-
-    // Lido do scrollLeft e nao guardado numa variavel: o visitante tambem arrasta
-    // com o dedo, e ai o indice guardado passaria a mentir.
-    function atual() {
-        var cs = cartoes(), b = base(), x = trilho.scrollLeft;
-        var melhor = 0, dist = Infinity;
-        for (var k = 0; k < cs.length; k++) {
-            var d = Math.abs((cs[k].offsetLeft - b) - x);
-            if (d < dist) { dist = d; melhor = k; }
-        }
-        return melhor;
-    }
-
-    function irPara(k) {
-        var cs = cartoes();
-        if (!cs.length) return;
-        k = Math.max(0, Math.min(k, ultimo()));
-        trilho.scrollLeft = cs[k].offsetLeft - base();
-    }
-
-    function atualizar() {
-        if (!antes || !depois) return;
-        var i = atual();
-        antes.disabled  = i <= 0;
-        depois.disabled = i >= ultimo();
-    }
-
-    if (antes && depois) {
-        antes.addEventListener('click',  function () { pausar(); irPara(atual() - 1); });
-        depois.addEventListener('click', function () { pausar(); irPara(atual() + 1); });
-    }
-    trilho.addEventListener('scroll', atualizar, { passive: true });
-    window.addEventListener('resize', atualizar);
-    atualizar();
-
-    // ---- rotacao automatica -------------------------------------------------
     var lento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (lento && lento.matches) return;
 
-    var INTERVALO = 3500;   // tempo parado em cada cartao
-    var TREGUA    = 8000;   // silencio depois de o visitante mexer
-    var sentido = 1;
-    var relogio = null;
-    var tregua  = null;
-    var travado = false;
-
-    function andar() {
-        if (travado || document.hidden) return;
-        var i = atual(), fim = ultimo();
-        if (fim <= 0) return;
-        if (sentido > 0 && i >= fim) sentido = -1;
-        else if (sentido < 0 && i <= 0) sentido = 1;
-        irPara(i + sentido);
+    // Sem rolagem continua: as setas andam um cartao e desligam nas pontas.
+    if (lento && lento.matches) {
+        if (!antes || !depois) return;
+        var atualizar = function () {
+            var recuo = parseFloat(getComputedStyle(trilho).paddingLeft || '0') || 0;
+            antes.disabled  = trilho.scrollLeft <= recuo + 2;
+            depois.disabled = trilho.scrollLeft >= trilho.scrollWidth - trilho.clientWidth - 2;
+        };
+        antes.addEventListener('click',  function () { trilho.scrollLeft -= passo(); });
+        depois.addEventListener('click', function () { trilho.scrollLeft += passo(); });
+        trilho.addEventListener('scroll', atualizar, { passive: true });
+        window.addEventListener('resize', atualizar);
+        atualizar();
+        return;
     }
 
-    function tocar() { if (!relogio) relogio = setInterval(andar, INTERVALO); }
-    function parar() { if (relogio) { clearInterval(relogio); relogio = null; } }
-
-    function pausar() {
-        travado = true;
-        clearTimeout(tregua);
-        tregua = setTimeout(function () { travado = false; }, TREGUA);
-    }
-
-    trilho.addEventListener('pointerdown', pausar);
-    trilho.addEventListener('touchstart', pausar, { passive: true });
-    trilho.addEventListener('wheel', pausar, { passive: true });
-
-    area.addEventListener('mouseenter', parar);
-    area.addEventListener('mouseleave', tocar);
-    area.addEventListener('focusin', parar);
-    area.addEventListener('focusout', tocar);
-    document.addEventListener('visibilitychange', function () {
-        if (document.hidden) parar(); else tocar();
+    // Clona a lista para o laco nao ter emenda visivel.
+    var originais = Array.prototype.slice.call(trilho.querySelectorAll('.seg-card'));
+    if (originais.length < 2) return;
+    originais.forEach(function (c) {
+        var copia = c.cloneNode(true);
+        copia.setAttribute('aria-hidden', 'true');
+        trilho.appendChild(copia);
     });
 
-    tocar();
+    // O tamanho do laco e' medido no DOM, e nao calculado: e' a distancia entre o
+    // primeiro cartao e o primeiro clone, que ja inclui o vao entre eles. Metade
+    // do scrollWidth daria errado, porque o padding do trilho entra na conta uma
+    // vez so'.
+    function volta() {
+        var cs = trilho.querySelectorAll('.seg-card');
+        return cs[originais.length].offsetLeft - cs[0].offsetLeft;
+    }
+
+    trilho.style.scrollSnapType = 'none';
+    trilho.style.scrollBehavior = 'auto';
+    trilho.classList.add('rodando');
+
+    // Sem pontas, nao ha o que desligar: a lista nao acaba mais.
+    if (antes)  antes.disabled = false;
+    if (depois) depois.disabled = false;
+
+    // Pixels por segundo. Medido: a 26 um cartao leva 9 segundos para atravessar a
+    // propria largura e de relance o carrossel ainda parece parado, que e' o que o
+    // Rafael reclamou. A 40 sao ~6 segundos por cartao e a volta inteira leva 1m47,
+    // devagar o bastante para ler o nome do segmento sem correr atras.
+    var VELOCIDADE = 40;
+    var EMPURRAO   = 6;    // quao rapido o empurrao das setas e' consumido
+
+    var pos = trilho.scrollLeft;
+    var extra = 0;
+    var arrastando = false;
+    var anterior = null;
+
+    function quadro(agora) {
+        if (anterior === null) anterior = agora;
+        // Teto no delta: aba que volta do segundo plano entrega um salto de
+        // varios segundos, e sem o teto o carrossel daria um pulo.
+        var dt = Math.min((agora - anterior) / 1000, 0.05);
+        anterior = agora;
+
+        var laco = volta();
+        if (laco > 0 && !document.hidden) {
+            if (!arrastando) pos += VELOCIDADE * dt;
+
+            if (extra !== 0) {
+                var fatia = extra * Math.min(1, dt * EMPURRAO);
+                pos += fatia;
+                extra -= fatia;
+                if (Math.abs(extra) < 0.5) extra = 0;
+            }
+
+            while (pos >= laco) pos -= laco;
+            while (pos < 0) pos += laco;
+
+            trilho.scrollLeft = pos;
+        }
+        requestAnimationFrame(quadro);
+    }
+    requestAnimationFrame(quadro);
+
+    // As setas nao mexem no scrollLeft direto: elas pedem um empurrao que o mesmo
+    // laco consome. Dois donos da posicao dariam tranco a cada clique.
+    if (antes)  antes.addEventListener('click',  function () { extra -= passo(); });
+    if (depois) depois.addEventListener('click', function () { extra += passo(); });
+
+    // Enquanto arrasta, quem manda e' o dedo.
+    function segurar() { arrastando = true; }
+    function soltar()  { arrastando = false; pos = trilho.scrollLeft; }
+    trilho.addEventListener('pointerdown', segurar);
+    trilho.addEventListener('touchstart', segurar, { passive: true });
+    window.addEventListener('pointerup', soltar);
+    window.addEventListener('touchend', soltar, { passive: true });
+    trilho.addEventListener('scroll', function () {
+        if (arrastando) pos = trilho.scrollLeft;
+    }, { passive: true });
 })();
 </script>
 
