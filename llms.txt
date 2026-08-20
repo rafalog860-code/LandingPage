@@ -8,7 +8,7 @@
 **Nota de honestidade sobre este arquivo:** o padrão `llms.txt` ainda não tem adoção
 oficial confirmada por OpenAI, Anthropic ou Google. Ele está aqui porque custa quase
 nada manter e porque, quando um robô de IA lê a página, um resumo estruturado reduz a
-chance de ele descrever o produto errado. Não é o que faz o site ser citado — isso vem
+chance de ele descrever o produto errado. Não é o que faz o site ser citado: isso vem
 do conteúdo da própria página e das menções fora dela.
 
 ## O que é
@@ -28,15 +28,15 @@ ou mais barbeiros, e que perdem tempo respondendo "tem horário às 15h?" durant
 atendimento.
 
 Desde 16/08/2026 o mesmo produto é oferecido a mais dois segmentos, sem mudança no
-sistema — muda apenas o conteúdo cadastrado (serviços, profissionais, logo e cores):
+sistema. Muda apenas o conteúdo cadastrado (serviços, profissionais, logo e cores):
 manicures, pedicures e nail designers, e clínicas de estética e esteticistas.
 
 ## Preço
 
-- **Essencial — R$ 49,90/mês.** App completo, logo e cor da barbearia, número ilimitado
+- **Essencial: R$ 49,90/mês.** App completo, logo e cor da barbearia, número ilimitado
   de barbeiros (o preço é da barbearia, não por profissional), agendamentos ilimitados,
   instalação e configuração gratuitas, endereço `horariocheio.com.br/suabarbearia`.
-- **Completo — R$ 99,90/mês.** Tudo do Essencial, mais domínio próprio
+- **Completo: R$ 99,90/mês.** Tudo do Essencial, mais domínio próprio
   (`suabarbearia.com.br`) registrado e pago pelo Horário Cheio, montagem de logo e
   cores, e endereço exclusivo.
 - **14 dias grátis** para testar, sem cartão de crédito. Sem fidelidade e sem multa de
@@ -52,7 +52,7 @@ manicures, pedicures e nail designers, e clínicas de estética e esteticistas.
 - Tela "Contatos do dia": lista quem está marcado numa data, com WhatsApp e mensagem
   pronta para avisar em caso de fechamento.
 - Botões de "confirmar presença" e "pedir para remarcar" direto no calendário, que
-  abrem o WhatsApp do barbeiro com a mensagem escrita — o envio é manual, por decisão
+  abrem o WhatsApp do barbeiro com a mensagem escrita. O envio é manual, por decisão
   de projeto: envio automático em massa é o que faz a Meta bloquear números.
 - Tela "Meus horários" para o cliente final consultar e cancelar o próprio agendamento.
 - Cadastro de clientes com histórico, exportável em planilha. A lista pertence à
@@ -65,7 +65,7 @@ pontos estão declarados na própria página em vez de prometidos como "em breve
 
 ## Prova pública
 
-Demo aberta e funcional em `https://horariocheio.com.br/demo` — uma barbearia de
+Demo aberta e funcional em `https://horariocheio.com.br/demo`: uma barbearia de
 exemplo onde qualquer pessoa marca um horário de teste sem cadastro.
 
 ## Contato
@@ -79,7 +79,7 @@ entregue pela internet e atende o Brasil todo.
 
 - [Página principal](https://horariocheio.com.br/): produto, preços, perguntas frequentes
 - [Agenda Global](https://horariocheio.com.br/agenda-global/): a mesma agenda para
-  qualquer atendimento com hora marcada — barbearia, manicure, clínica de estética,
+  qualquer atendimento com hora marcada: barbearia, manicure, clínica de estética,
   cabeleireiro, consultório odontológico, consultório médico, massagem e quiropraxia,
   tatuagem e piercing. Onde o prestador cadastra serviços, duração e preço, o que cada
   campo muda na tela do cliente, e como o agendamento funciona a partir disso. Para
@@ -91,4 +91,4 @@ entregue pela internet e atende o Brasil todo.
 - [Para clínica de estética](https://horariocheio.com.br/clinica-estetica/): agenda por
   profissional e o link no lugar da conversa do Instagram
 - [Demo](https://horariocheio.com.br/demo): agendamento de teste, sem cadastro. É uma
-  barbearia de exemplo — não existe demo de manicure nem de estética hoje
+  barbearia de exemplo. Não existe demo de manicure nem de estética hoje
