@@ -272,6 +272,38 @@ footer {
 @media (min-width: 1000px) {
   .grade { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ---------- planos (19/08/2026) ----------
+   Mesmo bloco de preco da home, montado com as variaveis DESTA pagina - por isso
+   ele fica rosa na manicure, roxo na estetica e dourado no comparativo, sem
+   nenhuma cor cravada aqui dentro.
+   O selo "Mais escolhido" fica no Essencial, e nao no Completo: decisao do Rafael
+   em 19/08/2026. E' o plano que a pagina inteira defende, e destacar o mais caro
+   contradizia o proprio argumento de "o preco e' do negocio, nao por cabeca". */
+.planos { display: grid; gap: var(--size-5); grid-template-columns: 1fr;
+          margin-top: var(--size-6); align-items: start; }
+.plano { position: relative; background: var(--papel);
+         border: var(--border-size-1) solid var(--linha);
+         border-radius: var(--radius-3); padding: var(--size-6);
+         box-shadow: var(--shadow-1); }
+.plano.principal { border: var(--border-size-2) solid var(--marca); }
+.plano .selo { position: absolute; top: calc(-1 * var(--size-3)); left: var(--size-5);
+               background: var(--marca); color: var(--btn-tinta);
+               font-size: var(--font-size-0); font-weight: var(--font-weight-7);
+               padding: 4px 14px; border-radius: var(--radius-round); }
+.plano h3 { color: var(--marca-forte); margin: 0 0 var(--size-1); }
+.plano .valor { font-size: var(--font-size-5); font-weight: var(--font-weight-7);
+                color: var(--marca-forte); line-height: 1; }
+.plano .valor small { font-size: var(--font-size-1); font-weight: var(--font-weight-4);
+                      color: var(--tinta-fraca); }
+.plano .para { color: var(--tinta-fraca); font-size: var(--font-size-1);
+               margin: var(--size-3) 0 0; }
+.plano ul { list-style: none; padding: 0; margin: var(--size-4) 0; }
+.plano li { padding: 5px 0 5px 26px; position: relative; }
+.plano li::before { content: "✓"; color: var(--marca); position: absolute; left: 0;
+                    font-weight: var(--font-weight-7); }
+.plano .btn { width: 100%; }
+@media (min-width: 760px) { .planos { grid-template-columns: 1fr 1fr; } }
 </style>
 <!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
 <script type="application/ld+json">
@@ -486,7 +518,7 @@ footer {
 
         <p class="mini">Preferimos não colocar aqui o preço de concorrente sem fonte: os
            números com nome, valor e data de consulta estão na
-           <a href="../comparar/">página de comparação</a>. A regra do nosso lado é simples
+           <a href="../diferencial-dos-concorrentes/">página com o diferencial dos concorrentes</a>. A regra do nosso lado é simples
            — contratar mais uma esteticista não mexe na mensalidade.</p>
     </div>
 </section>
@@ -660,34 +692,55 @@ footer {
     </div>
 </section>
 
-<!-- PREÇO -------------------------------------------------------------------- -->
-<section>
+<!-- PLANOS (bloco padronizado com a home, 19/08/2026) ------------------------
+     O selo "Mais escolhido" fica no ESSENCIAL, por decisao do Rafael em 19/08/2026.
+     Antes ele estava no Completo, o que contradizia o argumento central da pagina:
+     se o barato ja resolve, destacar o caro so' cria desconfianca. -->
+<section class="alt" id="preco">
     <div class="wrap">
         <h2>Preço</h2>
+        <p>Os dois planos têm o app inteiro. A diferença é o endereço e o quanto fazemos
+           por você.</p>
 
-        <div class="grade" style="grid-template-columns:1fr;max-width:720px;">
-            <div class="card">
-                <h3>Essencial — R$ 49,90/mês</h3>
-                <p>App completo com a marca da clínica no endereço
-                   <strong>horariocheio.com.br/suaclinica</strong>, profissionais e
-                   agendamentos ilimitados, instalação e configuração grátis.</p>
+        <div class="planos">
+            <div class="plano principal">
+                <span class="selo">Mais escolhido</span>
+                <h3>Essencial</h3>
+                <div class="valor">R$ 49,90 <small>/mês</small></div>
+                <p class="para">Para a clínica que quer o link da bio marcando horário, e não abrindo conversa.</p>
+
+                <ul>
+                    <li>O app inteiro, com o seu logo e a sua cor</li>
+                    <li><strong>Quantas profissionais você tiver</strong> — o preço é do clínica</li>
+                    <li>Agendamentos sem limite</li>
+                    <li>Instalação e configuração grátis</li>
+                    <li>Seu endereço: horariocheio.com.br/suaclinica</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20de%20est%C3%A9tica%20e%20quero%20testar%2014%20dias%20o%20plano%20Essencial." target="_blank" rel="noopener">Testar 14 dias grátis</a>
             </div>
 
-            <div class="card">
-                <h3>Completo — R$ 99,90/mês</h3>
-                <p>Tudo do Essencial, mais <strong>domínio próprio</strong>
-                   (suaclinica.com.br) registrado e pago por nós, e montagem de logo e cores.</p>
+            <div class="plano">
+                <h3>Completo</h3>
+                <div class="valor">R$ 99,90 <small>/mês</small></div>
+                <p class="para">Para quem quer endereço próprio na internet, com a cara da casa.</p>
+
+                <ul>
+                    <li>Tudo do Essencial</li>
+                    <li><strong>Domínio próprio</strong> (suaclinica.com.br), registrado e pago por nós</li>
+                    <li>Montagem do logo e das cores</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20de%20est%C3%A9tica%20e%20quero%20saber%20do%20plano%20Completo%2C%20com%20dom%C3%ADnio%20pr%C3%B3prio." target="_blank" rel="noopener">Falar no WhatsApp</a>
             </div>
         </div>
 
-        <p style="margin-top:var(--size-5);"><strong>14 dias grátis, sem cartão.</strong>
-           Sem fidelidade, sem multa de cancelamento. Em contas do seu caixa: a mensalidade
-           custa menos que uma sessão de limpeza de pele.</p>
-
-        <div class="botoes">
-            <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Quero%20os%2014%20dias%20gr%C3%A1tis%20do%20Hor%C3%A1rio%20Cheio%20para%20minha%20cl%C3%ADnica" target="_blank" rel="noopener">Começar os 14 dias grátis</a>
-            <a class="btn btn-vazio" href="../comparar/">Comparar com outros sistemas</a>
-        </div>
+        <p style="margin-top:var(--size-5);"><strong>14 dias grátis para testar, sem cartão.</strong>
+           Sem fidelidade e sem multa para cancelar.</p>
     </div>
 </section>
 
@@ -818,8 +871,8 @@ footer {
            Guarulhos, SP · WhatsApp (11) 93935-7759 ·
            <a href="../">horariocheio.com.br</a> ·
            <a href="../manicure/">versão para manicure</a> ·
-           <a href="../como-funciona/">como funciona por dentro</a> ·
-           <a href="../comparar/">comparação com outros sistemas</a></p>
+           <a href="../agenda-global/">Agenda Global</a> ·
+           <a href="../diferencial-dos-concorrentes/">diferencial dos concorrentes</a></p>
     </div>
 </footer>
 

@@ -34,3 +34,21 @@
 # Nao afeta a demo: o PHP dela ja manda "charset=UTF-8" explicito no header, e o
 # AddDefaultCharset so' vale quando a resposta nao declarou charset nenhum.
 AddDefaultCharset UTF-8
+
+# ---------------------------------------------------------------------------
+# 3. enderecos antigos -> novos (19/08/2026)
+# ---------------------------------------------------------------------------
+# /como-funciona/ virou /agenda-global/ e /comparar/ virou
+# /diferencial-dos-concorrentes/. As duas antigas ja' estavam no sitemap e foram
+# rastreadas; sem o 301 elas viram 404 e o buscador joga fora o que elas
+# acumularam. Com ele, quem chega pelo link velho cai no novo e o valor e'
+# transferido.
+#
+# Os padroes sao ANCORADOS e exatos, pelo mesmo motivo do resto deste arquivo:
+# como a pasta demo/ nao tem .htaccess proprio, tudo aqui vale para ela tambem.
+# "^como-funciona/?$" nao casa com nada dentro de demo/, porque o caminho que a
+# regra ve la' comeca com "demo/".
+<IfModule mod_rewrite.c>
+    RewriteRule ^como-funciona/?$ https://horariocheio.com.br/agenda-global/ [R=301,L]
+    RewriteRule ^comparar/?$ https://horariocheio.com.br/diferencial-dos-concorrentes/ [R=301,L]
+</IfModule>

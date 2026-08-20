@@ -35,10 +35,10 @@ CORPO=$(cat <<JSON
   "keyLocation": "https://$HOST/$CHAVE.txt",
   "urlList": [
     "https://$HOST/",
-    "https://$HOST/como-funciona/",
+    "https://$HOST/agenda-global/",
     "https://$HOST/manicure/",
     "https://$HOST/clinica-estetica/",
-    "https://$HOST/comparar/"
+    "https://$HOST/diferencial-dos-concorrentes/"
   ]
 }
 JSON

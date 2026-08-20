@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Como funciona: cadastrar serviços, preços e receber agendamento — Horário Cheio</title>
-<meta name="description" content="Onde o profissional cadastra os serviços que presta, a duração e o preço, e como o agendamento funciona depois disso. Passo a passo, com as telas reais do painel e do cliente.">
+<title>Agenda Global: barbearia, manicure, estética, dentista e mais — Horário Cheio</title>
+<meta name="description" content="Agenda Global: uma agenda online para qualquer atendimento com hora marcada — barbearia, manicure, clínica de estética, dentista, médico, massagista e tatuador. Você cadastra o que faz, quanto dura e quanto custa; o cliente marca sozinho.">
 <meta name="theme-color" content="#ffffff">
-<link rel="canonical" href="https://horariocheio.com.br/como-funciona/">
+<link rel="canonical" href="https://horariocheio.com.br/agenda-global/">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://horariocheio.com.br/como-funciona/">
-<meta property="og:title" content="Como funciona o Horário Cheio: dos seus serviços ao horário marcado">
+<meta property="og:url" content="https://horariocheio.com.br/agenda-global/">
+<meta property="og:title" content="Agenda Global: a mesma agenda para barbearia, manicure, estética, dentista e mais">
 <meta property="og:description" content="Você cadastra o que faz, quanto tempo leva e quanto custa. O cliente escolhe entre os horários que sobraram de verdade. Veja as telas.">
 <!-- og:image e' a tela de cadastro de servico: e' o assunto da pagina, e evita o
      img/logo.png, que ainda traz a marca antiga "Agenda Barbeiro" (T105). -->
@@ -280,6 +280,93 @@ footer {
 @media (min-width: 1000px) {
   .grade { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ---------- reorganizacao comercial (20/08/2026) ----------
+   Tudo abaixo entrou junto com a nova hierarquia da pagina (heroi -> demonstracao
+   -> beneficios -> gestao -> segmentos -> funcionalidades -> preco -> FAQ -> CTA).
+   Nenhuma regra acima foi alterada: as classes novas convivem com as antigas. */
+.centro { text-align: center; }
+
+/* exemplos de segmento no heroi: discretos de proposito — sao ilustracao, nao menu */
+.segmentos-heroi {
+  display: flex; flex-wrap: wrap; gap: var(--size-2);
+  list-style: none; padding: 0; margin: var(--size-5) 0 0;
+}
+.segmentos-heroi li {
+  font-size: var(--font-size-0); color: var(--tinta-fraca);
+  background: var(--marca-veu); border: var(--border-size-1) solid var(--marca-linha);
+  border-radius: var(--radius-round); padding: 3px 12px; line-height: var(--font-lineheight-3);
+}
+
+/* a linha de preco logo abaixo dos CTAs — o visitante nao precisa rolar ate o fim */
+.heroi-selo {
+  margin: var(--size-4) 0 0; font-size: var(--font-size-1); color: var(--tinta-fraca);
+}
+.heroi-selo strong { color: var(--marca-forte); font-weight: var(--font-weight-7); }
+
+/* rotulo "Cliente" / "Negocio" na demonstracao */
+.lado { margin-top: var(--size-8); }
+.lado .etiqueta {
+  display: inline-block; font-size: var(--font-size-0); letter-spacing: .12em;
+  text-transform: uppercase; font-weight: var(--font-weight-7);
+  color: var(--marca-forte); margin-bottom: var(--size-2);
+}
+.lado h3 { margin-bottom: var(--size-5); }
+
+/* numero dentro do titulo do cartao (o fluxo do lado do negocio) */
+.num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: var(--radius-round); flex: none;
+  background: var(--marca); color: #fff; font-size: var(--font-size-0);
+  font-weight: var(--font-weight-7); font-family: system-ui, sans-serif;
+  margin-right: var(--size-2); vertical-align: 2px;
+}
+
+/* acordeao do conteudo longo (tabela de campos e lista do que some sozinho).
+   A classe existe por dois motivos: (1) segura a rolagem no celular; (2) o
+   gerar_jsonld.py extrai o FAQ com a regex "<details>" SEM atributo, entao um
+   <details class="acordeao"> nao entra no FAQPage por engano. Nao tirar a classe. */
+details.acordeao {
+  border: var(--border-size-1) solid var(--linha); border-bottom: var(--border-size-1) solid var(--linha);
+  border-radius: var(--radius-3); background: var(--papel);
+  padding: var(--size-4) var(--size-5); margin-top: var(--size-5);
+}
+details.acordeao > summary { font-family: Georgia, serif; font-size: var(--font-size-2); }
+details.acordeao[open] > summary { margin-bottom: var(--size-4); }
+details.acordeao p { margin-left: 0; }
+details.acordeao table { margin-top: 0; }
+
+/* ---------- planos (19/08/2026) ----------
+   Mesmo bloco de preco da home, montado com as variaveis DESTA pagina - por isso
+   ele fica rosa na manicure, roxo na estetica e dourado no comparativo, sem
+   nenhuma cor cravada aqui dentro.
+   O selo "Mais escolhido" fica no Essencial, e nao no Completo: decisao do Rafael
+   em 19/08/2026. E' o plano que a pagina inteira defende, e destacar o mais caro
+   contradizia o proprio argumento de "o preco e' do negocio, nao por cabeca". */
+.planos { display: grid; gap: var(--size-5); grid-template-columns: 1fr;
+          margin-top: var(--size-6); align-items: start; }
+.plano { position: relative; background: var(--papel);
+         border: var(--border-size-1) solid var(--linha);
+         border-radius: var(--radius-3); padding: var(--size-6);
+         box-shadow: var(--shadow-1); }
+.plano.principal { border: var(--border-size-2) solid var(--marca); }
+.plano .selo { position: absolute; top: calc(-1 * var(--size-3)); left: var(--size-5);
+               background: var(--marca); color: var(--btn-tinta);
+               font-size: var(--font-size-0); font-weight: var(--font-weight-7);
+               padding: 4px 14px; border-radius: var(--radius-round); }
+.plano h3 { color: var(--marca-forte); margin: 0 0 var(--size-1); }
+.plano .valor { font-size: var(--font-size-5); font-weight: var(--font-weight-7);
+                color: var(--marca-forte); line-height: 1; }
+.plano .valor small { font-size: var(--font-size-1); font-weight: var(--font-weight-4);
+                      color: var(--tinta-fraca); }
+.plano .para { color: var(--tinta-fraca); font-size: var(--font-size-1);
+               margin: var(--size-3) 0 0; }
+.plano ul { list-style: none; padding: 0; margin: var(--size-4) 0; }
+.plano li { padding: 5px 0 5px 26px; position: relative; }
+.plano li::before { content: "✓"; color: var(--marca); position: absolute; left: 0;
+                    font-weight: var(--font-weight-7); }
+.plano .btn { width: 100%; }
+@media (min-width: 760px) { .planos { grid-template-columns: 1fr 1fr; } }
 </style>
 <!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
 <script type="application/ld+json">
@@ -288,9 +375,9 @@ footer {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://horariocheio.com.br/como-funciona/",
-      "url": "https://horariocheio.com.br/como-funciona/",
-      "name": "Como funciona: cadastrar serviços e preços e receber agendamento",
+      "@id": "https://horariocheio.com.br/agenda-global/",
+      "url": "https://horariocheio.com.br/agenda-global/",
+      "name": "Agenda Global: uma agenda para barbearia, manicure, estética, consultório e mais",
       "inLanguage": "pt-BR",
       "isPartOf": {
         "@id": "https://horariocheio.com.br/#site"
@@ -307,7 +394,7 @@ footer {
     },
     {
       "@type": "FAQPage",
-      "@id": "https://horariocheio.com.br/como-funciona/#faq",
+      "@id": "https://horariocheio.com.br/agenda-global/#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -388,6 +475,7 @@ footer {
 <section>
     <div class="wrap heroi">
         <div>
+            <p class="mini" style="text-transform:uppercase;letter-spacing:.12em;margin-bottom:var(--size-2);">Agenda Global</p>
             <h1>Você cadastra o que faz e <span class="cor">quanto custa</span>. O resto o cliente resolve sozinho.</h1>
 
             <p class="chamada">
@@ -668,9 +756,10 @@ footer {
 <!-- SERVE PARA O MEU RAMO ---------------------------------------------------- -->
 <section class="alt">
     <div class="wrap">
-        <h2>Como isso fica no seu ramo</h2>
+        <h2>Quem usa a Agenda Global</h2>
 
-        <p>Os mesmos campos, preenchidos de forma diferente:</p>
+        <p>É a mesma agenda para qualquer atendimento com hora marcada. Muda o que você
+           escreve nos campos, não o sistema:</p>
 
         <p class="dica-rolagem">Arraste a tabela para o lado para ver todas as colunas →</p>
         <div class="rolagem">
@@ -700,7 +789,37 @@ footer {
                     <td class="nosso"><a href="../clinica-estetica/">versão para estética</a></td>
                 </tr>
                 <tr>
-                    <td>Outro atendimento com hora marcada</td>
+                    <td>Cabeleireiro e salão</td>
+                    <td>Escova + hidratação</td>
+                    <td>90 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Consultório odontológico</td>
+                    <td>Avaliação / limpeza</td>
+                    <td>40 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Consultório médico</td>
+                    <td>Consulta de retorno</td>
+                    <td>30 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Massagem e quiropraxia</td>
+                    <td>Massagem relaxante</td>
+                    <td>60 min</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Tatuagem e piercing</td>
+                    <td>Sessão fechada</td>
+                    <td>2h a 4h</td>
+                    <td class="nosso">chame no WhatsApp e a gente monta</td>
+                </tr>
+                <tr>
+                    <td>Qualquer outro atendimento com hora marcada</td>
                     <td>o seu</td>
                     <td>o seu</td>
                     <td class="nosso">chame no WhatsApp e a gente monta</td>
@@ -710,7 +829,8 @@ footer {
 
         <div class="card">
             <h3>Onde ele <em>não</em> serve, para você não perder tempo</h3>
-            <p>Não controla pacote de sessões, não guarda prontuário, ficha de anamnese
+            <p><strong>Para consultório, ele é agenda e só.</strong> Não controla pacote de
+               sessões, não guarda prontuário, ficha de anamnese
                nem qualquer informação de saúde, não cobra sinal nem processa pagamento,
                não calcula comissão e não dispara lembrete sozinho. Se o centro da sua
                operação é uma dessas, o app resolve só a parte da agenda — e é melhor
@@ -778,6 +898,58 @@ footer {
     </div>
 </section>
 
+<!-- PLANOS (bloco padronizado com a home, 19/08/2026) ------------------------
+     O selo "Mais escolhido" fica no ESSENCIAL, por decisao do Rafael em 19/08/2026.
+     Antes ele estava no Completo, o que contradizia o argumento central da pagina:
+     se o barato ja resolve, destacar o caro so' cria desconfianca. -->
+<section class="alt" id="preco">
+    <div class="wrap">
+        <h2>Preço</h2>
+        <p>Os dois planos têm o app inteiro. A diferença é o endereço e o quanto fazemos
+           por você.</p>
+
+        <div class="planos">
+            <div class="plano principal">
+                <span class="selo">Mais escolhido</span>
+                <h3>Essencial</h3>
+                <div class="valor">R$ 49,90 <small>/mês</small></div>
+                <p class="para">Para quem quer o cadastro pronto e a agenda recebendo horário ainda esta semana.</p>
+
+                <ul>
+                    <li>O app inteiro, com o seu logo e a sua cor</li>
+                    <li><strong>Quantos profissionais você tiver</strong> — o preço é do negócio</li>
+                    <li>Agendamentos sem limite</li>
+                    <li>Instalação e configuração grátis</li>
+                    <li>Seu endereço: horariocheio.com.br/seunegocio</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20o%20plano%20Essencial." target="_blank" rel="noopener">Testar 14 dias grátis</a>
+            </div>
+
+            <div class="plano">
+                <h3>Completo</h3>
+                <div class="valor">R$ 99,90 <small>/mês</small></div>
+                <p class="para">Para quem quer endereço próprio na internet, com a cara da casa.</p>
+
+                <ul>
+                    <li>Tudo do Essencial</li>
+                    <li><strong>Domínio próprio</strong> (seunegocio.com.br), registrado e pago por nós</li>
+                    <li>Montagem do logo e das cores</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20saber%20do%20plano%20Completo%2C%20com%20dom%C3%ADnio%20pr%C3%B3prio." target="_blank" rel="noopener">Falar no WhatsApp</a>
+            </div>
+        </div>
+
+        <p style="margin-top:var(--size-5);"><strong>14 dias grátis para testar, sem cartão.</strong>
+           Sem fidelidade e sem multa para cancelar.</p>
+    </div>
+</section>
+
 <!-- CHAMADA FINAL ------------------------------------------------------------ -->
 <section class="veu">
     <div class="wrap">
@@ -787,7 +959,7 @@ footer {
            antes de decidir qualquer coisa. Teste grátis de 14 dias, sem cartão.</p>
         <div class="botoes">
             <a class="btn" href="https://wa.me/5511939357759?text=Oi!%20Vi%20a%20p%C3%A1gina%20de%20como%20funciona%20e%20quero%20ver%20com%20a%20minha%20marca" target="_blank" rel="noopener">Falar no WhatsApp</a>
-            <a class="btn btn-vazio" href="../comparar/">Comparar com outros sistemas</a>
+            <a class="btn btn-vazio" href="../diferencial-dos-concorrentes/">Ver o diferencial dos concorrentes</a>
         </div>
     </div>
 </section>
@@ -802,7 +974,7 @@ footer {
            <a href="../">horariocheio.com.br</a> ·
            <a href="../manicure/">manicure</a> ·
            <a href="../clinica-estetica/">clínica de estética</a> ·
-           <a href="../comparar/">comparação</a></p>
+           <a href="../diferencial-dos-concorrentes/">diferencial dos concorrentes</a></p>
     </div>
 </footer>
 

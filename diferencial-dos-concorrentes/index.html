@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AppBarber, Booksy ou Horário Cheio? Comparação de preços 2026</title>
+<title>Diferencial dos concorrentes: AppBarber, Booksy ou Horário Cheio — preços 2026</title>
 <meta name="description" content="Quanto custa cada sistema de agendamento para barbearia em 2026: AppBarber cobra por profissional, Booksy é marketplace, Horário Cheio cobra por barbearia. Preços com fonte e data.">
 <meta name="theme-color" content="#ffffff">
-<link rel="canonical" href="https://horariocheio.com.br/comparar/">
+<link rel="canonical" href="https://horariocheio.com.br/diferencial-dos-concorrentes/">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://horariocheio.com.br/comparar/">
-<meta property="og:title" content="AppBarber, Booksy ou Horário Cheio? Comparação de preços">
+<meta property="og:url" content="https://horariocheio.com.br/diferencial-dos-concorrentes/">
+<meta property="og:title" content="Diferencial dos concorrentes: AppBarber, Booksy ou Horário Cheio">
 <meta property="og:description" content="Com 3 barbeiros, o AppBarber sai a R$ 219,90/mês. Aqui o preço é da barbearia, não do barbeiro. Números com fonte e data.">
 <!-- og:image aponta para a tela do app, e NAO para img/logo.png: aquele arquivo ainda
      diz "AGENDA BARBEIRO", o nome aposentado em 12/08 — ou seja, o card do WhatsApp
@@ -224,6 +224,38 @@ footer {
 @media (min-width: 1000px) {
   .grade { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* ---------- planos (19/08/2026) ----------
+   Mesmo bloco de preco da home, montado com as variaveis DESTA pagina - por isso
+   ele fica rosa na manicure, roxo na estetica e dourado no comparativo, sem
+   nenhuma cor cravada aqui dentro.
+   O selo "Mais escolhido" fica no Essencial, e nao no Completo: decisao do Rafael
+   em 19/08/2026. E' o plano que a pagina inteira defende, e destacar o mais caro
+   contradizia o proprio argumento de "o preco e' do negocio, nao por cabeca". */
+.planos { display: grid; gap: var(--size-5); grid-template-columns: 1fr;
+          margin-top: var(--size-6); align-items: start; }
+.plano { position: relative; background: var(--papel);
+         border: var(--border-size-1) solid var(--linha);
+         border-radius: var(--radius-3); padding: var(--size-6);
+         box-shadow: var(--shadow-1); }
+.plano.principal { border: var(--border-size-2) solid var(--marca); }
+.plano .selo { position: absolute; top: calc(-1 * var(--size-3)); left: var(--size-5);
+               background: var(--marca); color: var(--btn-tinta);
+               font-size: var(--font-size-0); font-weight: var(--font-weight-7);
+               padding: 4px 14px; border-radius: var(--radius-round); }
+.plano h3 { color: var(--marca-forte); margin: 0 0 var(--size-1); }
+.plano .valor { font-size: var(--font-size-5); font-weight: var(--font-weight-7);
+                color: var(--marca-forte); line-height: 1; }
+.plano .valor small { font-size: var(--font-size-1); font-weight: var(--font-weight-4);
+                      color: var(--tinta-fraca); }
+.plano .para { color: var(--tinta-fraca); font-size: var(--font-size-1);
+               margin: var(--size-3) 0 0; }
+.plano ul { list-style: none; padding: 0; margin: var(--size-4) 0; }
+.plano li { padding: 5px 0 5px 26px; position: relative; }
+.plano li::before { content: "✓"; color: var(--marca); position: absolute; left: 0;
+                    font-weight: var(--font-weight-7); }
+.plano .btn { width: 100%; }
+@media (min-width: 760px) { .planos { grid-template-columns: 1fr 1fr; } }
 </style>
 <!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
 <script type="application/ld+json">
@@ -232,9 +264,9 @@ footer {
   "@graph": [
     {
       "@type": "WebPage",
-      "@id": "https://horariocheio.com.br/comparar/",
-      "url": "https://horariocheio.com.br/comparar/",
-      "name": "AppBarber, Booksy ou Horário Cheio: comparação de preços",
+      "@id": "https://horariocheio.com.br/diferencial-dos-concorrentes/",
+      "url": "https://horariocheio.com.br/diferencial-dos-concorrentes/",
+      "name": "Diferencial dos concorrentes: AppBarber, Booksy ou Horário Cheio",
       "inLanguage": "pt-BR",
       "isPartOf": {
         "@id": "https://horariocheio.com.br/#site"
@@ -251,7 +283,7 @@ footer {
     },
     {
       "@type": "FAQPage",
-      "@id": "https://horariocheio.com.br/comparar/#faq",
+      "@id": "https://horariocheio.com.br/diferencial-dos-concorrentes/#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -315,7 +347,7 @@ footer {
 <!-- ABERTURA ---------------------------------------------------------------- -->
 <section>
     <div class="wrap">
-        <h1>AppBarber, Booksy ou Horário Cheio: <span class="cor">o que muda no preço</span></h1>
+        <h1>Diferencial dos concorrentes: <span class="cor">AppBarber, Booksy ou Horário Cheio</span></h1>
 
         <p class="sub" style="font-size:var(--font-size-3);">
             Somos parte interessada nesta comparação — o Horário Cheio é nosso. Por isso todo
@@ -376,6 +408,58 @@ footer {
            site brasileiro informa a partir de R$ 99/mês e o valor final passa por contato
            comercial. Por isso as duas células dizem “sob consulta” — não sabemos, e não
            vamos inventar número de concorrente.</p>
+    </div>
+</section>
+
+<!-- PLANOS (bloco padronizado com a home, 19/08/2026) ------------------------
+     O selo "Mais escolhido" fica no ESSENCIAL, por decisao do Rafael em 19/08/2026.
+     Antes ele estava no Completo, o que contradizia o argumento central da pagina:
+     se o barato ja resolve, destacar o caro so' cria desconfianca. -->
+<section class="alt" id="preco">
+    <div class="wrap">
+        <h2>Preço</h2>
+        <p>Os dois planos têm o app inteiro. A diferença é o endereço e o quanto fazemos
+           por você.</p>
+
+        <div class="planos">
+            <div class="plano principal">
+                <span class="selo">Mais escolhido</span>
+                <h3>Essencial</h3>
+                <div class="valor">R$ 49,90 <small>/mês</small></div>
+                <p class="para">Para quem comparou os preços e quer testar antes de decidir.</p>
+
+                <ul>
+                    <li>O app inteiro, com o seu logo e a sua cor</li>
+                    <li><strong>Quantos profissionais você tiver</strong> — o preço é do negócio</li>
+                    <li>Agendamentos sem limite</li>
+                    <li>Instalação e configuração grátis</li>
+                    <li>Seu endereço: horariocheio.com.br/seunegocio</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20compara%C3%A7%C3%A3o%20de%20pre%C3%A7os%20e%20quero%20testar%2014%20dias%20o%20plano%20Essencial." target="_blank" rel="noopener">Testar 14 dias grátis</a>
+            </div>
+
+            <div class="plano">
+                <h3>Completo</h3>
+                <div class="valor">R$ 99,90 <small>/mês</small></div>
+                <p class="para">Para quem quer endereço próprio na internet, com a cara da casa.</p>
+
+                <ul>
+                    <li>Tudo do Essencial</li>
+                    <li><strong>Domínio próprio</strong> (seunegocio.com.br), registrado e pago por nós</li>
+                    <li>Montagem do logo e das cores</li>
+                    <li><strong>14 dias grátis</strong> para testar, sem cartão</li>
+                    <li>Sem fidelidade</li>
+                </ul>
+
+                <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20compara%C3%A7%C3%A3o%20de%20pre%C3%A7os%20e%20quero%20saber%20do%20plano%20Completo%2C%20com%20dom%C3%ADnio%20pr%C3%B3prio." target="_blank" rel="noopener">Falar no WhatsApp</a>
+            </div>
+        </div>
+
+        <p style="margin-top:var(--size-5);"><strong>14 dias grátis para testar, sem cartão.</strong>
+           Sem fidelidade e sem multa para cancelar.</p>
     </div>
 </section>
 
@@ -576,7 +660,7 @@ footer {
            <a href="../">horariocheio.com.br</a> ·
            <a href="../manicure/">versão para manicure</a> ·
            <a href="../clinica-estetica/">versão para clínica de estética</a> ·
-           <a href="../como-funciona/">como funciona por dentro</a></p>
+           <a href="../agenda-global/">Agenda Global</a></p>
     </div>
 </footer>
 

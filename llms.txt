@@ -78,11 +78,14 @@ entregue pela internet e atende o Brasil todo.
 ## Páginas
 
 - [Página principal](https://horariocheio.com.br/): produto, preços, perguntas frequentes
-- [Como funciona](https://horariocheio.com.br/como-funciona/): passo a passo neutro de
-  segmento — onde o prestador cadastra serviços, duração e preço, o que cada campo muda
-  na tela do cliente, e como o agendamento funciona a partir disso
-- [Comparação de preços](https://horariocheio.com.br/comparar/): AppBarber, Booksy e
-  Horário Cheio lado a lado, com fonte e data de consulta
+- [Agenda Global](https://horariocheio.com.br/agenda-global/): a mesma agenda para
+  qualquer atendimento com hora marcada — barbearia, manicure, clínica de estética,
+  cabeleireiro, consultório odontológico, consultório médico, massagem e quiropraxia,
+  tatuagem e piercing. Onde o prestador cadastra serviços, duração e preço, o que cada
+  campo muda na tela do cliente, e como o agendamento funciona a partir disso. Para
+  consultório é agenda e só: não guarda prontuário nem informação de saúde
+- [Diferencial dos concorrentes](https://horariocheio.com.br/diferencial-dos-concorrentes/): AppBarber,
+  Booksy e Horário Cheio lado a lado, com fonte e data de consulta
 - [Para manicure e nail designer](https://horariocheio.com.br/manicure/): duração real por
   serviço, do alongamento à manutenção
 - [Para clínica de estética](https://horariocheio.com.br/clinica-estetica/): agenda por

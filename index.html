@@ -79,6 +79,13 @@
     .hero-grid { display: grid; gap: 36px; align-items: center; }
     .hero h1 span { color: var(--ouro); }
     .hero .lead { font-size: 1.15rem; color: var(--texto-fraco); }
+    /* Segunda linha do titulo (19/08/2026). O white-label tinha saido do heroi na
+       reorganizacao e o Rafael pediu de volta: e' o diferencial que ja estava sendo
+       medido. Fica FORA do H1, que agora vende a consequencia — e em serifada, para
+       ler como continuacao do titulo, e nao como mais um paragrafo. */
+    .hero-marca { font-family: Georgia, "Times New Roman", serif; font-size: 1.25rem;
+                  color: var(--texto); line-height: 1.3; margin: 0 0 .7em; }
+    @media (min-width: 800px) { .hero-marca { font-size: 1.5rem; } }
     /* height:auto e' OBRIGATORIO aqui desde que as imagens ganharam width/height no
        HTML (16/08/2026). Sem ele a largura vira 100% e a altura fica presa no 1688
        do atributo, esticando a imagem — foi exatamente o que quebrou no ar. Com
@@ -86,6 +93,15 @@
        (que e' o ganho de CLS) e calcula a altura pela proporcao. */
     .hero img { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;
                 border-radius: 18px; border: 1px solid var(--borda); }
+
+    /* Selo de preco do heroi (19/08/2026). Fica logo abaixo dos botoes e precisa
+       ser lido de relance — dai o cartao, e nao mais uma linha de texto fraco.
+       Usa os mesmos tokens do resto da pagina. */
+    .hero-selo { display: inline-block; margin-top: 18px; font-size: .92rem;
+                 color: var(--texto-fraco); background: var(--preto-card);
+                 border: 1px solid var(--borda); border-radius: 10px;
+                 padding: 10px 14px; line-height: 1.5; }
+    .hero-selo strong { color: var(--ouro); }
 
     /* Botoes --------------------------------------------------------------- */
     .botoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
@@ -116,12 +132,6 @@
                    border: 1px solid var(--borda); margin-bottom: 12px; }
     .num { font-family: Georgia, serif; color: var(--ouro); font-size: 1.5rem; display: block; }
 
-    /* Faixa "o app nao para onde esta" (fim da secao Sob encomenda) */
-    .aviso-evolucao {
-        margin: 22px 0 0; padding: 20px 22px; border-radius: 14px;
-        background: var(--preto-card); border: 1px solid var(--borda);
-    }
-
     /* Vaga de depoimento ainda nao preenchida. Tracejada de proposito: le-se como
        "espaco reservado", nao como card quebrado. */
     .card.vaga { border-style: dashed; background: transparent; text-align: center; }
@@ -147,9 +157,81 @@
     .painel-print figcaption { color: var(--texto-fraco); font-size: .9rem;
                                margin-top: 8px; text-align: center; }
     .painel-titulo { margin: 34px 0 18px; }
+    /* Foto de cenario na coluna de texto (19/08/2026). Existe por layout: no
+       desktop a coluna do texto acabava muito antes do print do celular e sobrava
+       um vazio de ~350px. Mesma moldura das outras imagens da pagina. */
+    .foto-cena { margin: 24px 0 0; }
+    .foto-cena img { width: 100%; height: auto; display: block; border-radius: 14px;
+                     border: 1px solid var(--borda); }
+    .foto-cena figcaption { color: var(--texto-fraco); font-size: .9rem; margin-top: 8px; }
+
 
     /* Rodape --------------------------------------------------------------- */
     .rodape-links { margin: 14px 0 0; font-size: .9rem; color: var(--texto-fraco); }
+
+
+
+
+    /* Vitrine do Faturamento (19/08/2026) ---------------------------------
+       Vem logo depois do titulo, antes de qualquer texto longo: decisao do
+       Rafael, e a razao e' boa — o barbeiro entende o produto olhando, nao
+       lendo. As imagens sao recortes de CELULAR (780px) de proposito: os
+       recortes largos que ele mandou tinham 1195px e, num telefone de 390,
+       encolheriam tres vezes; o numero, que e' o argumento, sumiria. */
+    .vitrine { display: grid; gap: 26px; grid-template-columns: 1fr; margin-top: 30px; }
+    .vitrine-item { background: var(--preto-card); border: 1px solid var(--borda);
+                    border-radius: 16px; overflow: hidden; display: flex;
+                    flex-direction: column; }
+    /* Texto em cima e tela embaixo: as quatro imagens tem alturas diferentes, e
+       com a imagem no topo cada titulo comecava numa altura, o que fazia a fileira
+       parecer torta. Assim os quatro titulos alinham e a tela vira a prova. */
+    .vitrine-item img { width: 100%; height: auto; display: block;
+                        border-top: 1px solid var(--borda); margin-top: auto; }
+    .vitrine-texto { padding: 20px 20px 16px; }
+    .vitrine-passo { display: inline-block; font-size: .78rem; letter-spacing: .12em;
+                     text-transform: uppercase; color: var(--ouro); margin-bottom: 6px; }
+    .vitrine-texto h3 { margin: 0 0 8px; font-size: 1.18rem; }
+    .vitrine-texto p { margin: 0; color: var(--texto-fraco); font-size: .95rem;
+                       line-height: 1.5; }
+    @media (min-width: 760px) { .vitrine { grid-template-columns: 1fr 1fr; gap: 22px; } }
+    @media (min-width: 1100px) { .vitrine { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+
+    /* Planilha + IA (19/08/2026) ------------------------------------------
+       As perguntas sao o produto desta secao: e' o que faz o barbeiro entender
+       para que serve baixar um arquivo. Ficam em cartoes pequenos, legiveis de
+       relance, porque ninguem le uma lista de doze linhas corridas no celular. */
+    .perguntas { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 22px 0 0; }
+    .pergunta { background: var(--preto-card); border: 1px solid var(--borda);
+                border-left: 3px solid var(--ouro); border-radius: 12px;
+                padding: 14px 16px; color: var(--texto); font-size: .96rem;
+                line-height: 1.45; }
+    .pergunta::before { content: "“"; color: var(--ouro); font-family: Georgia, serif;
+                        font-size: 1.5rem; line-height: 0; position: relative;
+                        top: .35rem; margin-right: 4px; }
+    .pergunta::after { content: "”"; color: var(--ouro); font-family: Georgia, serif;
+                       font-size: 1.5rem; line-height: 0; position: relative;
+                       top: .35rem; margin-left: 2px; }
+    @media (min-width: 760px) { .perguntas { grid-template-columns: 1fr 1fr; } }
+
+    /* Cartoes de link do rodape (19/08/2026) -------------------------------
+       Antes era uma linha de texto com quatro links separados por ponto: ninguem
+       distinguia o que cada um levava, e os tres primeiros eram a MESMA promessa
+       dita de tres jeitos. Viraram dois cartoes com icone e uma linha de
+       explicacao. O icone e' SVG escrito aqui dentro - a pagina nao carrega
+       biblioteca de icone nem fonte externa, e nao vai passar a carregar. */
+    .cartoes-link { display: grid; gap: 14px; grid-template-columns: 1fr;
+                    margin: 22px auto 0; max-width: 720px; text-align: left; }
+    .cartao-link { display: flex; gap: 14px; align-items: flex-start;
+                   background: var(--preto-card); border: 1px solid var(--borda);
+                   border-radius: 14px; padding: 16px 18px; text-decoration: none;
+                   color: var(--texto); transition: border-color .15s, transform .1s; }
+    .cartao-link:hover { border-color: var(--ouro); transform: translateY(-1px); }
+    .cartao-link svg { flex: 0 0 26px; width: 26px; height: 26px; stroke: var(--ouro);
+                       fill: none; stroke-width: 1.6; margin-top: 2px; }
+    .cartao-link b { display: block; color: var(--ouro-claro); font-size: 1rem;
+                     margin-bottom: 3px; }
+    .cartao-link span { color: var(--texto-fraco); font-size: .88rem; line-height: 1.45; }
+    @media (min-width: 760px) { .cartoes-link { grid-template-columns: 1fr 1fr; } }
 
     /* Preco ---------------------------------------------------------------- */
     .preco { background: var(--preto-card); border: 1px solid var(--ouro);
@@ -158,6 +240,9 @@
     .preco ul { list-style: none; padding: 0; margin: 22px 0; text-align: left; display: inline-block; }
     .preco li { padding: 5px 0 5px 28px; position: relative; }
     .preco li::before { content: "✓"; color: var(--ouro); position: absolute; left: 0; }
+    /* Mesma regra do .plano .valor small — o bloco "Tem 1, 3 ou 10 barbeiros?"
+       reaproveita o .preco, que nao previa o /mes. */
+    .preco .valor small { font-size: .95rem; font-family: inherit; color: var(--texto-fraco); }
 
     table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: .98rem; }
     th, td { padding: 12px 10px; border-bottom: 1px solid rgba(212, 175, 55, .15); text-align: left; }
@@ -205,8 +290,10 @@
     .plano .btn { display: block; }
 
     /* FAQ ------------------------------------------------------------------ */
-    details { border-bottom: 1px solid rgba(212, 175, 55, .15); padding: 16px 0; }
-    summary { cursor: pointer; font-weight: 600; list-style: none; }
+    details { border-bottom: 1px solid rgba(212, 175, 55, .15); padding: 7px 0; }
+    /* O padding e' alvo de toque, nao estetica: sem ele o <summary> de uma linha
+       fica com 27px de altura e o dedo erra a pergunta no celular (19/08/2026). */
+    summary { cursor: pointer; font-weight: 600; list-style: none; padding: 9px 0; }
     summary::-webkit-details-marker { display: none; }
     summary::before { content: "+ "; color: var(--ouro); font-weight: 700; }
     details[open] summary::before { content: "– "; }
@@ -355,7 +442,7 @@
           "name": "Meu cliente precisa baixar alguma coisa?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Não. É um link que abre no navegador do celular dele. Se quiser, ele salva na tela de início e fica com cara de aplicativo."
+            "text": "Não. É um link que abre no navegador do celular. Se quiser, ele salva na tela de início e fica com cara de aplicativo."
           }
         },
         {
@@ -371,7 +458,7 @@
           "name": "Preciso ensinar meu cliente a usar?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Não. Ele escolhe serviço, dia e hora, escreve o nome e o celular e pronto — são quatro toques."
+            "text": "Não. São quatro toques: serviço e barbeiro, dia e hora, nome e celular, confirmar."
           }
         },
         {
@@ -379,7 +466,7 @@
           "name": "E se eu precisar fechar amanhã?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Você bloqueia o dia no painel e a agenda para de oferecer horário na hora. A tela de contatos do dia mostra quem já estava marcado, com o WhatsApp de cada um e a mensagem pronta para avisar."
+            "text": "Você bloqueia o dia no painel e a agenda para de oferecer horário na hora. A tela de contatos do dia mostra quem já estava marcado, com a mensagem pronta para avisar."
           }
         },
         {
@@ -403,15 +490,15 @@
           "name": "De quem é a minha lista de clientes?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sua. Está no contrato: nós operamos o sistema para você e não podemos usar os seus clientes para nada — nem para vender, nem para oferecer outra coisa a eles. Se um dia você sair, entregamos a lista em planilha e apagamos do nosso lado."
+            "text": "Sua. Está no contrato: não podemos usar os seus clientes para nada. Se um dia você sair, entregamos a lista em planilha e apagamos do nosso lado."
           }
         },
         {
           "@type": "Question",
-          "name": "Dá para pedir uma função que o app não tem?",
+          "name": "Precisa de alguma função específica?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Dá. Você conta o que precisa, levantamos quanto custa desenvolver e quanto custa manter no ar, e mandamos um orçamento com prazo e valor. Você só decide depois de ver o número — perguntar não custa nada."
+            "text": "Fale conosco. E o app não para onde está: o que entra vale também para quem já é assinante."
           }
         },
         {
@@ -419,7 +506,7 @@
           "name": "Qual plano eu escolho?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Comece pelo Essencial. Ele tem o app inteiro e não limita barbeiro. O Completo vale quando você quer o endereço próprio — suabarbearia.com.br — em vez de dividir o nosso. Trocar de plano é só avisar, sem multa."
+            "text": "Comece pelo Essencial: tem o app inteiro e não limita barbeiro. O Completo vale quando você quer o endereço próprio — suabarbearia.com.br. Trocar de plano é só avisar, sem multa."
           }
         },
         {
@@ -427,7 +514,7 @@
           "name": "E se eu quiser mudar preço ou serviço depois?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Você mesmo muda pelo painel, em qualquer celular, quantas vezes quiser. Se preferir que a gente mude, é só chamar no WhatsApp."
+            "text": "Você mesmo muda pelo painel, em qualquer celular, quantas vezes quiser."
           }
         },
         {
@@ -451,7 +538,7 @@
           "name": "Como vocês se comparam ao AppBarber e ao Booksy?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A diferença maior é a unidade de cobrança: eles cobram por profissional e aqui o preço é da barbearia. Com três barbeiros, isso é R$ 170 por mês de diferença. Montamos uma comparação de preços com fonte e data, incluindo os casos em que a resposta certa não é a gente."
+            "text": "Eles cobram por profissional; aqui o preço é da barbearia. Com três barbeiros isso dá R$ 170 por mês de diferença. A comparação com fonte e data inclui os casos em que a resposta certa não é a gente."
           }
         }
       ]
@@ -471,28 +558,38 @@
     </div>
 </header>
 
-<!-- Hero ------------------------------------------------------------------ -->
+<!-- Hero ------------------------------------------------------------------
+     Reescrito em 19/08/2026, a pedido do Rafael. O H1 anterior vendia o
+     white-label ("com a marca da sua barbearia"); este vende o que o barbeiro
+     ganha no dia — ele para de ser o atendente. A marca continua sendo
+     argumento, mas mais abaixo, nos beneficios e na secao propria.
+     O CTA principal virou o teste de 14 dias, e nao "falar no WhatsApp": o
+     destino e' o mesmo (nao existe cadastro sozinho), o que muda e' a promessa.
+     O CTA secundario e' ancora para a demonstracao, e nao pagina — /como-funciona/
+     virou /agenda-global/ em 19/08 e fala de todos os segmentos, o que tiraria o
+     barbeiro do funil da home. -->
 <div class="hero">
     <div class="wrap hero-grid">
         <div>
-            <h1>Seu cliente marca o horário sozinho. <span>Com a marca da sua barbearia.</span></h1>
+            <h1>Seu cliente agenda sozinho. <span>Você continua cortando.</span></h1>
+
+            <p class="hero-marca">Agendamento online com a marca da sua barbearia.</p>
 
             <p class="lead">
-                Você manda um link. Ele escolhe o serviço, o barbeiro e o horário livre —
-                e cai direto na sua agenda. Sem app para baixar, sem cadastro, sem você
-                parar o corte para responder “tem horário?”.
+                Envie seu link. O cliente escolhe o serviço, o barbeiro e o horário
+                disponível. O agendamento aparece direto na sua agenda.
             </p>
 
             <div class="botoes">
                 <a class="btn btn-ouro"
-                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20o%20app%20de%20agendamento%20para%20a%20minha%20barbearia."
-                   target="_blank" rel="noopener">Falar no WhatsApp</a>
-                <a class="btn btn-vazio" href="https://horariocheio.com.br/demo"
-                   target="_blank" rel="noopener">Ver funcionando</a>
+                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20testar%2014%20dias%20gr%C3%A1tis%20o%20app%20de%20agendamento%20na%20minha%20barbearia."
+                   target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+                <a class="btn btn-vazio" href="#veja-como-e-simples">Ver como funciona</a>
             </div>
 
-            <p class="sub" style="margin-top:16px; font-size:.92rem;">
-                14 dias grátis para testar · instalação grátis · sem fidelidade
+            <p class="hero-selo">
+                <strong>R$ 49,90/mês</strong> • barbeiros ilimitados • sem fidelidade •
+                sem cartão
             </p>
         </div>
 
@@ -504,115 +601,31 @@
     </div>
 </div>
 
-<!-- Dor ------------------------------------------------------------------- -->
-<section>
+<!-- Demonstracao do produto ------------------------------------------------
+     Entrou em 19/08/2026 na reorganizacao da home. NAO e' secao nova de conteudo:
+     absorve a antiga "Como funciona para o seu cliente" (as 4 telas sao os mesmos
+     arquivos) e ganha o lado da barbearia, que so' aparecia quatro secoes abaixo.
+     O barbeiro precisa ver os dois lados antes de ler paragrafo.
+     O VIDEO SAIU DAQUI em 19/08, por decisao do Rafael: ele contava o mesmo fluxo
+     das 4 telas e sozinho somava 700px de rolagem no celular. O arquivo continua em
+     img/demo.mp4 e pode voltar em outra posicao — ver T170.
+     O lado da barbearia esta em passos, sem print: nao existe print real da agenda
+     hoje, e por decisao do Rafael (19/08) nao entra mockup ao lado de print de
+     verdade — foi exatamente o defeito que a T164 corrigiu. -->
+<section id="veja-como-e-simples">
     <div class="wrap">
-        <h2>O problema não é falta de cliente. É o WhatsApp.</h2>
+        <h2 class="centro">Veja como é simples</h2>
+        <p class="sub centro">O mesmo agendamento visto dos dois lados: o que o seu
+           cliente faz no celular dele — <strong>sem baixar aplicativo</strong> — e o
+           que acontece do seu lado.</p>
 
-        <div class="cards">
-            <div class="card">
-                <h3>Você para o corte para responder</h3>
-                <p>“Tem horário às 15h?” chega o dia inteiro, e cada resposta é um cliente
-                   esperando na cadeira.</p>
-            </div>
-            <div class="card">
-                <h3>Dois clientes no mesmo horário</h3>
-                <p>Anotação no caderno não avisa quando bate. O app simplesmente não deixa
-                   marcar em cima.</p>
-            </div>
-            <div class="card">
-                <h3>O cliente some sem avisar</h3>
-                <p>Cancelar dá vergonha de ligar. Pelo link ele cancela em dois toques — e
-                   o horário volta a ficar livre para outro.</p>
-            </div>
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn btn-ouro" href="https://horariocheio.com.br/demo"
+               target="_blank" rel="noopener">Testar como cliente — leva 30 segundos</a>
         </div>
-    </div>
-</section>
 
-<!-- Reclamacao x resposta --------------------------------------------------
-     A analise que o Rafael pediu: cada linha e' uma queixa que barbeiro repete, com
-     o que o app JA faz hoje. Nada de "em breve" aqui - o que ainda nao existe
-     (lembrete automatico, pagamento) fica de fora de proposito, na secao "o que ele
-     ainda nao faz", porque prometer na landing e' o jeito mais rapido de perder o
-     cliente no dia 2 do teste. -->
-<section>
-    <div class="wrap">
-        <h2>O que a gente mais ouve — e o que o app já faz</h2>
-        <p class="sub">Sem “em breve”. Tudo desta lista está funcionando e você testa
-           antes de pagar.</p>
-
-        <table class="resposta">
-            <tr><th>A reclamação</th><th>O que o app faz</th></tr>
-
-            <tr>
-                <td>“Passo o dia respondendo <em>tem horário?</em>”</td>
-                <td>Você manda um link e volta para o corte. Ele escolhe sozinho, às 11 da
-                    noite se quiser.</td>
-            </tr>
-            <tr>
-                <td>“Marquei dois no mesmo horário.”</td>
-                <td>Horário ocupado desaparece da tela. Não existe marcar em cima.</td>
-            </tr>
-            <tr>
-                <td>“O cara marca e não vem.”</td>
-                <td>Cancelar pelo link é mais fácil que ligar — e o horário volta a ficar
-                    livre. Você ainda toca no horário na agenda e manda a confirmação pronta
-                    pelo WhatsApp.</td>
-            </tr>
-            <tr>
-                <td>“Precisei fechar e tive que avisar um por um.”</td>
-                <td>Bloqueia o dia e abre <strong>Contatos do dia</strong>: a lista de quem
-                    estava marcado, com o WhatsApp e a mensagem já escrita.</td>
-            </tr>
-            <tr>
-                <td>“Tenho três barbeiros, cada um com folga diferente.”</td>
-                <td>Cada um com expediente, almoço, folga e férias próprios. Lançou férias,
-                    somem os dias dele — e só dele.</td>
-            </tr>
-            <tr>
-                <td>“Sistema cobra por barbeiro e fica caro.”</td>
-                <td>Aqui o preço é da barbearia, não do barbeiro.</td>
-            </tr>
-            <tr>
-                <td>“Fico no app junto com o concorrente do lado.”</td>
-                <td>É o seu link, com o seu logo e a sua cor. Ninguém mais aparece nele.</td>
-            </tr>
-            <tr>
-                <td>“Meu cliente não vai baixar aplicativo.”</td>
-                <td>Não precisa. Abre no navegador do celular.</td>
-            </tr>
-            <tr>
-                <td>“Meu cliente nem e-mail tem.”</td>
-                <td>Pede nome e celular. Só isso.</td>
-            </tr>
-            <tr>
-                <td>“Digitam o telefone errado e eu não consigo achar a pessoa.”</td>
-                <td>O campo só aceita celular brasileiro de verdade, com DDD que existe.</td>
-            </tr>
-            <tr>
-                <td>“Se eu sair do sistema, perco meus clientes.”</td>
-                <td>Não perde. A lista é sua, está escrito no contrato, e entregamos em
-                    planilha quando você pedir.</td>
-            </tr>
-        </table>
-    </div>
-</section>
-
-<!-- Como funciona --------------------------------------------------------- -->
-<section>
-    <div class="wrap">
-        <h2>Como funciona para o seu cliente</h2>
-        <p class="sub">Quatro toques, cerca de 30 segundos. Ele nem precisa saber usar nada.</p>
-
-        <!-- Gravacao de tela real da demo, do passo 1 ate a confirmacao. O preload="none"
-             e' o que importa aqui: sem ele o navegador baixa 1,5 MB de video de quem nunca
-             aperta o play, no 4G da barbearia. As 4 imagens abaixo continuam servindo a
-             quem nao da play. -->
-        <video controls playsinline muted preload="none" poster="img/demo-poster.jpg"
-               width="384" height="848"
-               style="max-width:320px;width:100%;height:auto;border-radius:12px;display:block;margin:0 auto 28px">
-            <source src="img/demo.mp4" type="video/mp4">
-        </video>
+        <h3 class="painel-titulo"><span class="vitrine-passo">Cliente</span><br>
+            Escolhe o serviço → barbeiro → horário → confirma</h3>
 
         <div class="telas">
             <figure>
@@ -632,44 +645,247 @@
                 <figcaption><span class="num">4</span> Confirma — e cai na sua agenda</figcaption>
             </figure>
         </div>
+
+        <h3 class="painel-titulo"><span class="vitrine-passo">Barbearia</span><br>
+            Recebe o agendamento → vê na agenda → confirma, cancela ou remarca</h3>
+
+        <div class="cards">
+            <div class="card">
+                <h3><span class="num">1</span> Recebe o agendamento</h3>
+                <p>Cai na sua agenda na hora, sem você digitar nada — e aquele horário
+                   some da tela de quem entrar depois.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">2</span> Vê na agenda</h3>
+                <p>Do celular, em dia, semana, mês ou tabela. Cada barbeiro com a própria
+                   agenda, com o horário, o serviço e o nome do cliente.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">3</span> Confirma, cancela ou remarca</h3>
+                <p>Toca no horário e escolhe <em>confirmar presença</em> ou <em>pedir para
+                   remarcar</em>, com a mensagem de WhatsApp já escrita. Para mudar de
+                   hora, arrasta o agendamento.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Beneficios --------------------------------------------------------------
+     Substituiu em 19/08/2026 a secao "O problema nao e' falta de cliente. E' o
+     WhatsApp", que dizia as mesmas tres coisas pelo lado da dor. Nada se perdeu:
+     as tres queixas continuam, com mais detalhe, na tabela logo abaixo. -->
+<section>
+    <div class="wrap">
+        <h2 class="centro">O que muda na sua barbearia</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Menos WhatsApp</h3>
+                <p>Seu cliente encontra sozinho os horários disponíveis.</p>
+            </div>
+            <div class="card">
+                <h3>Sem conflito de horário</h3>
+                <p>Horário ocupado deixa de aparecer automaticamente.</p>
+            </div>
+            <div class="card">
+                <h3>Sua barbearia, sua marca</h3>
+                <p>Seu logo, suas cores e seu próprio link.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Diferencial de preco ----------------------------------------------------
+     Entrou em 19/08/2026. O argumento que a pagina inteira defende sai do meio da
+     secao de planos e vira bloco proprio, no alto: com 3 barbeiros a diferenca
+     para quem cobra por profissional passa de R$ 170/mes. Reaproveita a classe
+     .preco, que ja existia no CSS e estava sem uso desde que os planos viraram
+     dois cartoes. -->
+<section>
+    <div class="wrap">
+        <div class="preco">
+            <h2>Tem 1, 3 ou 10 barbeiros?</h2>
+            <p class="sub">O preço continua</p>
+            <div class="valor">R$ 49,90 <small>/mês</small></div>
+
+            <p style="margin-top:18px;">Sem cobrança por profissional.<br>
+               Sem limite de agendamentos.</p>
+
+            <div class="botoes" style="justify-content:center;">
+                <a class="btn btn-ouro"
+                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20testar%2014%20dias%20gr%C3%A1tis%20o%20app%20de%20agendamento%20na%20minha%20barbearia."
+                   target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vitrine do Faturamento ------------------------------------------------
+     As 4 telas contam o dia na ordem em que ele acontece. Texto encurtado em
+     19/08/2026 na passada de tesoura: a tela e' o argumento, o paragrafo so'
+     diz o que olhar. -->
+<section class="alt">
+    <div class="wrap">
+        <h2 class="centro">Quanto você fez <span class="ouro">hoje?</span></h2>
+
+        <p class="sub centro">A agenda vira número sozinha. Em quatro telas.</p>
+
+        <div class="vitrine">
+            <div class="vitrine-item">
+                <div class="vitrine-texto">
+                    <span class="vitrine-passo">1 · O dia</span>
+                    <h3>O caixa do dia, sem calculadora</h3>
+                    <p>Hoje, ontem, a semana ou o mês: o que já entrou, o que ainda vem e
+                       quanto sumiu com quem não apareceu.</p>
+                </div>
+                <img src="img/1-quanto-entrou.png" width="780" height="1132" loading="lazy"
+                     decoding="async"
+                     alt="Tela do app mostrando R$ 425,00 já atendido em 10 atendimentos, R$ 240,00 ainda por atender e R$ 100,00 perdido com 2 faltas">
+            </div>
+
+            <div class="vitrine-item">
+                <div class="vitrine-texto">
+                    <span class="vitrine-passo">2 · O balcão</span>
+                    <h3>Chegou sem marcar? Entra também</h3>
+                    <p>Dois toques e o atendimento de balcão entra na conta do dia.</p>
+                </div>
+                <img src="img/2-venda-avulsa.png" width="780" height="824" loading="lazy"
+                     decoding="async"
+                     alt="Formulário de venda avulsa: serviço, profissional, hora e nome opcional, com o botão Lançar">
+            </div>
+
+            <div class="vitrine-item">
+                <div class="vitrine-texto">
+                    <span class="vitrine-passo">3 · A origem</span>
+                    <h3>De onde veio o dinheiro</h3>
+                    <p>Qual serviço puxou o faturamento e quanto rendeu cada barbeiro.</p>
+                </div>
+                <img src="img/3-de-onde-veio.png" width="780" height="1116" loading="lazy"
+                     decoding="async"
+                     alt="Gráfico de rosca com o quanto cada serviço rendeu no dia e a tabela com o total por profissional">
+            </div>
+
+            <div class="vitrine-item">
+                <div class="vitrine-texto">
+                    <span class="vitrine-passo">4 · O próximo mês</span>
+                    <h3>A planilha que vira conselho</h3>
+                    <p>Baixa em Excel e joga numa inteligência artificial, com a pergunta
+                       pronta.</p>
+                </div>
+                <img src="img/4-planilha.png" width="780" height="1042" loading="lazy"
+                     decoding="async"
+                     alt="Bloco de baixar planilha, com o período escolhido e uma pergunta pronta para colar numa inteligência artificial">
+            </div>
+        </div>
+
+        <p class="centro" style="margin-top:28px;">
+            <strong>Você não anota nada.</strong> É a agenda que gera os números.
+        </p>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn btn-ouro" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20ver%20o%20Faturamento%20do%20Hor%C3%A1rio%20Cheio%20funcionando%20na%20minha%20barbearia." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+            <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Ver o app funcionando</a>
+        </div>
+    </div>
+</section>
+
+<!-- Reclamacao x resposta --------------------------------------------------
+     Cada linha e' uma queixa que barbeiro repete, com o que o app JA faz hoje.
+     Nada de "em breve" aqui, de proposito.
+     Passou de 11 para 8 linhas em 19/08/2026: sairam as tres que ja tinham secao
+     propria na pagina — preco por barbeiro (o bloco "Tem 1, 3 ou 10 barbeiros?"),
+     dividir espaco com o concorrente (a secao da marca) e "meu cliente nem e-mail
+     tem" (o FAQ). As respostas encurtaram; nenhuma funcionalidade saiu. -->
+<section>
+    <div class="wrap">
+        <h2>O que a gente mais ouve — e o que o app já faz</h2>
+        <p class="sub">Sem “em breve”: tudo desta lista você testa antes de pagar.</p>
+
+        <table class="resposta">
+            <tr><th>A reclamação</th><th>O que o app faz</th></tr>
+
+            <tr>
+                <td>“Passo o dia respondendo <em>tem horário?</em>”</td>
+                <td>Manda o link e volta para o corte. Ele escolhe sozinho, às 11 da noite
+                    se quiser.</td>
+            </tr>
+            <tr>
+                <td>“Marquei dois no mesmo horário.”</td>
+                <td>Horário ocupado desaparece da tela. Não existe marcar em cima.</td>
+            </tr>
+            <tr>
+                <td>“O cara marca e não vem.”</td>
+                <td>Cancelar pelo link é mais fácil que ligar — e o horário volta a ficar
+                    livre.</td>
+            </tr>
+            <tr>
+                <td>“Precisei fechar e tive que avisar um por um.”</td>
+                <td>Bloqueia o dia e abre <strong>Contatos do dia</strong>: quem estava
+                    marcado, com o WhatsApp e a mensagem já escrita.</td>
+            </tr>
+            <tr>
+                <td>“Tenho três barbeiros, cada um com folga diferente.”</td>
+                <td>Cada um com expediente, almoço, folga e férias próprios.</td>
+            </tr>
+            <tr>
+                <td>“Meu cliente não vai baixar aplicativo.”</td>
+                <td>Não precisa. Abre no navegador do celular.</td>
+            </tr>
+            <tr>
+                <td>“Digitam o telefone errado e eu não acho a pessoa.”</td>
+                <td>O campo só aceita celular brasileiro de verdade, com DDD que existe.</td>
+            </tr>
+            <tr>
+                <td>“Se eu sair do sistema, perco meus clientes.”</td>
+                <td>Não perde. Está no contrato, e entregamos a lista em planilha quando
+                    você pedir.</td>
+            </tr>
+        </table>
     </div>
 </section>
 
 <!-- O painel do barbeiro ---------------------------------------------------
-     Entrou em 17/08/2026, a pedido do Rafael. O buraco que ela fecha: a pagina
-     inteira mostrava a tela do CLIENTE, e quem paga o app e' o barbeiro. O painel
-     so' aparecia como texto solto no FAQ e em dois cards de "o que vem junto" —
-     nenhuma imagem, nenhuma secao. Quem chega aqui pela busca nao tinha como
-     saber o que ele mesmo vai fazer no dia a dia.
-     Fica DEPOIS do fluxo do cliente e ANTES da secao da marca, de proposito: o
-     heroi e o H1 nao foram tocados (sao a melhor parte em conversao, medida). -->
+     Quem paga o app e' o barbeiro, entao ele precisa ver a propria tela.
+     Encurtada em 19/08/2026: o bloco do Faturamento SAIU daqui — a vitrine logo
+     acima ja mostra a mesma tela em quatro recortes, e manter os dois era dizer
+     duas vezes (era a T167). Sobrou o que so' existe aqui: Contatos do dia. -->
 <section>
     <div class="wrap">
         <h2>E do seu lado: <span class="ouro">o painel</span></h2>
 
-        <p class="sub">Quem paga o app é você — então esta parte importa mais que a de cima.
-           Tudo aqui você faz do celular, sozinho, sem pedir para a gente.</p>
+        <p class="sub">Tudo pelo celular, sozinho, sem pedir para a gente.</p>
 
         <div class="painel-linha">
             <div>
-                <p>A tela que resolve o dia em que dá problema é <strong>Contatos do
-                   dia</strong>: você acordou doente, tem quatro clientes marcados e não quer
-                   caçar o número de cada um no meio das conversas. Escolhe a data e vê quem
-                   está marcado, em ordem de horário, com o serviço, o barbeiro, o telefone e
-                   dois botões de WhatsApp por cliente — <em>avisar cancelamento</em> e
-                   <em>lembrar do horário</em>, com a mensagem já escrita e o nome da pessoa
-                   dentro dela.</p>
+                <p>A tela do dia em que dá problema é <strong>Contatos do dia</strong>.
+                   Você escolhe a data e vê quem está marcado, em ordem de horário, com o
+                   serviço, o barbeiro, o telefone e dois botões de WhatsApp por cliente —
+                   <em>avisar cancelamento</em> e <em>lembrar do horário</em>, com a
+                   mensagem já escrita e o nome da pessoa dentro dela.</p>
 
-                <p>Dá para mudar o texto antes de mandar. E é um botão por cliente:
-                   <strong>não existe disparo em massa aqui</strong>, de propósito — envio em
-                   rajada é o padrão que faz o WhatsApp bloquear número, e o número é a
-                   barbearia.</p>
+                <p class="sub">É um botão por cliente, de propósito: envio em rajada é o
+                   padrão que faz o WhatsApp bloquear número — e o número é a barbearia.</p>
+
+                <!-- Foto de cenario (Pexels, uso comercial liberado, sem atribuicao
+                     obrigatoria): "A red barber leather padded chair", de Ryan Klaus,
+                     pexels.com/photo/12304516. Recortada de 867x1300 para 867x578.
+                     Entrou em 19/08/2026 para fechar o vazio de ~350px que sobrava ao lado
+                     do print no desktop. E' CADEIRA VAZIA de proposito: a regra da T133
+                     proibe pessoa apresentada como cliente do Horario Cheio, e foto de
+                     banco de imagens com gente sendo atendida e' exatamente isso. -->
+                <figure class="foto-cena">
+                    <img src="img/cadeira-pronta.jpg" width="867" height="578" loading="lazy"
+                         decoding="async"
+                         alt="Cadeira de barbeiro vazia e pronta para o próximo cliente, com a barbearia desfocada ao fundo">
+                    <figcaption>O horário marcado é dele: quando chega, a cadeira já está
+                       reservada — e você não parou de cortar para combinar isso.</figcaption>
+                </figure>
             </div>
 
             <figure class="painel-print">
                 <img width="780" height="1688" loading="lazy" decoding="async"
-                     src="img/painel.png"
-                     alt="Painel da barbearia no celular: lista de quem tem horário marcado no dia, com hora, cliente, serviço, barbeiro, telefone e botões de WhatsApp para avisar cancelamento ou lembrar do horário">
+                     src="img/painel.png?v=2"
+                     alt="Tela Contatos do dia no celular, no tema escuro do app: lista de quem tem horário marcado, com hora, cliente, serviço, barbeiro, telefone e dois botões de WhatsApp por pessoa">
                 <figcaption>Contatos do dia, no seu celular</figcaption>
             </figure>
         </div>
@@ -678,52 +894,85 @@
 
         <div class="cards">
             <div class="card">
-                <h3>A agenda como der para olhar</h3>
-                <p>Dia, semana, mês ou tabela. Cliente pediu para mudar de horário? Você
-                   arrasta o agendamento para o lugar novo.</p>
-            </div>
-            <div class="card">
-                <h3>Confirmar e remarcar de dentro da agenda</h3>
-                <p>Toca no horário e aparecem <em>confirmar presença</em> e <em>pedir para
-                   remarcar</em>. O de remarcar manda o cliente para o link dele, que só
-                   oferece horário que está mesmo livre — sem lista colada na mensagem para
-                   envelhecer em cinco minutos.</p>
-            </div>
-            <div class="card">
                 <h3>Férias de um barbeiro</h3>
-                <p>Um registro cobre o período inteiro, e aqueles dias somem da agenda dele
-                   na hora. A agenda do outro barbeiro não muda nada.</p>
+                <p>Um registro cobre o período inteiro e aqueles dias somem da agenda dele
+                   — só dele.</p>
             </div>
             <div class="card">
                 <h3>Fechar só algumas horas</h3>
-                <p>Compromisso de quinta às 15h não precisa virar dia perdido: fecha aquela
-                   janela e o resto do dia continua aberto.</p>
+                <p>Compromisso de quinta às 15h fecha aquela janela. O resto do dia
+                   continua aberto.</p>
             </div>
             <div class="card">
                 <h3>Fechar a barbearia inteira</h3>
-                <p>Feriado ou reforma: um período bloqueado vale para todos os barbeiros de
-                   uma vez.</p>
+                <p>Feriado ou reforma: um período bloqueado vale para todos de uma vez.</p>
             </div>
             <div class="card">
                 <h3>Serviços, preços e durações</h3>
-                <p>Nome, tempo, preço e cor de cada serviço. Você mesmo cadastra e reajusta
-                   quando quiser — não passa pela gente.</p>
+                <p>Nome, tempo, preço e cor de cada serviço. Você mesmo reajusta quando
+                   quiser.</p>
             </div>
             <div class="card">
                 <h3>Marcar você mesmo</h3>
-                <p>Quem ligou, mandou mensagem ou apareceu na porta entra pelo painel, no
-                   horário que você decidir. O link é um caminho a mais, não o único.</p>
+                <p>Quem ligou ou apareceu na porta entra pelo painel. O link é um caminho a
+                   mais, não o único.</p>
             </div>
             <div class="card">
                 <h3>Quem vê o quê</h3>
-                <p>Administrador, barbeiro e recepção têm acessos diferentes. O barbeiro vê
-                   os próprios clientes; quem abre tudo é o dono.</p>
+                <p>Administrador, barbeiro e recepção com acessos diferentes. Quem abre tudo
+                   é o dono.</p>
             </div>
             <div class="card">
                 <h3>Desligar o agendamento</h3>
-                <p>Agenda lotada ou barbearia fechada por um tempo: a página sai do ar com um
-                   recado no lugar e volta com um clique.</p>
+                <p>A página sai do ar com um recado no lugar e volta com um clique.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Planilha + IA ----------------------------------------------------------
+     A tela de Faturamento responde "quanto deu"; esta secao e' a pergunta
+     seguinte: "e agora, o que eu faco com isso". As perguntas prontas sao o
+     argumento — sem elas, "baixar planilha" e' so' mais um botao.
+     Encurtada em 19/08/2026: saiu o print de faturamento.png, que ja aparece
+     recortado na vitrine, e os paragrafos viraram dois. As 12 perguntas ficam. -->
+<section class="alt">
+    <div class="wrap">
+        <h2>Sua barbearia tem <span class="ouro">um consultor</span> escondido numa planilha de Excel</h2>
+
+        <p class="sub">Um botão baixa tudo o que aconteceu na sua barbearia — uma linha por
+           atendimento. Abre no Excel, ou você manda o arquivo para uma inteligência
+           artificial e escreve a pergunta. É de graça.</p>
+
+        <p>Vai data, hora, serviço, valor, duração, barbeiro, cliente, falta, balcão,
+           antecedência, <strong>em que visita ele estava</strong> e <strong>quantos dias
+           fazia que ele não aparecia</strong>. Essas duas últimas são as que ninguém tem:
+           é com elas que dá para saber quem sumiu, quem está prestes a sumir e de quanto
+           em quanto tempo cada cliente volta.</p>
+
+        <h3 class="painel-titulo">Perguntas que o barbeiro faz — e a planilha responde</h3>
+
+        <div class="perguntas">
+            <div class="pergunta">Como posso melhorar meu faturamento?</div>
+            <div class="pergunta">Como faço meus clientes se interessarem pelos outros serviços que eu presto?</div>
+            <div class="pergunta">Como monto uma campanha para preencher os horários em que fico parado sem cliente?</div>
+            <div class="pergunta">Que mensagem eu mando para os clientes que deixaram de vir?</div>
+            <div class="pergunta">Quais dias e horários não se pagam? Vale a pena abrir mais cedo ou fechar mais tarde?</div>
+            <div class="pergunta">Qual serviço me rende mais por hora de cadeira ocupada?</div>
+            <div class="pergunta">Quantos clientes vieram uma vez só e nunca voltaram — e quanto isso me custou?</div>
+            <div class="pergunta">De quanto em quanto tempo cada cliente costuma voltar, e quem já está atrasado?</div>
+            <div class="pergunta">Quanto eu perdi com quem marcou e não apareceu, e em que horário isso mais acontece?</div>
+            <div class="pergunta">Se eu subir R$ 5 no corte, quanto muda no meu mês? E quantos clientes eu posso perder?</div>
+            <div class="pergunta">Quem marca em cima da hora e quem marca com dias de antecedência?</div>
+            <div class="pergunta">Monte um plano de 30 dias para eu faturar mais, usando só os clientes que já são meus.</div>
+        </div>
+
+        <p class="sub" style="margin-top:22px;">Não custa nada a mais, e não te obriga a
+           usar IA nenhuma: a planilha é sua e abre no Excel como qualquer outra.</p>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn btn-ouro" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Vi%20a%20planilha%20do%20Hor%C3%A1rio%20Cheio%20e%20quero%20testar%2014%20dias%20na%20minha%20barbearia." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+            <a class="btn btn-vazio" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Ver o app funcionando</a>
         </div>
     </div>
 </section>
@@ -734,8 +983,8 @@
         <h2>É o app <span class="ouro">da sua barbearia</span> — não o nosso</h2>
 
         <p>Seu logo, seu nome, sua cor, seus serviços e seus preços. Seu cliente não vê
-           marca de sistema nenhum, e não encontra a barbearia do concorrente do lado da
-           sua, como acontece nos aplicativos de catálogo.</p>
+           marca de sistema nenhum — e não encontra a barbearia do lado da sua, como
+           acontece nos aplicativos de catálogo.</p>
 
         <div class="telas" style="grid-template-columns: repeat(2, 1fr); max-width: 620px;">
             <figure>
@@ -744,99 +993,8 @@
             </figure>
             <figure>
                 <img width="780" height="1688" loading="lazy" decoding="async" src="img/marca-terracota.png" alt="O mesmo app com a marca em terracota">
-                <figcaption>Cor e logo entram na hora da instalação</figcaption>
+                <figcaption>Cor e logo entram na instalação</figcaption>
             </figure>
-        </div>
-    </div>
-</section>
-
-<!-- Sob encomenda -----------------------------------------------------------
-     Argumento que os concorrentes grandes nao conseguem dar: la o barbeiro e' um entre
-     milhares e o roadmap nao e' dele. Aqui o pedido chega direto em quem escreve o
-     codigo. Escrito SEM prometer prazo e SEM prometer exclusividade — o orcamento e'
-     que fecha isso, caso a caso. -->
-<section>
-    <div class="wrap">
-        <h2>Faltou alguma coisa? <span class="ouro">Peça.</span></h2>
-
-        <p>Você não está entrando num sistema fechado onde ninguém te escuta. Se o seu dia
-           a dia pedir algo que o app ainda não faz, quem recebe o pedido é quem escreve o
-           programa.</p>
-
-        <div class="cards">
-            <div class="card">
-                <h3><span class="num">1</span> Você conta</h3>
-                <p>Do seu jeito, por WhatsApp. Não precisa saber explicar em termo técnico —
-                   basta dizer o que te atrapalha hoje.</p>
-            </div>
-            <div class="card">
-                <h3><span class="num">2</span> Levantamos o custo</h3>
-                <p>Quanto custa desenvolver e quanto custa manter no ar. São duas contas
-                   diferentes, e você vê as duas.</p>
-            </div>
-            <div class="card">
-                <h3><span class="num">3</span> Você recebe o orçamento</h3>
-                <p>Com prazo e valor fechados antes de começar. Se não fizer sentido, você
-                   diz não e não paga nada por ter perguntado.</p>
-            </div>
-        </div>
-
-        <!-- Pedido do Rafael (16/08/2026). Escrita SEM citar funcionalidade e SEM data:
-             a secao "o que a gente mais ouve" promete explicitamente "sem em breve", e a
-             unica forma das duas conviverem e' esta frase falar de RITMO, nao de promessa.
-             No dia em que virar "logo teremos lembrete automatico", ela vira divida. -->
-        <p class="aviso-evolucao">
-            <strong class="ouro">E o app não para onde está.</strong> Estamos desenvolvendo
-            melhorias e funcionalidades novas o tempo todo — pensando nos dois lados do
-            balcão: em você, que quer gastar menos tempo com agenda, e no seu cliente, que
-            quer marcar sem complicação. Logo, logo tem novidade. O que entrar no app entra
-            também para quem já é assinante.
-        </p>
-    </div>
-</section>
-
-<!-- O que vem junto -------------------------------------------------------- -->
-<section>
-    <div class="wrap">
-        <h2>O que vem junto</h2>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Agenda de cada barbeiro</h3>
-                <p>Cada profissional com o próprio horário, folga e almoço. O cliente
-                   escolhe com quem quer cortar.</p>
-            </div>
-            <div class="card">
-                <h3>Férias e dia fechado</h3>
-                <p>Lançou as férias de um barbeiro, os dias somem da agenda dele — e só
-                   dele. Feriado fecha a barbearia inteira de uma vez.</p>
-            </div>
-            <div class="card">
-                <h3>Contatos do dia</h3>
-                <p>Precisou fechar hoje? A tela mostra quem está marcado, com o WhatsApp de
-                   cada um e a mensagem já escrita para avisar.</p>
-            </div>
-            <div class="card">
-                <h3>Remarcar e cancelar</h3>
-                <p>O cliente resolve sozinho pelo link dele, sem ligar para você e sem
-                   ocupar horário à toa.</p>
-            </div>
-            <div class="card">
-                <h3>Confirmar com um toque</h3>
-                <p>Toque no horário na agenda e escolha <em>confirmar presença</em> ou
-                   <em>pedir para remarcar</em>. Abre o seu WhatsApp com a mensagem escrita —
-                   quem aperta enviar é você.</p>
-            </div>
-            <div class="card">
-                <h3>Celular conferido</h3>
-                <p>O campo só aceita celular brasileiro de verdade, com DDD válido. Nada de
-                   telefone digitado errado.</p>
-            </div>
-            <div class="card">
-                <h3>Lista de clientes</h3>
-                <p>Quem já veio fica registrado, com o histórico de horários — sua base,
-                   não a de um aplicativo de terceiro.</p>
-            </div>
         </div>
     </div>
 </section>
@@ -854,7 +1012,11 @@
            o quanto fazemos por você.</p>
 
         <div class="planos">
-            <div class="plano">
+            <!-- O selo saiu do Completo e veio para ca' em 19/08/2026, por decisao do
+                 Rafael. Destacar o plano caro contradizia o argumento que a pagina
+                 inteira defende — "o preco e' da barbearia, nao por barbeiro". -->
+            <div class="plano principal">
+                <span class="selo">Mais escolhido</span>
                 <h3>Essencial</h3>
                 <div class="valor">R$ 49,90 <small>/mês</small></div>
                 <p class="para">Para a barbearia que quer parar de responder “tem horário?”
@@ -872,11 +1034,10 @@
 
                 <a class="btn btn-vazio"
                    href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20testar%2014%20dias%20o%20plano%20Essencial%20na%20minha%20barbearia."
-                   target="_blank" rel="noopener">Testar 14 dias grátis</a>
+                   target="_blank" rel="noopener">Testar grátis por 14 dias</a>
             </div>
 
-            <div class="plano principal">
-                <span class="selo">Mais escolhido</span>
+            <div class="plano">
                 <h3>Completo</h3>
                 <div class="valor">R$ 99,90 <small>/mês</small></div>
                 <p class="para">Para quem quer a barbearia com endereço próprio na internet,
@@ -899,7 +1060,7 @@
 
                 <a class="btn btn-ouro"
                    href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20testar%2014%20dias%20o%20plano%20Completo%20na%20minha%20barbearia."
-                   target="_blank" rel="noopener">Testar 14 dias grátis</a>
+                   target="_blank" rel="noopener">Testar grátis por 14 dias</a>
             </div>
         </div>
 
@@ -915,28 +1076,20 @@
 
 <!-- Prova -------------------------------------------------------------------
      Aqui NAO entra depoimento: o Horario Cheio ainda nao tem cliente pagante, e
-     depoimento inventado com foto de banco de imagens e' publicidade enganosa (CDC
-     art. 37) alem de ser conferivel no Google em 5 segundos pelo proprio barbeiro.
-     O lugar esta reservado - entram os tres primeiros clientes de verdade, com nome
-     e autorizacao. Ate la, a prova e' melhor do que depoimento: a demo aberta. -->
+     depoimento inventado e' publicidade enganosa (CDC art. 37) alem de conferivel
+     no Google em 5 segundos. Ate ter cliente, a prova e' a demo aberta. -->
 <section>
     <div class="wrap centro">
         <h2>Não acredite em mim. Teste.</h2>
-        <p class="sub" style="max-width: 44rem; margin: 0 auto 26px;">
+        <p class="sub" style="max-width: 40rem; margin: 0 auto 26px;">
             O app está no ar agora, com uma barbearia de exemplo. Marque um horário como se
-            fosse seu cliente e veja quantos toques leva. Nada para instalar — e nenhum
-            dado seu fica conosco.
+            fosse seu cliente. Nada para instalar, nenhum dado seu conosco.
         </p>
 
         <div class="botoes" style="justify-content:center;">
             <a class="btn btn-ouro" href="https://horariocheio.com.br/demo"
                target="_blank" rel="noopener">Marcar um horário na demo</a>
         </div>
-
-        <p class="sub" style="font-size:.88rem; margin-top:22px;">
-            Se preferir, fale com a gente no WhatsApp: montamos a tela com o nome e o logo da
-            <em>sua</em> barbearia e mandamos o print antes de você decidir qualquer coisa.
-        </p>
     </div>
 </section>
 
@@ -974,11 +1127,10 @@
 <section>
     <div class="wrap">
         <h2>Estas três vagas <span class="ouro">são de quem chegar primeiro</span></h2>
-        <p class="sub" style="max-width: 44rem;">
-            É aqui que vão ficar os depoimentos das três primeiras barbearias que usarem o
-            Horário Cheio no dia a dia — com o nome, a foto e a frase delas. Enquanto isso
-            não existir, o espaço fica vazio: a gente não inventa depoimento nem compra
-            foto de banco de imagens para fingir cliente que não temos.
+        <p class="sub" style="max-width: 40rem;">
+            É aqui que ficam os depoimentos das três primeiras barbearias que usarem o
+            Horário Cheio. Enquanto não existirem, o espaço fica vazio: a gente não inventa
+            depoimento nem compra foto de banco de imagens.
         </p>
 
         <div class="cards">
@@ -995,23 +1147,22 @@
                 <p>Reservado para a terceira.</p>
             </div>
         </div>
-
-        <p class="sub" style="margin-top:22px;">
-            Quer uma delas? Teste 14 dias grátis. Se o app te ajudar de verdade, a gente vai
-            te pedir uma frase — e você diz sim ou não com a mesma liberdade.
-        </p>
     </div>
 </section>
 
-<!-- FAQ -------------------------------------------------------------------- -->
+<!-- FAQ --------------------------------------------------------------------
+     Respostas encurtadas em 19/08/2026. As perguntas continuam as mesmas 13, que
+     e' o que alimenta o FAQPage do JSON-LD e o que a busca de IA le.
+     A pergunta do desenvolvimento sob encomenda encolheu para uma linha, e com
+     ela veio a frase de evolucao que era a faixa da secao apagada (T51). -->
 <section>
     <div class="wrap">
         <h2>Perguntas que sempre fazem</h2>
 
         <details>
             <summary>Meu cliente precisa baixar alguma coisa?</summary>
-            <p>Não. É um link que abre no navegador do celular dele. Se quiser, ele salva na
-               tela de início e fica com cara de aplicativo.</p>
+            <p>Não. É um link que abre no navegador do celular. Se quiser, ele salva na tela
+               de início e fica com cara de aplicativo.</p>
         </details>
 
         <details>
@@ -1021,15 +1172,15 @@
 
         <details>
             <summary>Preciso ensinar meu cliente a usar?</summary>
-            <p>Não. Ele escolhe serviço, dia e hora, escreve o nome e o celular e pronto —
-               são quatro toques.</p>
+            <p>Não. São quatro toques: serviço e barbeiro, dia e hora, nome e celular,
+               confirmar.</p>
         </details>
 
         <details>
             <summary>E se eu precisar fechar amanhã?</summary>
             <p>Você bloqueia o dia no painel e a agenda para de oferecer horário na hora. A
-               tela de contatos do dia mostra quem já estava marcado, com o WhatsApp de cada
-               um e a mensagem pronta para avisar.</p>
+               tela de contatos do dia mostra quem já estava marcado, com a mensagem pronta
+               para avisar.</p>
         </details>
 
         <details>
@@ -1046,36 +1197,32 @@
 
         <details>
             <summary>De quem é a minha lista de clientes?</summary>
-            <p>Sua. Está no contrato: nós operamos o sistema para você e não podemos usar os
-               seus clientes para nada — nem para vender, nem para oferecer outra coisa a
-               eles. Se um dia você sair, entregamos a lista em planilha e apagamos do
-               nosso lado.</p>
+            <p>Sua. Está no contrato: não podemos usar os seus clientes para nada. Se um dia
+               você sair, entregamos a lista em planilha e apagamos do nosso lado.</p>
         </details>
 
         <details>
-            <summary>Dá para pedir uma função que o app não tem?</summary>
-            <p>Dá. Você conta o que precisa, levantamos quanto custa desenvolver e quanto
-               custa manter no ar, e mandamos um orçamento com prazo e valor. Você só decide
-               depois de ver o número — perguntar não custa nada.</p>
+            <summary>Precisa de alguma função específica?</summary>
+            <p>Fale conosco. E o app não para onde está: o que entra vale também para quem
+               já é assinante.</p>
         </details>
 
         <details>
             <summary>Qual plano eu escolho?</summary>
-            <p>Comece pelo Essencial. Ele tem o app inteiro e não limita barbeiro. O Completo
-               vale quando você quer o endereço próprio — suabarbearia.com.br — em vez de
-               dividir o nosso. Trocar de plano é só avisar, sem multa.</p>
+            <p>Comece pelo Essencial: tem o app inteiro e não limita barbeiro. O Completo
+               vale quando você quer o endereço próprio — suabarbearia.com.br. Trocar de
+               plano é só avisar, sem multa.</p>
         </details>
 
         <details>
             <summary>E se eu quiser mudar preço ou serviço depois?</summary>
-            <p>Você mesmo muda pelo painel, em qualquer celular, quantas vezes quiser. Se
-               preferir que a gente mude, é só chamar no WhatsApp.</p>
+            <p>Você mesmo muda pelo painel, em qualquer celular, quantas vezes quiser.</p>
         </details>
 
         <details>
             <summary>Quanto tempo para ficar no ar?</summary>
-            <p>Um dia. Precisamos do nome dos barbeiros, dos serviços com preço e duração, e do
-               horário de funcionamento.</p>
+            <p>Um dia. Precisamos do nome dos barbeiros, dos serviços com preço e duração, e
+               do horário de funcionamento.</p>
         </details>
 
         <details>
@@ -1083,18 +1230,11 @@
             <p>Sem fidelidade e sem multa. É só avisar.</p>
         </details>
 
-        <!-- Entrou em 16/08/2026, com o nome dos concorrentes de volta - o Rafael
-             liberou depois de eu apontar que "AppBarber preco" e' a busca de maior
-             intencao de compra do nicho e que a T43 estava custando isso. O corpo da
-             comparacao mora em /comparar/, nao aqui: a landing continua limpa, e quem
-             cai naquela pagina JA conhece o AppBarber - nao estamos apresentando. -->
         <details>
             <summary>Como vocês se comparam ao AppBarber e ao Booksy?</summary>
-            <p>A diferença maior é a unidade de cobrança: eles cobram por profissional e
-               aqui o preço é da barbearia. Com três barbeiros, isso é R$ 170 por mês de
-               diferença. Montamos uma
-               <a href="comparar/">comparação de preços com fonte e data</a>, incluindo os
-               casos em que a resposta certa não é a gente.</p>
+            <p>Eles cobram por profissional; aqui o preço é da barbearia. Com três barbeiros
+               isso dá R$ 170 por mês de diferença. A <a href="diferencial-dos-concorrentes/">comparação
+               com fonte e data</a> inclui os casos em que a resposta certa não é a gente.</p>
         </details>
     </div>
 </section>
@@ -1117,7 +1257,7 @@
 </section>
 
 <!-- Os tres links abaixo entraram em 17/08/2026 e resolvem a T103: as paginas
-     /manicure/, /clinica-estetica/ e /comparar/ estavam no sitemap mas NENHUMA
+     /manicure/, /clinica-estetica/ e /diferencial-dos-concorrentes/ estavam no sitemap mas NENHUMA
      pagina apontava para elas. Buscador trata link interno como voto — pagina
      orfa e' rastreada mais tarde e vale menos. Ficam no rodape, e nao no corpo,
      justamente para nao competir com a conversao da home, que fala com barbeiro. -->
@@ -1125,13 +1265,30 @@
     <div class="wrap centro">
         Horário Cheio · agendamento online para barbearias · Guarulhos, SP<br>
         WhatsApp (11) 93935-7759
-        <p class="rodape-links">
-            Também atendemos:
-            <a href="manicure/">manicure e nail designer</a> ·
-            <a href="clinica-estetica/">clínica de estética</a> ·
-            <a href="como-funciona/">como funciona, do cadastro ao horário marcado</a> ·
-            <a href="comparar/">comparação com AppBarber e Booksy</a>
-        </p>
+        <div class="cartoes-link">
+            <a class="cartao-link" href="agenda-global/">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9s1.3-6.3 3.8-9z"></path>
+                </svg>
+                <span>
+                    <b>Agenda Global</b>
+                    Barbearia, manicure, clínica de estética, dentista, médico, massagista,
+                    tatuador — todo atendimento com hora marcada. Veja como fica no seu ramo.
+                </span>
+            </a>
+
+            <a class="cartao-link" href="diferencial-dos-concorrentes/">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path>
+                </svg>
+                <span>
+                    <b>Diferencial dos concorrentes</b>
+                    O que muda no preço e no que você leva, comparado com AppBarber e Booksy —
+                    com fonte e data de cada valor.
+                </span>
+            </a>
+        </div>
     </div>
 </footer>
 

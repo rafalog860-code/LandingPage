@@ -7,7 +7,7 @@ User-agent: *
 Allow: /
 
 # A demo fica fora do indice por DOIS motivos, e o segundo e' o forte:
-#  1. e' uma barbearia de exemplo ("Navalha de Ouro") - conteudo de teste competindo
+#  1. e' uma barbearia de exemplo - conteudo de teste competindo
 #     na busca com a landing so atrapalha;
 #  2. calendario e' armadilha de rastreamento: cada dia, cada profissional e cada
 #     servico vira uma URL nova, e o robo entra num numero praticamente infinito de
