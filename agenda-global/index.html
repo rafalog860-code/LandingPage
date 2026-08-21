@@ -142,9 +142,15 @@ header {
 /* height:auto e' obrigatorio junto de width/height no <img>. Sem ele a altura
    fica presa nos 1688 do atributo e a imagem estica — foi o defeito que
    quebrou a home no ar em 16/08 (T76). Nao remover. */
+/* A BORDA NAO E' ENFEITE. Desde 20/08/2026 os prints do app nesta pagina sao a
+   versao clara, e o fundo deles (#f5f6f8) e' quase o mesmo da pagina: sem uma
+   linha em volta a tela do celular se dissolve no papel e o visitante nao ve onde
+   comeca o produto. Com o print escuro a sombra bastava; com o claro, nao.
+   Apontado pelo Rafael: "a imagem esta da mesma cor que a lateral". */
 .heroi img {
   width: 100%; height: auto; max-width: 300px; display: block; margin: 0 auto;
   border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+  border: var(--border-size-1) solid var(--linha);
 }
 
 /* ---------- botões ---------- */
@@ -243,6 +249,7 @@ td code {
 .telas.quatro figure { max-width: 210px; }
 .telas img {
   width: 100%; height: auto; border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+  border: var(--border-size-1) solid var(--linha);
 }
 .telas figcaption {
   color: var(--tinta-tenue); font-size: var(--font-size-0);
@@ -254,6 +261,7 @@ td code {
 .lado-a-lado .print img {
   width: 100%; height: auto; max-width: 290px; display: block; margin: 0 auto;
   border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+  border: var(--border-size-1) solid var(--linha);
 }
 
 /* ---------- FAQ ---------- */
@@ -411,6 +419,7 @@ details.acordeao table { margin-top: 0; }
 .painel-duplo img {
   width: 100%; height: auto; max-width: 340px; display: block; margin: 0 auto;
   border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+  border: var(--border-size-1) solid var(--linha);
 }
 .painel-duplo figcaption {
   color: var(--tinta-fraca); font-size: var(--font-size-1);
@@ -639,8 +648,8 @@ details.acordeao table { margin-top: 0; }
                 <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
             </figure>
             <figure>
-                <img src="../img/claro-tela-2.png" width="780" height="2620" loading="lazy" decoding="async"
-                     alt="Passo 2 do agendamento: dias e horários livres, com os já ocupados riscados">
+                <img src="../img/claro-tela-2.png" width="780" height="1944" loading="lazy" decoding="async"
+                     alt="Passo 2 do agendamento: calendário do mês com os dias sem vaga riscados, e abaixo os horários livres do dia escolhido, com um deles selecionado">
                 <figcaption>2. O horário, só o que está livre</figcaption>
             </figure>
             <figure>
@@ -755,7 +764,7 @@ details.acordeao table { margin-top: 0; }
             <figure>
                 <img src="../img/claro-faturamento.png" width="780" height="1220"
                      loading="lazy" decoding="async"
-                     alt="Tela de Faturamento no celular: atalhos de hoje, ontem, 7 dias, este mês e 30 dias, com R$ 840,00 já atendido em 7 atendimentos, ticket médio de R$ 120,00, R$ 420,00 ainda por atender e R$ 120,00 perdido com 1 falta">
+                     alt="Tela de Faturamento no celular: atalhos de hoje, ontem, 7 dias, este mês e 30 dias, com R$ 1.260,00 já atendido em 10 atendimentos, ticket médio de R$ 126,00, R$ 180,00 ainda por atender e R$ 120,00 perdido com 1 falta">
                 <figcaption>O período que você escolher, fechado sozinho</figcaption>
             </figure>
             <figure>
