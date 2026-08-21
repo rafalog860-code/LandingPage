@@ -77,7 +77,13 @@
   --papel-alt:  var(--gray-0);
   --tinta:      var(--gray-9);
   --tinta-fraca: var(--gray-7);
-  --tinta-tenue: var(--gray-6);
+  /* 21/08/2026: era var(--gray-6) (#868e96), que da' 3,32:1 no branco — abaixo dos
+     4,5:1 que a WCAG pede para texto pequeno, e este token veste justamente o texto
+     pequeno da pagina (figcaption, th, .mini, avisos). Reprovado pelo
+     LandingPage/testes/contraste-landing.js. #6b7177 continua sendo cinza discreto e
+     passa nos tres fundos da pagina: 4,94:1 no branco, 4,68:1 no #f8f9fa das secoes
+     alternadas e 4,55:1 no azul-veu. */
+  --tinta-tenue: #6b7177;
   --linha:      var(--gray-3);
 }
 
@@ -146,6 +152,10 @@ header {
 .heroi img {
   width: 100%; height: auto; max-width: 300px; display: block; margin: 0 auto;
   border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+  /* Borda acrescentada em 21/08/2026: o print do app e' um cartao branco e a
+     pagina e' branca, entao sombra sozinha dava 1,00:1 de separacao. Reprovado
+     pelo LandingPage/testes/contraste-landing.js. */
+  border: var(--border-size-1) solid var(--linha);
 }
 
 /* ---------- botões ---------- */
@@ -240,12 +250,38 @@ td.nosso, th.nosso { color: var(--marca-forte); font-weight: var(--font-weight-6
   color: var(--tinta-tenue); font-size: var(--font-size-0);
   margin-top: var(--size-2); text-align: center;
 }
+/* Palco das telas (21/08/2026) — a mesma correcao feita na /agenda-global/.
+   As telas do app sao cartoes brancos e aqui elas nem borda tinham, so' sombra:
+   1,00:1 contra a pagina. O LandingPage/testes/contraste-landing.js reprovou as duas
+   paginas de segmento junto com a global, porque o defeito era o mesmo nas tres.
+   O tom e' o --marca-veu da propria pagina, entao nao entra cor nova. */
+.telas-palco {
+  background: var(--marca-veu);
+  border: var(--border-size-1) solid var(--marca-linha);
+  border-radius: var(--radius-4);
+  padding: var(--size-7) var(--size-3);
+  margin-top: var(--size-7);
+}
+.telas-palco .telas { margin-top: 0; }
+.telas-palco .telas img {
+  border: var(--border-size-2) solid rgb(0 0 0 / .16);
+  box-shadow: 0 10px 24px -12px rgb(0 0 0 / .35);
+  background: #fff;
+}
+.telas-palco .telas figcaption { color: var(--tinta-fraca); }
+@media (max-width: 640px) {
+  .telas-palco { padding: var(--size-5) var(--size-2); border-radius: var(--radius-3); }
+}
 
 /* ---------- texto + print lado a lado ---------- */
 .lado-a-lado { display: grid; gap: var(--size-7); align-items: start; }
 .lado-a-lado .print img {
   width: 100%; height: auto; max-width: 290px; display: block; margin: 0 auto;
   border-radius: var(--radius-3); box-shadow: var(--shadow-2);
+  /* Borda acrescentada em 21/08/2026: o print do app e' um cartao branco e a
+     pagina e' branca, entao sombra sozinha dava 1,00:1 de separacao. Reprovado
+     pelo LandingPage/testes/contraste-landing.js. */
+  border: var(--border-size-1) solid var(--linha);
 }
 
 /* ---------- FAQ ---------- */
@@ -545,22 +581,24 @@ footer {
                 horário e o link para remarcar ou cancelar sozinha.</li>
         </ol>
 
-        <div class="telas">
-            <figure>
-                <img src="../img/manicure-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Tela do app mostrando a escolha do serviço Alongamento em Gel com duração de 120 minutos e preço de R$ 150,00">
-                <figcaption>1. Serviço, profissional, duração e preço</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/manicure-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Tela do app mostrando os dias e horários livres para a cliente escolher, com os horários já ocupados riscados">
-                <figcaption>2. Só aparece o que está livre</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/manicure-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
-                     alt="Tela de horário confirmado, com serviço, profissional, dia, horário e total de R$ 150,00">
-                <figcaption>3. Horário confirmado na hora</figcaption>
-            </figure>
+        <div class="telas-palco">
+            <div class="telas">
+                <figure>
+                    <img src="../img/manicure-tela-1.png" width="780" height="1688" loading="lazy" decoding="async"
+                         alt="Tela do app mostrando a escolha do serviço Alongamento em Gel com duração de 120 minutos e preço de R$ 150,00">
+                    <figcaption>1. Serviço, profissional, duração e preço</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/manicure-tela-2.png" width="780" height="1688" loading="lazy" decoding="async"
+                         alt="Tela do app mostrando os dias e horários livres para a cliente escolher, com os horários já ocupados riscados">
+                    <figcaption>2. Só aparece o que está livre</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/manicure-tela-4.png" width="780" height="1688" loading="lazy" decoding="async"
+                         alt="Tela de horário confirmado, com serviço, profissional, dia, horário e total de R$ 150,00">
+                    <figcaption>3. Horário confirmado na hora</figcaption>
+                </figure>
+            </div>
         </div>
 
         <p class="mini" style="text-align:center;margin-top:var(--size-5);">

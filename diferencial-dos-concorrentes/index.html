@@ -78,7 +78,13 @@
   --papel-alt:  var(--gray-0);
   --tinta:      var(--gray-9);
   --tinta-fraca: var(--gray-7);
-  --tinta-tenue: var(--gray-6);
+  /* 21/08/2026: era var(--gray-6) (#868e96), que da' 3,32:1 no branco — abaixo dos
+     4,5:1 que a WCAG pede para texto pequeno, e este token veste justamente o texto
+     pequeno da pagina (figcaption, th, .mini, avisos). Reprovado pelo
+     LandingPage/testes/contraste-landing.js. #6b7177 continua sendo cinza discreto e
+     passa nos tres fundos da pagina: 4,94:1 no branco, 4,68:1 no #f8f9fa das secoes
+     alternadas e 4,55:1 no azul-veu. */
+  --tinta-tenue: #6b7177;
   --linha:      var(--gray-3);
 }
 
@@ -147,6 +153,20 @@ header {
   box-shadow: var(--shadow-1);
 }
 .btn-vazio { background: none; color: var(--marca-forte); box-shadow: none; }
+
+/* Opt-in de WhatsApp (21/08/2026). Mesmo bloco das outras duas paginas.
+   Desmarcado por padrao: sem marcar, o href dos botoes fica identico ao que era.
+   O porque esta' no comentario do <script>, no fim do arquivo. */
+.optin { margin: var(--size-5) 0 0; max-width: 46ch; }
+.optin label {
+  display: flex; gap: var(--size-2); align-items: flex-start; cursor: pointer;
+  font-size: var(--font-size-1); color: var(--tinta-fraca);
+  line-height: var(--font-lineheight-3);
+}
+.optin input {
+  flex: 0 0 auto; width: 17px; height: 17px; margin: 4px 0 0;
+  accent-color: var(--marca); cursor: pointer;
+}
 
 /* ---------- cartões ---------- */
 .card {
@@ -460,6 +480,15 @@ footer {
 
         <p style="margin-top:var(--size-5);"><strong>14 dias grátis para testar, sem cartão.</strong>
            Sem fidelidade e sem multa para cancelar.</p>
+
+        <p class="optin">
+            <label>
+                <input type="checkbox" id="optin-zap">
+                <span>Autorizo o Horário Cheio a me enviar novidades, dicas e ofertas
+                      pelo WhatsApp. Dá para sair quando quiser, é só escrever "parar".
+                      <a href="../privacidade/">Privacidade</a>.</span>
+            </label>
+        </p>
     </div>
 </section>
 
@@ -660,9 +689,52 @@ footer {
            <a href="../">horariocheio.com.br</a> ·
            <a href="../manicure/">versão para manicure</a> ·
            <a href="../clinica-estetica/">versão para clínica de estética</a> ·
-           <a href="../agenda-global/">Agenda Global</a></p>
+           <a href="../agenda-global/">Agenda Global</a> ·
+           <a href="../privacidade/">política de privacidade</a></p>
     </div>
 </footer>
+
+<!-- Opt-in de WhatsApp (21/08/2026) — PRIMEIRO javascript executavel desta pagina.
+     Bloco identico ao da home e da /agenda-global/.
+     O que ele faz: quando a caixa esta' marcada, acrescenta a frase de autorizacao
+     ao ?text= de TODOS os links wa.me da pagina, para que o consentimento fique
+     escrito na mensagem que o proprio visitante envia. E' o registro de opt-in que
+     a Cloud API cobra para template de Marketing.
+
+     Duas decisoes que valem reler antes de mexer:
+
+     1. Os dois hrefs de cada botao sao calculados UMA vez e guardados; marcar e
+        desmarcar so' troca entre eles. Assim o estado desmarcado devolve a string
+        original inteira, sem passar por decode/encode — que nao e' round-trip fiel
+        (encodeURIComponent nao escapa "!", e os links usam %21).
+     2. A frase e' ACRESCENTADA ao fim do href. So' funciona porque text= e' o ultimo
+        (e unico) parametro em todos os links desta pagina. Se entrar outro parametro
+        depois dele, este append passa a corromper a URL. -->
+<script>
+(function () {
+    var caixa = document.getElementById('optin-zap');
+    if (!caixa) return;
+
+    var FRASE = '\n\nAutorizo o Horário Cheio a me enviar novidades e ofertas por este WhatsApp.';
+    var links = document.querySelectorAll('a[href*="wa.me/"]');
+    var semFrase = [], comFrase = [];
+
+    for (var i = 0; i < links.length; i++) {
+        var href = links[i].getAttribute('href');
+        semFrase[i] = href;
+        comFrase[i] = href.indexOf('?text=') > -1 ? href + encodeURIComponent(FRASE) : href;
+    }
+
+    function aplicar() {
+        for (var i = 0; i < links.length; i++) {
+            links[i].setAttribute('href', caixa.checked ? comFrase[i] : semFrase[i]);
+        }
+    }
+
+    caixa.addEventListener('change', aplicar);
+    aplicar();
+})();
+</script>
 
 </body>
 </html>

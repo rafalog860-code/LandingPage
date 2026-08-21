@@ -78,7 +78,13 @@
   --papel-alt:  var(--gray-0);
   --tinta:      var(--gray-9);
   --tinta-fraca: var(--gray-7);
-  --tinta-tenue: var(--gray-6);
+  /* 21/08/2026: era var(--gray-6) (#868e96), que da' 3,32:1 no branco — abaixo dos
+     4,5:1 que a WCAG pede para texto pequeno, e este token veste justamente o texto
+     pequeno da pagina (figcaption, th, .mini, avisos). Reprovado pelo
+     LandingPage/testes/contraste-landing.js. #6b7177 continua sendo cinza discreto e
+     passa nos tres fundos da pagina: 4,94:1 no branco, 4,68:1 no #f8f9fa das secoes
+     alternadas e 4,55:1 no azul-veu. */
+  --tinta-tenue: #6b7177;
   --linha:      var(--gray-3);
 }
 
@@ -251,6 +257,42 @@ td code {
   width: 100%; height: auto; border-radius: var(--radius-3); box-shadow: var(--shadow-2);
   border: var(--border-size-1) solid var(--linha);
 }
+
+/* Palco das telas (21/08/2026) — o contraste, nao a decoracao.
+   As telas do app sao cartoes BRANCOS. Elas estavam soltas na section.alt, que e'
+   #f8f9fa: 1,03:1 de diferenca entre a tela e a pagina, ou seja, nenhuma. A borda
+   de 1px em --linha (#dee2e6) era a unica separacao e nao dava conta. O Rafael
+   reprovou, e essa e' a terceira vez que contraste volta como pedido — dai a regra
+   executavel em LandingPage/testes/contraste-landing.js.
+   O tom e' o --marca-veu, que e' o mesmo da secao "Quer ver com os seus servicos?",
+   entao nao entra cor nova na pagina. A moldura ganha um tom da marca com alfa em
+   vez de cinza, para a separacao existir tambem para quem nao distingue cinza. */
+.telas-palco {
+  background: var(--marca-veu);
+  border: var(--border-size-1) solid var(--marca-linha);
+  border-radius: var(--radius-4);
+  padding: var(--size-7) var(--size-3);
+  margin-top: var(--size-7);
+}
+.telas-palco .telas { margin-top: 0; }
+/* O palco come largura, e a tira dos 4 passos tem que continuar numa linha so' no
+   desktop — foi o primeiro efeito colateral desta mudanca: com 210px ela quebrou
+   3+1, o mesmo defeito que o comentario do .telas.quatro ja' avisava. Sobram
+   940 - 32 = 908px uteis; 4 x 200 + 3 x 24 de gap fecha em 872. */
+.telas-palco .telas.quatro figure { max-width: 200px; }
+/* No celular a tira ja' empilhava uma por linha (T179, esperando decisao do Rafael).
+   O palco nao pode piorar isso comendo largura: aqui ele encolhe a moldura e a tela
+   CRESCE de 210 para 260px, que e' mais do que a pagina mostrava antes. */
+@media (max-width: 640px) {
+  .telas-palco { padding: var(--size-5) var(--size-2); border-radius: var(--radius-3); }
+  .telas-palco .telas.quatro figure { max-width: 260px; }
+}
+.telas-palco .telas img {
+  border: var(--border-size-2) solid rgb(11 114 133 / .22);
+  box-shadow: 0 10px 24px -12px rgb(7 70 82 / .45);
+  background: #fff;
+}
+.telas-palco .telas figcaption { color: var(--tinta-fraca); }
 .telas figcaption {
   color: var(--tinta-tenue); font-size: var(--font-size-0);
   margin-top: var(--size-2); text-align: center;
@@ -377,6 +419,20 @@ footer {
 }
 .heroi-selo strong { color: var(--marca-forte); font-weight: var(--font-weight-7); }
 
+/* Opt-in de WhatsApp (21/08/2026). Mesmo bloco das outras duas paginas, com os
+   tokens claros desta. Desmarcado por padrao: sem marcar, o href dos botoes fica
+   identico ao que era. O porque esta' no comentario do <script>, no fim do arquivo. */
+.optin { margin: var(--size-4) 0 0; max-width: 46ch; }
+.optin label {
+  display: flex; gap: var(--size-2); align-items: flex-start; cursor: pointer;
+  font-size: var(--font-size-1); color: var(--tinta-fraca);
+  line-height: var(--font-lineheight-3);
+}
+.optin input {
+  flex: 0 0 auto; width: 17px; height: 17px; margin: 4px 0 0;
+  accent-color: var(--marca); cursor: pointer;
+}
+
 /* rotulo "Cliente" / "Negocio" na demonstracao */
 .lado { margin-top: var(--size-8); }
 .lado .etiqueta {
@@ -480,7 +536,7 @@ details.acordeao table { margin-top: 0; }
         "@id": "https://horariocheio.com.br/#app"
       },
       "datePublished": "2026-08-16",
-      "dateModified": "2026-08-20",
+      "dateModified": "2026-08-21",
       "description": "Agendamento online para quem trabalha com hora marcada: o cliente escolhe o serviço, o profissional e o horário disponível, e o agendamento cai direto na agenda do negócio. Barbearias, salões e cabeleireiros, manicures e nail designers, lash designers, maquiadoras, estética, depilação, tatuagem, massagem, podologia, fisioterapia, personal trainers, dentistas, médicos, psicólogos, pet shops, professores particulares e lava-jatos."
     },
     {
@@ -593,10 +649,19 @@ details.acordeao table { margin-top: 0; }
                 <strong>R$ 49,90/mês</strong> • profissionais ilimitados • sem fidelidade •
                 sem cartão
             </p>
+
+            <p class="optin">
+                <label>
+                    <input type="checkbox" id="optin-zap">
+                    <span>Autorizo o Horário Cheio a me enviar novidades, dicas e ofertas
+                          pelo WhatsApp. Dá para sair quando quiser, é só escrever "parar".
+                          <a href="../privacidade/">Privacidade</a>.</span>
+                </label>
+            </p>
         </div>
 
         <div>
-            <img src="../img/claro-tela-1.png" width="780" height="1808"
+            <img src="../img/claro-tela-1.png" width="780" height="2020"
                  fetchpriority="high" decoding="async"
                  alt="Tela do agendamento no celular: o cliente escolhe o serviço e o profissional, e já vê a duração de 90 minutos e o preço de R$ 180,00">
         </div>
@@ -621,7 +686,9 @@ details.acordeao table { margin-top: 0; }
      no meio do texto pesarem mais do que a fidelidade da cor rende. Como a inversão
      é feita, e por que ela não desbota a marca do cliente, está no
      Instagram/video/tema_claro.js.
-     As alturas de cada passo são diferentes e por isso não são mais 1688 iguais.
+     As quatro têm 780x2020 iguais desde 21/08/2026: o print bruto sai com a altura
+     natural de cada passo (1808, 1944, 1584, 2020) e o LandingPage/normalizar_telas.py
+     iguala preenchendo embaixo. Antes disso a tira ficava serrilhada.
      O lado do negócio está em cartões de texto, sem print: não existe print real
      da tela de agenda hoje, e por decisão do Rafael (19/08) não entra mockup ao
      lado de print de verdade (T169). -->
@@ -641,27 +708,29 @@ details.acordeao table { margin-top: 0; }
             <h3>Escolhe o serviço → o profissional → o horário → confirma</h3>
         </div>
 
-        <div class="telas quatro">
-            <figure>
-                <img src="../img/claro-tela-1.png" width="780" height="1808" loading="lazy" decoding="async"
-                     alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
-                <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/claro-tela-2.png" width="780" height="1944" loading="lazy" decoding="async"
-                     alt="Passo 2 do agendamento: calendário do mês com os dias sem vaga riscados, e abaixo os horários livres do dia escolhido, com um deles selecionado">
-                <figcaption>2. O horário, só o que está livre</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/claro-tela-3.png" width="780" height="1584" loading="lazy" decoding="async"
-                     alt="Passo 3 do agendamento: campos de nome e celular do cliente">
-                <figcaption>3. Nome e celular</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/claro-tela-4.png" width="780" height="2020" loading="lazy" decoding="async"
-                     alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
-                <figcaption>4. Confirma</figcaption>
-            </figure>
+        <div class="telas-palco">
+            <div class="telas quatro">
+                <figure>
+                    <img src="../img/claro-tela-1.png" width="780" height="2020" loading="lazy" decoding="async"
+                         alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
+                    <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/claro-tela-2.png" width="780" height="2020" loading="lazy" decoding="async"
+                         alt="Passo 2 do agendamento: calendário do mês com os dias sem vaga riscados, e abaixo os horários livres do dia escolhido, com um deles selecionado">
+                    <figcaption>2. O horário, só o que está livre</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/claro-tela-3.png" width="780" height="2020" loading="lazy" decoding="async"
+                         alt="Passo 3 do agendamento: campos de nome e celular do cliente">
+                    <figcaption>3. Nome e celular</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/claro-tela-4.png" width="780" height="2020" loading="lazy" decoding="async"
+                         alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
+                    <figcaption>4. Confirma</figcaption>
+                </figure>
+            </div>
         </div>
 
         <div class="lado">
@@ -749,10 +818,16 @@ details.acordeao table { margin-top: 0; }
      Instagram/video/print_generico.js. Os prints do Faturamento que a home usa não
      servem aqui: o img/3-de-onde-veio.png lista "Corte + Barba" na própria tela.
 
-     O BLOCO DO CONSULTOR, no fim da seção, veio de outra instrução e foi
-     PRESERVADO de propósito — ele não é funcionalidade do sistema, é serviço
-     nosso, e por isso fica separado dos seis cartões e depois da frase sobre o
-     arquivo exportado. Ver a pergunta aberta na T182. -->
+     O BLOCO DO CONSULTOR, no fim da seção, não é funcionalidade do sistema: é
+     serviço nosso, e por isso fica separado dos seis cartões e depois da frase
+     sobre o arquivo exportado.
+     Reescrito em 21/08/2026, junto com a home: a consultoria virou serviço PAGO e
+     AVULSO (R$ 37,90 por análise) e deixou de exigir que a pessoa seja cliente do
+     app ou que tenha um mês de agenda rodando. O que ela sempre entrega passou a
+     ser presença digital, concorrência (inclusive o preço que os vizinhos cobram)
+     e divulgação; os números da agenda entram por cima, quando existem. Isso fecha
+     a pergunta aberta da T182. O texto aqui fala em "mesmo serviço" e não em
+     "corte" porque esta página atende todos os segmentos. -->
 <section class="veu">
     <div class="wrap">
         <h2>Além da agenda, acompanhe seu negócio.</h2>
@@ -818,18 +893,30 @@ details.acordeao table { margin-top: 0; }
            dados para lugar nenhum.</p>
 
         <div class="card" style="margin-top:var(--size-5);">
-            <h3>Ou pergunte para a gente: um consultor no WhatsApp</h3>
-            <p>Depois do primeiro mês de uso, você manda a sua pergunta no nosso WhatsApp
-               e a resposta vem olhando os números do seu negócio. Do tipo <em>"quais dias
-               e horários não se pagam?"</em>, <em>"que mensagem eu mando para quem deixou
-               de vir?"</em> ou <em>"monte um plano de 30 dias para eu faturar mais usando
-               só os clientes que já são meus"</em>.
-               <strong>É a partir do segundo mês</strong> porque antes disso não existe
-               histórico suficiente para a resposta valer alguma coisa.</p>
+            <h3>Ou pergunte para a gente: consultoria por R$ 37,90</h3>
+            <p>Uma análise, um pagamento, sem assinatura, e <strong>você não precisa
+               contratar o app</strong> para pedir. Você manda o Instagram e o site do seu
+               negócio, a gente estuda a sua região e responde pelo WhatsApp, por escrito.</p>
+            <p>Vem na análise: o que o cliente encontra quando procura você no Google e
+               no Instagram, quem são os concorrentes ao seu redor e <strong>quanto eles
+               cobram pelo mesmo serviço</strong>, o que eles fazem que você pode
+               aproveitar, e <strong>onde está o dinheiro que já é seu</strong>: cliente
+               que veio uma vez e sumiu, horário que fica vazio toda semana, serviço que
+               ocupa a agenda e rende pouco.</p>
+            <p>Metade do que a gente aponta você resolve sozinho, sem gastar nada. A outra
+               metade tem preço, e ele vem escrito do lado, inclusive quanto colocar num
+               anúncio no Google ou no Instagram. Se ainda não for a sua hora de anunciar,
+               a gente diz isso.</p>
+            <p>Se você já usa a agenda, a mesma análise entra mais fundo, porque entram os
+               números do seu movimento: <em>"quais dias e horários não se pagam?"</em>,
+               <em>"que mensagem eu mando para quem deixou de vir?"</em> ou <em>"monte um
+               plano de 30 dias para eu faturar mais usando só os clientes que já são
+               meus"</em>. O preço continua o mesmo.</p>
         </div>
 
         <div class="botoes">
             <a class="btn" href="https://wa.me/5511939357759?text=Oi%21%20Vi%20a%20p%C3%A1gina%20da%20Agenda%20Global%20e%20quero%20testar%2014%20dias%20gr%C3%A1tis." target="_blank" rel="noopener">Testar grátis por 14 dias</a>
+            <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20a%20consultoria%20de%20R%24%2037%2C90%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">Consultoria por R$ 37,90</a>
         </div>
     </div>
 </section>
@@ -1419,7 +1506,8 @@ details.acordeao table { margin-top: 0; }
            <a href="../">horariocheio.com.br</a> ·
            <a href="../manicure/">manicure</a> ·
            <a href="../clinica-estetica/">clínica de estética</a> ·
-           <a href="../diferencial-dos-concorrentes/">diferencial dos concorrentes</a></p>
+           <a href="../diferencial-dos-concorrentes/">diferencial dos concorrentes</a> ·
+           <a href="../privacidade/">política de privacidade</a></p>
     </div>
 </footer>
 
@@ -1565,6 +1653,47 @@ details.acordeao table { margin-top: 0; }
     trilho.addEventListener('scroll', function () {
         if (arrastando) pos = trilho.scrollLeft;
     }, { passive: true });
+})();
+</script>
+
+<!-- Opt-in de WhatsApp (21/08/2026). Bloco identico nas 3 paginas.
+     O que ele faz: quando a caixa esta' marcada, acrescenta a frase de autorizacao
+     ao ?text= de TODOS os links wa.me da pagina, para que o consentimento fique
+     escrito na mensagem que o proprio visitante envia. E' o registro de opt-in que
+     a Cloud API cobra para template de Marketing.
+
+     Duas decisoes que valem reler antes de mexer:
+
+     1. Os dois hrefs de cada botao sao calculados UMA vez e guardados; marcar e
+        desmarcar so' troca entre eles. Assim o estado desmarcado devolve a string
+        original inteira, sem passar por decode/encode — que nao e' round-trip fiel
+        (encodeURIComponent nao escapa "!", e os links usam %21).
+     2. A frase e' ACRESCENTADA ao fim do href. So' funciona porque text= e' o ultimo
+        (e unico) parametro em todos os links desta pagina. Se entrar outro parametro
+        depois dele, este append passa a corromper a URL. -->
+<script>
+(function () {
+    var caixa = document.getElementById('optin-zap');
+    if (!caixa) return;
+
+    var FRASE = '\n\nAutorizo o Horário Cheio a me enviar novidades e ofertas por este WhatsApp.';
+    var links = document.querySelectorAll('a[href*="wa.me/"]');
+    var semFrase = [], comFrase = [];
+
+    for (var i = 0; i < links.length; i++) {
+        var href = links[i].getAttribute('href');
+        semFrase[i] = href;
+        comFrase[i] = href.indexOf('?text=') > -1 ? href + encodeURIComponent(FRASE) : href;
+    }
+
+    function aplicar() {
+        for (var i = 0; i < links.length; i++) {
+            links[i].setAttribute('href', caixa.checked ? comFrase[i] : semFrase[i]);
+        }
+    }
+
+    caixa.addEventListener('change', aplicar);
+    aplicar();
 })();
 </script>
 

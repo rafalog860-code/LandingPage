@@ -67,6 +67,35 @@ APP = {
 }
 
 
+# A consultoria e' SERVICO, nao software: entra como Service proprio e nao como mais
+# uma oferta do SoftwareApplication. Se entrasse como oferta do app, o schema diria
+# que existe um plano de R$ 37,90 do aplicativo — e o argumento da pagina, desde
+# 21/08/2026, e' exatamente o contrario: da' para pagar a consultoria SEM contratar
+# o app. Preco avulso, por analise.
+CONSULTORIA = {
+    "@type": "Service", "@id": SITE + "#consultoria",
+    "name": "Consultoria para barbearia",
+    "serviceType": "Consultoria de marketing e presença digital",
+    "provider": {"@id": SITE + "#org"},
+    "url": SITE, "inLanguage": "pt-BR",
+    "areaServed": {"@type": "Country", "name": "Brasil"},
+    "audience": {"@type": "BusinessAudience", "audienceType": "Barbearias e barbeiros"},
+    "description": ("Análise avulsa da barbearia, entregue por escrito no WhatsApp: como está "
+                    "a presença digital no Google e no Instagram, quais são os concorrentes ao "
+                    "redor e qual o preço médio cobrado pelo corte na região, o que a "
+                    "concorrência está fazendo que dá para aproveitar, quais soluções são "
+                    "gratuitas e quais são pagas, e como anunciar no Google Ads e fazer "
+                    "campanha no Instagram. Não é preciso contratar o aplicativo de "
+                    "agendamento para pedir."),
+    "offers": {"@type": "Offer", "price": "37.90", "priceCurrency": "BRL",
+               "category": "Análise avulsa", "url": SITE,
+               "availability": "https://schema.org/InStock",
+               "description": ("Pagamento único por análise, sem assinatura e sem fidelidade. "
+                               "O mesmo preço para quem assina o aplicativo e para quem não "
+                               "assina.")},
+}
+
+
 # Paginas de segmento e a de comparacao: todas seguem o mesmo formato
 # (WebPage + FAQPage). So a landing tem Organization, WebSite e SoftwareApplication,
 # que sao do site inteiro e nao podem ser repetidos em cada pagina.
@@ -86,7 +115,7 @@ SECUNDARIAS = {
     },
     "global": {
         "pasta": "agenda-global",
-        "modificado": "2026-08-20",
+        "modificado": "2026-08-21",
         "nome": "Agenda Global: uma agenda para barbearia, manicure, estética, consultório e mais",
         "descricao": ("Agendamento online para quem trabalha com hora marcada: o cliente "
                       "escolhe o serviço, o profissional e o horário disponível, e o "
@@ -132,6 +161,7 @@ def montar(pagina, html):
                   "name": "Horário Cheio", "inLanguage": "pt-BR",
                   "publisher": {"@id": SITE + "#org"}},
                  APP,
+                 CONSULTORIA,
                  {"@type": "FAQPage", "@id": SITE + "#faq", "mainEntity": faq}]
     else:
         meta = SECUNDARIAS[pagina]
