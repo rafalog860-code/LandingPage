@@ -8,6 +8,7 @@ elas sao extraidas do proprio HTML.
 
 Uso:
     python gerar_jsonld.py
+    python gerar_jsonld.py --conferir   # nao escreve; diz se algo sairia diferente
 
 E idempotente: se ja houver um bloco JSON-LD gerado por aqui, ele e' SUBSTITUIDO
 (delimitado pelos marcadores abaixo), nunca duplicado.
@@ -189,6 +190,20 @@ PAGINAS = {"landing": BASE / "index.html"}
 for _nome, _meta in SECUNDARIAS.items():
     PAGINAS[_nome] = BASE / _meta["pasta"] / "index.html"
 
+# --conferir: nao escreve nada, so' diz se alguma pagina SAIRIA diferente do que esta'
+# no disco. Existe por um susto de 21/08/2026: o no' `Service` da consultoria apareceu
+# dentro do bloco gerado da home e eu concluí, olhando so' o HTML, que a proxima execucao
+# do gerador o apagaria. Nao apagaria — ele ja' tinha sido trazido para o `CONSULTORIA`
+# aqui em cima, e eu nao conferi essa metade antes de dar o alarme.
+#
+# O susto era falso, o risco nao: nada impede alguem de editar o bloco a mao, e o
+# prejuizo aparece calado, uma execucao depois. Este modo responde a pergunta em um
+# segundo, em vez de exigir que alguem compare os dois lados de cabeca. Sai com codigo 1
+# se houver divergencia, entao serve de guarda no verificar_fechamento.sh.
+CONFERIR = "--conferir" in sys.argv
+
+divergentes = []
+
 for nome, caminho in PAGINAS.items():
     if not caminho.exists():
         sys.exit(f"nao achei {caminho}")
@@ -214,5 +229,23 @@ for nome, caminho in PAGINAS.items():
         html = html.replace("</head>", bloco + "\n\n</head>", 1)
         acao = "inserido"
 
+    if CONFERIR:
+        atual = caminho.read_text(encoding="utf-8")
+        igual = atual == html
+        if not igual:
+            divergentes.append(nome)
+        print(f"{nome:9} {'igual' if igual else 'DIVERGENTE':12} {n_faq} perguntas")
+        continue
+
     caminho.write_text(html, encoding="utf-8", newline="")
     print(f"{nome:9} {acao:12} {n_faq} perguntas  ->  {caminho.name}")
+
+if CONFERIR:
+    if divergentes:
+        print()
+        print(f"{len(divergentes)} pagina(s) sairiam diferentes: {', '.join(divergentes)}.")
+        print("Ou alguem editou o bloco JSON-LD a mao (e rodar o gerador vai apagar), ou o")
+        print("gerador mudou e as paginas nao foram regeradas. Rode sem --conferir.")
+        sys.exit(1)
+    print()
+    print("Todas iguais: rodar o gerador nao mudaria nada.")
