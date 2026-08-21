@@ -72,18 +72,21 @@ APP = {
 # que sao do site inteiro e nao podem ser repetidos em cada pagina.
 # Para acrescentar um segmento novo: uma entrada aqui e a pagina em <pasta>/index.html.
 SECUNDARIAS = {
-    "comparar": {
-        "pasta": "comparar",
-        "nome": "AppBarber, Booksy ou Horário Cheio: comparação de preços",
+    # As pastas "comparar" e "como-funciona" foram renomeadas em 19/08/2026 e este
+    # dicionario ficou apontando para o nome velho ate 20/08/2026 — o script morria
+    # em "nao achei .../comparar/index.html" (T171/T174). Corrigido junto do campo
+    # "modificado": sem ele, o script sobrescrevia com uma data fixa o dateModified
+    # que cada pagina ja' trazia, e a /agenda-global/ (20/08) voltaria para 17/08.
+    "diferencial": {
+        "pasta": "diferencial-dos-concorrentes",
+        "nome": "Diferencial dos concorrentes: AppBarber, Booksy ou Horário Cheio",
         "descricao": ("Comparação de preços entre AppBarber, Booksy e Horário Cheio "
                       "para barbearias, com fonte e data de consulta."),
+        "modificado": "2026-08-17",
     },
-    # A pasta virou "agenda-global" em 19/08/2026 e este dicionario ainda nao foi
-    # acertado — e' a T171. Nome e descricao ja' foram atualizados aqui em
-    # 20/08/2026 para bater com o que esta no <head> da pagina, para que o conserto
-    # da T171 nao reverta o JSON-LD que a pagina serve hoje.
-    "como-funciona": {
-        "pasta": "como-funciona",
+    "global": {
+        "pasta": "agenda-global",
+        "modificado": "2026-08-20",
         "nome": "Agenda Global: uma agenda para barbearia, manicure, estética, consultório e mais",
         "descricao": ("Agendamento online para quem trabalha com hora marcada: o cliente "
                       "escolhe o serviço, o profissional e o horário disponível, e o "
@@ -95,6 +98,7 @@ SECUNDARIAS = {
     },
     "manicure": {
         "pasta": "manicure",
+        "modificado": "2026-08-17",
         "nome": "Sistema de agendamento para manicure e nail designer",
         "descricao": ("Agenda online para manicure, pedicure e nail designer com a marca "
                       "do próprio estúdio: a cliente marca pelo link, cada serviço com a "
@@ -102,6 +106,7 @@ SECUNDARIAS = {
     },
     "estetica": {
         "pasta": "clinica-estetica",
+        "modificado": "2026-08-17",
         "nome": "Sistema de agendamento para clínica de estética",
         "descricao": ("Agenda online para clínica de estética e esteticista com a marca da "
                       "própria clínica: agenda por profissional, link no lugar da conversa "
@@ -142,7 +147,8 @@ def montar(pagina, html):
              # e' sinal de spam, e data velha desperdica a reescrita.
              # 17/08/2026: as tres foram redesenhadas (Open Props, fundo claro,
              # secao nova do painel), entao o dateModified andou junto.
-             "datePublished": "2026-08-16", "dateModified": "2026-08-17",
+             "datePublished": "2026-08-16",
+             "dateModified": meta["modificado"],
              "description": meta["descricao"]},
             {"@type": "FAQPage", "@id": url + "#faq", "mainEntity": faq},
         ]
