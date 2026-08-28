@@ -112,14 +112,14 @@
     .hero img { width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto;
                 border-radius: 18px; border: 1px solid var(--borda); }
 
-    /* Selo de preco do heroi (19/08/2026). Fica logo abaixo dos botoes e precisa
-       ser lido de relance — dai o cartao, e nao mais uma linha de texto fraco.
-       Usa os mesmos tokens do resto da pagina. */
+    /* Selo do heroi (19/08/2026). Fica logo abaixo dos botoes e precisa ser lido
+       de relance — dai o cartao, e nao mais uma linha de texto fraco. Desde
+       26/08/2026 traz so' risco/valor (ilimitados, sem fidelidade, sem cartao),
+       sem preco: valor antes, preco depois (regra "preco nao no comeco"). */
     .hero-selo { display: inline-block; margin-top: 18px; font-size: .92rem;
                  color: var(--texto-fraco); background: var(--preto-card);
                  border: 1px solid var(--borda); border-radius: 10px;
                  padding: 10px 14px; line-height: 1.5; }
-    .hero-selo strong { color: var(--ouro); }
 
     /* Botoes --------------------------------------------------------------- */
     .botoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
@@ -256,14 +256,6 @@
     .card .rosto { width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
                    border: 1px solid var(--borda); margin-bottom: 12px; }
     .num { font-family: "Fraunces", Georgia, serif; color: var(--ouro); font-size: 1.5rem; display: block; }
-
-    /* Vaga de depoimento ainda nao preenchida. Tracejada de proposito: le-se como
-       "espaco reservado", nao como card quebrado. */
-    .card.vaga { border-style: dashed; background: transparent; text-align: center; }
-    .card.vaga .rosto { margin: 0 auto 12px; border-style: dashed;
-                        display: grid; place-items: center; color: var(--texto-fraco);
-                        font-size: 1.3rem; }
-    .card.vaga p { color: var(--texto-fraco); }
 
     /* Telas ---------------------------------------------------------------- */
     .telas { display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr); }
@@ -988,8 +980,8 @@
             </tr>
             <tr>
                 <td>“Marcaram cinco horários com número falso e sumiram.”</td>
-                <td>Número inventado não passa, e o mesmo celular só segura três horários
-                    em aberto. Pelo seu painel você continua marcando quantos quiser.</td>
+                <td>O mesmo celular só segura três horários em aberto. Pelo seu painel
+                    você continua marcando quantos quiser.</td>
             </tr>
         </table>
     </div>
@@ -1119,30 +1111,12 @@
      de ouro do agente proibe, e prometer resultado aqui e' publicidade enganosa. -->
 <section class="alt">
     <div class="wrap">
-        <h2>Consultoria para a sua barbearia, por <span class="ouro">R$ 37,90</span></h2>
+        <h2>Consultoria para a sua barbearia</h2>
 
         <p class="sub">Uma análise, um pagamento. Não é assinatura, não tem fidelidade e
            você <strong>não precisa contratar o app</strong> para pedir. Você manda o
            Instagram e o site da barbearia, a gente estuda a sua região e responde pelo
            WhatsApp, por escrito, com o que fazer primeiro.</p>
-
-        <div class="preco" style="margin-top:26px;">
-            <h3 style="margin-top:0;">A consultoria</h3>
-            <div class="valor">R$ 37,90 <small>por análise</small></div>
-
-            <ul>
-                <li>Cliente do app ou não, o preço é o mesmo</li>
-                <li>Pagamento por Pix, uma vez, antes da análise</li>
-                <li>A resposta volta pelo WhatsApp, escrita para você ler no celular</li>
-                <li>Quiser outra daqui a alguns meses, é só pedir de novo</li>
-            </ul>
-
-            <div class="botoes" style="justify-content:center;">
-                <a class="btn btn-ouro"
-                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20a%20consultoria%20de%20R%24%2037%2C90%20para%20a%20minha%20barbearia."
-                   target="_blank" rel="noopener">Quero a consultoria</a>
-            </div>
-        </div>
 
         <h3 class="painel-titulo">O que chega no seu WhatsApp</h3>
 
@@ -1230,10 +1204,22 @@
            a que você quiser: se a resposta estiver na sua região ou no movimento da sua
            barbearia, ela vem.</p>
 
-        <div class="botoes" style="justify-content:center;">
-            <a class="btn btn-ouro"
-               href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20a%20consultoria%20de%20R%24%2037%2C90%20para%20a%20minha%20barbearia."
-               target="_blank" rel="noopener">Quero a consultoria por R$ 37,90</a>
+        <div class="preco" style="margin-top:26px;">
+            <h3 style="margin-top:0;">A consultoria</h3>
+            <div class="valor">R$ 37,90 <small>por análise</small></div>
+
+            <ul>
+                <li>Cliente do app ou não, o preço é o mesmo</li>
+                <li>Pagamento por Pix, uma vez, antes da análise</li>
+                <li>A resposta volta pelo WhatsApp, escrita para você ler no celular</li>
+                <li>Quiser outra daqui a alguns meses, é só pedir de novo</li>
+            </ul>
+
+            <div class="botoes" style="justify-content:center;">
+                <a class="btn btn-ouro"
+                   href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20a%20consultoria%20de%20R%24%2037%2C90%20para%20a%20minha%20barbearia."
+                   target="_blank" rel="noopener">Quero a consultoria</a>
+            </div>
         </div>
     </div>
 </section>
@@ -1369,67 +1355,11 @@
     </div>
 </section>
 
-<!-- Depoimentos (T38) --------------------------------------------------------
-     Rafael pediu em 16/08/2026 tres depoimentos com inicial do nome e foto, "para
-     trocar depois que tiver os primeiros clientes". Nao escrevi os depoimentos
-     inventados, e o motivo e' de venda antes de ser juridico: o Horario Cheio nao
-     tem cliente pagante, entao seria pessoa que nao existe elogiando uso que nao
-     houve, com foto de banco de imagens, num site ligado ao CPF dele - e o publico
-     alvo e' justamente quem confere "barbearia tal em Guarulhos" no Google Maps em
-     cinco segundos. Somado a isso, publicidade enganosa (CDC art. 37, §1).
-
-     O que entrou no lugar: as tres vagas VISIVEIS. Ocupa o mesmo espaco na pagina,
-     e a recusa em inventar depoimento vira argumento - e' a unica coisa nesta
-     pagina que concorrente nenhum consegue copiar sem mentir.
-
-     PARA TROCAR PELOS REAIS (deve levar 5 minutos):
-       1. pedir por escrito no WhatsApp e guardar o print: autorizacao de uso do
-          nome/foto/nome da barbearia na internet;
-       2. pedir uma frase do que mudou na pratica - numero vence adjetivo
-          ("parei de responder 30 mensagem por dia" > "sistema otimo");
-       3. foto: a do perfil dele ou a da fachada. Nunca banco de imagens;
-       4. salvar em img/depoimento-1.jpg .. 3.jpg (quadradas, ~400px) e trocar o
-          bloco .card.vaga por:
-
-          <div class="card">
-              <img class="rosto" src="img/depoimento-1.jpg" alt="">
-              <p>“FRASE DO BARBEIRO.”</p>
-              <p class="sub"><strong>NOME</strong> — Barbearia NOME, CIDADE</p>
-          </div>
-
-       5. trocar o titulo e o subtitulo da secao por "Quem já usa" e apagar a
-          frase das vagas.
--->
-<section>
-    <div class="wrap">
-        <h2>Estas três vagas <span class="ouro">são de quem chegar primeiro</span></h2>
-        <p class="sub" style="max-width: 40rem;">
-            É aqui que ficam os depoimentos das três primeiras barbearias que usarem o
-            Horário Cheio. Enquanto não existirem, o espaço fica vazio: a gente não inventa
-            depoimento nem compra foto de banco de imagens.
-        </p>
-
-        <div class="cards">
-            <div class="card vaga">
-                <div class="rosto">1</div>
-                <p>Reservado para a primeira barbearia.</p>
-            </div>
-            <div class="card vaga">
-                <div class="rosto">2</div>
-                <p>Reservado para a segunda.</p>
-            </div>
-            <div class="card vaga">
-                <div class="rosto">3</div>
-                <p>Reservado para a terceira.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- FAQ --------------------------------------------------------------------
-     Respostas encurtadas em 19/08/2026. Sao 15 perguntas desde 21/08/2026 (eram 13):
-     entraram as duas da consultoria paga, porque "quanto custa" e "preciso ser cliente"
-     sao as duas primeiras coisas que o barbeiro pergunta sobre ela.
+     Respostas encurtadas em 19/08/2026. 14 perguntas (em 21/08 entraram as duas da
+     consultoria paga, porque "quanto custa" e "preciso ser cliente" sao as duas primeiras
+     coisas que o barbeiro pergunta sobre ela; em 26/08 saiu a duplicada "manda mensagem
+     sozinho", que ja' e' o card anti-spam do painel).
      E' este bloco que alimenta o FAQPage do JSON-LD e o que a busca de IA le.
      A pergunta do desenvolvimento sob encomenda encolheu para uma linha, e com
      ela veio a frase de evolucao que era a faixa da secao apagada (T51). -->
