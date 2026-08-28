@@ -27,7 +27,7 @@ FIM = "<!-- JSONLD:FIM -->"
 
 ORG = {
     "@type": "Organization", "@id": SITE + "#org", "name": "Horário Cheio",
-    "url": SITE, "logo": SITE + "img/logo.png", "telephone": "+55-11-93935-7759",
+    "url": SITE, "logo": SITE + "img/logo.v2.png", "telephone": "+55-11-93935-7759",
     "description": "Sistema de agendamento online para barbearias, com a marca da própria barbearia.",
     "areaServed": [{"@type": "City", "name": "Guarulhos"},
                    {"@type": "State", "name": "São Paulo"},

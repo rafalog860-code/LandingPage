@@ -38,7 +38,8 @@ CORPO=$(cat <<JSON
     "https://$HOST/agenda-global/",
     "https://$HOST/manicure/",
     "https://$HOST/clinica-estetica/",
-    "https://$HOST/diferencial-dos-concorrentes/"
+    "https://$HOST/diferencial-dos-concorrentes/",
+    "https://$HOST/privacidade/"
   ]
 }
 JSON
@@ -67,4 +68,8 @@ if [ "$ERROS" -gt 0 ]; then
   exit 1
 fi
 echo ""
-echo "5 URLs submetidas ao IndexNow (Bing e Yandex). O Google nao participa - ver T66."
+# Contado do proprio corpo, nao cravado: em 21/08/2026 entrou a /privacidade/ e a
+# mensagem continuou dizendo "5 URLs". Numero escrito a mao em mensagem de resultado
+# envelhece calado, que e' o pior tipo de erro num script de verificacao.
+N_URLS=$(echo "$CORPO" | grep -cE '^\s*"https://')
+echo "$N_URLS URLs submetidas ao IndexNow (Bing e Yandex). O Google nao participa - ver T66."

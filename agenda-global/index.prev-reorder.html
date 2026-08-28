@@ -13,15 +13,12 @@
 <meta property="og:description" content="Você cadastra o que faz, quanto tempo leva e quanto custa. O cliente escolhe entre os horários que sobraram de verdade. Veja as telas.">
 <!-- og:image e' a tela 1 do agendamento, generica: e' o assunto da pagina depois da
      reorganizacao de 20/08/2026 (era a tela de cadastro de servico, que virou
-     detalhe la' embaixo). A tela ganha do logo aqui porque e' o assunto da pagina.
-     O motivo antigo, de que o img/logo.v2.png trazia a marca "Agenda Barbeiro",
-     EXPIROU em 27/08/2026: aquele arquivo virou o relogio verde da marca (T105).
+     detalhe la' embaixo). Continua evitando o img/logo.png, que ainda traz a marca
+     antiga "Agenda Barbeiro" (T105).
      TROCA DE 20/08: quem ja' compartilhou o link tem o card velho em cache no
      WhatsApp e no Instagram; o card novo vale para compartilhamento novo. -->
 <meta property="og:image" content="https://horariocheio.com.br/img/claro-tela-1.v2.png">
-<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="../img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="icon" href="../img/logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,12 +142,10 @@ header {
   font-size: var(--font-size-0); color: var(--tinta); text-decoration: none;
 }
 .marca .selo {
-  /* Era o monograma "HC" desenhado em CSS. Virou o relogio da marca em 27/08/2026
-     (T13). Maior que os 30px de antes, a pedido do Rafael. O nome ao lado continua
-     na tinta da pagina: em 3:1 o verde lê fraco em serifada fina. */
-  width: 42px; height: 42px; flex: none;
-  /* Embutido no HTML, nao por <img src>: assim o cabecalho nao depende de um
-     arquivo chegar. Mestre em img/logo.svg, usado pelo gerar_logo.ps1. */
+  width: 30px; height: 30px; border-radius: var(--radius-round); flex: none;
+  border: var(--border-size-2) solid var(--marca); color: var(--marca-forte);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; letter-spacing: .04em; font-weight: var(--font-weight-7);
 }
 
 /* ---------- herói ---------- */
@@ -623,6 +618,14 @@ details.acordeao table { margin-top: 0; }
       "mainEntity": [
         {
           "@type": "Question",
+          "name": "Quem cadastra os meus serviços e preços?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Na montagem, a gente cadastra junto com você: basta mandar a lista com o nome de cada serviço, quanto tempo ele leva e quanto custa. Depois disso é você quem altera, pelo painel, quantas vezes quiser. Reajuste de preço não depende da gente e não tem custo."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Posso ter serviços com durações bem diferentes?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -639,10 +642,26 @@ details.acordeao table { margin-top: 0; }
         },
         {
           "@type": "Question",
+          "name": "Tenho mais de uma pessoa atendendo. Paga por cada uma?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não. O preço é do negócio, não da pessoa: você cadastra quantos profissionais quiser sem a mensalidade mudar. Cada um com expediente, folga e férias próprios, e ligado só aos serviços que ele faz."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Como eu bloqueio um horário que vendi pessoalmente?",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Você marca pelo painel, no horário que quiser: o link público é um caminho a mais, não o único. A partir do momento em que está lançado, aquele espaço some da tela de quem for marcar online."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Preciso instalar alguma coisa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Não, nem você nem o seu cliente. É um endereço na internet: abre no navegador do celular ou do computador. Dá para adicionar o atalho na tela de início do celular e ele passa a abrir como se fosse um aplicativo."
           }
         },
         {
@@ -666,7 +685,7 @@ details.acordeao table { margin-top: 0; }
 <header>
     <div class="wrap">
         <a class="marca" href="../">
-            <svg class="selo" width="42" height="42" viewBox="0 0 100 100" fill="none" stroke="#00a651" aria-hidden="true"><circle cx="50" cy="50" r="43" stroke-width="2.5" opacity=".38"/><circle cx="50" cy="50" r="37" stroke-width="4.5" stroke-linecap="butt" pathLength="120" stroke-dasharray="2 8" transform="rotate(-90 50 50)"/><circle cx="50" cy="50" r="27" stroke-width="9" opacity=".24"/><circle cx="50" cy="50" r="27" stroke-width="9" stroke-linecap="butt" pathLength="100" stroke-dasharray="78 22" transform="rotate(-90 50 50)"/><line x1="50" y1="50" x2="50" y2="33" stroke-width="3.4" stroke-linecap="round"/><line x1="50" y1="50" x2="59" y2="44" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="50" r="3" fill="#00a651" stroke="none"/></svg>
+            <span class="selo">HC</span>
             Horário Cheio
         </a>
     </div>
@@ -718,6 +737,267 @@ details.acordeao table { margin-top: 0; }
             <img src="../img/claro-tela-1.v2.png" width="780" height="1872"
                  fetchpriority="high" decoding="async"
                  alt="Tela do agendamento no celular: o cliente escolhe o serviço e o profissional, e já vê a duração de 90 minutos e o preço de R$ 180,00">
+        </div>
+    </div>
+</section>
+
+<!-- 2. DEMONSTRAÇÃO --------------------------------------------------------
+     Mesma seção que a home ganhou em 19/08, montada com as telas GENÉRICAS
+     (claro-tela-1..4): ícone de relógio, "MEU NEGÓCIO", "Atendimento completo" e
+     "Ana Martins". Nenhuma imagem de barbearia aqui, de propósito: a página inteira
+     deixa de funcionar se a primeira demonstração fizer o produto parecer só de
+     barbeiro.
+     20/08/2026, em duas passadas. Primeiro as quatro deixaram de ser MOCKUP
+     desenhado à mão e passaram a ser print do app de verdade, tiradas da instância
+     genérica local pelo Instagram/video/print_generico_cliente.js — a página estava
+     misturando padrão de imagem, que é a T164 outra vez, na outra ponta do funil.
+     Depois, a pedido do Rafael, todas as 9 imagens do app desta página passaram a
+     ser a VERSÃO CLARA (prefixo claro-, geradas com --claro).
+     O app só tem tema escuro: estas imagens não retratam uma tela que o cliente vá
+     encontrar, e ele sabe disso. O que muda é só a cor de fundo; texto, campo, valor
+     e botão são os do produto. A razão é esta página ser branca, e nove blocos pretos
+     no meio do texto pesarem mais do que a fidelidade da cor rende. Como a inversão
+     é feita, e por que ela não desbota a marca do cliente, está no
+     Instagram/video/tema_claro.js.
+     EXCEÇÃO desde 23/08/2026: as quatro telas do CLIENTE (claro-tela-1..4) deixaram de
+     ser print e viraram MOCKUP teal, refeitas à mão em 780x1872 IGUAIS, modeladas na
+     tira da home — mesma altura, botão e rodapé alinhados, conteúdo distribuído sem
+     vazio. O print real do app tem alturas diferentes por passo (1808/1924/1584/2020) e
+     screen curto não preenche a tira; igualar por corte deixava tamanhos diferentes e
+     igualar por preenchimento deixava vazio branco. Rafael reprovou as duas e pediu o
+     padrão da home. O cabeçalho e o rodapé de cada mockup são recorte do print real
+     (aba certa, "AGENDAMENTO ONLINE" já escurecido para preto); o corpo é reconstruído.
+     Dados batem com a tela-4 (Ana Martins, 90 min, R$180, Sexta 21/08 09:30). Os
+     width/height abaixo têm que bater com o arquivo (1872). Os cinco prints do PAINEL
+     seguem claro- de verdade (parágrafo acima). Fonte do mockup: HTML+Playwright, fora
+     do repo hoje — regerar exige refazer a página de build.
+     O lado do negócio está em cartões de texto, sem print: não existe print real
+     da tela de agenda hoje, e por decisão do Rafael (19/08) não entra mockup ao
+     lado de print de verdade (T169). -->
+<section class="alt" id="veja-como-e-simples">
+    <div class="wrap">
+        <h2 class="centro">Veja como é simples</h2>
+        <p class="sub centro">O mesmo agendamento visto dos dois lados: o que o seu
+           cliente faz no celular dele, <strong>sem baixar aplicativo</strong>, e o
+           que acontece do seu lado.</p>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Testar como cliente, <em>o exemplo no ar é de uma barbearia</em></a>
+        </div>
+
+        <div class="lado">
+            <span class="etiqueta">Cliente</span>
+            <h3>Escolhe o serviço → o profissional → o horário → confirma</h3>
+        </div>
+
+        <div class="telas-palco">
+            <div class="telas quatro">
+                <figure>
+                    <img src="../img/claro-tela-1.v2.png" width="780" height="1872" loading="lazy" decoding="async"
+                         alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
+                    <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/claro-tela-2.v2.png" width="780" height="1872" loading="lazy" decoding="async"
+                         alt="Passo 2 do agendamento: tira de dias com a sexta-feira 21 de agosto selecionada, e abaixo os horários livres do dia, com os ocupados riscados e o das 09:30 selecionado">
+                    <figcaption>2. O horário, só o que está livre</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/claro-tela-3.v2.png" width="780" height="1872" loading="lazy" decoding="async"
+                         alt="Passo 3 do agendamento: campos de nome e celular do cliente">
+                    <figcaption>3. Nome e celular</figcaption>
+                </figure>
+                <figure>
+                    <img src="../img/claro-tela-4.v2.png" width="780" height="1872" loading="lazy" decoding="async"
+                         alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
+                    <figcaption>4. Confirma</figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <div class="lado">
+            <span class="etiqueta">Negócio</span>
+            <h3>Recebe o agendamento → vê na agenda → confirma, cancela ou remarca → acompanha os atendimentos</h3>
+        </div>
+
+        <div class="grade">
+            <div class="card">
+                <h3><span class="num">1</span>Recebe o agendamento</h3>
+                <p>Cai na sua agenda na hora, sem você digitar nada, e aquele horário
+                   some da tela de quem entrar depois.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">2</span>Visualiza na agenda</h3>
+                <p>Do celular, em dia, semana, mês ou tabela. Cada profissional com a
+                   própria agenda, com o horário, o serviço e o nome do cliente.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">3</span>Confirma, cancela ou remarca</h3>
+                <p>Toca no horário e escolhe <em>confirmar presença</em> ou <em>pedir para
+                   remarcar</em>, com a mensagem de WhatsApp já escrita. Para mudar de
+                   hora, arrasta o agendamento.</p>
+            </div>
+            <div class="card">
+                <h3><span class="num">4</span>Acompanha os atendimentos</h3>
+                <p>A tela de contatos do dia mostra quem está marcado naquela data, em
+                   ordem de horário, com serviço, profissional e telefone.</p>
+            </div>
+        </div>
+
+        <p class="aviso">
+            As telas desta página usam um negócio de exemplo, com nome, cor e serviços
+            inventados para demonstrar. <strong>A demo que está no ar é de uma
+            barbearia</strong>: foi o primeiro ramo que atendemos. O app é o mesmo em
+            qualquer caso: o que muda são os serviços, os nomes, o logo e as cores.
+        </p>
+    </div>
+</section>
+
+<!-- 3. BENEFÍCIOS ----------------------------------------------------------
+     Três, e só três. O argumento de cada um NÃO se repete no resto da página:
+     "menos mensagens" só aparece aqui, "sem conflito" é detalhado (não repetido)
+     no acordeão do que some sozinho, e "mais organização" é o que as seções de
+     funcionalidades mostram na prática, sem reafirmar a frase. -->
+<section>
+    <div class="wrap">
+        <h2 class="centro">O que muda no seu dia a dia</h2>
+
+        <div class="grade">
+            <div class="card">
+                <h3>Menos mensagens para agendar</h3>
+                <p>Seu cliente encontra sozinho os horários disponíveis e faz o
+                   agendamento.</p>
+            </div>
+            <div class="card">
+                <h3>Sem conflito de horário</h3>
+                <p>Horários já ocupados deixam de aparecer como disponíveis.</p>
+            </div>
+            <div class="card">
+                <h3>Mais organização</h3>
+                <p>Serviços, profissionais, horários e atendimentos ficam centralizados.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. GESTÃO DO NEGÓCIO ---------------------------------------------------
+     POSIÇÃO E ESTRUTURA preparadas em 20/08/2026; o conteúdo detalhado é tarefa
+     à parte, combinada com o Rafael. O que está escrito aqui já existe no app
+     hoje (a tela de Faturamento) — nada de "em breve".
+     Detalhada em 20/08/2026. Cada afirmação dos seis cartões foi conferida no
+     código antes de ser escrita — em Revenue.php e em views/pages/revenue.php. O
+     que NÃO foi escrito, e por quê, está registrado no TAREFAS.md (T181):
+       · a tela mostra o VALOR por serviço e por profissional, e não a contagem de
+         atendimentos de cada um — as duas tabelas viraram nome+valor na T160, e
+         "quantas vezes cada serviço saiu" só existe na planilha exportada;
+       · a tabela por profissional só aparece quando há mais de um cadastrado.
+     A perda com faltas É calculada (`no_show_amount`, "Perdido com faltas" na
+     tela), então essa afirmação pôde ficar.
+
+     AS DUAS IMAGENS SÃO PRINTS DE VERDADE, e não mockup: saem de uma instância
+     local provisionada pelo provisionar.py como qualquer cliente ("Meu Negócio",
+     cor #0b7285, serviços e profissionais genéricos), recortadas por seletor pelo
+     Instagram/video/print_generico.js. Os prints do Faturamento que a home usa não
+     servem aqui: o img/3-de-onde-veio.png lista "Corte + Barba" na própria tela.
+
+     O BLOCO DO CONSULTOR, no fim da seção, não é funcionalidade do sistema: é
+     serviço nosso, e por isso fica separado dos seis cartões e depois da frase
+     sobre o arquivo exportado.
+     Reescrito em 21/08/2026, junto com a home: a consultoria virou serviço PAGO e
+     AVULSO (R$ 37,90 por análise) e deixou de exigir que a pessoa seja cliente do
+     app ou que tenha um mês de agenda rodando. O que ela sempre entrega passou a
+     ser presença digital, concorrência (inclusive o preço que os vizinhos cobram)
+     e divulgação; os números da agenda entram por cima, quando existem. Isso fecha
+     a pergunta aberta da T182. O texto aqui fala em "mesmo serviço" e não em
+     "corte" porque esta página atende todos os segmentos. -->
+<section class="veu">
+    <div class="wrap">
+        <h2>Além da agenda, acompanhe seu negócio.</h2>
+
+        <p class="sub">Veja seus atendimentos, acompanhe resultados e tenha informações
+           para tomar decisões melhores.</p>
+
+        <div class="painel-duplo">
+            <figure>
+                <img src="../img/claro-faturamento.png" width="780" height="1220"
+                     loading="lazy" decoding="async"
+                     alt="Tela de Faturamento no celular: atalhos de hoje, ontem, 7 dias, este mês e 30 dias, com R$ 1.260,00 já atendido em 10 atendimentos, ticket médio de R$ 126,00, R$ 180,00 ainda por atender e R$ 120,00 perdido com 1 falta">
+                <figcaption>O período que você escolher, fechado sozinho</figcaption>
+            </figure>
+            <figure>
+                <img src="../img/claro-de-onde-veio.png" width="780" height="1080"
+                     loading="lazy" decoding="async"
+                     alt="Gráfico de rosca com o quanto cada serviço rendeu no período e a tabela com o total por profissional">
+                <figcaption>Quanto rendeu cada serviço e cada pessoa</figcaption>
+            </figure>
+        </div>
+
+        <p class="mini" style="margin-top:var(--size-4);">As duas telas são do mesmo
+           negócio de exemplo do resto da página: os números são dele, não de um cliente
+           real.</p>
+
+        <div class="grade" style="margin-top:var(--size-6);">
+            <div class="card">
+                <h3>Veja quanto você faturou</h3>
+                <p>O valor dos atendimentos por período: hoje, ontem, 7 dias, este mês,
+                   30 dias, ou o intervalo de datas que você escolher.</p>
+            </div>
+            <div class="card">
+                <h3>Descubra quais serviços mais geram resultado</h3>
+                <p>Quanto cada serviço rendeu no período, do maior para o menor, com a
+                   fatia de cada um no total.</p>
+            </div>
+            <div class="card">
+                <h3>Acompanhe sua equipe</h3>
+                <p>Quanto cada profissional rendeu no período. A tabela aparece quando há
+                   mais de uma pessoa atendendo.</p>
+            </div>
+            <div class="card">
+                <h3>Entenda o impacto das faltas</h3>
+                <p>Você marca quem não compareceu, e o valor daquele horário sai do que
+                   foi faturado e aparece separado, como perda do período.</p>
+            </div>
+            <div class="card">
+                <h3>Registre também quem chegou sem agendar</h3>
+                <p>Lance o atendimento presencial em dois toques e ele entra na conta do
+                   dia junto com os que foram marcados.</p>
+            </div>
+            <div class="card">
+                <h3>Seus dados também no Excel</h3>
+                <p>Baixe uma planilha com uma linha por atendimento: serviço, valor,
+                   profissional, cliente, falta e o intervalo em que cada um costuma
+                   voltar.</p>
+            </div>
+        </div>
+
+        <p class="mini" style="margin-top:var(--size-4);">O arquivo é seu, e a planilha é
+           o que o sistema entrega: ele não analisa nada por dentro nem manda os seus
+           dados para lugar nenhum.</p>
+
+        <div class="card" style="margin-top:var(--size-5);text-align:center;">
+            <h3>Ou pergunte para a gente: consultoria por R$ 37,90</h3>
+            <p>Uma análise, um pagamento, sem assinatura, e <strong>você não precisa
+               contratar o app</strong> para pedir. Você manda o Instagram e o site do seu
+               negócio, a gente estuda a sua região e responde pelo WhatsApp, por escrito.</p>
+            <p>Vem na análise: o que o cliente encontra quando procura você no Google e
+               no Instagram, quem são os concorrentes ao seu redor e <strong>quanto eles
+               cobram pelo mesmo serviço</strong>, o que eles fazem que você pode
+               aproveitar, e <strong>onde está o dinheiro que já é seu</strong>: cliente
+               que veio uma vez e sumiu, horário que fica vazio toda semana, serviço que
+               ocupa a agenda e rende pouco.</p>
+            <p>Metade do que a gente aponta você resolve sozinho, sem gastar nada. A outra
+               metade tem preço, e ele vem escrito do lado, inclusive quanto colocar num
+               anúncio no Google ou no Instagram. Se ainda não for a sua hora de anunciar,
+               a gente diz isso.</p>
+            <p>Se você já usa a agenda, a mesma análise entra mais fundo, porque entram os
+               números do seu movimento: <em>"quais dias e horários não se pagam?"</em>,
+               <em>"que mensagem eu mando para quem deixou de vir?"</em> ou <em>"monte um
+               plano de 30 dias para eu faturar mais usando só os clientes que já são
+               meus"</em>. O preço continua o mesmo.</p>
+        </div>
+
+        <div class="botoes" style="justify-content:center;">
+            <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20a%20consultoria%20de%20R%24%2037%2C90%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">Consultoria por R$ 37,90</a>
         </div>
     </div>
 </section>
@@ -922,240 +1202,6 @@ details.acordeao table { margin-top: 0; }
     </div>
 </section>
 
-<!-- 2. DEMONSTRAÇÃO --------------------------------------------------------
-     Mesma seção que a home ganhou em 19/08, montada com as telas GENÉRICAS
-     (claro-tela-1..4): ícone de relógio, "MEU NEGÓCIO", "Atendimento completo" e
-     "Ana Martins". Nenhuma imagem de barbearia aqui, de propósito: a página inteira
-     deixa de funcionar se a primeira demonstração fizer o produto parecer só de
-     barbeiro.
-     20/08/2026, em duas passadas. Primeiro as quatro deixaram de ser MOCKUP
-     desenhado à mão e passaram a ser print do app de verdade, tiradas da instância
-     genérica local pelo Instagram/video/print_generico_cliente.js — a página estava
-     misturando padrão de imagem, que é a T164 outra vez, na outra ponta do funil.
-     Depois, a pedido do Rafael, todas as 9 imagens do app desta página passaram a
-     ser a VERSÃO CLARA (prefixo claro-, geradas com --claro).
-     O app só tem tema escuro: estas imagens não retratam uma tela que o cliente vá
-     encontrar, e ele sabe disso. O que muda é só a cor de fundo; texto, campo, valor
-     e botão são os do produto. A razão é esta página ser branca, e nove blocos pretos
-     no meio do texto pesarem mais do que a fidelidade da cor rende. Como a inversão
-     é feita, e por que ela não desbota a marca do cliente, está no
-     Instagram/video/tema_claro.js.
-     EXCEÇÃO desde 23/08/2026: as quatro telas do CLIENTE (claro-tela-1..4) deixaram de
-     ser print e viraram MOCKUP teal, refeitas à mão em 780x1872 IGUAIS, modeladas na
-     tira da home — mesma altura, botão e rodapé alinhados, conteúdo distribuído sem
-     vazio. O print real do app tem alturas diferentes por passo (1808/1924/1584/2020) e
-     screen curto não preenche a tira; igualar por corte deixava tamanhos diferentes e
-     igualar por preenchimento deixava vazio branco. Rafael reprovou as duas e pediu o
-     padrão da home. O cabeçalho e o rodapé de cada mockup são recorte do print real
-     (aba certa, "AGENDAMENTO ONLINE" já escurecido para preto); o corpo é reconstruído.
-     Dados batem com a tela-4 (Ana Martins, 90 min, R$180, Sexta 21/08 09:30). Os
-     width/height abaixo têm que bater com o arquivo (1872). Os cinco prints do PAINEL
-     seguem claro- de verdade (parágrafo acima). Fonte do mockup: HTML+Playwright, fora
-     do repo hoje — regerar exige refazer a página de build.
-     O lado do negócio está em cartões de texto, sem print: não existe print real
-     da tela de agenda hoje, e por decisão do Rafael (19/08) não entra mockup ao
-     lado de print de verdade (T169). -->
-<section id="veja-como-e-simples">
-    <div class="wrap">
-        <h2 class="centro">Veja como é simples</h2>
-        <p class="sub centro">O mesmo agendamento visto dos dois lados: o que o seu
-           cliente faz no celular dele, <strong>sem baixar aplicativo</strong>, e o
-           que acontece do seu lado.</p>
-
-        <div class="botoes" style="justify-content:center;">
-            <a class="btn" href="https://horariocheio.com.br/demo" target="_blank" rel="noopener">Testar como cliente, <em>o exemplo no ar é de uma barbearia</em></a>
-        </div>
-
-        <div class="lado">
-            <span class="etiqueta">Cliente</span>
-            <h3>Escolhe o serviço → o profissional → o horário → confirma</h3>
-        </div>
-
-        <div class="telas-palco">
-            <div class="telas quatro">
-                <figure>
-                    <img src="../img/claro-tela-1.v2.png" width="780" height="1872" loading="lazy" decoding="async"
-                         alt="Passo 1 do agendamento: escolha do serviço Atendimento completo e da profissional Ana, com duração de 90 minutos e preço de R$ 180,00">
-                    <figcaption>1. Serviço e profissional, com tempo e preço</figcaption>
-                </figure>
-                <figure>
-                    <img src="../img/claro-tela-2.v2.png" width="780" height="1872" loading="lazy" decoding="async"
-                         alt="Passo 2 do agendamento: tira de dias com a sexta-feira 21 de agosto selecionada, e abaixo os horários livres do dia, com os ocupados riscados e o das 09:30 selecionado">
-                    <figcaption>2. O horário, só o que está livre</figcaption>
-                </figure>
-                <figure>
-                    <img src="../img/claro-tela-3.v2.png" width="780" height="1872" loading="lazy" decoding="async"
-                         alt="Passo 3 do agendamento: campos de nome e celular do cliente">
-                    <figcaption>3. Nome e celular</figcaption>
-                </figure>
-                <figure>
-                    <img src="../img/claro-tela-4.v2.png" width="780" height="1872" loading="lazy" decoding="async"
-                         alt="Passo 4 do agendamento: horário confirmado, com serviço, profissional, dia, horário e total">
-                    <figcaption>4. Confirma</figcaption>
-                </figure>
-            </div>
-        </div>
-
-        <div class="lado">
-            <span class="etiqueta">Negócio</span>
-            <h3>Recebe o agendamento → vê na agenda → confirma, cancela ou remarca → acompanha os atendimentos</h3>
-        </div>
-
-        <div class="grade">
-            <div class="card">
-                <h3><span class="num">1</span>Recebe o agendamento</h3>
-                <p>Cai na sua agenda na hora, sem você digitar nada, e aquele horário
-                   some da tela de quem entrar depois.</p>
-            </div>
-            <div class="card">
-                <h3><span class="num">2</span>Visualiza na agenda</h3>
-                <p>Do celular, em dia, semana, mês ou tabela. Cada profissional com a
-                   própria agenda, com o horário, o serviço e o nome do cliente.</p>
-            </div>
-            <div class="card">
-                <h3><span class="num">3</span>Confirma, cancela ou remarca</h3>
-                <p>Toca no horário e escolhe <em>confirmar presença</em> ou <em>pedir para
-                   remarcar</em>, com a mensagem de WhatsApp já escrita. Para mudar de
-                   hora, arrasta o agendamento.</p>
-            </div>
-            <div class="card">
-                <h3><span class="num">4</span>Acompanha os atendimentos</h3>
-                <p>A tela de contatos do dia mostra quem está marcado naquela data, em
-                   ordem de horário, com serviço, profissional e telefone.</p>
-            </div>
-        </div>
-
-        <p class="aviso">
-            As telas desta página usam um negócio de exemplo, com nome, cor e serviços
-            inventados para demonstrar. <strong>A demo que está no ar é de uma
-            barbearia</strong>: foi o primeiro ramo que atendemos. O app é o mesmo em
-            qualquer caso: o que muda são os serviços, os nomes, o logo e as cores.
-        </p>
-    </div>
-</section>
-
-<!-- 4. GESTÃO DO NEGÓCIO ---------------------------------------------------
-     POSIÇÃO E ESTRUTURA preparadas em 20/08/2026; o conteúdo detalhado é tarefa
-     à parte, combinada com o Rafael. O que está escrito aqui já existe no app
-     hoje (a tela de Faturamento) — nada de "em breve".
-     Detalhada em 20/08/2026. Cada afirmação dos seis cartões foi conferida no
-     código antes de ser escrita — em Revenue.php e em views/pages/revenue.php. O
-     que NÃO foi escrito, e por quê, está registrado no TAREFAS.md (T181):
-       · a tela mostra o VALOR por serviço e por profissional, e não a contagem de
-         atendimentos de cada um — as duas tabelas viraram nome+valor na T160, e
-         "quantas vezes cada serviço saiu" só existe na planilha exportada;
-       · a tabela por profissional só aparece quando há mais de um cadastrado.
-     A perda com faltas É calculada (`no_show_amount`, "Perdido com faltas" na
-     tela), então essa afirmação pôde ficar.
-
-     AS DUAS IMAGENS SÃO PRINTS DE VERDADE, e não mockup: saem de uma instância
-     local provisionada pelo provisionar.py como qualquer cliente ("Meu Negócio",
-     cor #0b7285, serviços e profissionais genéricos), recortadas por seletor pelo
-     Instagram/video/print_generico.js. Os prints do Faturamento que a home usa não
-     servem aqui: o img/3-de-onde-veio.png lista "Corte + Barba" na própria tela.
-
-     O BLOCO DO CONSULTOR, no fim da seção, não é funcionalidade do sistema: é
-     serviço nosso, e por isso fica separado dos seis cartões e depois da frase
-     sobre o arquivo exportado.
-     Reescrito em 21/08/2026, junto com a home: a consultoria virou serviço PAGO e
-     AVULSO (R$ 37,90 por análise) e deixou de exigir que a pessoa seja cliente do
-     app ou que tenha um mês de agenda rodando. O que ela sempre entrega passou a
-     ser presença digital, concorrência (inclusive o preço que os vizinhos cobram)
-     e divulgação; os números da agenda entram por cima, quando existem. Isso fecha
-     a pergunta aberta da T182. O texto aqui fala em "mesmo serviço" e não em
-     "corte" porque esta página atende todos os segmentos. -->
-<section class="veu">
-    <div class="wrap">
-        <h2>Além da agenda, acompanhe seu negócio.</h2>
-
-        <p class="sub">Veja seus atendimentos, acompanhe resultados e tenha informações
-           para tomar decisões melhores.</p>
-
-        <div class="painel-duplo">
-            <figure>
-                <img src="../img/claro-faturamento.png" width="780" height="1220"
-                     loading="lazy" decoding="async"
-                     alt="Tela de Faturamento no celular: atalhos de hoje, ontem, 7 dias, este mês e 30 dias, com R$ 1.260,00 já atendido em 10 atendimentos, ticket médio de R$ 126,00, R$ 180,00 ainda por atender e R$ 120,00 perdido com 1 falta">
-                <figcaption>O período que você escolher, fechado sozinho</figcaption>
-            </figure>
-            <figure>
-                <img src="../img/claro-de-onde-veio.png" width="780" height="1080"
-                     loading="lazy" decoding="async"
-                     alt="Gráfico de rosca com o quanto cada serviço rendeu no período e a tabela com o total por profissional">
-                <figcaption>Quanto rendeu cada serviço e cada pessoa</figcaption>
-            </figure>
-        </div>
-
-        <p class="mini" style="margin-top:var(--size-4);">As duas telas são do mesmo
-           negócio de exemplo do resto da página: os números são dele, não de um cliente
-           real.</p>
-
-        <div class="grade" style="margin-top:var(--size-6);">
-            <div class="card">
-                <h3>Veja quanto você faturou</h3>
-                <p>O valor dos atendimentos por período: hoje, ontem, 7 dias, este mês,
-                   30 dias, ou o intervalo de datas que você escolher.</p>
-            </div>
-            <div class="card">
-                <h3>Descubra quais serviços mais geram resultado</h3>
-                <p>Quanto cada serviço rendeu no período, do maior para o menor, com a
-                   fatia de cada um no total.</p>
-            </div>
-            <div class="card">
-                <h3>Acompanhe sua equipe</h3>
-                <p>Quanto cada profissional rendeu no período. A tabela aparece quando há
-                   mais de uma pessoa atendendo.</p>
-            </div>
-            <div class="card">
-                <h3>Entenda o impacto das faltas</h3>
-                <p>Você marca quem não compareceu, e o valor daquele horário sai do que
-                   foi faturado e aparece separado, como perda do período.</p>
-            </div>
-            <div class="card">
-                <h3>Registre também quem chegou sem agendar</h3>
-                <p>Lance o atendimento presencial em dois toques e ele entra na conta do
-                   dia junto com os que foram marcados.</p>
-            </div>
-            <div class="card">
-                <h3>Seus dados também no Excel</h3>
-                <p>Baixe uma planilha com uma linha por atendimento: serviço, valor,
-                   profissional, cliente, falta e o intervalo em que cada um costuma
-                   voltar.</p>
-            </div>
-        </div>
-
-        <p class="mini" style="margin-top:var(--size-4);">O arquivo é seu, e a planilha é
-           o que o sistema entrega: ele não analisa nada por dentro nem manda os seus
-           dados para lugar nenhum.</p>
-
-        <div class="card" style="margin-top:var(--size-5);text-align:center;">
-            <h3>Ou pergunte para a gente: consultoria por R$ 37,90</h3>
-            <p>Uma análise, um pagamento, sem assinatura, e <strong>você não precisa
-               contratar o app</strong> para pedir. Você manda o Instagram e o site do seu
-               negócio, a gente estuda a sua região e responde pelo WhatsApp, por escrito.</p>
-            <p>Vem na análise: o que o cliente encontra quando procura você no Google e
-               no Instagram, quem são os concorrentes ao seu redor e <strong>quanto eles
-               cobram pelo mesmo serviço</strong>, o que eles fazem que você pode
-               aproveitar, e <strong>onde está o dinheiro que já é seu</strong>: cliente
-               que veio uma vez e sumiu, horário que fica vazio toda semana, serviço que
-               ocupa a agenda e rende pouco.</p>
-            <p>Metade do que a gente aponta você resolve sozinho, sem gastar nada. A outra
-               metade tem preço, e ele vem escrito do lado, inclusive quanto colocar num
-               anúncio no Google ou no Instagram. Se ainda não for a sua hora de anunciar,
-               a gente diz isso.</p>
-            <p>Se você já usa a agenda, a mesma análise entra mais fundo, porque entram os
-               números do seu movimento: <em>"quais dias e horários não se pagam?"</em>,
-               <em>"que mensagem eu mando para quem deixou de vir?"</em> ou <em>"monte um
-               plano de 30 dias para eu faturar mais usando só os clientes que já são
-               meus"</em>. O preço continua o mesmo.</p>
-        </div>
-
-        <div class="botoes" style="justify-content:center;">
-            <a class="btn btn-vazio" href="https://wa.me/5511939357759?text=Ol%C3%A1%21%20Quero%20a%20consultoria%20de%20R%24%2037%2C90%20para%20o%20meu%20neg%C3%B3cio." target="_blank" rel="noopener">Consultoria por R$ 37,90</a>
-        </div>
-    </div>
-</section>
-
 <!-- 6. FUNCIONALIDADES DETALHADAS -------------------------------------------
      Daqui para baixo é o conteúdo que a página já tinha, na mesma ordem interna
      (a ideia → serviços → expediente → o agendamento → o painel). Ele desceu em
@@ -1171,9 +1217,13 @@ details.acordeao table { margin-top: 0; }
         <h2>O app não sabe qual é o seu ramo, e é isso que faz ele servir</h2>
 
         <p>Ele não conhece “corte de cabelo”, “alongamento de unha” nem “limpeza de
-           pele”: lê cada serviço isolado e calcula sozinho quais horários ainda cabem na
-           agenda. Por isso o passo a passo abaixo é o mesmo para qualquer atendimento com
-           hora marcada: muda o que você escreve nos campos, não o caminho.</p>
+           pele”. Ele conhece quatro coisas: <strong>um serviço, quanto tempo ele leva,
+           quanto custa e quem sabe fazer</strong>. A partir disso ele calcula sozinho
+           quais horários ainda cabem na sua agenda e mostra só esses para quem quer
+           marcar.</p>
+
+        <p>Por isso o passo a passo abaixo é o mesmo para qualquer atendimento com hora
+           marcada. Muda o que você escreve nos campos, não o caminho.</p>
     </div>
 </section>
 
@@ -1318,11 +1368,20 @@ details.acordeao table { margin-top: 0; }
     <div class="wrap">
         <div class="etapa"><span class="n">3</span><h2>O cliente marca em quatro toques</h2></div>
 
-        <p>Num link com o seu nome e a sua cor, <strong>sem baixar aplicativo e sem criar
-           conta</strong>, ele escolhe o serviço e o profissional (com a duração e o preço
-           do passo 1), pega um horário <strong>entre os que realmente sobraram</strong>
-           (o passo 2 em ação), deixa nome e celular, e recebe a confirmação com um link
-           para remarcar ou cancelar sozinho.</p>
+        <p>Ele abre um link com o seu nome e a sua cor. Não baixa aplicativo, não cria
+           conta e não escolhe senha. O formulário pede <strong>nome e celular</strong>,
+           só isso.</p>
+
+        <ol class="passos">
+            <li>Escolhe o serviço e quem vai atender. Já vê a duração e o preço que você
+                cadastrou no passo 1.</li>
+            <li>Escolhe o dia e a hora, <strong>entre os que realmente sobraram</strong>:
+                é aqui que o passo 2 aparece.</li>
+            <li>Escreve o nome e o celular. O campo só aceita celular brasileiro de
+                verdade, com DDD que existe.</li>
+            <li>Recebe a confirmação na tela, com o resumo e um link próprio para remarcar
+                ou cancelar sozinho depois.</li>
+        </ol>
 
         <details class="acordeao">
             <summary>O que some da agenda sem você fazer nada</summary>
@@ -1351,13 +1410,16 @@ details.acordeao table { margin-top: 0; }
 
         <div class="lado-a-lado">
             <div>
-                <p>Você gerencia tudo do painel, pelo celular. Em <strong>contatos do
-                   dia</strong> vê quem está marcado, em ordem de horário, com dois botões
-                   de WhatsApp por pessoa (<em>avisar cancelamento</em> e <em>lembrar do
-                   horário</em>) e a mensagem já escrita. No calendário, tocar num horário
-                   abre <em>confirmar presença</em> ou <em>remarcar</em>, e o de remarcar
-                   manda a pessoa para o link dela, que só oferece horário livre. Nada de
-                   colar uma lista que envelhece em cinco minutos.</p>
+                <p>Você abre o painel pelo celular. A tela de <strong>contatos do dia</strong>
+                   mostra quem está marcado naquela data, em ordem de horário, com o
+                   serviço, quem atende, o telefone e dois botões de WhatsApp por pessoa,
+                   <em>avisar cancelamento</em> e <em>lembrar do horário</em>, com a
+                   mensagem já escrita e o nome dela dentro.</p>
+
+                <p>No calendário, tocar em um horário abre <em>confirmar presença</em> e
+                   <em>pedir para remarcar</em>. O de remarcar manda a pessoa para o link
+                   dela, que oferece só horário livre. Nada de colar uma lista na mensagem
+                   e ela envelhecer em cinco minutos.</p>
 
                 <div class="card">
                     <h3>Quem aperta enviar é sempre você</h3>
@@ -1448,6 +1510,14 @@ details.acordeao table { margin-top: 0; }
         <h2>Perguntas sobre o cadastro</h2>
 
         <details>
+            <summary>Quem cadastra os meus serviços e preços?</summary>
+            <p>Na montagem, a gente cadastra junto com você: basta mandar a lista com o
+               nome de cada serviço, quanto tempo ele leva e quanto custa. Depois disso é
+               você quem altera, pelo painel, quantas vezes quiser. Reajuste de preço não
+               depende da gente e não tem custo.</p>
+        </details>
+
+        <details>
             <summary>Posso ter serviços com durações bem diferentes?</summary>
             <p>Sim, e é o caso normal. Cada serviço tem a própria duração, e o sistema só
                oferece à pessoa os horários em que aquele serviço cabe inteiro. Um serviço
@@ -1464,10 +1534,24 @@ details.acordeao table { margin-top: 0; }
         </details>
 
         <details>
+            <summary>Tenho mais de uma pessoa atendendo. Paga por cada uma?</summary>
+            <p>Não. O preço é do negócio, não da pessoa: você cadastra quantos
+               profissionais quiser sem a mensalidade mudar. Cada um com expediente, folga
+               e férias próprios, e ligado só aos serviços que ele faz.</p>
+        </details>
+
+        <details>
             <summary>Como eu bloqueio um horário que vendi pessoalmente?</summary>
             <p>Você marca pelo painel, no horário que quiser: o link público é um caminho
                a mais, não o único. A partir do momento em que está lançado, aquele espaço
                some da tela de quem for marcar online.</p>
+        </details>
+
+        <details>
+            <summary>Preciso instalar alguma coisa?</summary>
+            <p>Não, nem você nem o seu cliente. É um endereço na internet: abre no
+               navegador do celular ou do computador. Dá para adicionar o atalho na tela
+               de início do celular e ele passa a abrir como se fosse um aplicativo.</p>
         </details>
 
         <details>

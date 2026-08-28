@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidade | Horário Cheio</title>
+<meta name="description" content="O que o site do Horário Cheio coleta, o que acontece quando você fala com a gente no WhatsApp, e como cancelar a autorização de receber novidades. Sem cookie de rastreamento e sem formulário.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://horariocheio.com.br/privacidade/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://horariocheio.com.br/privacidade/">
+<meta property="og:title" content="Política de privacidade | Horário Cheio">
+<meta property="og:description" content="Este site não tem formulário, não usa cookie de rastreamento e não tem pixel de anúncio. O que existe está escrito aqui.">
+<meta property="og:image" content="https://horariocheio.com.br/img/tela-1.png">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+
+<style>
+/* ===========================================================================
+   1. TOKENS — Open Props v1.7.16 (subconjunto)
+   ---------------------------------------------------------------------------
+   COPIADOS, nao linkados de propósito: folha de estilo externa e' requisicao
+   bloqueante, e estas paginas sao abertas a frio, pela busca, no 4G — nao ha
+   cache quente para amortizar a ida e volta. Valores conferidos direto em
+   unpkg.com/open-props@1.7.16/open-props.min.css em 17/08/2026.
+
+   Este bloco e' IDENTICO nas 3 paginas internas do site. Quando a extracao do
+   CSS comum acontecer (T102 no TAREFAS.md), e' exatamente este pedaco que sai
+   daqui para um arquivo so'. A home NAO usa este bloco: o CSS dela foi medido
+   em conversao e continua inline, intocado.
+   =========================================================================== */
+:root {
+  --size-1: .25rem;  --size-2: .5rem;   --size-3: 1rem;   --size-4: 1.25rem;
+  --size-5: 1.5rem;  --size-6: 1.75rem; --size-7: 2rem;   --size-8: 3rem;
+  --size-9: 4rem;    --size-10: 5rem;
+  --size-fluid-3: max(1.5rem, min(3vw, 2rem));
+  --size-fluid-4: max(2rem, min(4vw, 3rem));
+
+  --font-size-0: .75rem; --font-size-1: 1rem;   --font-size-2: 1.1rem;
+  --font-size-3: 1.25rem; --font-size-4: 1.5rem; --font-size-5: 2rem;
+  --font-size-fluid-2: max(1.5rem, min(6vw, 2.5rem));
+  --font-weight-4: 400; --font-weight-6: 600; --font-weight-7: 700;
+  --font-lineheight-1: 1.25; --font-lineheight-3: 1.5; --font-lineheight-4: 1.75;
+
+  --radius-2: 5px; --radius-3: 1rem; --radius-4: 2rem; --radius-round: 1e5px;
+  --border-size-1: 1px; --border-size-2: 2px; --border-size-3: 5px;
+
+  --gray-0: #f8f9fa; --gray-2: #e9ecef; --gray-3: #dee2e6;
+  --gray-6: #868e96; --gray-7: #495057; --gray-9: #212529;
+
+  --shadow-color: 220 3% 15%; --shadow-strength: 1%;
+  --shadow-1: 0 1px 2px -1px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 9%));
+  --shadow-2: 0 3px 5px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+              0 7px 14px -5px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%));
+}
+
+/* ===========================================================================
+   2. MARCA — esta pagina fala das 3 marcas, entao usa a nossa: o dourado
+   ---------------------------------------------------------------------------
+   ATENCAO ao dourado no claro: #d4af37 sobre branco da 1,9:1 de contraste e
+   REPROVA em qualquer criterio de leitura. Por isso o dourado aqui e' so'
+   preenchimento (botao, celula de destaque) e todo TEXTO dourado usa o
+   --marca-forte, que e' um dourado escurecido com 7,4:1 no branco. Botao
+   dourado leva texto escuro (--btn-tinta), nao branco.
+   =========================================================================== */
+:root {
+  --marca:       #b08a25;
+  --marca-forte: #6b5010;
+  --marca-veu:   #fdf9ec;
+  --marca-linha: #f0e4c0;
+  --btn-tinta:   #241c05;   /* texto sobre o dourado: escuro, nao branco */
+
+  --papel:      #fff;
+  --papel-alt:  var(--gray-0);
+  --tinta:      var(--gray-9);
+  --tinta-fraca: var(--gray-7);
+  /* 21/08/2026: era var(--gray-6) (#868e96), que da' 3,32:1 no branco — abaixo dos
+     4,5:1 que a WCAG pede para texto pequeno, e este token veste justamente o texto
+     pequeno da pagina (figcaption, th, .mini, avisos). Reprovado pelo
+     LandingPage/testes/contraste-landing.js. #6b7177 continua sendo cinza discreto e
+     passa nos tres fundos da pagina: 4,94:1 no branco, 4,68:1 no #f8f9fa das secoes
+     alternadas e 4,55:1 no azul-veu. */
+  --tinta-tenue: #6b7177;
+  --linha:      var(--gray-3);
+}
+
+/* ===========================================================================
+   3. ESTRUTURA — igual nas 3 paginas internas
+   =========================================================================== */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif;
+  font-size: var(--font-size-2);
+  line-height: var(--font-lineheight-4);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: var(--font-lineheight-1);
+  margin: 0 0 var(--size-3);
+  font-weight: var(--font-weight-7);
+}
+h1 { font-size: var(--font-size-fluid-2); letter-spacing: -.015em; }
+h2 { font-size: var(--font-size-5); margin-bottom: var(--size-4); }
+h3 { font-size: var(--font-size-3); }
+p  { margin: 0 0 var(--size-4); }
+a  { color: var(--marca-forte); }
+strong { font-weight: var(--font-weight-6); }
+.cor { color: var(--marca-forte); }
+.sub { color: var(--tinta-fraca); }
+.mini { font-size: var(--font-size-1); color: var(--tinta-tenue); }
+
+.wrap { width: 100%; max-width: 980px; margin: 0 auto; padding: 0 var(--size-4); }
+section { padding: var(--size-fluid-4) 0; }
+section.alt { background: var(--papel-alt); border-block: var(--border-size-1) solid var(--linha); }
+section.veu { background: var(--marca-veu); }
+
+/* ---------- topo ---------- */
+header {
+  padding: var(--size-3) 0;
+  background: var(--papel);
+  border-bottom: var(--border-size-1) solid var(--linha);
+}
+.marca {
+  display: inline-flex; align-items: center; gap: var(--size-2);
+  font-family: Georgia, serif; letter-spacing: .14em; text-transform: uppercase;
+  font-size: var(--font-size-0); color: var(--tinta); text-decoration: none;
+}
+.marca .selo {
+  /* Era o monograma "HC" desenhado em CSS. Virou o relogio da marca em 27/08/2026
+     (T13). Maior que os 30px de antes, a pedido do Rafael. O nome ao lado continua
+     na tinta da pagina: em 3:1 o verde lê fraco em serifada fina. */
+  width: 42px; height: 42px; flex: none;
+  /* Embutido no HTML, nao por <img src>: assim o cabecalho nao depende de um
+     arquivo chegar. Mestre em img/logo.svg, usado pelo gerar_logo.ps1. */
+}
+
+/* ---------- botões ---------- */
+.botoes { display: flex; flex-wrap: wrap; gap: var(--size-3); margin-top: var(--size-6); }
+.btn {
+  display: inline-block; padding: var(--size-4) var(--size-6);
+  border-radius: var(--radius-2); font-weight: var(--font-weight-7);
+  text-decoration: none; font-size: var(--font-size-1); text-align: center;
+  background: var(--marca); color: var(--btn-tinta);
+  border: var(--border-size-2) solid var(--marca);
+  box-shadow: var(--shadow-1);
+}
+.btn-vazio { background: none; color: var(--marca-forte); box-shadow: none; }
+
+/* ---------- cartões ---------- */
+.card {
+  background: var(--papel); border: var(--border-size-1) solid var(--linha);
+  border-radius: var(--radius-3); padding: var(--size-5);
+  box-shadow: var(--shadow-1);
+}
+.card h3 { color: var(--marca-forte); }
+.card p:last-child { margin-bottom: 0; }
+
+.grade { display: grid; gap: var(--size-4); grid-template-columns: 1fr; }
+.grade .card p { font-size: var(--font-size-1); color: var(--tinta-fraca); }
+
+.aviso {
+  border-left: var(--border-size-3) solid var(--marca);
+  background: var(--marca-veu);
+  padding: var(--size-4);
+  border-radius: 0 var(--radius-2) var(--radius-2) 0;
+  color: var(--tinta-fraca); font-size: var(--font-size-1);
+  margin-top: var(--size-5);
+}
+.aviso :last-child { margin-bottom: 0; }
+
+/* ---------- tabela ---------- */
+/* No celular a tabela nao cabe e vira rolagem lateral. Sem aviso, a ultima
+   coluna — que aqui e' justamente a nossa — simplesmente nao e' vista: a
+   pessoa nao adivinha que da' para arrastar. A dica so' aparece na largura
+   em que o problema existe. */
+.rolagem { overflow-x: auto; }
+.dica-rolagem {
+  display: none; margin: 0; font-size: var(--font-size-0);
+  color: var(--tinta-tenue); font-style: italic;
+}
+@media (max-width: 640px) { .dica-rolagem { display: block; } }
+table {
+  width: 100%; border-collapse: collapse; margin: var(--size-5) 0;
+  font-size: var(--font-size-1); min-width: 560px; background: var(--papel);
+}
+th, td {
+  padding: var(--size-3); border-bottom: var(--border-size-1) solid var(--linha);
+  text-align: left; vertical-align: top;
+}
+th { color: var(--tinta-tenue); font-weight: var(--font-weight-6);
+     font-size: var(--font-size-0); text-transform: uppercase; letter-spacing: .06em; }
+/* a coluna que e' nossa fica com fundo dourado bem lavado: destaca sem gritar,
+   e o texto continua no --marca-forte, que passa em contraste */
+td.nosso, th.nosso {
+  color: var(--marca-forte); font-weight: var(--font-weight-6);
+  background: var(--marca-veu);
+}
+tr.destaque td { font-weight: var(--font-weight-7); }
+
+/* ---------- FAQ ---------- */
+details { border-bottom: var(--border-size-1) solid var(--linha); padding: var(--size-4) 0; }
+summary {
+  cursor: pointer; font-weight: var(--font-weight-6); list-style: none;
+  display: flex; gap: var(--size-3); align-items: baseline;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; color: var(--marca-forte); font-weight: var(--font-weight-7); flex: none; }
+details[open] summary::before { content: "–"; }
+details p { margin: var(--size-3) 0 0 var(--size-5); color: var(--tinta-fraca); }
+
+/* ---------- rodapé ---------- */
+footer {
+  padding: var(--size-8) 0 var(--size-10);
+  color: var(--tinta-tenue); font-size: var(--font-size-1);
+  background: var(--papel-alt); border-top: var(--border-size-1) solid var(--linha);
+}
+
+/* ---------- desktop ---------- */
+@media (min-width: 760px) {
+  .grade { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1000px) {
+  .grade { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- planos (19/08/2026) ----------
+   Mesmo bloco de preco da home, montado com as variaveis DESTA pagina - por isso
+   ele fica rosa na manicure, roxo na estetica e dourado no comparativo, sem
+   nenhuma cor cravada aqui dentro.
+   O selo "Mais escolhido" fica no Essencial, e nao no Completo: decisao do Rafael
+   em 19/08/2026. E' o plano que a pagina inteira defende, e destacar o mais caro
+   contradizia o proprio argumento de "o preco e' do negocio, nao por cabeca". */
+.planos { display: grid; gap: var(--size-5); grid-template-columns: 1fr;
+          margin-top: var(--size-6); align-items: start; }
+.plano { position: relative; background: var(--papel);
+         border: var(--border-size-1) solid var(--linha);
+         border-radius: var(--radius-3); padding: var(--size-6);
+         box-shadow: var(--shadow-1); }
+.plano.principal { border: var(--border-size-2) solid var(--marca); }
+.plano .selo { position: absolute; top: calc(-1 * var(--size-3)); left: var(--size-5);
+               background: var(--marca); color: var(--btn-tinta);
+               font-size: var(--font-size-0); font-weight: var(--font-weight-7);
+               padding: 4px 14px; border-radius: var(--radius-round); }
+.plano h3 { color: var(--marca-forte); margin: 0 0 var(--size-1); }
+.plano .valor { font-size: var(--font-size-5); font-weight: var(--font-weight-7);
+                color: var(--marca-forte); line-height: 1; }
+.plano .valor small { font-size: var(--font-size-1); font-weight: var(--font-weight-4);
+                      color: var(--tinta-fraca); }
+.plano .para { color: var(--tinta-fraca); font-size: var(--font-size-1);
+               margin: var(--size-3) 0 0; }
+.plano ul { list-style: none; padding: 0; margin: var(--size-4) 0; }
+.plano li { padding: 5px 0 5px 26px; position: relative; }
+.plano li::before { content: "✓"; color: var(--marca); position: absolute; left: 0;
+                    font-weight: var(--font-weight-7); }
+.plano .btn { width: 100%; }
+@media (min-width: 760px) { .planos { grid-template-columns: 1fr 1fr; } }
+</style>
+<!-- Estilos proprios desta pagina. O bloco acima e' o mesmo das outras internas
+     (T102); estas regras existem so' aqui e nao devem ir para o CSS comum. -->
+<style>
+.aviso-topo {
+  background: var(--marca-veu); border: var(--border-size-1) solid var(--marca-linha);
+  border-radius: var(--radius-3); padding: var(--size-4) var(--size-5);
+  margin: 0 0 var(--size-6);
+}
+.aviso-topo p:last-child { margin-bottom: 0; }
+.lista-limpa { margin: 0 0 var(--size-4); padding-left: var(--size-5); }
+.lista-limpa li { margin-bottom: var(--size-2); }
+.bloco + .bloco { margin-top: var(--size-7); }
+.data-topo { color: var(--tinta-tenue); font-size: var(--font-size-1); margin-bottom: var(--size-6); }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="wrap">
+        <a class="marca" href="../">
+            <svg class="selo" width="42" height="42" viewBox="0 0 100 100" fill="none" stroke="#00a651" aria-hidden="true"><circle cx="50" cy="50" r="43" stroke-width="2.5" opacity=".38"/><circle cx="50" cy="50" r="37" stroke-width="4.5" stroke-linecap="butt" pathLength="120" stroke-dasharray="2 8" transform="rotate(-90 50 50)"/><circle cx="50" cy="50" r="27" stroke-width="9" opacity=".24"/><circle cx="50" cy="50" r="27" stroke-width="9" stroke-linecap="butt" pathLength="100" stroke-dasharray="78 22" transform="rotate(-90 50 50)"/><line x1="50" y1="50" x2="50" y2="33" stroke-width="3.4" stroke-linecap="round"/><line x1="50" y1="50" x2="59" y2="44" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="50" r="3" fill="#00a651" stroke="none"/></svg>
+            Horário Cheio
+        </a>
+    </div>
+</header>
+
+<section>
+    <div class="wrap">
+        <h1>Política de privacidade</h1>
+        <p class="data-topo">Última atualização: 21 de agosto de 2026.</p>
+
+        <div class="aviso-topo">
+            <p><strong>O resumo, para quem não quer ler tudo:</strong> este site não tem
+               formulário, não pede seus dados, não usa cookie de rastreamento e não tem
+               pixel de anúncio. A única informação que chega até nós é a que você mesmo
+               escreve quando decide falar com a gente no WhatsApp.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>1. A quem esta política se aplica</h2>
+            <p>Ao site <strong>horariocheio.com.br</strong> e às suas páginas: a página
+               inicial, a Agenda Global, o diferencial dos concorrentes, as versões para
+               manicure e para clínica de estética, e esta aqui.</p>
+            <p>Quem responde pelos dados tratados aqui é o <strong>Horário Cheio</strong>,
+               de Guarulhos, SP. Contato: WhatsApp <strong>(11) 93935-7759</strong>.</p>
+            <p class="mini">A página pública de agendamento de cada barbearia é outra coisa
+               e tem aviso de privacidade próprio. Veja a seção 7.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>2. O que este site coleta</h2>
+            <p><strong>Nada, enquanto você só navega.</strong> Não existe campo para
+               preencher em nenhuma página, não há login, não há carrinho e não há cadastro.</p>
+            <ul class="lista-limpa">
+                <li>Sem cookie de rastreamento e sem banner de cookie, porque não há o que consentir.</li>
+                <li>Sem Google Analytics, sem pixel do Facebook e sem qualquer script de medição de terceiros.</li>
+                <li>Sem fontes, ícones ou bibliotecas carregados de fora: tudo o que a página usa está no próprio servidor.</li>
+            </ul>
+            <p>O que existe, e existe em qualquer site, são os <strong>registros do servidor</strong>
+               mantidos pela empresa de hospedagem: endereço de IP, data, hora e qual página
+               foi pedida. Servem para o site funcionar e para investigar falha ou abuso.
+               Não os usamos para montar perfil de ninguém.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>3. Quando você clica em "Falar no WhatsApp"</h2>
+            <p>Os botões deste site abrem o WhatsApp com uma mensagem já escrita. O site
+               não envia nada sozinho: <strong>quem aperta o enviar é você</strong>, do seu
+               aparelho, pelo seu número.</p>
+            <p>A partir daí a conversa passa a existir e nós temos o seu número de WhatsApp,
+               o nome que aparece no seu perfil e o que você nos escrever. Usamos isso para
+               responder você e cuidar do assunto que você trouxe: tirar dúvida, mostrar o
+               sistema, liberar o teste de 14 dias, resolver um problema.</p>
+            <p>A base legal para esse uso é a <strong>execução de procedimentos preliminares
+               a pedido do titular</strong> (LGPD, art. 7º, inciso V). Em português: você
+               pediu, a gente responde.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>4. A autorização para receber novidades</h2>
+            <p>Junto dos botões existe uma caixa de marcar, <strong>desmarcada por padrão</strong>,
+               com este texto: "autorizo o Horário Cheio a me enviar novidades, dicas e
+               ofertas pelo WhatsApp".</p>
+            <p>Se você marcar, a frase de autorização entra na mensagem que você envia, e
+               fica registrada na própria conversa. Se não marcar, a mensagem sai exatamente
+               como estava e <strong>não muda nada</strong>: a gente continua respondendo você
+               normalmente, só não manda promoção depois.</p>
+            <p>Aqui a base legal é o <strong>consentimento</strong> (LGPD, art. 7º, inciso I),
+               e por isso ele é separado, voluntário e reversível. Recusar não tira de você
+               nenhum direito: o teste grátis, o preço e o atendimento são os mesmos.</p>
+            <p><strong>Para cancelar, escreva "parar" na conversa.</strong> Vale a partir da
+               primeira vez que a gente ler, e não precisa justificar.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>5. Com quem compartilhamos</h2>
+            <p>Com ninguém. Não vendemos, não cedemos e não trocamos a sua informação.</p>
+            <p>As exceções são técnicas e inevitáveis:</p>
+            <ul class="lista-limpa">
+                <li><strong>A empresa de hospedagem do site</strong>, que mantém o servidor de pé e guarda os registros de acesso da seção 2.</li>
+                <li><strong>O WhatsApp, da Meta</strong>, que é por onde a conversa acontece. O que você manda passa pela infraestrutura deles e segue as regras deles, que a gente não controla.</li>
+                <li><strong>Ordem judicial ou obrigação legal</strong>, se houver.</li>
+            </ul>
+        </div>
+
+        <div class="bloco">
+            <h2>6. Por quanto tempo guardamos</h2>
+            <p>A conversa de WhatsApp fica enquanto o contato fizer sentido e por até
+               <strong>24 meses</strong> depois da última mensagem trocada. Se você pedir
+               antes, apagamos antes.</p>
+            <p>Os registros de acesso do servidor seguem o prazo da hospedagem e a regra do
+               Marco Civil da Internet, que é de seis meses.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>7. Se você é cliente de uma barbearia que usa o Horário Cheio</h2>
+            <p>Esta política não é a sua. Quando você marca um horário na página da barbearia,
+               quem decide sobre os seus dados é <strong>a barbearia</strong>, e o Horário
+               Cheio entra apenas como a empresa que opera o sistema por conta dela.</p>
+            <p>Aquele fluxo tem aviso de privacidade próprio, exibido na página de
+               agendamento, e a regra lá é mais restrita: nome e celular servem só para
+               registrar e confirmar o horário, e não viram propaganda.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>8. Seus direitos</h2>
+            <p>A LGPD (art. 18) garante, de graça:</p>
+            <ul class="lista-limpa">
+                <li>Saber se temos dados seus, e quais são.</li>
+                <li>Corrigir o que estiver errado.</li>
+                <li>Pedir a exclusão dos seus dados.</li>
+                <li>Pedir uma cópia deles.</li>
+                <li>Saber com quem compartilhamos.</li>
+                <li>Retirar o consentimento da seção 4 a qualquer momento.</li>
+            </ul>
+            <p>Para exercer qualquer um, chame no WhatsApp <strong>(11) 93935-7759</strong>.
+               Respondemos em até 15 dias.</p>
+        </div>
+
+        <div class="bloco">
+            <h2>9. Segurança</h2>
+            <p>O site funciona em conexão criptografada (HTTPS) e as páginas são estáticas,
+               sem banco de dados por trás e sem área de login, o que reduz bastante o que
+               pode ser atacado.</p>
+            <p>Nenhum sistema é totalmente seguro. Se acontecer um incidente que possa te
+               afetar, comunicamos você e a Autoridade Nacional de Proteção de Dados (ANPD).</p>
+        </div>
+
+        <div class="bloco">
+            <h2>10. Mudanças nesta política</h2>
+            <p>Se algo mudar, a data no topo muda junto. Mudança que afete o que você já
+               autorizou é avisada na própria conversa, antes de valer.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="wrap">
+        <p>Horário Cheio · agendamento online para barbearia, manicure e estética ·
+           Guarulhos, SP · WhatsApp (11) 93935-7759 ·
+           <a href="mailto:contato@horariocheio.com.br">contato@horariocheio.com.br</a> ·
+           <a href="mailto:suporte@horariocheio.com.br">suporte@horariocheio.com.br</a> ·
+           <a href="../">horariocheio.com.br</a> ·
+           <a href="../agenda-global/">Agenda Global</a> ·
+           <a href="../diferencial-dos-concorrentes/">diferencial dos concorrentes</a></p>
+    </div>
+</footer>
+
+</body>
+</html>

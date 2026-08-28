@@ -93,7 +93,21 @@ def main():
     p = argparse.ArgumentParser(description="Iguala a altura das 4 telas do cliente")
     p.add_argument("--conferir", action="store_true",
                    help="so relata o que faria, nao escreve arquivo nenhum")
+    p.add_argument("--forcar", action="store_true",
+                   help="roda mesmo assim (ver o aviso APOSENTADO abaixo)")
     args = p.parse_args()
+
+    # APOSENTADO em 22/08/2026. Este script iguala tudo em 780x2020 preenchendo o rodape
+    # com branco. Isso deixava a claro-tela-3 com 22% de vazio branco, que o Rafael leu
+    # como "as imagens estao de tamanhos diferentes". A /agenda-global/ passou a usar as
+    # telas RECORTADAS no conteudo (alturas 1808/1924/1584/2020, mesma largura), sem
+    # rodape branco. Rodar este script de novo DESFAZ isso e traz o vazio de volta.
+    # Se um dia as quatro telas voltarem a ter conteudo de altura parecida, de para
+    # reativar removendo esta trava.
+    if not (args.forcar or args.conferir):
+        sys.exit("normalizar_telas.py esta APOSENTADO: ele repoe o vazio branco que a "
+                 "/agenda-global/ deixou de usar em 22/08/2026. Use --conferir para so "
+                 "relatar, ou --forcar se realmente quiser reescrever (leia o comentario).")
 
     preparadas = []
     for nome in TELAS:

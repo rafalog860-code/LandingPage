@@ -41,6 +41,9 @@ manicures, pedicures e nail designers, e clínicas de estética e esteticistas.
   cores, e endereço exclusivo.
 - **14 dias grátis** para testar, sem cartão de crédito. Sem fidelidade e sem multa de
   cancelamento. Instalação sempre gratuita.
+- **Consultoria: R$ 37,90 por análise.** Serviço separado do aplicativo, pago uma vez,
+  sem assinatura. Não é preciso contratar o app para pedir, e quem assina paga o mesmo
+  valor. Detalhado na seção "Consultoria" abaixo.
 
 ## O que o app faz
 
@@ -57,6 +60,27 @@ manicures, pedicures e nail designers, e clínicas de estética e esteticistas.
 - Tela "Meus horários" para o cliente final consultar e cancelar o próprio agendamento.
 - Cadastro de clientes com histórico, exportável em planilha. A lista pertence à
   barbearia, com essa condição escrita em contrato.
+
+## Consultoria (serviço separado, R$ 37,90 por análise)
+
+Análise avulsa entregue por escrito no WhatsApp, disponível para qualquer barbearia,
+seja ela cliente do aplicativo ou não. O barbeiro envia o Instagram, o site (se
+tiver), o bairro ou endereço e quanto cobra hoje pelo corte. A análise cobre:
+
+- Presença digital: o que quem procura barbearia naquela região encontra dele no
+  Google e no Instagram, e o que está faltando.
+- Concorrência: quais barbearias estão ao redor, o preço médio cobrado pelo corte na
+  região e onde o preço dele está nessa média.
+- O que os concorrentes estão fazendo que ele pode aproveitar na própria barbearia.
+- Soluções gratuitas e pagas, separadas, com o custo mensal de cada uma.
+- Conteúdo: como fotografar e postar o antes e depois dos cortes.
+- Divulgação paga: Google Ads, tráfego pago e campanha no Instagram, com quanto
+  investir, para quem mirar e como medir o retorno.
+
+Para quem já usa o aplicativo há pelo menos um mês, a mesma análise inclui os números
+da própria agenda: faturamento por dia e por horário, rendimento por serviço, clientes
+que não voltaram, perda com faltas e plano de 30 dias usando a base existente. O preço
+não muda.
 
 ## O que o app NÃO faz hoje
 

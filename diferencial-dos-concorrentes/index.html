@@ -11,13 +11,18 @@
 <meta property="og:url" content="https://horariocheio.com.br/diferencial-dos-concorrentes/">
 <meta property="og:title" content="Diferencial dos concorrentes: AppBarber, Booksy ou Horário Cheio">
 <meta property="og:description" content="Com 3 barbeiros, o AppBarber sai a R$ 219,90/mês. Aqui o preço é da barbearia, não do barbeiro. Números com fonte e data.">
-<!-- og:image aponta para a tela do app, e NAO para img/logo.png: aquele arquivo ainda
-     diz "AGENDA BARBEIRO", o nome aposentado em 12/08 — ou seja, o card do WhatsApp
-     saia com a marca errada toda vez que alguem compartilhasse esta pagina.
-     Ver T105 no TAREFAS.md: o logo em si continua por trocar, mas esta pagina ja
-     deixou de exibi-lo. -->
+<!-- og:image aponta para a tela do app, e NAO para img/logo.v2.png: a tela vende melhor
+     numa pagina que e' sobre comparacao de preco. O motivo original EXPIROU em
+     27/08/2026: o logo dizia "AGENDA BARBEIRO", nome aposentado em 12/08, e o card
+     do WhatsApp saia com a marca errada. A T105 foi resolvida nesse dia. -->
 <meta property="og:image" content="https://horariocheio.com.br/img/tela-1.png">
-<link rel="icon" href="../img/logo.png">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap">
 
 <style>
 /* ===========================================================================
@@ -104,10 +109,12 @@ body {
 }
 
 h1, h2, h3 {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
   line-height: var(--font-lineheight-1);
   margin: 0 0 var(--size-3);
-  font-weight: var(--font-weight-7);
+  font-weight: var(--font-weight-6);
+  letter-spacing: -.015em;
+  text-wrap: balance;
 }
 h1 { font-size: var(--font-size-fluid-2); letter-spacing: -.015em; }
 h2 { font-size: var(--font-size-5); margin-bottom: var(--size-4); }
@@ -136,10 +143,12 @@ header {
   font-size: var(--font-size-0); color: var(--tinta); text-decoration: none;
 }
 .marca .selo {
-  width: 30px; height: 30px; border-radius: var(--radius-round); flex: none;
-  border: var(--border-size-2) solid var(--marca); color: var(--marca-forte);
-  display: flex; align-items: center; justify-content: center;
-  font-size: .6rem; letter-spacing: .04em; font-weight: var(--font-weight-7);
+  /* Era o monograma "HC" desenhado em CSS. Virou o relogio da marca em 27/08/2026
+     (T13). Maior que os 30px de antes, a pedido do Rafael. O nome ao lado continua
+     na tinta da pagina: em 3:1 o verde lê fraco em serifada fina. */
+  width: 42px; height: 42px; flex: none;
+  /* Embutido no HTML, nao por <img src>: assim o cabecalho nao depende de um
+     arquivo chegar. Mestre em img/logo.svg, usado pelo gerar_logo.ps1. */
 }
 
 /* ---------- botões ---------- */
@@ -235,6 +244,7 @@ footer {
   padding: var(--size-8) 0 var(--size-10);
   color: var(--tinta-tenue); font-size: var(--font-size-1);
   background: var(--papel-alt); border-top: var(--border-size-1) solid var(--linha);
+  text-align: center;
 }
 
 /* ---------- desktop ---------- */
@@ -276,6 +286,56 @@ footer {
                     font-weight: var(--font-weight-7); }
 .plano .btn { width: 100%; }
 @media (min-width: 760px) { .planos { grid-template-columns: 1fr 1fr; } }
+
+    /* Icone do WhatsApp em todo botao wa.me (24/08/2026). Mask + currentColor:
+       o icone herda a cor do texto do botao (escuro no dourado, claro no vazado),
+       e a regra pega qualquer <a class="btn"> com href de wa.me, atual ou futuro. */
+    .btn[href*="wa.me"]::before {
+        content: ""; display: inline-block; width: 18px; height: 18px;
+        vertical-align: -4px; margin-right: 9px; background-color: currentColor;
+        -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M17.472%2014.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94%201.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.148-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198%200-.52.074-.792.372-.272.297-1.04%201.016-1.04%202.479%200%201.462%201.065%202.875%201.213%203.074.149.198%202.096%203.2%205.077%204.487.709.306%201.262.489%201.694.625.712.227%201.36.195%201.871.118.571-.085%201.758-.719%202.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421%207.403h-.004a9.87%209.87%200%2001-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86%209.86%200%2001-1.51-5.26c.001-5.45%204.436-9.884%209.888-9.884%202.64%200%205.122%201.03%206.988%202.898a9.825%209.825%200%20012.893%206.994c-.003%205.45-4.437%209.885-9.885%209.885M20.52%203.449C18.24%201.245%2015.24%200%2012.045%200%205.463%200%20.104%205.359.101%2011.892c0%202.096.549%204.14%201.595%205.945L0%2024l6.335-1.652a11.93%2011.93%200%20005.71%201.454h.006c6.585%200%2011.946-5.359%2011.949-11.893a11.821%2011.821%200%2000-3.48-8.464%27/%3E%3C/svg%3E") center / contain no-repeat;
+        mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2024%2024%27%3E%3Cpath%20d%3D%27M17.472%2014.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94%201.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.148-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198%200-.52.074-.792.372-.272.297-1.04%201.016-1.04%202.479%200%201.462%201.065%202.875%201.213%203.074.149.198%202.096%203.2%205.077%204.487.709.306%201.262.489%201.694.625.712.227%201.36.195%201.871.118.571-.085%201.758-.719%202.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421%207.403h-.004a9.87%209.87%200%2001-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86%209.86%200%2001-1.51-5.26c.001-5.45%204.436-9.884%209.888-9.884%202.64%200%205.122%201.03%206.988%202.898a9.825%209.825%200%20012.893%206.994c-.003%205.45-4.437%209.885-9.885%209.885M20.52%203.449C18.24%201.245%2015.24%200%2012.045%200%205.463%200%20.104%205.359.101%2011.892c0%202.096.549%204.14%201.595%205.945L0%2024l6.335-1.652a11.93%2011.93%200%20005.71%201.454h.006c6.585%200%2011.946-5.359%2011.949-11.893a11.821%2011.821%200%2000-3.48-8.464%27/%3E%3C/svg%3E") center / contain no-repeat;
+    }
+/* ===== Refino visual (26/08/2026): mesma qualidade da home/agenda-global ===== */
+.abertura { position: relative; overflow: hidden; }
+.abertura::before { content: ""; position: absolute; z-index: 0; pointer-events: none;
+    top: -140px; right: -120px; width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(176, 138, 37, .12), transparent 62%);
+    animation: hc-pulse 7s ease-in-out infinite; }
+.abertura > * { position: relative; z-index: 1; }
+
+.abertura-olho { display: inline-flex; align-items: center; gap: var(--size-2);
+    font-size: var(--font-size-0); letter-spacing: .12em; text-transform: uppercase;
+    color: var(--marca-forte); background: var(--marca-veu);
+    border: var(--border-size-1) solid var(--marca-linha); border-radius: var(--radius-round);
+    padding: 6px 13px; margin-bottom: var(--size-4); }
+.abertura-olho .pip { width: 7px; height: 7px; border-radius: 50%; background: var(--marca);
+    animation: hc-beat 2.4s infinite; }
+
+.btn { transition: transform .16s ease, box-shadow .16s ease, filter .16s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); filter: brightness(1.03); }
+.btn-vazio:hover { background: var(--marca-veu); }
+
+.card { transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.card:hover { transform: translateY(-4px); border-color: var(--marca); box-shadow: var(--shadow-2); }
+
+.rise { opacity: 0; transform: translateY(18px); animation: hc-rise .7s ease forwards; }
+.rise.d1 { animation-delay: .05s; } .rise.d2 { animation-delay: .16s; } .rise.d3 { animation-delay: .28s; }
+
+.rodape-contato { list-style: none; margin: var(--size-3) 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; justify-content: center; }
+.rodape-contato a { display: inline-flex; align-items: center; gap: 7px; }
+.rodape-contato svg { width: 16px; height: 16px; flex: 0 0 16px; fill: none;
+    stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+@keyframes hc-pulse { 0%, 100% { opacity: .6; } 50% { opacity: 1; } }
+@keyframes hc-beat { 0% { box-shadow: 0 0 0 0 rgba(176, 138, 37, .5); }
+    70% { box-shadow: 0 0 0 8px rgba(176, 138, 37, 0); } 100% { box-shadow: 0 0 0 0 rgba(176, 138, 37, 0); } }
+@keyframes hc-rise { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+    .abertura::before, .abertura-olho .pip { animation: none; }
+    .rise { opacity: 1; transform: none; animation: none; }
+}
 </style>
 <!-- JSONLD:INICIO (gerado por gerar_jsonld.py - nao editar a mao) -->
 <script type="application/ld+json">
@@ -358,18 +418,19 @@ footer {
 <header>
     <div class="wrap">
         <a class="marca" href="../">
-            <span class="selo">HC</span>
+            <svg class="selo" width="42" height="42" viewBox="0 0 100 100" fill="none" stroke="#00a651" aria-hidden="true"><circle cx="50" cy="50" r="43" stroke-width="2.5" opacity=".38"/><circle cx="50" cy="50" r="37" stroke-width="4.5" stroke-linecap="butt" pathLength="120" stroke-dasharray="2 8" transform="rotate(-90 50 50)"/><circle cx="50" cy="50" r="27" stroke-width="9" opacity=".24"/><circle cx="50" cy="50" r="27" stroke-width="9" stroke-linecap="butt" pathLength="100" stroke-dasharray="78 22" transform="rotate(-90 50 50)"/><line x1="50" y1="50" x2="50" y2="33" stroke-width="3.4" stroke-linecap="round"/><line x1="50" y1="50" x2="59" y2="44" stroke-width="4" stroke-linecap="round"/><circle cx="50" cy="50" r="3" fill="#00a651" stroke="none"/></svg>
             Horário Cheio
         </a>
     </div>
 </header>
 
 <!-- ABERTURA ---------------------------------------------------------------- -->
-<section>
+<section class="abertura">
     <div class="wrap">
-        <h1>Diferencial dos concorrentes: <span class="cor">AppBarber, Booksy ou Horário Cheio</span></h1>
+        <span class="abertura-olho rise d1"><span class="pip"></span> Comparação honesta · com fonte e data</span>
+        <h1 class="rise d2">Diferencial dos concorrentes: <span class="cor">AppBarber, Booksy ou Horário Cheio</span></h1>
 
-        <p class="sub" style="font-size:var(--font-size-3);">
+        <p class="sub rise d3" style="font-size:var(--font-size-3);">
             Somos parte interessada nesta comparação: o Horário Cheio é nosso. Por isso todo
             número aqui vem com <strong>fonte e data</strong>, e a recomendação no fim inclui
             os casos em que a resposta certa <em>não</em> é a gente.
@@ -685,10 +746,19 @@ footer {
            publicadas, não para desqualificar ninguém: os dois são bons produtos e
            atendem bem casos que a gente não atende.</p>
         <p>Horário Cheio · agendamento online para barbearia, manicure e estética ·
-           Guarulhos, SP · WhatsApp (11) 93935-7759 ·
+           Guarulhos, SP · WhatsApp (11) 93935-7759</p>
+        <p class="rodape-contato">
+            <a href="mailto:contato@horariocheio.com.br">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+                contato@horariocheio.com.br
+            </a>
+            <a href="mailto:suporte@horariocheio.com.br">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+                suporte@horariocheio.com.br
+            </a>
+        </p>
+        <p>
            <a href="../">horariocheio.com.br</a> ·
-           <a href="../manicure/">versão para manicure</a> ·
-           <a href="../clinica-estetica/">versão para clínica de estética</a> ·
            <a href="../agenda-global/">Agenda Global</a> ·
            <a href="../privacidade/">política de privacidade</a></p>
     </div>
